@@ -83,7 +83,7 @@ All work is to be done on your own. There are no group projects.
 
 ### _Lectures_
 
-1. [**Introduction**]()
+1. [**Introduction**](introduction/)
 
 ### _Getting Help and Discord_
 
