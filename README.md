@@ -1,6 +1,6 @@
 # CS505 _Introduction to Game Programming_
 
-## Pace University
+## NYU Tandon School of Engineering
 
 ### _Instructor_
 
@@ -13,8 +13,8 @@
 
 ### _Class Information_
 
-- **Pre-Requisites**: [_Data Structures and Algorithms_](http://bulletin.engineering.nyu.edu/preview_course_nopop.php?catoid=15&coid=36541) (C- or better)
-- **Credits**: 3.
+- **Pre-Requisites**: [_**Data Structures and Algorithms**_](http://bulletin.engineering.nyu.edu/preview_course_nopop.php?catoid=15&coid=36541) (C- or better)
+- **Credits**: 3
 
 ### _Description_
 
@@ -84,8 +84,6 @@ All work is to be done on your own. There are no group projects.
 ### _Lectures_
 
 1. [**Introduction**]()
-
-### _University Policies and Resources_
 
 ### _Getting Help and Discord_
 
