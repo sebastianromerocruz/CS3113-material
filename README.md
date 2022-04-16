@@ -35,6 +35,8 @@ You need to use either a Mac or Windows computer. You do not need a powerful mac
 not writing anything super complicated. For Mac users, you’ll be using Xcode. For Windows, you will
 be using Visual Studio. These are both freely available.
 
+You will also need a [**Github**](https://github.com/) account!
+
 ### _Grading Scheme_
 
 |                                         | **Percentage** |
