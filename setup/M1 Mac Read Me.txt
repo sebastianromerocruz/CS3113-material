@@ -1,0 +1,10 @@
+If you are using an M1 mac, you'll need to change the following settings on the project:
+
+- Open the project in XCode
+- Click on the "project" area, it should be called "SDLProject"
+- Go to Build Settings -> (All) -> Exclude Architecture -> Debug
+- hit the + sign then type arg64 and hit return
+- Go to Deployment -> Mac Os Deployment Target
+- Choose 11.3
+
+You may need to close XCode and open it again.
