@@ -89,3 +89,5 @@ Let's make a simple change to your repo—create a `txt` file called `something.
 ![git_14](assets/git_14.png)
 
 <sub>**Figures 9-14**: Making, adding, committing, and pushing changes onto GitHub.</sub>
+
+### Part 1: _Working with GitHub_
