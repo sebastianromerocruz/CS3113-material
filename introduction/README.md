@@ -11,21 +11,9 @@
 Hey, my name is Sebastián, and my last names are Romero Cruz. I teach about programming for a living and, incredibly, 
 sometimes even enjoy programming itself.
 
-I'm actually very excited to teach this class; I love 
-Java, and haven't had the chance to use it for a while, so this is the perfect opportunity for both you and I to learn 
-together.
-
-Here's how you can reach me if you have any questions:
-
-| **Email**                                                 | **Office Hours**                                                      |
-|-----------------------------------------------------------|-----------------------------------------------------------------------|
-| [**sebastian.romerocruz@nyu.edu**](mailto:src402@nyu.edu) | [**calendly.com/profromerocruz**](http://calendly.com/profromerocruz) |
-
-<sub>_**Figure 1**: Prof. Romero Cruz's contact information._</sub>
-
-Unless you have a super trivial question, **I much prefer you scheduling office hours with me to ask me questions about
-the course**. Even if we only spend 5 minutes on a Zoom call, it is a lot easier for me to keep track of my calendar 
-this way, and a lot harder for me to lose track of your e-mail (something I am unfortunately wont to do).
+I'm actually very excited to teach this class; I have done both game development on Unity and interactive computer 
+graphics with OpenGL before. Having the previlege of putting these two together by teaching this class and learning with
+everyone is something I am super exited about.
 
 Anyway, other things I enjoy are:
 
@@ -90,4 +78,4 @@ Let's make a simple change to your repo—create a `txt` file called `something.
 
 <sub>**Figures 9-14**: Making, adding, committing, and pushing changes onto GitHub.</sub>
 
-### Part 1: _Working with GitHub_
+### Part 1: _Opening a sample project_

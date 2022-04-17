@@ -1,6 +1,6 @@
 # CS505 _Introduction to Game Programming_
 
-## NYU Tandon School of Engineering
+## New York University Tandon School of Engineering
 
 ### _Instructor_
 
