@@ -11,32 +11,48 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "ShaderProgram.h"
 
-SDL_Window* displayWindow;
-bool gameIsRunning = true;
+const int WINDOW_WIDTH = 640,
+          WINDOW_HEIGHT = 480;
+
+const int VIEWPORT_X = 0,
+          VIEWPORT_Y = 0,
+          VIEWPORT_WIDTH = WINDOW_WIDTH,
+          VIEWPORT_HEIGHT = WINDOW_HEIGHT;
+
+const char V_SHADER_PATH[] = "shaders/vertex.glsl",
+           F_SHADER_PATH[] = "shaders/fragment.glsl";
+
+SDL_Window* display_window;
+bool game_is_running = true;
 
 ShaderProgram program;
-glm::mat4 viewMatrix, modelMatrix, projectionMatrix;
+glm::mat4 view_matrix, model_matrix, projection_matrix;
 
-void Initialize() {
+void initialise()
+{
     SDL_Init(SDL_INIT_VIDEO);
-    displayWindow = SDL_CreateWindow("Triangle!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_OPENGL);
-    SDL_GLContext context = SDL_GL_CreateContext(displayWindow);
-    SDL_GL_MakeCurrent(displayWindow, context);
+    display_window = SDL_CreateWindow("Triangle!",
+                                      SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+                                      WINDOW_WIDTH, WINDOW_HEIGHT,
+                                      SDL_WINDOW_OPENGL);
+    
+    SDL_GLContext context = SDL_GL_CreateContext(display_window);
+    SDL_GL_MakeCurrent(display_window, context);
     
 #ifdef _WINDOWS
     glewInit();
 #endif
     
-    glViewport(0, 0, 640, 480);
+    glViewport(VIEWPORT_X, VIEWPORT_Y, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
     
-    program.Load("shaders/vertex.glsl", "shaders/fragment.glsl");
+    program.Load(V_SHADER_PATH, F_SHADER_PATH);
     
-    viewMatrix = glm::mat4(1.0f);
-    modelMatrix = glm::mat4(1.0f);
-    projectionMatrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);
+    view_matrix = glm::mat4(1.0f);  // Defines the position (location and orientation) of the camera
+    model_matrix = glm::mat4(1.0f);  // Defines every translation, rotations, or scaling applied to an object
+    projection_matrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);  // Defines theharacteristics of your camera, such as clip planes, field of view, projection method etc.
     
-    program.SetProjectionMatrix(projectionMatrix);
-    program.SetViewMatrix(viewMatrix);
+    program.SetProjectionMatrix(projection_matrix);
+    program.SetViewMatrix(view_matrix);
     program.SetColor(1.0f, 0.0f, 0.0f, 1.0f);
     
     glUseProgram(program.programID);
@@ -44,44 +60,56 @@ void Initialize() {
     glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 }
 
-void ProcessInput() {
+void process_input()
+{
     SDL_Event event;
-    while (SDL_PollEvent(&event)) {
-        if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE) {
-            gameIsRunning = false;
+    while (SDL_PollEvent(&event))
+    {
+        if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE)
+        {
+            game_is_running = false;
         }
     }
 }
 
-void Update() { }
+void update() { }
 
-void Render() {
+void render() {
     glClear(GL_COLOR_BUFFER_BIT);
     
-    program.SetModelMatrix(modelMatrix);
+    program.SetModelMatrix(model_matrix);
     
-    float vertices[] = { 0.5f, -0.5f, 0.0f, 0.5f, -0.5f, -0.5f };
+    float vertices[] =
+    {
+        0.5f, -0.5f,
+        0.0f, 0.5f,
+        -0.5f, -0.5f
+    };
+    
     glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, vertices);
     glEnableVertexAttribArray(program.positionAttribute);
     glDrawArrays(GL_TRIANGLES, 0, 3);
     glDisableVertexAttribArray(program.positionAttribute);
     
-    SDL_GL_SwapWindow(displayWindow);
+    SDL_GL_SwapWindow(display_window);
 }
 
-void Shutdown() {
-    SDL_Quit();
-}
+void shutdown() { SDL_Quit(); }
 
-int main(int argc, char* argv[]) {
-    Initialize();
+/**
+ Start here—we can see the general structure of a game loop without worrying too much about the details yet.
+ */
+int main(int argc, char* argv[])
+{
+    initialise();
     
-    while (gameIsRunning) {
-        ProcessInput();
-        Update();
-        Render();
+    while (game_is_running)
+    {
+        process_input();
+        update();
+        render();
     }
     
-    Shutdown();
+    shutdown();
     return 0;
 }
