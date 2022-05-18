@@ -44,7 +44,7 @@ You will also need a [**Github**](https://github.com/) account!
 | **_Project 1_: Draw a Simple 2D Scene** | 10%            |
 | **_Project 2_: Pong**                   | 10%            |
 | **_Project 3_: Rise of the AI**         | 15%            |
-| **_Project 4_: Pong**                   | 15%            |
+| **_Project 4_: Lunar Lander**           | 15%            |
 | **_Project 5_: Platformer**             | 15%            |
 | **_Final Project_: Students’ Choice**   | 25%            |
 
@@ -85,7 +85,8 @@ All work is to be done on your own. There are no group projects.
 
 ### _Lectures_
 
-1. [**Introduction**](introduction/)
+1. [**Introduction**](lectures/introduction/)
+2. [**You're Getting Old, Matrix: Triangles**](lectures/triangle/)
 
 ### _Getting Help and Discord_
 

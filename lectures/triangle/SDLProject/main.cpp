@@ -14,6 +14,11 @@
 const int WINDOW_WIDTH = 640,
           WINDOW_HEIGHT = 480;
 
+const float BG_RED = 0.1922f,
+            BG_BLUE = 0.549f,
+            BG_GREEN = 0.9059f,
+            BG_OPACITY = 1.0f;
+
 const int VIEWPORT_X = 0,
           VIEWPORT_Y = 0,
           VIEWPORT_WIDTH = WINDOW_WIDTH,
@@ -21,6 +26,11 @@ const int VIEWPORT_X = 0,
 
 const char V_SHADER_PATH[] = "shaders/vertex.glsl",
            F_SHADER_PATH[] = "shaders/fragment.glsl";
+
+const int TRIANGLE_RED = 1.0,
+          TRIANGLE_BLUE = 0.4,
+          TRIANGLE_GREEN = 0.4,
+          TRIANGLE_OPACITY = 1.0;
 
 SDL_Window* display_window;
 bool game_is_running = true;
@@ -49,15 +59,16 @@ void initialise()
     
     view_matrix = glm::mat4(1.0f);  // Defines the position (location and orientation) of the camera
     model_matrix = glm::mat4(1.0f);  // Defines every translation, rotations, or scaling applied to an object
-    projection_matrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);  // Defines theharacteristics of your camera, such as clip planes, field of view, projection method etc.
+    projection_matrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);  // Defines the characteristics of your camera, such as clip planes, field of view, projection method etc.
     
     program.SetProjectionMatrix(projection_matrix);
     program.SetViewMatrix(view_matrix);
-    program.SetColor(1.0f, 0.0f, 0.0f, 1.0f);
+    
+    program.SetColor(TRIANGLE_RED, TRIANGLE_BLUE, TRIANGLE_GREEN, TRIANGLE_OPACITY);
     
     glUseProgram(program.programID);
     
-    glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+    glClearColor(BG_RED, BG_BLUE, BG_GREEN, BG_OPACITY);
 }
 
 void process_input()
