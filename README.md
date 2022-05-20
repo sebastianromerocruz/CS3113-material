@@ -94,7 +94,7 @@ If you are emailing me for help with your projects, upload your entire project t
 (I need to see everything so I can help you). Do not email screenshots of your code. 
 
 **Discord Server**: We will be using Discord to answer quick questions that you may have about the course throughout the 
-semester. Discord is a very lightweight instant-messaging platform very similar to Slack. Please click [**here**]() to 
+semester. Discord is a very lightweight instant-messaging platform very similar to Slack. Please click [**here**](https://discord.gg/3DZFNuZg7R) to 
 join (you will need to make an account). While I’m usually pretty lax in terms of behavior in our server (see: #off-topic), 
 this server is still a university environment and should be treated as such. Be respectful to your fellow students. Please 
 adhere to the following rules:
