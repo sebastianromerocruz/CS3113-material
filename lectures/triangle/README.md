@@ -212,6 +212,8 @@ void shutdown()
 
 <sub>**Code Block 6**: Since our game is basically not a game yet, this is all that our input processing and updating does.</sub>
 
+### Part 3: _Initialising our triangle program_
+
 Things get interesting when we get to initialising. In lecture 01, we initialised by telling OpenGL what colour we wanted our screen to be cleared to. We will be doing that again—but now, we will also be telling it about our triangle:
 
 ```c++
@@ -232,6 +234,7 @@ void initialise()
 
     /* New stuff */ 
     glViewport(VIEWPORT_X, VIEWPORT_Y, VIEWPORT_HEIGHT, VIEWPORT_HEIGHT);   // Initialise our camera
+
     program.load(V_SHADER_PATH, F_SHADER_PATH);     // Load up our shaders
 
     // Initialise our view, model, and projection matrices
@@ -241,7 +244,61 @@ void initialise()
 
     program.setViewMatrix(view_matrix);
     program.setProjectionMatrix(projection_matrix);
+    // Notice we haven't set our model matrix yet!
 
     program.SetColor(TRIANGLE_RED, TRIANGLE_BLUE, TRIANGLE_GREEN, TRIANGLE_OPACITY);
+    glUseProgram(program.programID);
+
+    // Old stuff
+    glClearColor(BG_RED, BG_BLUE, BG_GREEN, BG_OPACITY);
 }
 ```
+
+In order, what we have done is:
+
+1. Initialised our SDL display window and context, and made it current (in case we have several windows open)
+2. Initialised our camera (viewport) using our pre-defined x- and y-positions, width, and height
+3. Initialise our OpenGL program (the triangle):
+    1. Load our vertex and fragment shaders
+    2. Initialise our view, projection, and model matrices, and load the first two onto our program
+    3. Set our model's (triangle's) colour
+    4. Tell OpenGL to use it by passing in its ID
+4. Setting the clear colour
+
+### Part 4: _Rendering our triangle program_
+
+There's a few things going on in the `render()` function:
+
+```c++
+void render() {
+    // Step 1
+    glClear(GL_COLOR_BUFFER_BIT);
+    
+    // Step 2
+    program.SetModelMatrix(model_matrix);
+    
+    // Step 3
+    float vertices[] =
+    {
+        0.5f, -0.5f,
+        0.0f, 0.5f,
+        -0.5f, -0.5f
+    };
+    
+    glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, vertices);
+    glEnableVertexAttribArray(program.positionAttribute);
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDisableVertexAttribArray(program.positionAttribute);
+    
+    // Step 4
+    SDL_GL_SwapWindow(display_window);
+}
+```
+
+In order:
+
+1. Clear the colour to our aforementioned initialisation settings
+2. _Now_ we set our model matrix. The reason why we do this hear becomes clear if we think about what the model matrix does: it "defines every translation, rotation, and/or scaling applied to an object". This is essentially every environmental/physical change done onto an object _every frame_. For instance, if you kick a ball in-game, its change in location (translation) is applied _every frame_, not just in its initialisation.
+3. Set up the triangle vertices and draw them using the following 4 commands.
+4. Swap window basically means that whatever changes were rendered from the previous frame, swap them into the current frame.
+

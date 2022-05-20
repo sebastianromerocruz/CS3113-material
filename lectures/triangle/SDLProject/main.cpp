@@ -63,6 +63,7 @@ void initialise()
     
     program.SetProjectionMatrix(projection_matrix);
     program.SetViewMatrix(view_matrix);
+    // Notice we haven't set our model matrix yet!
     
     program.SetColor(TRIANGLE_RED, TRIANGLE_BLUE, TRIANGLE_GREEN, TRIANGLE_OPACITY);
     
