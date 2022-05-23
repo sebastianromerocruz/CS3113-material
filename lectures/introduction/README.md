@@ -26,6 +26,22 @@ That's all I want to flex at the present moment. Let's talk about the course (se
 
 ---
 
+### Sections
+
+1. [**Working with Github**](#part-1-working-with-github)
+    1. [**Create a new repository through Github**](#step-1-create-a-new-repository-through-github)
+    2. [**Cloning your repo**](#step-2-cloning-your-repo)
+    3. [**Making and saving changes into your repo**](#step-3-making-and-saving-changes-into-your-repo)
+2. [**Opening a sample project**](#part-2-opening-a-sample-project)
+3. [**Understanding the basics**](#part-3-understanding-the-basics)
+    1. [**Housekeeping**](#housekeeping)
+    2. [**Constants and (global) variables**](#constants-and-global-variables)
+    3. [**Starting our driver program**](#starting-our-driver-program)
+    4. [**Setting up our context**](#setting-up-our-context)
+    5. [**The game loop**](#the-game-loop)
+
+---
+
 ### Part 1: _Working with GitHub_
 
 The way we're going to be managing our work in this class via [**GitHub**](https://github.com/). Follow [**these instructions**](https://github.com/git-guides/install-git#install-git) to
@@ -78,7 +94,7 @@ Let's make a simple change to your repo—create a `txt` file called `something.
 
 <sub>**Figures 9-14**: Making, adding, committing, and pushing changes onto GitHub.</sub>
 
-### Part 1: _Opening a sample project_
+### Part 2: _Opening a sample project_
 
 Unfortunately, setting up OpenGL takes some setting up. A former instructor of the course and friend of mine, Carmine Guida, lent me these guides for each operating system, so please follow [**these instructions**](assets/Full%20Setup%20-%20Windows.pdf) if you are a Windows user or [**these instructions**](assets/Full%20Setup%20-%20Mac.pdf) if you are a Mac user. Once you've finished, come back to this `README`.
 
@@ -147,7 +163,7 @@ And the result should be the following window popping up on your screen:
 
 That's nice, isn't it? It may not seem like much, but getting pixels onto the screen using OpenGL is no small feat. Let's walk through the code, section by section, and understand what is going on here.
 
-### Part 2: _Understanding the basics_
+### Part 3: _Understanding the basics_
 
 #### Housekeeping
 

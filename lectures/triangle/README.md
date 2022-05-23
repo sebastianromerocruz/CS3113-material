@@ -76,6 +76,16 @@ So yeah, it's a good amount. The NES-era consoles were even more complicated. Th
 
 So where are we now, and how does OpenGL fit into all of this? As you may already know, nowadays we have dedicated graphic cards installed into our machines. For those who actually care for that kind of stuff, owning the right graphics card is what makes all the difference in their gaming experience. And that's actually where libraries like OpenGL come in. OpenGL interacts directly with your graphics card to create high fidelity graphics with much smaller overhead than, say, Unity or even Unreal. This is why gaming companies create their own in-house engines. At a certain point, tools built by somebody else stop being enough, and we want to have as fine control of our game as possible.
 
+---
+
+### Sections
+
+1. [**Our first...triangle?**](#part-1-our-firsttriangle)
+2. [**The game loop**](#part-2-the-game-loop)
+3. [**Initialising our triangle program**](#part-3-initialising-our-triangle-program)
+
+---
+
 ### Part 1: _Our first...triangle?_
 
 So how are complex 3D models built using libraries like OpenGL? The answer is simple: triangles. Lots, and lots of triangles.
