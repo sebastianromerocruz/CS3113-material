@@ -86,7 +86,7 @@ All work is to be done on your own. There are no group projects.
 ### _Lectures_
 
 1. [**Introduction**](lectures/introduction/)
-2. [**You're Getting Old, Matrix: Triangles**](lectures/triangle/)
+2. [**Triangles**](lectures/triangle/)
 
 ### _Getting Help and Discord_
 

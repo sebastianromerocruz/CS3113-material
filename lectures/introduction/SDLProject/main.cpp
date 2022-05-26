@@ -70,7 +70,7 @@ int main(int argc, char* argv[])
             /**
              Basically, while OpenGL is polling, or expecting, an event from the user, don't do anything.
              */
-            if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE) 
+            if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE)
             {
                 /**
                  The only types of events we are expecting thus far are simple those that end our OpenGL program. This will change soon.

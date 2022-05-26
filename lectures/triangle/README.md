@@ -1,10 +1,10 @@
 ## Lecture 02
 
-# You're getting old, Matrix
+# Triangles
 
 ### 7 Prairial, Year CCXXX
 
-***Song of the day***: _[****]() by ._
+***Song of the day***: _[**Coming Up (Paul McCartney Cover)**](https://youtu.be/_u8POfTE-eM) by Ginger Root (2020)._
 
 How do graphics get created and rendered onto our screens?
 
