@@ -199,3 +199,6 @@ void update()
 
 <sub>**Code Block 2**: Scaling the size of our model matrix by 1% every frame.</sub>
 
+![result](assets/result.gif)
+
+<sub>**Figure 15**: The result of code block 2.</sub>
