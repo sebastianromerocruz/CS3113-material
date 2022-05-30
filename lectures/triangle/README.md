@@ -1,6 +1,6 @@
 ## Lecture 02
 
-# Triangles
+# [**Triangles**](SDLProject/main.cpp)
 
 ### 7 Prairial, Year CCXXX
 

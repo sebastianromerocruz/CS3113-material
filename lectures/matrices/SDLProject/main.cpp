@@ -84,7 +84,18 @@ void process_input()
     }
 }
 
-void update() { }
+void update() 
+{
+    // This scale vector will make the x- and y-coordinates of the triangle
+    // grow by a factor of 1% of it of its original size every frame.
+    float scale_factor = 1.01;
+    glm::vec3 scale_vector = glm::vec3(scale_factor, scale_factor, 1.0f);
+    
+    // We replace the previous value of the model matrix with the scaled
+    // value of model matrix. This would mean that  glm::scale() returns
+    // a matrix, which it does!
+    model_matrix = glm::scale(model_matrix, scale_vector);
+}
 
 void render() {
     glClear(GL_COLOR_BUFFER_BIT);
