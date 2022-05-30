@@ -178,7 +178,7 @@ The function to scale in OpenGL also resides in the `glm` namespace, and it is c
 new_matrix = glm::scale(original_matrix, scale_vector);
 ```
 
-<sub>**Code Block 1: The syntax of a scaling call.</sub>
+<sub>**Code Block 1**: The syntax of a scaling call.</sub>
 
 Here, both `original_matrix` and `new_matrix` are matrix objects of order _n_ × _n_. `scale_vector` is an _n - 1_ × _n - 1_ `vec` object. Since basically all of the matrices that we will deal with in this class will be on the order of 4 × 4 or higher, we will be using a `vec3` object to define our scaling in the x-, y-, and z-direction. Let's see what we would do in the case of our triangle:
 
