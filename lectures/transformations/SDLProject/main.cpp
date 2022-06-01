@@ -1,4 +1,5 @@
 #define GL_SILENCE_DEPRECATION
+#include <iostream>
 
 #ifdef _WINDOWS
 #include <GL/glew.h>
@@ -11,6 +12,7 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "ShaderProgram.h"
 
+// Constants
 const int WINDOW_WIDTH = 640,
           WINDOW_HEIGHT = 480;
 
@@ -36,6 +38,9 @@ const float GROWTH_FACTOR = 1.01f;
 const float SHRINK_FACTOR = 0.99f;
 const int MAX_FRAME = 40;
 
+const float TRIANGLE_INIT_ANGLE = glm::radians(45.0); // note that OpenGL ALWAYS rotates in radians
+
+// Global variables
 int frame_counter = 0;
 bool is_growing = true;
 
@@ -45,6 +50,10 @@ bool game_is_running = true;
 ShaderProgram program;
 glm::mat4 view_matrix, model_matrix, projection_matrix;
 
+// Functions from helper file
+void print_matrix(glm::mat4 &matrix, int size);
+
+// Driver code
 void initialise()
 {
     SDL_Init(SDL_INIT_VIDEO);
@@ -68,9 +77,10 @@ void initialise()
     model_matrix = glm::mat4(1.0f);  // Defines every translation, rotations, or scaling applied to an object
     projection_matrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);  // Defines the characteristics of your camera, such as clip planes, field of view, projection method etc.
     
+    model_matrix = glm::rotate(model_matrix, TRIANGLE_INIT_ANGLE, glm::vec3(0.0f, 0.0f, 1.0f));
+    
     program.SetProjectionMatrix(projection_matrix);
     program.SetViewMatrix(view_matrix);
-    // Notice we haven't set our model matrix yet!
     
     program.SetColor(TRIANGLE_RED, TRIANGLE_BLUE, TRIANGLE_GREEN, TRIANGLE_OPACITY);
     
@@ -91,12 +101,24 @@ void process_input()
     }
 }
 
-void update()
+
+void update() 
 {
-    // This scale vector will make the x- and y-coordinates of the triangle
-    // grow by a factor of 1% of it of its original size every frame.
-    float scale_factor = 1.01;
-    glm::vec3 scale_vector = glm::vec3(scale_factor, scale_factor, 1.0f);
+    // Initialise our scale_vector and update the number of frames past
+    glm::vec3 scale_vector;
+    frame_counter += 1;
+    
+    // Once we reach our limit, we switch directions
+    if (frame_counter >= MAX_FRAME)
+    {
+        is_growing = !is_growing;
+        frame_counter = 0;
+    }
+    
+    // Decide if the matrix will be scaled up or scaled down
+    scale_vector = glm::vec3(is_growing ? GROWTH_FACTOR : SHRINK_FACTOR,
+                             is_growing ? GROWTH_FACTOR : SHRINK_FACTOR,
+                             1.0f);
     
     // We replace the previous value of the model matrix with the scaled
     // value of model matrix. This would mean that  glm::scale() returns
