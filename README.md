@@ -88,6 +88,7 @@ All work is to be done on your own. There are no group projects.
 1. [**Introduction**](lectures/introduction/)
 2. [**Triangles**](lectures/triangle/)
 3. [**You're getting old, Matrix**](lectures/matrices/)
+4. [**Transformation Practice**](lectures/transformations/)
 
 ### _Getting Help and Discord_
 

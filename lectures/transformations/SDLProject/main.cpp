@@ -12,6 +12,9 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "ShaderProgram.h"
 
+// Defining this macro so I can easy print things when I need to
+#define LOG(statement) std::cout << statement << '\n'
+
 // Constants
 const int WINDOW_WIDTH = 640,
           WINDOW_HEIGHT = 480;
@@ -34,11 +37,16 @@ const int TRIANGLE_RED = 1.0,
           TRIANGLE_GREEN = 0.4,
           TRIANGLE_OPACITY = 1.0;
 
+// Scaling
 const float GROWTH_FACTOR = 1.01f;
 const float SHRINK_FACTOR = 0.99f;
 const int MAX_FRAME = 40;
 
-const float TRIANGLE_INIT_ANGLE = glm::radians(45.0); // note that OpenGL ALWAYS rotates in radians
+// Rotation
+const float ROT_ANGLE = glm::radians(1.5f); // note that OpenGL ALWAYS rotates in radians
+
+// Translation
+float TRANS_VALUE = 0.025f;
 
 // Global variables
 int frame_counter = 0;
@@ -76,8 +84,6 @@ void initialise()
     view_matrix = glm::mat4(1.0f);  // Defines the position (location and orientation) of the camera
     model_matrix = glm::mat4(1.0f);  // Defines every translation, rotations, or scaling applied to an object
     projection_matrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);  // Defines the characteristics of your camera, such as clip planes, field of view, projection method etc.
-    
-    model_matrix = glm::rotate(model_matrix, TRIANGLE_INIT_ANGLE, glm::vec3(0.0f, 0.0f, 1.0f));
     
     program.SetProjectionMatrix(projection_matrix);
     program.SetViewMatrix(view_matrix);
@@ -120,10 +126,10 @@ void update()
                              is_growing ? GROWTH_FACTOR : SHRINK_FACTOR,
                              1.0f);
     
-    // We replace the previous value of the model matrix with the scaled
-    // value of model matrix. This would mean that  glm::scale() returns
-    // a matrix, which it does!
+    // Our transformations
+    model_matrix = glm::translate(model_matrix, glm::vec3(TRANS_VALUE, 0.0f, 0.0f));
     model_matrix = glm::scale(model_matrix, scale_vector);
+    model_matrix = glm::rotate(model_matrix, ROT_ANGLE, glm::vec3(0.0f, 0.0f, 1.0f));
 }
 
 void render() {

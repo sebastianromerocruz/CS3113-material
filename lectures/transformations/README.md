@@ -4,12 +4,14 @@
 
 ### 14 Prairial, Year CCXXX
 
-***Song of the day***: _[****]() by Ginger Root (2021)._
+***Song of the day***: _[**Funny Heartbeat**](https://youtu.be/BbIaaxi9uAY) by Kisses (2013)._
 
 ### Sections
 
 1. [**A little help**](#part-0-a-little-help)
 2. [**Funny heartbeat or, how to scale a model matrix**](#part-1-funny-heartbeat-or-how-to-scale-a-model-matrix)
+3. [**Rotating a model matrix**](#part-3-rotating-a-model-matrix)
+4. [**Translating a model matrix**](#part-4-translating-a-model-matrix)
 
 ### Part 0: _A little help_
 
@@ -174,3 +176,120 @@ void initialise()
     model_matrix = glm::rotate(model_matrix, TRIANGLE_INIT_ANGLE, glm::vec3(0.0f, 0.0f, 1.0f));
 }
 ```
+
+<sub>**Code Block 3**: Rotating our triangle's model matrix by 45-degrees. Note that OpenGL works in _radians_, so you must convert your angles from degrees to radians where necessary. For consistency, I have chosen to do so with OpenGL's built-in `glm::radians()` function.</sub>
+
+The result is an exciting, slightly rotated version of what we had before:
+
+![rotated-triangle](assets/rotated-triangle.gif)
+
+<sub>**Figure 4**: Our beating triangle rotated 45-degrees to the _left_.</sub>
+
+You may be wondering why `glm::rotate()`'s third parameter is a `glm::vec3` object. While it is not the only way to invoke `glm::rotate()`, doing so this way will assign each the three values of the `glm::vec3` object to an x-, y-, and z-plane. What OpenGL is basically looking for here is the axis upon which you want to rotate your model. In our case, we will basically only be rotating on the z-axis. Since all of our games for the time being will be in two dimensions (i.e. the x- and y-dimensions), rotating on these two axes would only look to us, a viewer with a bird's eye view, like shrinking and stretching:
+
+- Rotating on the **x-axis**:
+
+```c++
+model_matrix = glm::rotate(model_matrix, TRIANGLE_INIT_ANGLE, glm::vec3(1.0f, 0.0f, 0.0f));
+```
+
+![x-axis-rot](assets/x-axis-rot.gif)
+
+<sub>**Figure 5**: An x-axis rotation gives the impression of a horizontal "compression".</sub>
+
+- Rotating on the **y-axis**:
+
+```c++
+model_matrix = glm::rotate(model_matrix, TRIANGLE_INIT_ANGLE, glm::vec3(0.0f, 1.0f, 0.0f));
+```
+
+![x-axis-rot](assets/y-axis-rot.gif)
+
+<sub>**Figure 6**: A y-axis rotation gives the impression of a vertical "compression".</sub>
+
+---
+
+Cool, so now that we've seen how to apply simple rotations onto our models, let's animate a bit. I'm gonna delete my initial rotation so that my triangle can start upright again, and add the following to our code:
+
+```c++
+/* Some code... */
+
+const float ROT_ANGLE = glm::radians(1.5f); // Let's try a smaller angle
+
+/* More code... */
+
+void update() 
+{
+    glm::vec3 scale_vector;
+    frame_counter += 1;
+
+    // Every frame, rotate my model by an angle of ROT_ANGLE on the z-axis
+    model_matrix = glm::rotate(model_matrix, ROT_ANGLE, glm::vec3(0.0f, 0.0f, 1.0f));
+    
+    if (frame_counter >= MAX_FRAME)
+    {
+        is_growing = !is_growing;
+        frame_counter = 0;
+    }
+    
+    scale_vector = glm::vec3(is_growing ? GROWTH_FACTOR : SHRINK_FACTOR,
+                             is_growing ? GROWTH_FACTOR : SHRINK_FACTOR,
+                             1.0f);
+    
+    model_matrix = glm::scale(model_matrix, scale_vector);
+}
+```
+
+![z-axis-spin](assets/z-axis-spin.gif)
+
+<sub>**Code Block 4** and **Figure 7**: A simple spinning animation (i.e. 1.5-degree anti-clockwise rotation per frame).</sub>
+
+### Part 4: Translating a model matrix
+
+Translating a model matrix is even more simple—we simply use the `glm::translate()` function. This function accepts our original 4 x 4 matrix as its first parameter, and a `glm::vec3` object (again representing the translation values in the x-, y-, and z-coordinates) as its second. It, too, returns another `glm::mat4` object:
+
+```c++
+model_matrix = glm::translate(model_matrix, glm::vec3(1.0f, 0.0f, 0.0f));
+```
+
+<sub>**Code Block 5**: Reassigning the model matrix a version of itself translated 1 "units" to the right.</sub>
+
+Let's apply this to our `update()` function and see what we get:
+
+```c++
+/* Some code here... */
+
+float TRANS_VALUE = 0.025f;
+
+/* More code here... */
+
+void update() 
+{
+    // Initialise our scale_vector and update the number of frames past
+    glm::vec3 scale_vector;
+    frame_counter += 1;
+    
+    // Once we reach our limit, we switch directions
+    if (frame_counter >= MAX_FRAME)
+    {
+        is_growing = !is_growing;
+        frame_counter = 0;
+    }
+    
+    // Decide if the matrix will be scaled up or scaled down
+    scale_vector = glm::vec3(is_growing ? GROWTH_FACTOR : SHRINK_FACTOR,
+                             is_growing ? GROWTH_FACTOR : SHRINK_FACTOR,
+                             1.0f);
+    
+    // Our transformations
+    model_matrix = glm::translate(model_matrix, glm::vec3(TRANS_VALUE, 0.0f, 0.0f));
+    model_matrix = glm::scale(model_matrix, scale_vector);
+    model_matrix = glm::rotate(model_matrix, ROT_ANGLE, glm::vec3(0.0f, 0.0f, 1.0f));
+}
+```
+
+![trans](assets/trans.gif)
+
+<sub>**Figure 8**: Maybe not what you expected?</sub>
+
+Yep. We'll talk about it next week.
