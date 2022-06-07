@@ -34,11 +34,7 @@ const int TRIANGLE_RED = 1.0,
           TRIANGLE_GREEN = 0.4,
           TRIANGLE_OPACITY = 1.0;
 
-const float GROWTH_FACTOR = 1.01f;
-const float SHRINK_FACTOR = 0.99f;
-const int MAX_FRAME = 40;
-const float ROT_ANGLE = glm::radians(1.5f);
-const float TRANS_VALUE = 0.025f;
+const float MILLISECONDS_IN_SECOND = 1000.0;
 
 SDL_Window* display_window;
 bool game_is_running = true;
@@ -47,9 +43,9 @@ bool is_growing = true;
 ShaderProgram program;
 glm::mat4 view_matrix, model_matrix, projection_matrix, trans_matrix;
 
-int frame_counter = 0;
-
-void print_matrix(glm::mat4 &matrix, int size);
+float triangle_x = 0.0f;
+float triangle_rotate = 0.0f;
+float previous_ticks = 0.0f;
 
 void initialise()
 {
@@ -71,7 +67,6 @@ void initialise()
     program.Load(V_SHADER_PATH, F_SHADER_PATH);
     
     view_matrix = glm::mat4(1.0f);  // Defines the position (location and orientation) of the camera
-    model_matrix = glm::mat4(1.0f);  // Defines every translation, rotations, or scaling applied to an object
     projection_matrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);  // Defines the characteristics of your camera, such as clip planes, field of view, projection method etc.
     trans_matrix = model_matrix;
     
@@ -100,28 +95,17 @@ void process_input()
 
 void update()
 {
-//    LOG(++frame_counter);
-    frame_counter++;
-    
-    // Step 1
-    glm::vec3 scale_vector;
-    
-    // Step 2
-    if (frame_counter >= MAX_FRAME)
-    {
-        is_growing = !is_growing;
-        frame_counter = 0;
-    }
-    
-    // Step 3
-    scale_vector = glm::vec3(is_growing ? GROWTH_FACTOR : SHRINK_FACTOR,
-                             is_growing ? GROWTH_FACTOR : SHRINK_FACTOR,
-                             1.0f);
-    
-    // Step 4
-    model_matrix = glm::translate(model_matrix, glm::vec3(TRANS_VALUE, TRANS_VALUE, 0.0f));
-    model_matrix = glm::scale(model_matrix, scale_vector);
-    model_matrix = glm::rotate(model_matrix, ROT_ANGLE, glm::vec3(0.0f, 0.0f, 1.0f));
+    float ticks = (float) SDL_GetTicks() / MILLISECONDS_IN_SECOND; // get the current number of ticks
+    float delta_time = ticks - previous_ticks; // the delta time is the difference from the last frame
+    previous_ticks = ticks;
+
+    triangle_x += 1.0f * delta_time;
+    triangle_rotate += 90.0 * delta_time; // 90-degrees per second
+    model_matrix = glm::mat4(1.0f);
+
+    /* Translate -> Rotate */
+    model_matrix = glm::translate(model_matrix, glm::vec3(triangle_x, 0.0f, 0.0f));
+    model_matrix = glm::rotate(model_matrix, glm::radians(triangle_rotate), glm::vec3(0.0f, 0.0f, 1.0f));
 }
 
 void render() {
