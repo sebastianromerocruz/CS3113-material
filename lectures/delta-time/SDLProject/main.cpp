@@ -35,6 +35,7 @@ const int TRIANGLE_RED = 1.0,
           TRIANGLE_OPACITY = 1.0;
 
 const float MILLISECONDS_IN_SECOND = 1000.0;
+const float DEGREES_PER_SECOND = 90.0f;
 
 SDL_Window* display_window;
 bool game_is_running = true;
@@ -100,7 +101,7 @@ void update()
     previous_ticks = ticks;
 
     triangle_x += 1.0f * delta_time;
-    triangle_rotate += 90.0 * delta_time; // 90-degrees per second
+    triangle_rotate += DEGREES_PER_SECOND * delta_time; // 90-degrees per second
     model_matrix = glm::mat4(1.0f);
 
     /* Translate -> Rotate */
