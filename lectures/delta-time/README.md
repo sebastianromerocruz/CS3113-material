@@ -4,7 +4,7 @@
 
 ### 19 Prairial, Year CCXXX
 
-***Song of the day***: _[****]() by  ()._
+***Song of the day***: _[**Shooting Star Warrior**](https://youtu.be/6DHAZo7IhhY) by Guilty Kiss (2021)._
 
 ### Sections
 
