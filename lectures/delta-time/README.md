@@ -9,6 +9,8 @@
 ### Sections
 
 1. [**Matrix Operations Review**](#part-1-matrix-operations-review)
+2. [**Spaces**](#part-2-spaces)
+3. [**Timing, FPS, and Delta Time**](#part-3-timing-fps-and-delta-time)
 
 ### Part 1: _Matrix Operations Review_ 
 
@@ -215,7 +217,7 @@ void update()
 
 The second is, instead of relying on our computer's speed to update our frame, we need to use a method that will keep track of time the same way on every machine.
 
-### Part 2: _Timing, FPS, and Delta Time_
+### Part 3: _Timing, FPS, and Delta Time_
 
 Faster hardware updates more times than its slower counterpart. This means that, unfortunately, if your computer is running at 60 frames-per-second (fps) and mine at 30 fps, the game _will_ run twice as fast on your machine than in mine.
 
