@@ -4,9 +4,19 @@
 
 ### 21 Prairial, Year CCXXX
 
-***Song of the day***: _[****]() by  ()._
+***Song of the day***: _[**This Hell**](https://youtu.be/vapT7WBkBdY) by Rina Sawayama (2022)._
 
 ### Sections
+
+1. [**Textures**](#part-1-textures)
+2. [**Loading our textures**](#part-2-loading-our-textures)
+    1. [**Loading the image file**](#step-1-loading-the-image-file)
+    2. [**Generating and binding a texture ID to our image**](#step-2-generating-and-binding-a-texture-id-to-our-image)
+    3. [**Setting our texture filter parameters**](#step-3-setting-our-texture-filter-parameters)
+    4. [**Releasing our file from memory and returning our texture ID**](#step-4-releasing-our-file-from-memory-and-returning-our-texture-id)
+3. [**Texture coordinates**](#part-3-texture-coordinates)
+4. [**Blending**](#part-4-blending)
+5. [**Drawing Multiple Objects**](#part-5-drawing-multiple-objects)
 
 ### Part 1: _Textures_
 
