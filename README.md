@@ -90,6 +90,7 @@ All work is to be done on your own. There are no group projects.
 3. [**You're getting old, Matrix**](lectures/matrices/)
 4. [**Transformation Practice**](lectures/transformations/)
 5. [**Delta Time**](lectures/delta-time/)
+6. [**Textures**](lectures/textures/)
 
 ### _Getting Help and Discord_
 
