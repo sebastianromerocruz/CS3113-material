@@ -13,6 +13,12 @@
 #include "ShaderProgram.h"
 #include "stb_image.h"
 
+enum Coordinate
+{
+    x_coordinate,
+    y_coordinate
+};
+
 #define LOG(argument) std::cout << argument << '\n'
 
 const int WINDOW_WIDTH = 640,
@@ -31,11 +37,6 @@ const int VIEWPORT_X = 0,
 const char V_SHADER_PATH[] = "shaders/vertex_textured.glsl",
            F_SHADER_PATH[] = "shaders/fragment_textured.glsl";
 
-//const int TRIANGLE_RED = 1.0,
-//          TRIANGLE_BLUE = 0.4,
-//          TRIANGLE_GREEN = 0.4,
-//          TRIANGLE_OPACITY = 1.0;
-
 const float MILLISECONDS_IN_SECOND = 1000.0;
 const float DEGREES_PER_SECOND = 90.0f;
 
@@ -52,11 +53,28 @@ bool is_growing = true;
 ShaderProgram program;
 glm::mat4 view_matrix, model_matrix, projection_matrix, trans_matrix;
 
-float triangle_x = 0.0f;
-float triangle_rotate = 0.0f;
 float previous_ticks = 0.0f;
 
 GLuint player_texture_id;
+SDL_Joystick *player_one_controller;
+
+// overall position
+glm::vec3 player_position = glm::vec3(0.0f, 0.0f, 0.0f);
+
+// movement tracker
+glm::vec3 player_movement = glm::vec3(0.0f, 0.0f, 0.0f);
+
+float get_screen_to_ortho(float coordinate, Coordinate axis)
+{
+    switch (axis) {
+        case x_coordinate:
+            return ((coordinate / WINDOW_WIDTH) * 10.0f ) - (10.0f / 2.0f);
+        case y_coordinate:
+            return (((WINDOW_HEIGHT - coordinate) / WINDOW_HEIGHT) * 7.5f) - (7.5f / 2.0);
+        default:
+            return 0.0f;
+    }
+}
 
 GLuint load_texture(const char* filepath)
 {
@@ -88,7 +106,12 @@ GLuint load_texture(const char* filepath)
 
 void initialise()
 {
-    SDL_Init(SDL_INIT_VIDEO);
+    // Initialise video and joystick subsystems
+    SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK);
+    
+    // Open the first controller found. Returns null on error
+    player_one_controller = SDL_JoystickOpen(0);
+    
     display_window = SDL_CreateWindow("Hello, Textures!",
                                       SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                                       WINDOW_WIDTH, WINDOW_HEIGHT,
@@ -113,8 +136,6 @@ void initialise()
     program.SetViewMatrix(view_matrix);
     // Notice we haven't set our model matrix yet!
     
-//    program.SetColor(TRIANGLE_RED, TRIANGLE_BLUE, TRIANGLE_GREEN, TRIANGLE_OPACITY);
-    
     glUseProgram(program.programID);
     
     glClearColor(BG_RED, BG_BLUE, BG_GREEN, BG_OPACITY);
@@ -128,13 +149,58 @@ void initialise()
 
 void process_input()
 {
+    player_movement = glm::vec3(0.0f);
+    
     SDL_Event event;
+    
     while (SDL_PollEvent(&event))
     {
-        if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE)
-        {
-            game_is_running = false;
+        switch (event.type) {
+            case SDL_WINDOWEVENT_CLOSE:
+            case SDL_QUIT:
+                game_is_running = false;
+                break;
+                
+            case SDL_KEYDOWN:
+                switch (event.key.keysym.sym) {
+                    case SDLK_RIGHT:
+                        player_movement.x = 1.0f;
+                        break;
+                    case SDLK_LEFT:
+                        player_movement.x = -1.0f;
+                        break;
+                    case SDLK_q:
+                        game_is_running = false;
+                        break;
+                    default:
+                        break;
+                }
+            default:
+                break;
         }
+    }
+    
+    const Uint8 *key_states = SDL_GetKeyboardState(NULL); // array of key states [0, 0, 1, 0, 0, ...]
+    
+    if (key_states[SDL_SCANCODE_LEFT])
+    {
+        player_movement.x = -1.0f;
+    } else if (key_states[SDL_SCANCODE_RIGHT])
+    {
+        player_movement.x = 1.0f;
+    }
+    
+    if (key_states[SDL_SCANCODE_UP])
+    {
+        player_movement.y = 1.0f;
+    } else if (key_states[SDL_SCANCODE_DOWN])
+    {
+        player_movement.y = -1.0f;
+    }
+    
+    if (glm::length(player_movement) > 1.0f)
+    {
+        player_movement = glm::normalize(player_movement);
     }
 }
 
@@ -144,13 +210,11 @@ void update()
     float delta_time = ticks - previous_ticks; // the delta time is the difference from the last frame
     previous_ticks = ticks;
 
-    triangle_x += 1.0f * delta_time;
-    triangle_rotate += DEGREES_PER_SECOND * delta_time; // 90-degrees per second
-    model_matrix = glm::mat4(1.0f);
+    // Add             direction       * elapsed time * units per second
+    player_position += player_movement * delta_time * 1.0f;
 
-    /* Translate -> Rotate */
-    model_matrix = glm::translate(model_matrix, glm::vec3(triangle_x, 0.0f, 0.0f));
-    model_matrix = glm::rotate(model_matrix, glm::radians(triangle_rotate), glm::vec3(0.0f, 0.0f, 1.0f));
+    model_matrix = glm::mat4(1.0f);
+    model_matrix = glm::translate(model_matrix, player_position);
 }
 
 void draw_object(glm::mat4 &object_model_matrix, GLuint &object_texture_id)
@@ -191,7 +255,11 @@ void render() {
     SDL_GL_SwapWindow(display_window);
 }
 
-void shutdown() { SDL_Quit(); }
+void shutdown()
+{
+    SDL_JoystickClose(player_one_controller);
+    SDL_Quit();
+}
 
 /**
  Start here—we can see the general structure of a game loop without worrying too much about the details yet.

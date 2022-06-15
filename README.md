@@ -92,6 +92,7 @@ All work is to be done on your own. There are no group projects.
 5. [**Delta Time**](lectures/delta-time/)
 6. [**Textures**](lectures/textures/)
 7. [**Player Input**](lectures/player-input/)
+8. [**Collision Detection**](lectures/collision-detection/)
 
 ### _Getting Help and Discord_
 
