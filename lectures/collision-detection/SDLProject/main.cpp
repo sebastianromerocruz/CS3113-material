@@ -12,6 +12,8 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "ShaderProgram.h"
 #include "stb_image.h"
+#include "cmath"
+#include <ctime>
 
 #define LOG(argument) std::cout << argument << '\n'
 
@@ -33,36 +35,38 @@ const char V_SHADER_PATH[] = "shaders/vertex_textured.glsl",
 
 const float MILLISECONDS_IN_SECOND = 1000.0;
 
-const int NUMBER_OF_TEXTURES = 1; // to be generated, that is
-const GLint LEVEL_OF_DETAIL  = 0;  // base image level; Level n is the nth mipmap reduction image
-const GLint TEXTURE_BORDER   = 0;   // this value MUST be zero
-
 const char PLAYER_SPRITE_FILEPATH[] = "soph.png";
+
+const float MINIMUM_COLLISION_DISTANCE = 1.0f;
 
 SDL_Window* display_window;
 bool game_is_running = true;
 bool is_growing = true;
 
 ShaderProgram program;
-glm::mat4 view_matrix, model_matrix, projection_matrix, trans_matrix;
-
-//float triangle_x = 0.0f;
-//float triangle_rotate = 0.0f;
+glm::mat4 view_matrix, model_matrix, projection_matrix, trans_matrix, other_model_matrix;
 
 float previous_ticks = 0.0f;
 
 GLuint player_texture_id;
+GLuint other_texture_id;
 
-/**
- NEW STUFF:
- */
 glm::vec3 player_position = glm::vec3(0.0f, 0.0f, 0.0f);
 glm::vec3 player_movement = glm::vec3(0.0f, 0.0f, 0.0f);
+
+glm::vec3 other_position = glm::vec3(0.0f, 0.0f, 0.0f);
+glm::vec3 other_movement = glm::vec3(1.0f, 1.0f, 0.0f);
 
 glm::vec3 player_orientation = glm::vec3(0.0f, 0.0f, 0.0f);
 glm::vec3 player_rotation    = glm::vec3(0.0f, 0.0f, 0.0f);
 
 float player_speed = 1.0f;  // move 1 unit per second
+
+#define LOG(argument) std::cout << argument << '\n'
+
+const int NUMBER_OF_TEXTURES = 1; // to be generated, that is
+const GLint LEVEL_OF_DETAIL  = 0;  // base image level; Level n is the nth mipmap reduction image
+const GLint TEXTURE_BORDER   = 0;   // this value MUST be zero
 
 GLuint load_texture(const char* filepath)
 {
@@ -112,6 +116,10 @@ void initialise()
     program.Load(V_SHADER_PATH, F_SHADER_PATH);
     
     model_matrix = glm::mat4(1.0f);
+    other_model_matrix = glm::mat4(1.0f);
+    other_model_matrix = glm::translate(other_model_matrix, glm::vec3(1.0f, 1.0f, 0.0f));
+    other_position += other_movement;
+    
     view_matrix = glm::mat4(1.0f);  // Defines the position (location and orientation) of the camera
     projection_matrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);  // Defines the characteristics of your camera, such as clip planes, field of view, projection method etc.
     
@@ -123,6 +131,7 @@ void initialise()
     glClearColor(BG_RED, BG_BLUE, BG_GREEN, BG_OPACITY);
     
     player_texture_id = load_texture(PLAYER_SPRITE_FILEPATH);
+    other_texture_id = load_texture(PLAYER_SPRITE_FILEPATH);
     
     // enable blending
     glEnable(GL_BLEND);
@@ -189,11 +198,19 @@ void process_input()
         player_movement.y = -1.0f;
     }
     
-    // This makes sure that the player can't "cheat" their way into moving faster
+    // This makes sure that the player can't move faster diagonally
     if (glm::length(player_movement) > 1.0f)
     {
         player_movement = glm::normalize(player_movement);
     }
+}
+
+/**
+ Uses distance formula.
+ */
+bool check_collision(glm::vec3 &position_a, glm::vec3 &position_b)
+{
+    return sqrt(pow(position_b[0] - position_a[0], 2) + pow(position_b[1] - position_b[1], 2)) < MINIMUM_COLLISION_DISTANCE;
 }
 
 void update()
@@ -207,6 +224,11 @@ void update()
     
     model_matrix = glm::mat4(1.0f);
     model_matrix = glm::translate(model_matrix, player_position);
+    
+    if (check_collision(player_position, other_position))
+    {
+        std::cout << std::time(nullptr) << ": Collision.\n";
+    }
 }
 
 void draw_object(glm::mat4 &object_model_matrix, GLuint &object_texture_id)
@@ -239,6 +261,7 @@ void render() {
     
     // Bind texture
     draw_object(model_matrix, player_texture_id);
+    draw_object(other_model_matrix, other_texture_id);
     
     // We disable two attribute arrays now
     glDisableVertexAttribArray(program.positionAttribute);
