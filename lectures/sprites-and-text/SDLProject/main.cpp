@@ -78,14 +78,14 @@ int *ANIMATION_LEFT  = new int[4] { 1, 5, 9,  13 }; // for George to move to the
 int *ANIMATION_UP    = new int[4] { 2, 6, 10, 14 }; // for George to move upwards
 int *ANIMATION_DOWN  = new int[4] { 0, 4, 8,  12 }; // for George to move downwards
 
-int **GEORGE_WALKING_ANIMATIONS = new int*[4]
+int **GEORGE_WALKING = new int*[4]
 {
     ANIMATION_LEFT, ANIMATION_RIGHT, ANIMATION_UP, ANIMATION_DOWN
 };
 
 const int FONTBANK_SIZE = 16;
 
-int *animation_indices = GEORGE_WALKING_ANIMATIONS[DOWN];  // start George looking down
+int *animation_indices = GEORGE_WALKING[DOWN];  // start George looking down
 
 int animation_frames = SPRITESHEET_DIMENSIONS;
 int animation_index = 0;
@@ -207,23 +207,23 @@ void process_input()
     if (key_state[SDL_SCANCODE_LEFT])
     {
         player_movement.x = -1.0f;
-        animation_indices = GEORGE_WALKING_ANIMATIONS[LEFT];
+        animation_indices = GEORGE_WALKING[LEFT];
     }
     else if (key_state[SDL_SCANCODE_RIGHT])
     {
         player_movement.x = 1.0f;
-        animation_indices = GEORGE_WALKING_ANIMATIONS[RIGHT];
+        animation_indices = GEORGE_WALKING[RIGHT];
     }
     
     if (key_state[SDL_SCANCODE_UP])
     {
         player_movement.y = 1.0f;
-        animation_indices = GEORGE_WALKING_ANIMATIONS[UP];
+        animation_indices = GEORGE_WALKING[UP];
     }
     else if (key_state[SDL_SCANCODE_DOWN])
     {
         player_movement.y = -1.0f;
-        animation_indices = GEORGE_WALKING_ANIMATIONS[DOWN];
+        animation_indices = GEORGE_WALKING[DOWN];
     }
     
     // This makes sure that the player can't move faster diagonally
@@ -390,7 +390,16 @@ void render()
     SDL_GL_SwapWindow(display_window);
 }
 
-void shutdown() { SDL_Quit(); }
+void shutdown()
+{
+    delete [] ANIMATION_LEFT;
+    delete [] ANIMATION_RIGHT;
+    delete [] ANIMATION_UP;
+    delete [] ANIMATION_DOWN;
+    delete [] GEORGE_WALKING;
+    
+    SDL_Quit();
+}
 
 
 int main(int argc, char* argv[])

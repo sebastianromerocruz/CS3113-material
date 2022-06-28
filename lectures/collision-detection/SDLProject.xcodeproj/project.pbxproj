@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84267A18286B70080067498F /* animation_sprites in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84267A17286B6CCA0067498F /* animation_sprites */; };
 		845C739D2846DACD000D6994 /* helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 845C739C2846DACD000D6994 /* helper.cpp */; };
 		847F55AD285198E300E6CF52 /* soph.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 847F55AC285198C100E6CF52 /* soph.png */; };
 		84E820D3285B8769003532D8 /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84E820D1285B8769003532D8 /* sprite.cpp */; };
@@ -27,6 +28,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
+				84267A18286B70080067498F /* animation_sprites in CopyFiles */,
 				DBDF1B612323DE9E007CECB1 /* shaders in CopyFiles */,
 				847F55AD285198E300E6CF52 /* soph.png in CopyFiles */,
 			);
@@ -35,6 +37,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		84267A17286B6CCA0067498F /* animation_sprites */ = {isa = PBXFileReference; lastKnownFileType = folder; path = animation_sprites; sourceTree = "<group>"; };
 		845C739C2846DACD000D6994 /* helper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = helper.cpp; sourceTree = "<group>"; };
 		847F55AC285198C100E6CF52 /* soph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = soph.png; sourceTree = "<group>"; };
 		84E820D1285B8769003532D8 /* sprite.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sprite.cpp; sourceTree = "<group>"; };
@@ -89,6 +92,7 @@
 		DBDF1B512323DE3F007CECB1 /* SDLProject */ = {
 			isa = PBXGroup;
 			children = (
+				84267A17286B6CCA0067498F /* animation_sprites */,
 				847F55AC285198C100E6CF52 /* soph.png */,
 				DBDF1B5B2323DE8D007CECB1 /* glm */,
 				DBDF1B5D2323DE8D007CECB1 /* ShaderProgram.cpp */,
