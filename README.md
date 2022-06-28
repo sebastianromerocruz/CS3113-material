@@ -93,6 +93,7 @@ All work is to be done on your own. There are no group projects.
 6. [**Textures**](lectures/textures/)
 7. [**Player Input**](lectures/player-input/)
 8. [**Collision Detection**](lectures/collision-detection/)
+9. [**Sprite Animation and Text**](lectures/sprites-and-text/)
 
 ### _Getting Help and Discord_
 
