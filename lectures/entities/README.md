@@ -191,7 +191,7 @@ void initialise()
 
 Of course, this will also mean that, wherever you used global variables and constants such as `player_position` or perhaps `PLAYER_SPEED`, you will need to replace them with `state.player->position` and `state.player->movement`. Getters and setters wouldn't be a bad idea, either.
 
-Here's my finalised `Entity` class, along with some enums I defined:
+Here are my finalised `Entity` class's [**`h`**](SDLProject/Entity.h) and [**C++**](SDLProject/Entity.cpp) files:
 
 ```c++
 // Entity.h
