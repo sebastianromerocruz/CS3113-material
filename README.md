@@ -85,15 +85,16 @@ All work is to be done on your own. There are no group projects.
 
 ### _Lectures_
 
-1. [**Introduction**](lectures/introduction/)
-2. [**Triangles**](lectures/triangle/)
-3. [**You're getting old, Matrix**](lectures/matrices/)
-4. [**Transformation Practice**](lectures/transformations/)
-5. [**Delta Time**](lectures/delta-time/)
-6. [**Textures**](lectures/textures/)
-7. [**Player Input**](lectures/player-input/)
-8. [**Collision Detection**](lectures/collision-detection/)
-9. [**Sprite Animation and Text**](lectures/sprites-and-text/)
+1.  [**Introduction**](lectures/introduction/)
+2.  [**Triangles**](lectures/triangle/)
+3.  [**You're getting old, Matrix**](lectures/matrices/)
+4.  [**Transformation Practice**](lectures/transformations/)
+5.  [**Delta Time**](lectures/delta-time/)
+6.  [**Textures**](lectures/textures/)
+7.  [**Player Input**](lectures/player-input/)
+8.  [**Collision Detection**](lectures/collision-detection/)
+9.  [**Sprite Animation and Text**](lectures/sprites-and-text/)
+10. [**Entities**](lectures/entities/)
 
 ### _Getting Help and Discord_
 
