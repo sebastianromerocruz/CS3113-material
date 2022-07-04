@@ -41,8 +41,8 @@ You will also need a [**Github**](https://github.com/) account!
 
 |                                         | **Percentage** |
 |-----------------------------------------|----------------|
-| **_Project 1_: Draw a Simple 2D Scene** | 10%            |
-| **_Project 2_: Pong**                   | 10%            |
+| **_Project 1_**: [**Draw a Simple 2D Scene**](assignments/Project%201%20-%20Simple%202D%20Scene.pdf) | 10%            |
+| **_Project 2_**: [**Pong**](assignments/Project%202%20-%20Pong.pdf)                   | 10%            |
 | **_Project 3_: Rise of the AI**         | 15%            |
 | **_Project 4_: Lunar Lander**           | 15%            |
 | **_Project 5_: Platformer**             | 15%            |
@@ -95,6 +95,7 @@ All work is to be done on your own. There are no group projects.
 8.  [**Collision Detection**](lectures/collision-detection/)
 9.  [**Sprite Animation and Text**](lectures/sprites-and-text/)
 10. [**Entities**](lectures/entities/)
+11. [**Physics**](lectures/physics_1/)
 
 ### _Getting Help and Discord_
 
