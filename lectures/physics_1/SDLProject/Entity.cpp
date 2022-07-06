@@ -101,9 +101,19 @@ void Entity::update(float delta_time, Entity *collidable_entities, int collidabl
 //    }
     for (int i = 0; i < collidable_entity_count; i++)
     {
-        if (check_collision(&collidable_entities[i]))
+        Entity *collidable_entity = &collidable_entities[i];
+        
+        if (check_collision(collidable_entity))
         {
-            velocity = glm::vec3(0.0f);
+            float y_distance = fabs(position.y - collidable_entity->position.y);
+            float y_overlap = fabs(y_distance - (height / 2.0f) - (collidable_entity->height / 2.0f));
+            if (velocity.y > 0) {
+                position.y -= y_overlap;
+                velocity.y = 0;
+            } else if (velocity.y < 0) {
+                position.y += y_overlap;
+                velocity.y = 0;
+            }
         }
     }
     

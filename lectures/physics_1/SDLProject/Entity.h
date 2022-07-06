@@ -12,8 +12,8 @@ private:
     
     // This is a lucky assumption—it will vary with each sprite
     // Think of using getters and setters to change these
-    int width = 1;
-    int height = 1;
+    float width = 1;
+    float height = 1;
     
 public:
     static const int SECONDS_PER_FRAME = 4;
@@ -66,4 +66,6 @@ public:
     void const set_movement(glm::vec3 new_movement)         { movement = new_movement;         };
     void const set_velocity(glm::vec3 new_velocity)         { velocity = new_velocity;         };
     void const set_acceleration(glm::vec3 new_acceleration) { acceleration = new_acceleration; };
+    void const set_width(float new_width)                   { width = new_width;               };
+    void const set_height(float new_height)                 { height = new_height;             };
 };

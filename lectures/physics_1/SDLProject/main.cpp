@@ -152,6 +152,8 @@ void initialise()
     state.player->animation_time   = 0.0f;
     state.player->animation_cols   = 4;
     state.player->animation_rows   = 4;
+    state.player->set_height(0.80);
+    state.player->set_width(0.80);
     
     GLuint platform_texture_id = load_texture(PLATFORM_FILEPATH);
     

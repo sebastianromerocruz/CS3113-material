@@ -43,8 +43,8 @@ You will also need a [**Github**](https://github.com/) account!
 |-----------------------------------------|----------------|
 | **_Project 1_**: [**Draw a Simple 2D Scene**](assignments/Project%201%20-%20Simple%202D%20Scene.pdf) | 10%            |
 | **_Project 2_**: [**Pong**](assignments/Project%202%20-%20Pong.pdf)                   | 10%            |
-| **_Project 3_: Rise of the AI**         | 15%            |
-| **_Project 4_: Lunar Lander**           | 15%            |
+| **_Project 3_**: [**Lunar Lander**](assignments/Project%203%20-%20Lunar%20Lander.pdf)           | 15%            |
+| **_Project 4_: Rise of the AI**         | 15%            |
 | **_Project 5_: Platformer**             | 15%            |
 | **_Final Project_: Students’ Choice**   | 25%            |
 
@@ -96,6 +96,7 @@ All work is to be done on your own. There are no group projects.
 9.  [**Sprite Animation and Text**](lectures/sprites-and-text/)
 10. [**Entities**](lectures/entities/)
 11. [**Physics**](lectures/physics_1/)
+12. [**Colliding with Different Kinds of Entities**](lectures/physics_2/)
 
 ### _Getting Help and Discord_
 
