@@ -8,4 +8,4 @@
 
 ---
 
-_Please see [**slide-deck**](assets/Week%207.pdf) for this week's content._
+_Please see [**slide-deck**](assets/Week%207.pdf) (made by [**Prof. Carmine Guida**](http://carmine.com/)) for this week's content._
