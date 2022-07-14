@@ -98,6 +98,7 @@ All work is to be done on your own. There are no group projects.
 11. [**Physics**](lectures/physics_1/)
 12. [**Colliding with Different Kinds of Entities**](lectures/physics_2/)
 13. [**Music and Sound Effects**](lectures/sound-fx/)
+14. [**Basic Enemy AI**](lectures/enemy-ai/)
 
 ### _Getting Help and Discord_
 
