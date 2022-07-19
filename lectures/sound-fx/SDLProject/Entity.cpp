@@ -72,9 +72,50 @@ void Entity::draw_sprite_from_texture_atlas(ShaderProgram *program, GLuint textu
     glDisableVertexAttribArray(program->texCoordAttribute);
 }
 
-void Entity::update(float delta_time, Entity *collidable_entities, int collidable_entity_count)
+void Entity::activate_ai(Entity *player)
+{
+    switch (ai_type) {
+        case WALKER:
+            ai_walker();
+            break;
+            
+        case GUARD:
+            ai_guard(player);
+            
+        default:
+            break;
+    }
+}
+void Entity::ai_walker()
+{
+    movement = glm::vec3(-1.0f, 0.0f, 0.0f);
+}
+
+void Entity::ai_guard(Entity *player)
+{
+    switch (ai_state) {
+        case IDLE:
+            if (glm::distance(position, player->position) < 3.0f) ai_state = WALKING;
+            break;
+            
+        case WALKING:
+            if (position.x > player->get_position().x) {
+                movement = glm::vec3(-1.0, 0.0, 0.0);
+            } else {
+                movement = glm::vec3(1.0, 0.0, 0.0);
+            }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+void Entity::update(float delta_time, Entity *player, Entity *collidable_entities, int collidable_entity_count)
 {
     if (!is_active) return;
+    
+    if (entity_type == ENEMY) activate_ai(player);
  
     collided_top    = false;
     collided_bottom = false;

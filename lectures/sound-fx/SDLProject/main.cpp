@@ -3,7 +3,8 @@
 #define LOG(argument) std::cout << argument << '\n'
 #define GL_GLEXT_PROTOTYPES 1
 #define FIXED_TIMESTEP 0.0166666f
-#define PLATFORM_COUNT 5
+#define PLATFORM_COUNT 11
+#define ENEMY_COUNT 1
 
 #ifdef _WINDOWS
 #include <GL/glew.h>
@@ -28,9 +29,14 @@ struct GameState
 {
     Entity* player;
     Entity* platforms;
+    Entity* enemies;
+    
     Mix_Music* bgm;
     Mix_Chunk* jump_sfx;
 };
+
+bool is_win_active = false;
+bool is_lose_active = false;
 
 /**
  CONSTANTS
@@ -72,6 +78,8 @@ glm::mat4 view_matrix, projection_matrix;
 
 float previous_ticks = 0.0f;
 float accumulator = 0.0f;
+
+const float PLATFORM_OFFSET = 5.0f;
 
 /**
  GENERAL FUNCTIONS
@@ -142,30 +150,23 @@ void initialise()
     
     state.platforms = new Entity[PLATFORM_COUNT];
     
-    state.platforms[PLATFORM_COUNT - 1].texture_id = platform_texture_id;
-    state.platforms[PLATFORM_COUNT - 1].set_position(glm::vec3(-1.5f, -2.35f, 0.0f));
-    state.platforms[PLATFORM_COUNT - 1].set_width(0.4f);
-    state.platforms[PLATFORM_COUNT - 1].update(0.0f, NULL, 0);
-    
-    for (int i = 0; i < PLATFORM_COUNT - 2; i++)
+    for (int i = 0; i < PLATFORM_COUNT; i++)
     {
         state.platforms[i].texture_id = platform_texture_id;
-        state.platforms[i].set_position(glm::vec3(i - 1.0f, -3.0f, 0.0f));
+        state.platforms[i].entity_type = PLATFORM;
+        state.platforms[i].set_position(glm::vec3(i - PLATFORM_OFFSET, -3.0f, 0.0f));
         state.platforms[i].set_width(0.4f);
-        state.platforms[i].update(0.0f, NULL, 0);
+        state.platforms[i].update(0.0f, NULL, NULL, 0);
     }
     
-    state.platforms[PLATFORM_COUNT - 2].texture_id = platform_texture_id;
-    state.platforms[PLATFORM_COUNT - 2].set_position(glm::vec3(2.5f, -2.5f, 0.0f));
-    state.platforms[PLATFORM_COUNT - 2].set_width(0.4f);
-    state.platforms[PLATFORM_COUNT - 2].update(0.0f, NULL, 0);
-    
+    // PLAYER STUFF
     // Existing
     state.player = new Entity();
-    state.player->set_position(glm::vec3(0.0f));
+    state.player->entity_type = PLAYER;
+    state.player->set_position(glm::vec3(-4.0f, -2.0f, 0.0f));
     state.player->set_movement(glm::vec3(0.0f));
-    state.player->speed = 1.0f;
-    state.player->set_acceleration(glm::vec3(0.0f, -4.905f, 0.0f));
+    state.player->speed = 3.0f;
+    state.player->set_acceleration(glm::vec3(0.0f, -9.81f, 0.0f));
     state.player->texture_id = load_texture(SPRITESHEET_FILEPATH);
     
     // Walking
@@ -174,7 +175,7 @@ void initialise()
     state.player->walking[state.player->UP]    = new int[4] { 2, 6, 10, 14 };
     state.player->walking[state.player->DOWN]  = new int[4] { 0, 4, 8,  12 };
 
-    state.player->animation_indices = state.player->walking[state.player->LEFT];  // start George looking left
+    state.player->animation_indices = state.player->walking[state.player->RIGHT];  // start George looking left
     state.player->animation_frames = 4;
     state.player->animation_index  = 0;
     state.player->animation_time   = 0.0f;
@@ -184,11 +185,21 @@ void initialise()
     state.player->set_width(0.9f);
     
     // Jumping
-    state.player->jumping_power = 3.0f;
+    state.player->jumping_power = 5.0f;
     
-    /**
-     NEW STUFF!
-     */
+    // ENEMY STUFF
+    GLuint enemy_texture_id = load_texture("assets/soph.png");
+    
+    state.enemies = new Entity[ENEMY_COUNT];
+    state.enemies[0].entity_type = ENEMY;
+    state.enemies[0].ai_type = GUARD;
+    state.enemies[0].ai_state = IDLE;
+    state.enemies[0].texture_id = enemy_texture_id;
+    state.enemies[0].set_position(glm::vec3(3.0f, 0.0f, 0.0f));
+    state.enemies[0].set_movement(glm::vec3(0.0f));
+    state.enemies[0].speed = 1.0f;
+    state.enemies[0].set_acceleration(glm::vec3(0.0f, -9.81, 0.0f));
+    
     // BGM and SFX
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096);
     
@@ -279,7 +290,10 @@ void update()
     
     while (delta_time >= FIXED_TIMESTEP) {
         // Update. Notice it's FIXED_TIMESTEP. Not deltaTime
-        state.player->update(FIXED_TIMESTEP, state.platforms, PLATFORM_COUNT);
+        state.player->update(FIXED_TIMESTEP, state.player, state.platforms, PLATFORM_COUNT);
+        
+        for (int i = 0; i < ENEMY_COUNT; i++) state.enemies[i].update(FIXED_TIMESTEP, state.player, state.platforms, PLATFORM_COUNT);
+        
         delta_time -= FIXED_TIMESTEP;
     }
     
@@ -293,6 +307,7 @@ void render()
     state.player->render(&program);
     
     for (int i = 0; i < PLATFORM_COUNT; i++) state.platforms[i].render(&program);
+    for (int i = 0; i < ENEMY_COUNT; i++) state.enemies[i].render(&program);
     
     SDL_GL_SwapWindow(display_window);
 }

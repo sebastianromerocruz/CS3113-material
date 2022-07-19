@@ -1,4 +1,6 @@
-enum EntityType { PLATFORM, PLAYER, ITEM };
+enum EntityType { PLATFORM, PLAYER, ENEMY };
+enum AIType { WALKER, GUARD };
+enum AIState { WALKING, IDLE, ATTACKING };
 
 class Entity
 {
@@ -28,7 +30,10 @@ public:
     // Existing
     GLuint texture_id;
     glm::mat4 model_matrix;
-    EntityType type;
+    
+    EntityType entity_type;
+    AIType ai_type;
+    AIState ai_state;
     
     // Translating
     float speed;
@@ -58,8 +63,13 @@ public:
     ~Entity();
 
     void draw_sprite_from_texture_atlas(ShaderProgram *program, GLuint texture_id, int index);
-    void update(float delta_time, Entity *collidable_entities, int collidable_entity_count);
+    void update(float delta_time, Entity *player, Entity *collidable_entities, int collidable_entity_count);
     void render(ShaderProgram *program);
+    
+    // AI Methods
+    void activate_ai(Entity *player);
+    void ai_walker();
+    void ai_guard(Entity *player);
     
     void const check_collision_y(Entity *collidable_entities, int collidable_entity_count);
     void const check_collision_x(Entity *collidable_entities, int collidable_entity_count);
