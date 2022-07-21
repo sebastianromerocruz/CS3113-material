@@ -4,7 +4,7 @@
 
 ### 3 Thermidor, Year CCXXX
 
-***Song of the day***: _[**Flower Tower**](https://youtu.be/Rwzy6Qt8gq8) performed by Sayuri (2022)._
+***Song of the day***: _[**Part Of The Band**](https://youtu.be/87nG3LuabUs) performed by The 1975 (2022)._
 
 ---
 

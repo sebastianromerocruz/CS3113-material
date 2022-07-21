@@ -44,7 +44,7 @@ You will also need a [**Github**](https://github.com/) account!
 | **_Project 1_**: [**Draw a Simple 2D Scene**](assignments/Project%201%20-%20Simple%202D%20Scene.pdf) | 10%            |
 | **_Project 2_**: [**Pong**](assignments/Project%202%20-%20Pong.pdf)                   | 10%            |
 | **_Project 3_**: [**Lunar Lander**](assignments/Project%203%20-%20Lunar%20Lander.pdf)           | 15%            |
-| **_Project 4_: Rise of the AI**         | 15%            |
+| **_Project 4_**: [**Rise of the AI**](assignments/Project%204%20-%20Rise%20of%20the%20AI.pdf)         | 15%            |
 | **_Project 5_: Platformer**             | 15%            |
 | **_Final Project_: Students’ Choice**   | 25%            |
 
