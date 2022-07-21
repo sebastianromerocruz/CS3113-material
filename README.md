@@ -100,6 +100,7 @@ All work is to be done on your own. There are no group projects.
 13. [**Music and Sound Effects**](lectures/sound-fx/)
 14. [**Basic Enemy AI**](lectures/enemy-ai/)
 15. [**Tilesets and Tilemaps**](lectures/platform-levels/)
+16. [**Scenes**](lectures/scenes/)
 
 ### _Getting Help and Discord_
 

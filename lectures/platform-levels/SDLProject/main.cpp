@@ -67,9 +67,9 @@ const GLint TEXTURE_BORDER   = 0;   // this value MUST be zero
 unsigned int LEVEL_1_DATA[] =
 {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0,
     1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1,
-    2, 2, 2, 2, 0, 0, 1, 1, 1, 2, 2, 2, 2, 2,
+    2, 2, 1, 1, 0, 0, 1, 1, 1, 2, 2, 2, 2, 2,
     2, 2, 2, 2, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2
 };
 
@@ -302,10 +302,15 @@ void update()
     }
     
     accumulator = delta_time;
+    
+    view_matrix = glm::mat4(1.0f);
+    view_matrix = glm::translate(view_matrix, glm::vec3(-state.player->get_position().x, 0.0f, 0.0f));
 }
 
 void render()
 {
+    program.SetViewMatrix(view_matrix);
+    
     glClear(GL_COLOR_BUFFER_BIT);
     
     state.player->render(&program);

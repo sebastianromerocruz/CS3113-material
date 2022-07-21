@@ -58,7 +58,8 @@ We could potentially build a world like this one:
 By doing the following:
 
 ![tilemap-example](assets/tilemap-example.png)
-![tilemap-numbered](assets/numbered-tilemap.png)
+
+Then, we can "draw" the map by assigning a specific index from the tilesheet to a location in the map using an array of indices:
 
 ```c++
  unsigned int level_data[] =
@@ -72,6 +73,14 @@ By doing the following:
    2, 2, 2, 2, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2
 };
 ```
+
+<sub>**Code Block 2**: A numerical "drawing" of our stage.</sub>
+
+The result, superimposed with the indices above, looks like this:
+
+![tilemap-numbered](assets/numbered-tilemap.png)
+
+<sub>**Figure 3**: Representing a scene using specific tiles from a tilesheet.</sub>
 
 This actually works in a very similar way to how we build and render text—it's simply evenly spaced sprite rendering with images of platforms instead of images of characters. For this, we will create a new class, `Map`, that will help us do this:
 
@@ -96,6 +105,7 @@ private:
     int width;
     int height;
     
+    // Here, the level_data is the numerical "drawing" of the map
     unsigned int *level_data;
     GLuint texture_id;
     
@@ -103,9 +113,12 @@ private:
     int tile_count_x;
     int tile_count_y;
     
+    // Just like with rendering text, we're rendering several sprites at once
+    // So we need vectors to store their respective vertices and texture coordinates
     std::vector<float> vertices;
     std::vector<float> texture_coordinates;
     
+    // The boundaries of the map
     float left_bound, right_bound, top_bound, bottom_bound;
     
 public:
@@ -157,22 +170,28 @@ Map::Map(int width, int height, unsigned int *level_data, GLuint texture_id, flo
 
 void Map::build()
 {
+    // Since this is a 2D map, we need a nested for-loop
     for(int y = 0; y < this->height; y++)
     {
         for(int x = 0; x < this->width; x++) {
+            // Get the current tile
             int tile = this->level_data[y * this->width + x];
             
+            // If the tile number is 0 i.e. not solid, skip to the next one
             if (tile == 0) continue;
             
+            // Otherwise, calculate its UV-coordinated
             float u = (float) (tile % this->tile_count_x) / (float) this->tile_count_x;
             float v = (float) (tile / this->tile_count_x) / (float) this->tile_count_y;
             
-            float tile_width = 1.0f/ (float) this->tile_count_x;
-            float tile_height = 1.0f/ (float) this->tile_count_y;
+            // And work out their dimensions and posititions
+            float tile_width  = 1.0f / (float) this->tile_count_x;
+            float tile_height = 1.0f / (float) this->tile_count_y;
             
             float x_offset = -(this->tile_size / 2); // From center of tile
             float y_offset = (this->tile_size / 2); // From center of tile
             
+            // So we can store them inside our std::vectors
             this->vertices.insert(vertices.end(), {
                 x_offset + (this->tile_size * x), y_offset + -this->tile_size * y,
                 x_offset + (this->tile_size * x), y_offset + (-this->tile_size * y) - this->tile_size,
@@ -193,6 +212,7 @@ void Map::build()
         }
     }
     
+    // The bounds are dependent on the size of the tiles
     this->left_bound   = 0 - (this->tile_size / 2);
     this->right_bound  = (this->tile_size * this->width) - (this->tile_size / 2);
     this->top_bound    = 0 + (this->tile_size / 2);
@@ -247,6 +267,7 @@ unsigned int LEVEL_1_DATA[] =
 
 void initialise()
 {
+    // Loop at this beautiful initialisation. That's literally it
     GLuint map_texture_id = load_texture("assets/tileset.png");
     state.map = new Map(LEVEL1_WIDTH, LEVEL1_HEIGHT, LEVEL_1_DATA, map_texture_id, 1.0f, 4, 1);
 }
@@ -257,7 +278,60 @@ void shutdown()
 }
 ```
 
-Now, we need to update a few more things in order to make this map collidable with our player—or rather, the other way around. To do this, we need to convert our entities' positions to the grid coordinates of the tilemap and check if a tile is actually there. This requires us to overload our collision-checking methods to work for both `Entity` objects and `Map` objects:
+<sub>**Code Block 3, 4, and 5**: The `Map` class implemented. Keep in mind that now we have no need for the `state.platforms` array, so you can get rid of all the code that involves it. _This includes the `state.player`'s `update()` method_. We'll be looking at that momentarily.</sub>
+
+Now, we need to update a few more things in order to make this map collidable with our player—or rather, the other way around. To do this, we need to convert our entities' positions to the grid coordinates of the tilemap and check if a tile is actually there. This requires us to overload our collision-checking methods to work for both `Entity` objects and `Map` objects.
+
+These new `check_collision_y()` and `check_collision_x()` methods will be probing for three points and checking whether the tile that we are colliding with is supposed to be solid or not. For instance, in the case of a pit:
+
+![vert](assets/vert.png)
+![horiz](assets/horiz.png)
+
+<sub>**Figures 4 and 5**: Collision detection in both cardinal coordinates.</sub>
+
+Our map, therefore needs to have a way to check whether its tiles are solid or not:
+
+```c++
+bool Map::is_solid(glm::vec3 position, float *penetration_x, float *penetration_y)
+{
+    // The penetration between the map and the object
+    // The reason why these are pointers is because we want to reassign values
+    // to them in case that we are colliding. That way the object that originally
+    // passed them as values will keep track of these distances
+    // inb4: we're passing by reference
+    *penetration_x = 0;
+    *penetration_y = 0;
+    
+    // If we are out of bounds, it is not solid
+    if (position.x < this->left_bound || position.x > this->right_bound) return false;
+    if (position.y > this->top_bound || position.y < this->bottom_bound) return false;
+    
+    int tile_x = floor((position.x + (this->tile_size / 2)) / this->tile_size);
+    int tile_y = -(ceil(position.y - (this->tile_size / 2))) / this->tile_size; // Our array counts up as Y goes down.
+    
+    // If the tile index is negative or greater than the dimensions, it is not solid
+    if (tile_x < 0 || tile_x >= this->width) return false;
+    if (tile_y < 0 || tile_y >= this->height) return false;
+    
+    // If the tile index is 0 i.e. an open space, it is not solid
+    int tile = level_data[tile_y * this->width + tile_x];
+    if (tile == 0) return false;
+    
+    // If none of these are true, then it is solid
+    float tile_center_x = (tile_x * this->tile_size);
+    float tile_center_y = -(tile_y * this->tile_size);
+    
+    // And we likely have some overlap
+    *penetration_x = (this->tile_size / 2) - fabs(position.x - tile_center_x);
+    *penetration_y = (this->tile_size / 2) - fabs(position.y - tile_center_y);
+    
+    return true;
+}
+```
+
+<sub>**Code Block 6**: This method serves a double purpose; it both a) tells us whether or not a specific tile is solid, and b) tells the calling scope by how much we've penetrated this given tile (via `penetration_x` and `penetration_y` pointers).</sub>
+
+To put this method into context, consider our `Entity` class's current implementations of `check_collision_y()` and `check_collision_x()`
 
 ```c++
 #include "Map.h"
@@ -265,10 +339,13 @@ Now, we need to update a few more things in order to make this map collidable wi
 class Entity
 {
 private:
+    // Now, update should check for both objects in the game AND the map
     void update(float delta_time, Entity *player, Entity *objects, int object_count, Map *map);
 
     void const check_collision_y(Entity *collidable_entities, int collidable_entity_count);
     void const check_collision_x(Entity *collidable_entities, int collidable_entity_count);
+
+    // Overloading our methods to check for only the map
     void const check_collision_y(Map *map);
     void const check_collision_x(Map *map);
 }
@@ -276,6 +353,8 @@ private:
 ```c++
 void Entity::update(float delta_time, Entity *player, Entity *objects, int object_count, Map *map)
 {
+    // We make two calls to our check_collision methods, one for the collidable objects and one for
+    // the map.
     position.y += velocity.y * delta_time;
     check_collision_y(objects, object_count);
     check_collision_y(map);
@@ -287,18 +366,21 @@ void Entity::update(float delta_time, Entity *player, Entity *objects, int objec
 
 void const Entity::check_collision_y(Map *map)
 {
-    // Probes for tiles
-    glm::vec3 top = glm::vec3(position.x, position.y + (height / 2), position.z);
-    glm::vec3 top_left = glm::vec3(position.x - (width / 2), position.y + (height / 2), position.z);
+    // Probes for tiles above
+    glm::vec3 top       = glm::vec3(position.x, position.y + (height / 2), position.z);
+    glm::vec3 top_left  = glm::vec3(position.x - (width / 2), position.y + (height / 2), position.z);
     glm::vec3 top_right = glm::vec3(position.x + (width / 2), position.y + (height / 2), position.z);
     
-    glm::vec3 bottom = glm::vec3(position.x, position.y - (height / 2), position.z);
-    glm::vec3 bottom_left = glm::vec3(position.x - (width / 2), position.y - (height / 2), position.z);
+    // Probes for tiles below
+    glm::vec3 bottom       = glm::vec3(position.x, position.y - (height / 2), position.z);
+    glm::vec3 bottom_left  = glm::vec3(position.x - (width / 2), position.y - (height / 2), position.z);
     glm::vec3 bottom_right = glm::vec3(position.x + (width / 2), position.y - (height / 2), position.z);
     
+    // f
     float penetration_x = 0;
     float penetration_y = 0;
     
+    // If the map is solid, check the top three points
     if (map->is_solid(top, &penetration_x, &penetration_y) && velocity.y > 0)
     {
         position.y -= penetration_y;
@@ -318,11 +400,12 @@ void const Entity::check_collision_y(Map *map)
         collided_top = true;
     }
     
+    // And the bottom three points
     if (map->is_solid(bottom, &penetration_x, &penetration_y) && velocity.y < 0)
     {
-    position.y += penetration_y;
-    velocity.y = 0;
-    collided_bottom = true;
+        position.y += penetration_y;
+        velocity.y = 0;
+        collided_bottom = true;
     }
     else if (map->is_solid(bottom_left, &penetration_x, &penetration_y) && velocity.y < 0)
     {
@@ -332,16 +415,15 @@ void const Entity::check_collision_y(Map *map)
     }
     else if (map->is_solid(bottom_right, &penetration_x, &penetration_y) && velocity.y < 0)
     {
-    position.y += penetration_y;
-    velocity.y = 0;
+        position.y += penetration_y;
+        velocity.y = 0;
         collided_bottom = true;
-        
     }
 }
 
 void const Entity::check_collision_x(Map *map)
 {
-    // Probes for tiles
+    // Probes for tiles; the x-checking is much simpler
     glm::vec3 left = glm::vec3(position.x - (width / 2), position.y, position.z);
     glm::vec3 right = glm::vec3(position.x + (width / 2), position.y, position.z);
     
@@ -362,3 +444,6 @@ void const Entity::check_collision_x(Map *map)
     }
 }
 ```
+
+<sub>**Code Blocks 7 and 8**: Collisions with the map and collisions with other entities are inherently different—for the better.</sub>
+
