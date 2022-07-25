@@ -2,6 +2,21 @@
 
 ## New York University Tandon School of Engineering
 
+### _Sections_
+
+1. [**Instructor**](#instructor)
+2. [**Class Information**](#class-information)
+3. [**Description**](#description)
+4. [**Objectives**](#objectives)
+5. [**Computer/Software Requirements**](#computersoftware-requirements)
+6. [**Grading Scheme**](#grading-scheme)
+7. [**Deadlines**](#deadlines)
+8. [**Course Weekly Schedule**](#course-weekly-schedule)
+9. [**Lectures Links**](#lectures)
+10. [**Getting Help and Discord**](#getting-help-and-discord)
+11. [**Moses Center Statement of Disability**](#moses-center-statement-of-disability)
+12. [**Academic Integrity**](#academic-integrity)
+
 ### _Instructor_
 
 [**Sebastián Romero Cruz**](https://github.com/sebastianromerocruz)  _(They / Them)_
@@ -45,8 +60,8 @@ You will also need a [**Github**](https://github.com/) account!
 | **_Project 2_**: [**Pong**](assignments/Project%202%20-%20Pong.pdf)                   | 10%            |
 | **_Project 3_**: [**Lunar Lander**](assignments/Project%203%20-%20Lunar%20Lander.pdf)           | 15%            |
 | **_Project 4_**: [**Rise of the AI**](assignments/Project%204%20-%20Rise%20of%20the%20AI.pdf)         | 15%            |
-| **_Project 5_: Platformer**             | 15%            |
-| **_Final Project_: Students’ Choice**   | 25%            |
+| **_Project 5_**: [**Platformer**](assignments/Project%205%20-%20Platformer.pdf)             | 15%            |
+| **_Final Project_**: [**Students’ Choice**](assignments/Project%206%20-%20Student's%20Choice.pdf)   | 25%            |
 
 ### _Deadlines_
 
@@ -101,6 +116,7 @@ All work is to be done on your own. There are no group projects.
 14. [**Basic Enemy AI**](lectures/enemy-ai/)
 15. [**Tilesets and Tilemaps**](lectures/platform-levels/)
 16. [**Scenes**](lectures/scenes/)
+17. [**Effects**](lectures/fx/)
 
 ### _Getting Help and Discord_
 
