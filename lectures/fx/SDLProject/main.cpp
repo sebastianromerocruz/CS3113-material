@@ -116,7 +116,7 @@ void initialise()
     switch_to_scene(levels[0]);
     
     effects = new Effects(projection_matrix, view_matrix);
-    effects->start(FADEIN, 1.0f);
+    effects->start(GROW, 2.0f);
 }
 
 void process_input()
@@ -196,7 +196,7 @@ void update()
         current_scene->update(FIXED_TIMESTEP);
         effects->update(FIXED_TIMESTEP);
         
-        if (is_colliding_bottom == false && current_scene->state.player->collided_bottom) effects->start(SHAKE, 1.0f);
+//        if (is_colliding_bottom == false && current_scene->state.player->collided_bottom) effects->start(SHAKE, 1.0f);
         
         is_colliding_bottom = current_scene->state.player->collided_bottom;
         

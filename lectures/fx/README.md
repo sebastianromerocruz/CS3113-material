@@ -14,6 +14,8 @@
 2. [**Effects**](#part-2-effects)
     1. [**Fade-In**](#fade-in)
     2. [**Fade-Out**](#fade-out)
+    3. [**Growing and Shrinking**](#growing-and-shrinking)
+    4. [**Shaking**](#shaking)
 
 ### Part 1: _Multiple Levels_
 
@@ -468,6 +470,11 @@ void Effects::render()
 
 Notice here that we had to modify the model matrix to reflect the size changes of our overlay. The multiplication by 0.75 is so that it grows in a rectangular pattern instead of a square pattern.
 
+![shrink](assets/shrink.gif)
+![grow](assets/grow.gif)
+
+<sub>**Figures 4 and 5**: Shrinking and Growing effects.</sub>
+
 ### Shaking
 
 A really cool effect that you can add to your game is a shaking effect to simulate the ground shaking. For this, we will have the view matrix shift rapidly for a second or two. So we need to keep track of both the time remaining and random directions that it will be shifting:
@@ -541,3 +548,5 @@ void update()
 Result:
 
 ![shake](assets/shake.gif)
+
+<sub>**Figure 6**: Really adds to the experience, I think.</sub>
