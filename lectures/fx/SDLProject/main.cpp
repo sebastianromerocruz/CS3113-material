@@ -116,7 +116,7 @@ void initialise()
     switch_to_scene(levels[0]);
     
     effects = new Effects(projection_matrix, view_matrix);
-    effects->start(FADEIN, 5.0f);
+    effects->start(FADEIN, 1.0f);
 }
 
 void process_input()
@@ -237,6 +237,7 @@ void shutdown()
     
     delete levelA;
     delete levelB;
+    delete effects;
 }
 
 /**
