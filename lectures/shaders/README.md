@@ -12,6 +12,7 @@
 
 1. [**What exactly do shaders do?**](#part-1-what-exactly-do-shaders-do)
 2. [**Experimenting with shaders**](#part-2-experimenting-with-shaders)
+3. [**2D Lighting**](#part-3-2d-lighting)
 
 ### Part 1: _What exactly do shaders do?_
 
