@@ -117,6 +117,7 @@ All work is to be done on your own. There are no group projects.
 15. [**Tilesets and Tilemaps**](lectures/platform-levels/)
 16. [**Scenes**](lectures/scenes/)
 17. [**Effects**](lectures/fx/)
+18. [**Shaders**](lectures/shaders/)
 
 ### _Getting Help and Discord_
 

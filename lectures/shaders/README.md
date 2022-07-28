@@ -4,7 +4,7 @@
 
 ### 10 Thermidor, Year CCXXX
 
-***Song of the day***: _[**Trumpet Concerto in E-flat major**](https://youtu.be/bG8nAxNd3zA) performed by Franz Joseph Haydn, performed by the Vienna Philharmonic (2021)._
+***Song of the day***: _[**少年少女**](https://youtu.be/7VYqcCLIx0s) by 銀杏BOYZ (2021)._
 
 ---
 
