@@ -118,7 +118,7 @@ All work is to be done on your own. There are no group projects.
 16. [**Scenes**](lectures/scenes/)
 17. [**Effects**](lectures/fx/)
 18. [**Shaders**](lectures/shaders/)
-19. [**Intro to 3D**](lectures/SDL3D/)
+19. [**Intro to 3D**](lectures/SDL3D/SDLProject/)
 
 ### _Getting Help and Discord_
 
