@@ -192,6 +192,8 @@ void update()
         return;
     }
     
+    glm::length(<#const vec<L, T, Q> &v#>)
+    
     while (delta_time >= FIXED_TIMESTEP) {
         current_scene->update(FIXED_TIMESTEP);
         effects->update(FIXED_TIMESTEP);

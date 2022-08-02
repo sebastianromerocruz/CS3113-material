@@ -102,7 +102,7 @@ void initialise()
     
     glUseProgram(program.programID);
     
-    glClearColor(BG_RED, BG_BLUE, BG_GREEN, BG_OPACITY);
+    glClearColor(0.22, 0.22, 0.22, BG_OPACITY);
     
     // enable blending
     glEnable(GL_BLEND);

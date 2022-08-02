@@ -1,3 +1,4 @@
+// fragment_lit.glsl
 uniform sampler2D diffuse;
 uniform vec2 lightPosition;
 
@@ -11,7 +12,9 @@ float attenuate(float dist, float a, float b)
 
 void main()
 {
-     float brightness = attenuate(distance(lightPosition, varPosition), 1.0, 0.0);
-     vec4 color = texture2D(diffuse, texCoordVar);
-     gl_FragColor = vec4(color.rgb * brightness, color.a);
+    // The brightness is directly based on the distance between the light source's
+    // location and the pixel's location
+    float brightness = attenuate(distance(lightPosition, varPosition), 1.0, 0.0);
+    vec4 color = texture2D(diffuse, texCoordVar);
+    gl_FragColor = vec4(color.rgb * brightness, color.a);
 }
