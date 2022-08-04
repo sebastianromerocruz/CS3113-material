@@ -1,10 +1,10 @@
-## Lecture 19
+## Lecture 20
 
-# [**3D**](SDLProject/main.cpp)
+# [**3D Models**](SDLProject/main.cpp)
 
-### 15 Thermidor, Year CCXXX
+### 17 Thermidor, Year CCXXX
 
-***Song of the day***: _[**Dal giorno in cui sei nato tu**](https://youtu.be/F3DGBuM9hjI) by Andrea Laszlo de Simone (2020)._
+***Song of the day***: _[**Happiness**](https://youtu.be/rR1lgEMMJwo) by The 1975 (2022)._
 
 ---
 
