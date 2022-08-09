@@ -120,6 +120,7 @@ All work is to be done on your own. There are no group projects.
 18. [**Shaders**](lectures/shaders/)
 19. [**Intro to 3D**](lectures/SDL3D/SDLProject/)
 20. [**3D Models**](lectures/3d-models/SDLProject/)
+21. [**3D Levels: Floors, Movement, and Collisions**](lectures/3d-levels/SDLProject/)
 
 ### _Getting Help and Discord_
 
