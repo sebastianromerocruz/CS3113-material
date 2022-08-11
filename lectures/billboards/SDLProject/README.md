@@ -160,4 +160,3 @@ Result:
 
 <sub>**Figure 6**: Hello, Sophie.</sub>
 
-
