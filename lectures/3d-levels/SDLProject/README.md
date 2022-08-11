@@ -12,7 +12,7 @@
 
 1. [**Getting Our Feet On The Ground**](#part-1-getting-our-feet-on-the-ground)
 2. [**3D Movement**](#part-2-3d-movement)
-3. [**3D Collisions**]()
+3. [**3D Collisions**](#part-3-3d-collisions)
 
 ### Part 1: *Getting Our Feet On The Ground*
 
