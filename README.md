@@ -61,7 +61,7 @@ You will also need a [**Github**](https://github.com/) account!
 | **_Project 3_**: [**Lunar Lander**](assignments/Project%203%20-%20Lunar%20Lander.pdf)           | 15%            |
 | **_Project 4_**: [**Rise of the AI**](assignments/Project%204%20-%20Rise%20of%20the%20AI.pdf)         | 15%            |
 | **_Project 5_**: [**Platformer**](assignments/Project%205%20-%20Platformer.pdf)             | 15%            |
-| **_Final Project_**: [**Students’ Choice**](assignments/Project%206%20-%20Student's%20Choice.pdf)   | 25%            |
+| **_Final Project_**: [**Students’ Choice**](assignments/Project%206%20-%20Student's%20Choice.pdf)   | 35%            |
 
 ### _Deadlines_
 
