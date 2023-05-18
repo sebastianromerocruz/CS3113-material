@@ -1,6 +1,6 @@
-# CS505 _Introduction to Game Programming_
+<h1 align=center>CS505 _Introduction to Game Programming</h1>
 
-## New York University Tandon School of Engineering
+<h2 align=center>New York University Tandon School of Engineering</h2>
 
 ### _Sections_
 

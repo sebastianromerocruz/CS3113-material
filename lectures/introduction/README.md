@@ -1,8 +1,8 @@
-## Lecture 01
+<h2 align=center>Lecture 01</h2>
 
-# Introduction
+<h1 align=center>Introduction</h1>
 
-### 4 Prairial, Year CCXXXI
+<h3 align=center>4 Prairial, Year CCXXXI</h3>
 
 ***Song of the day***: _[**hello world**](https://youtu.be/Yw6u6YkTgQ4) by Louie Zong._
 
