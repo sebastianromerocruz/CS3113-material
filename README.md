@@ -4,18 +4,43 @@
 
 ### _Sections_
 
-1. [**Instructor**](#instructor)
-2. [**Class Information**](#class-information)
-3. [**Description**](#description)
-4. [**Objectives**](#objectives)
-5. [**Computer/Software Requirements**](#computersoftware-requirements)
-6. [**Grading Scheme**](#grading-scheme)
-7. [**Deadlines**](#deadlines)
-8. [**Course Weekly Schedule**](#course-weekly-schedule)
-9. [**Lectures Links**](#lectures)
+1. [**Lectures Links**](#lectures)
+2. [**Instructor**](#instructor)
+3. [**Class Information**](#class-information)
+4. [**Description**](#description)
+5. [**Objectives**](#objectives)
+6. [**Computer/Software Requirements**](#computersoftware-requirements)
+7. [**Grading Scheme**](#grading-scheme)
+8. [**Deadlines**](#deadlines)
+9. [**Course Weekly Schedule**](#course-weekly-schedule)
 10. [**Getting Help and Discord**](#getting-help-and-discord)
 11. [**Moses Center Statement of Disability**](#moses-center-statement-of-disability)
 12. [**Academic Integrity**](#academic-integrity)
+
+### _Lectures_
+
+1.  [**Introduction**](lectures/introduction/)
+<!-- 2.  [**Triangles**](lectures/triangle/)
+3.  [**You're getting old, Matrix**](lectures/matrices/)
+4.  [**Transformation Practice**](lectures/transformations/)
+5.  [**Delta Time**](lectures/delta-time/)
+6.  [**Textures**](lectures/textures/)
+7.  [**Player Input**](lectures/player-input/)
+8.  [**Collision Detection**](lectures/collision-detection/)
+9.  [**Sprite Animation and Text**](lectures/sprites-and-text/)
+10. [**Entities**](lectures/entities/)
+11. [**Physics**](lectures/physics_1/)
+12. [**Colliding with Different Kinds of Entities**](lectures/physics_2/)
+13. [**Music and Sound Effects**](lectures/sound-fx/)
+14. [**Basic Enemy AI**](lectures/enemy-ai/)
+15. [**Tilesets and Tilemaps**](lectures/platform-levels/)
+16. [**Scenes**](lectures/scenes/)
+17. [**Effects**](lectures/fx/)
+18. [**Shaders**](lectures/shaders/)
+19. [**Intro to 3D**](lectures/SDL3D/SDLProject/)
+20. [**3D Models**](lectures/3d-models/SDLProject/)
+21. [**3D Levels: Floors, Movement, and Collisions**](lectures/3d-levels/SDLProject/)
+22. [**Billboards**](lectures/billboards/SDLProject/) -->
 
 ### _Instructor_
 
@@ -57,11 +82,11 @@ You will also need a [**Github**](https://github.com/) account!
 |                                         | **Percentage** |
 |-----------------------------------------|----------------|
 | **_Project 1_**: [**Draw a Simple 2D Scene**](assignments/Project%201%20-%20Simple%202D%20Scene.pdf) | 10%            |
-| **_Project 2_**: [**Pong**](assignments/Project%202%20-%20Pong.pdf)                   | 10%            |
-| **_Project 3_**: [**Lunar Lander**](assignments/Project%203%20-%20Lunar%20Lander.pdf)           | 15%            |
-| **_Project 4_**: [**Rise of the AI**](assignments/Project%204%20-%20Rise%20of%20the%20AI.pdf)         | 15%            |
-| **_Project 5_**: [**Platformer**](assignments/Project%205%20-%20Platformer.pdf)             | 15%            |
-| **_Final Project_**: [**Students’ Choice**](assignments/Project%206%20-%20Student's%20Choice.pdf)   | 35%            |
+| **_Project 2_**: **Pong**                   | 10%            |
+| **_Project 3_**: **Lunar Lander** | 15%            |
+| **_Project 4_**: **Rise of the AI**| 15%            |
+| **_Project 5_**: **Platformer**             | 15%            |
+| **_Final Project_**: **Students’ Choice**  | 35%            |
 
 ### _Deadlines_
 
@@ -98,38 +123,13 @@ You will also need a [**Github**](https://github.com/) account!
 All work is to be done on your own. There are no group projects.
 **There is no extra credit** in this course and the grades are **not curved**.
 
-### _Lectures_
-
-1.  [**Introduction**](lectures/introduction/)
-2.  [**Triangles**](lectures/triangle/)
-3.  [**You're getting old, Matrix**](lectures/matrices/)
-4.  [**Transformation Practice**](lectures/transformations/)
-5.  [**Delta Time**](lectures/delta-time/)
-6.  [**Textures**](lectures/textures/)
-7.  [**Player Input**](lectures/player-input/)
-8.  [**Collision Detection**](lectures/collision-detection/)
-9.  [**Sprite Animation and Text**](lectures/sprites-and-text/)
-10. [**Entities**](lectures/entities/)
-11. [**Physics**](lectures/physics_1/)
-12. [**Colliding with Different Kinds of Entities**](lectures/physics_2/)
-13. [**Music and Sound Effects**](lectures/sound-fx/)
-14. [**Basic Enemy AI**](lectures/enemy-ai/)
-15. [**Tilesets and Tilemaps**](lectures/platform-levels/)
-16. [**Scenes**](lectures/scenes/)
-17. [**Effects**](lectures/fx/)
-18. [**Shaders**](lectures/shaders/)
-19. [**Intro to 3D**](lectures/SDL3D/SDLProject/)
-20. [**3D Models**](lectures/3d-models/SDLProject/)
-21. [**3D Levels: Floors, Movement, and Collisions**](lectures/3d-levels/SDLProject/)
-22. [**Billboards**](lectures/billboards/SDLProject/)
-
 ### _Getting Help and Discord_
 
 If you are emailing me for help with your projects, upload your entire project to github and email me with the link 
 (I need to see everything so I can help you). Do not email screenshots of your code. 
 
 **Discord Server**: We will be using Discord to answer quick questions that you may have about the course throughout the 
-semester. Discord is a very lightweight instant-messaging platform very similar to Slack. Please click [**here**](https://discord.gg/3DZFNuZg7R) to 
+semester. Discord is a very lightweight instant-messaging platform very similar to Slack. Please click [**here**]() to 
 join (you will need to make an account). While I’m usually pretty lax in terms of behavior in our server (see: #off-topic), 
 this server is still a university environment and should be treated as such. Be respectful to your fellow students. Please 
 adhere to the following rules:
