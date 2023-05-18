@@ -1,6 +1,11 @@
-<h1 align=center>CS505 _Introduction to Game Programming</h1>
+<h1 align=center>CS505 <em>Introduction to Game Programming</em></h1>
 
 <h2 align=center>New York University Tandon School of Engineering</h2>
+
+[![Language C++](https://img.shields.io/badge/Language-C%2B%2B-5E97D0)](https://www.learncpp.com/)
+[![IDE (MacOS) XCode](https://img.shields.io/badge/IDE%20(MacOS)-XCode-lightgrey)](https://developer.apple.com/xcode/)
+[![IDE (Windows) VS Code](https://img.shields.io/badge/IDE%20(Windows)-VS%20Code-blue)](https://code.visualstudio.com/)
+[![Library OpenGL](https://img.shields.io/badge/Library-OpenGL-yellow)](https://www.opengl.org/)
 
 ### _Sections_
 
