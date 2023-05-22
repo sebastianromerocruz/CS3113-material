@@ -2,14 +2,16 @@
 
 <h2 align=center>New York University Tandon School of Engineering</h2>
 
-[![Language C++](https://img.shields.io/badge/Language-C%2B%2B-5E97D0)](https://www.learncpp.com/)
-[![IDE (MacOS) XCode](https://img.shields.io/badge/IDE%20(MacOS)-XCode-lightgrey)](https://developer.apple.com/xcode/)
-[![IDE (Windows) VS Code](https://img.shields.io/badge/IDE%20(Windows)-VS%20Code-blue)](https://code.visualstudio.com/)
-[![Library OpenGL](https://img.shields.io/badge/Library-OpenGL-yellow)](https://www.opengl.org/)
+<p align=center>
+    <a href="https://www.learncpp.com/"><img src="https://img.shields.io/badge/Language-C%2B%2B-5E97D0"></img></a>
+    <a href="https://developer.apple.com/xcode/"><img src="https://img.shields.io/badge/IDE%20(MacOS)-XCode-lightgrey"></img></a>
+    <a href="https://code.visualstudio.com/"><img src="https://img.shields.io/badge/IDE%20(Windows)-VS%20Code-blue"></img></a>
+    <a href="https://www.opengl.org/"><img src="https://img.shields.io/badge/Library-OpenGL-yellow"></img></a>
+</p>
 
 ### _Sections_
 
-1. [**Lectures Links**](#lectures)
+1. [**Lecture Notes**](#lecture-notes)
 2. [**Instructor**](#instructor)
 3. [**Class Information**](#class-information)
 4. [**Description**](#description)
@@ -22,7 +24,7 @@
 11. [**Moses Center Statement of Disability**](#moses-center-statement-of-disability)
 12. [**Academic Integrity**](#academic-integrity)
 
-### _Lectures_
+### _Lecture Notes_
 
 1.  [**Introduction**](lectures/introduction/)
 <!-- 2.  [**Triangles**](lectures/triangle/)
@@ -46,6 +48,8 @@
 20. [**3D Models**](lectures/3d-models/SDLProject/)
 21. [**3D Levels: Floors, Movement, and Collisions**](lectures/3d-levels/SDLProject/)
 22. [**Billboards**](lectures/billboards/SDLProject/) -->
+
+<sub>To be released every lecture day before class.</sub>
 
 ### _Instructor_
 
@@ -84,14 +88,17 @@ You will also need a [**Github**](https://github.com/) account!
 
 ### _Grading Scheme_
 
-|                                         | **Percentage** |
-|-----------------------------------------|----------------|
-| **_Project 1_**: [**Draw a Simple 2D Scene**](assignments/Project%201%20-%20Simple%202D%20Scene.pdf) | 10%            |
-| **_Project 2_**: **Pong**                   | 10%            |
-| **_Project 3_**: **Lunar Lander** | 15%            |
-| **_Project 4_**: **Rise of the AI**| 15%            |
-| **_Project 5_**: **Platformer**             | 15%            |
-| **_Final Project_**: **Students’ Choice**  | 35%            |
+|                                                                         | **Percentage** |
+|-------------------------------------------------------------------------|----------------|
+| **_Project 1_**: [**Draw a Simple 2D Scene**](assignments/project_1.md) | 10%            |
+| **_Project 2_**: **Pong**                                               | 10%            |
+| **_Project 3_**: **Lunar Lander**                                       | 15%            |
+| **_Project 4_**: **Rise of the AI**                                     | 15%            |
+| **_Project 5_**: **Platformer**                                         | 15%            |
+| **_Final Project_**: **Students’ Choice**                               | 30%            |
+| **Extra Credit**: **Extra Credit**                                      | 05%            |
+
+Every assignment will have an extra credit portion. While these sections are not at all necessary, I will add **5% to your final grade** at the end of the semester if you complete the extra credit portion of **at least 3 of the projects**. While 5% may not seem like a lot, it can mean the difference between two letter grades. This can be especially helpful later in the semester, when the projects get more long and complex.
 
 ### _Deadlines_
 
@@ -128,32 +135,27 @@ You will also need a [**Github**](https://github.com/) account!
 All work is to be done on your own. There are no group projects.
 **There is no extra credit** in this course and the grades are **not curved**.
 
-### _Getting Help and Discord_
+### _Getting Help and Slack_
 
 If you are emailing me for help with your projects, upload your entire project to github and email me with the link 
 (I need to see everything so I can help you). Do not email screenshots of your code. 
 
-**Discord Server**: We will be using Discord to answer quick questions that you may have about the course throughout the 
-semester. Discord is a very lightweight instant-messaging platform very similar to Slack. Please click [**here**]() to 
-join (you will need to make an account). While I’m usually pretty lax in terms of behavior in our server (see: #off-topic), 
-this server is still a university environment and should be treated as such. Be respectful to your fellow students. Please 
-adhere to the following rules:
+**Discord Server**: We will be using Slack to answer quick questions that you may have about the course throughout the 
+summer; please click [**here**](https://join.slack.com/t/slack-v0o3051/shared_invite/zt-1vgnlp091-3rHFzfkFold83o7tN7cJEQ) to join. While I’m usually pretty lax in terms of behavior in our server (see: #off-topic), this server is still a university environment and should be treated as such. Be respectful to me, your course assistant, and to your fellow students. Please adhere to the following rules:
 
 - Do not post your homework assignment code, or anybody else's, on this server. Doing so will have you automatically banned and flagged for plagiarism. You may, however, share small code blocks that don’t give away your implementation in order to ask questions.
 
 - Please use your real first and last name as your name for easy identification.
 
-- While we aim to be as active as possible on this server, we may not always have time to respond to a question. Please respect the team’s time as you wait for somebody to answer your question.
+- While we aim to be as active as possible on this server, we may not always have time to respond to a question. Please respect the team’s time as you wait for somebody to answer your question. As a student of this class, you should aim to try to answer your classmates' questions as well, instead of waiting for me to answer them every single time.
 
 - This is a productivity server. While we encourage a relaxed atmosphere, let's stay on topic. For absolutely necessary off-topic content (it happens), post in #off-topic.
 
 - Use #concepts-help to ask questions that pertain to the lecture material in general (i.e. not specific to a project).
 
-- Use #project-questions to ask questions that pertain to the project concepts in general.
+- Use #projects to ask questions that pertain to the project concepts in general.
 
 - Do NOT use this server to rant about your performance in the class. This is a professional environment, and so such behavior will result in a ban. If you would like to discuss your grades, schedule office hours with me.
-
-- You may not add the instructors as Discord friends until after the semester ends.
 
 - You may not invite any people outside of our class into this server.
 
