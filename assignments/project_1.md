@@ -51,7 +51,7 @@
 
 ### Common Issues
 
-If you screen is flickering, remember that you have to, _in order_:
+If your screen is flickering, remember that you have to, _in order_:
 
 1. Call `glClear`.
 2. Draw every single one of your objects (i.e. everything you want to be in your scene)
