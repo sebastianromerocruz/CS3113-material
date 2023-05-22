@@ -96,7 +96,7 @@ You will also need a [**Github**](https://github.com/) account!
 | **_Project 4_**: **Rise of the AI**                                     | 15%            |
 | **_Project 5_**: **Platformer**                                         | 15%            |
 | **_Final Project_**: **Students’ Choice**                               | 30%            |
-| **Extra Credit**: **Extra Credit**                                      | 05%            |
+| **_Extra Credit_**                                                      | 05%            |
 
 Every assignment will have an extra credit portion. While these sections are not at all necessary, I will add **5% to your final grade** at the end of the semester if you complete the extra credit portion of **at least 3 of the projects**. While 5% may not seem like a lot, it can mean the difference between two letter grades. This can be especially helpful later in the semester, when the projects get more long and complex.
 
