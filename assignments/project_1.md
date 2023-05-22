@@ -19,7 +19,6 @@
 * NYU School of Engineering Policies and Procedures on
 * Academic Misconduct.
 **/
-"""
 ```
 
 ***No late submissions will be accepted***.
