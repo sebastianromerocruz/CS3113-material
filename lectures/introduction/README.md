@@ -95,7 +95,7 @@ Let's make a simple change to your repo—create a `txt` file called `something.
 
 ### Part 2: _Opening a sample project_
 
-Unfortunately, setting up OpenGL takes some setting up. A former instructor of the course and friend of mine, Carmine Guida, lent me these guides for each operating system, so please follow [**these instructions**](assets/Full%20Setup%20-%20Windows.pdf) and if you are a Windows user or [**these instructions**](assets/Full%20Setup%20-%20Mac.pdf) if you are a Mac user–in either case, you will need to download the appropriate library from [**this folder**](CS3113-material/libraries/). 
+Unfortunately, setting up OpenGL takes some setting up. A former instructor of the course and friend of mine, Carmine Guida, lent me these guides for each operating system, so please follow [**these instructions**](assets/Full%20Setup%20-%20Windows.pdf) if you are a Windows user or [**these instructions**](assets/Full%20Setup%20-%20Mac.pdf) if you are a Mac user–in either case, you will need to download the appropriate library from [**this folder**](https://github.com/sebastianromerocruz/CS3113-material/tree/main/libraries). 
 
 Once you've finished, come back to this `README`.
 
@@ -301,3 +301,5 @@ while (g_game_is_running)
     SDL_GL_SwapWindow(g_display_window); // Update a window with whatever OpenGL is rendering
 }
 ```
+
+You can find my complete `cpp` file [**here**](SDLProject/main.cpp)
