@@ -11,23 +11,25 @@
 
 ### _Sections_
 
-1. [**Lecture Notes**](#lecture-notes)
-2. [**Instructor**](#instructor)
-3. [**Class Information**](#class-information)
-4. [**Description**](#description)
-5. [**Objectives**](#objectives)
-6. [**Computer/Software Requirements**](#computersoftware-requirements)
-7. [**Grading Scheme**](#grading-scheme)
-8. [**Deadlines**](#deadlines)
-9. [**Course Weekly Schedule**](#course-weekly-schedule)
-10. [**Getting Help and Discord**](#getting-help-and-discord)
+1.  [**Lecture Notes**](#lecture-notes)
+2.  [**Instructor**](#instructor)
+3.  [**Class Information**](#class-information)
+4.  [**Description**](#description)
+5.  [**Objectives**](#objectives)
+6.  [**Computer/Software Requirements**](#computersoftware-requirements)
+7.  [**Grading Scheme**](#grading-scheme)
+8.  [**Deadlines**](#deadlines)
+9.  [**Course Weekly Schedule**](#course-weekly-schedule)
+10. [**Getting Help and Slack**](#getting-help-and-slack)
 11. [**Moses Center Statement of Disability**](#moses-center-statement-of-disability)
 12. [**Academic Integrity**](#academic-integrity)
 
 ### _Lecture Notes_
 
 1.  [**Introduction**](lectures/introduction/)
-<!-- 2.  [**Triangles**](lectures/triangle/)
+2.  [**Triangles**](lectures/triangle/)
+
+<!-- 
 3.  [**You're getting old, Matrix**](lectures/matrices/)
 4.  [**Transformation Practice**](lectures/transformations/)
 5.  [**Delta Time**](lectures/delta-time/)
@@ -88,7 +90,7 @@ You will also need a [**Github**](https://github.com/) account!
 
 ### _Grading Scheme_
 
-|                                                                         | **Percentage** |
+| **Item**                                                                | **Percentage** |
 |-------------------------------------------------------------------------|----------------|
 | **_Project 1_**: [**Draw a Simple 2D Scene**](assignments/project_1.md) | 10%            |
 | **_Project 2_**: **Pong**                                               | 10%            |

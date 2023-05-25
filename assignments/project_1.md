@@ -1,19 +1,20 @@
 <h4 align=center>NYU Tandon School of Engineering<h4>
 <h3 align=center>CS-UY 3113 Summer 2023</h3>
 <h1 align=center>Project 1: <em>Simple 2D Scene</em></h1>
-<h3 align=center><em>Due: 11:59pm, Friday, June 2nd, 2023</em></h3>
+<h3 align=center><em>Due: 11:59pm, Friday, June 11th, 2023</em></h3>
  
 ### Submission instructions
 1. You should submit your homework on [**Brightspace**](https://brightspace.nyu.edu/d2l/lms/dropbox/admin/folders_manage.d2l?ou=289892).
-2. For this assignment you should turn in **one** C++ file named `main.cpp` _and_ any image files that you used in your project. Do **not** submit any other files.
-3. Do not use any OpenGL functionality that we have not learned in class.
-3. The `main.cpp` file you submit should contain a header comment block as follows:
+2. You should also push that same version to your GitHub account. Note that any commits done after the deadline will be ignored.
+3. For this assignment you should turn in **one** C++ file named `main.cpp` _and_ any image files that you used in your project. Do **not** submit any other files.
+4. Do not use any OpenGL functionality that we have not learned in class.
+5. The `main.cpp` file you submit should contain a header comment block as follows:
 
 ```c++
 /**
 * Author: [Your name here]
 * Assignment: Simple 2D Scene
-* Date due: 2023-06-02, 11:59pm
+* Date due: 2023-06-11, 11:59pm
 * I pledge that I have completed this assignment without
 * collaborating with anyone else, in conformance with the
 * NYU School of Engineering Policies and Procedures on
