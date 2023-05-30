@@ -28,9 +28,9 @@
 
 1.  [**Introduction**](lectures/introduction/)
 2.  [**Triangles**](lectures/triangle/)
+3.  [**You're getting old, Matrix**](lectures/matrices/)
 
 <!-- 
-3.  [**You're getting old, Matrix**](lectures/matrices/)
 4.  [**Transformation Practice**](lectures/transformations/)
 5.  [**Delta Time**](lectures/delta-time/)
 6.  [**Textures**](lectures/textures/)
