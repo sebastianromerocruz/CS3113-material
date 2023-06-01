@@ -29,9 +29,9 @@
 1.  [**Introduction**](lectures/introduction/)
 2.  [**Triangles**](lectures/triangle/)
 3.  [**You're getting old, Matrix**](lectures/matrices/)
+4.  [**Transformations**](lectures/transformations/)
 
 <!-- 
-4.  [**Transformation Practice**](lectures/transformations/)
 5.  [**Delta Time**](lectures/delta-time/)
 6.  [**Textures**](lectures/textures/)
 7.  [**Player Input**](lectures/player-input/)
@@ -102,12 +102,19 @@ You will also need a [**Github**](https://github.com/) account!
 
 Every assignment will have an extra credit portion. While these sections are not at all necessary, I will add **5% to your final grade** at the end of the semester if you complete the extra credit portion of **at least 3 of the projects**. While 5% may not seem like a lot, it can mean the difference between two letter grades. This can be especially helpful later in the semester, when the projects get more long and complex.
 
+As for your final letter grade, the following scale will be used:
+
+| **Letter Grade** | **A**  | **A-** | **B+** | **B** | **B-** | **C+** | **C** | **C-** | **D+** | **D** | **F** |
+|------------------|--------|--------|--------|-------|--------|--------|-------|--------|--------|-------|-------|
+| **Range**        | 93-100 | 90-92  | 87-89  | 83-86 | 80-82  | 77-79  | 73-76 | 70-72  | 67-69  | 60-66 | 0-60  |
+
 ### _Deadlines_
 
-- All projects are due at **11:59pm the day before lecture**.
-    - Due by 11:59pm means your project was successfully uploaded _by that time_.
+- All projects are due at **11:59pm on Fridays**.
+    - Due by 11:59pm means your project was successfully uploaded _by that time_. This means that the version to be graded must be uploaded in both Brightspace and GitHub at that time.
     - Start uploading your project at least an hour before the deadline.
     - Projects received **1 minute late** are considered to be **a day** late.
+    - The first project is due on the Friday of week 3.
 
 - If there are any issues with uploading your project, you must email me **before the due date**.
     - While I check email regularly, do not expect a response over the weekend or close to deadlines.
