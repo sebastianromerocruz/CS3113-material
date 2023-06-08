@@ -68,7 +68,7 @@ Picture a small triangle at position (0<sub>x</sub>, 0<sub>y</sub>):
 
 <sub>**Figure 4**: A square at the origin.</sub>
 
-If we applied a +a translation on the y-axis first, a quarter-clockwise rotation second, and some scaling somewhere in between, we would get the following:
+If we applied a positive translation on the y-axis first, a quarter-clockwise rotation second, and some scaling somewhere in between, we would get the following:
 
 ```
                 ^ y
@@ -165,7 +165,7 @@ character_model_matrix = glm::mat4(1.0f);
 character_model_matrix = glm::translate(character_model_matrix, glm::vec3(TRANS_VALUE, TRANS_VALUE, 0.0f));
 
 item_model_matrix = glm::translate(character_model, glm::vec3(TRANS_VALUE, TRANS_VALUE, 0.0f));
-item_model_matrix = glm::rotate(item_model, ANGLE, glm::vec3(0.0f, 0.0f, 1.0f));
+item_model_matrix = glm::rotate(character_model_matrix, ANGLE, glm::vec3(0.0f, 0.0f, 1.0f));
 ```
 
 <sub>**Code Block 2**: The character is probably still translated with respect to the world space, but our item now also has to be translated with respect to our character; in a sense, the character's space becomes the item's world space.</sub>
