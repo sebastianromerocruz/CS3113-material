@@ -338,3 +338,5 @@ So you can just call a single line for every single object that you have in `ren
 ```c++
 draw_object(model_matrix, player_texture_id);
 ```
+
+You can find the complete `main.cpp` file [**here**](https://github.com/sebastianromerocruz/CS3113-material/blob/main/lectures/textures/SDLProject/main.cpp).
