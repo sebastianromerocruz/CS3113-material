@@ -193,15 +193,14 @@ void update()
     
     /** ———— RESETTING MODEL MATRIX ———— **/
     g_flower_model_matrix = glm::mat4(1.0f);
-    g_flower_model_matrix = glm::scale(g_flower_model_matrix, FLOWER_INIT_SCA);
     g_flower_model_matrix = glm::translate(g_flower_model_matrix, glm::vec3(0.0f, 0.0f, 0.0f));
-    
+    g_flower_model_matrix = glm::scale(g_flower_model_matrix, FLOWER_INIT_SCA);
+
+
     // ———————————————— PART 3 ———————————————— //
     
-    g_flower_position += g_flower_movement * g_speed * delta_time;
-    
+    g_flower_position += g_flower_movement * g_speed * delta_time;    
     g_flower_model_matrix = glm::translate(g_flower_model_matrix, g_flower_position);
-    
     g_flower_movement = glm::vec3(0.0f, 0.0f, 0.0f);
     
     // ———————————————— PART 3 ———————————————— //
