@@ -155,10 +155,7 @@ I'm going to add the lines from code block 2 and adapt them to our situation, ta
 5. **`width_a`** and **`height_a`**: The dimensions of your objects will vary from object to object, but a good starting point is assuming that the width is `1.0f` (following the dimensions of the square that the vertex coordinates) multiplied by whatever scaling factor you may have used. In this case, `FLOWER_INIT_SCA` can provide both `x`- and `y`-facts. Because my sprite doesn't occupy the entire image file, this number might not be accurate, but we can fine-tune it later.
 6. **`width_b`** and **`height_b`**: Same story as number 5, but with `CUP_INIT_SCA`. Since this object is scaled to be larger, we might have to fine-tune this one even more for it to feel 'natural'.
 
-I am going to place my collision detection at the top of my `update` function. This is not strictly necessary, but your transformations may depend on your objects not touching each other (e.g. if you touch an enemy/wall, your character should probably stop moving):
-
-    float collision_factor = 0.09;
-
+I am going to place my collision detection at the top of my `update` function. This is not strictly necessary, but your transformations may depend on your objects not touching each other (e.g. if you touch an enemy/wall, your character should probably stop moving):¬
 
 ```c++
 void update()
