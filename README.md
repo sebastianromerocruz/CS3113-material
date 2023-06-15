@@ -93,7 +93,7 @@ You will also need a [**Github**](https://github.com/) account!
 | **Item**                                                                | **Percentage** |
 |-------------------------------------------------------------------------|----------------|
 | **_Project 1_**: [**Draw a Simple 2D Scene**](assignments/project_1.md) | 10%            |
-| **_Project 2_**: **Pong**                                               | 10%            |
+| **_Project 2_**: [**Pong**](assignments/project_2.md)                   | 10%            |
 | **_Project 3_**: **Lunar Lander**                                       | 15%            |
 | **_Project 4_**: **Rise of the AI**                                     | 15%            |
 | **_Project 5_**: **Platformer**                                         | 15%            |
