@@ -23,7 +23,7 @@ We will achieve this through the following three steps:
 
 #### STEP 1: _Set up the necessary data structures_
 
-As the [**notes**] from last class explain, in order efficiently translate objects in OpenGL, we need:
+As the [**notes**](https://github.com/sebastianromerocruz/CS3113-material/tree/main/lectures/player-input#part-5-keeping-track-of-the-players-motion) from last class explain, in order efficiently translate objects in OpenGL, we need:
 
 1. A vector to keep track of **how much we have moved in all three Cartesian directions**.
 2. A vector to keep track of **whether the player has moved in a given frame or not**, and if so, **in what direction**.
