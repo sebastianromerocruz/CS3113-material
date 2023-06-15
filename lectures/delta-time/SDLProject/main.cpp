@@ -106,6 +106,7 @@ void update()
     g_triangle_x += 1.0f * delta_time;
     g_triangle_rotate += DEGREES_PER_SECOND * delta_time; // 90-degrees per second
     g_model_matrix = glm::mat4(1.0f);
+    
 
     /* Translate -> Rotate */
     g_model_matrix = glm::translate(g_model_matrix, glm::vec3(g_triangle_x, 0.0f, 0.0f));

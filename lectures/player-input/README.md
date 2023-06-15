@@ -377,7 +377,7 @@ void update()
 }
 ```
 
-<sub>**Code Block 11**: Here, `player_speed` is how many units you want your player to move.</sub>
+<sub>**Code Block 12**: Here, `player_speed` is how many units you want your player to move.</sub>
 
 ---
 
