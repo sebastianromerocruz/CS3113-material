@@ -34,9 +34,9 @@
 6.  [**Textures**](lectures/textures/)
 7.  [**Player Input**](lectures/player-input/)
 8.  [**Collision Detection**](lectures/collision-detection/)
+9.  [**Sprite Animation and Text**](lectures/sprites-and-text/)
 
 <!-- 
-9.  [**Sprite Animation and Text**](lectures/sprites-and-text/)
 10. [**Entities**](lectures/entities/)
 11. [**Physics**](lectures/physics_1/)
 12. [**Colliding with Different Kinds of Entities**](lectures/physics_2/)
