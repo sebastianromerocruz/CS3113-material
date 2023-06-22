@@ -12,17 +12,18 @@
 ### _Sections_
 
 1.  [**Lecture Notes**](#lecture-notes)
-2.  [**Instructor**](#instructor)
-3.  [**Class Information**](#class-information)
-4.  [**Description**](#description)
-5.  [**Objectives**](#objectives)
-6.  [**Computer/Software Requirements**](#computersoftware-requirements)
-7.  [**Grading Scheme**](#grading-scheme)
-8.  [**Deadlines**](#deadlines)
-9.  [**Course Weekly Schedule**](#course-weekly-schedule)
-10. [**Getting Help and Slack**](#getting-help-and-slack)
-11. [**Moses Center Statement of Disability**](#moses-center-statement-of-disability)
-12. [**Academic Integrity**](#academic-integrity)
+2.  [**Exercises**](#exercises)
+3.  [**Instructor**](#instructor)
+4.  [**Class Information**](#class-information)
+5.  [**Description**](#description)
+6.  [**Objectives**](#objectives)
+7.  [**Computer/Software Requirements**](#computersoftware-requirements)
+8.  [**Grading Scheme**](#grading-scheme)
+9.  [**Deadlines**](#deadlines)
+10. [**Course Weekly Schedule**](#course-weekly-schedule)
+11. [**Getting Help and Slack**](#getting-help-and-slack)
+12. [**Moses Center Statement of Disability**](#moses-center-statement-of-disability)
+13. [**Academic Integrity**](#academic-integrity)
 
 ### _Lecture Notes_
 
@@ -35,9 +36,9 @@
 7.  [**Player Input**](lectures/player-input/)
 8.  [**Collision Detection**](lectures/collision-detection/)
 9.  [**Sprite Animation and Text**](lectures/sprites-and-text/)
+10. [**Entities**](lectures/entities/)
 
 <!-- 
-10. [**Entities**](lectures/entities/)
 11. [**Physics**](lectures/physics_1/)
 12. [**Colliding with Different Kinds of Entities**](lectures/physics_2/)
 13. [**Music and Sound Effects**](lectures/sound-fx/)
@@ -52,6 +53,12 @@
 22. [**Billboards**](lectures/billboards/SDLProject/) -->
 
 <sub>To be released every lecture day before class.</sub>
+
+### _Exercises_
+
+- _06/15_: **[User Input](exercises/player_input/)**
+- _06/20_: **[Collision Detection](exercises/collision-detection/)**
+- _06/22_: **[Animation](exercises/animation/)**
 
 ### _Instructor_
 
