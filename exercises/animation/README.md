@@ -6,7 +6,7 @@
 
 ### Instructions
 
-If you run the [**following `main.cpp`**](SDLProject/main.cpp) file, you will see the following scene (whose assets you can downloaded [**here**](SDLProject/sprites/sonic.png) and [**here**](SDLProject/sprites/frame.png)):
+If you run the [**following `main.cpp`**](SDLProject/main.cpp) file, you will see the following scene (whose assets you can downloaded [**here**](SDLProject/sprites/sonic.png), [**here**](SDLProject/sprites/frame.png), and [**here**](SDLProject/sprites/font1.png)):
 
 
 ![flower_static](assets/anim-01.png)
