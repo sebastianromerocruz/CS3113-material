@@ -38,10 +38,10 @@
 9.  [**Sprite Animation and Text**](lectures/sprites-and-text/)
 10. [**Entities**](lectures/entities/)
 11. [**Physics: Gravity**](lectures/physics_1/)
-12. [**Colliding with Different Kinds of Entities**](lectures/physics_2/)
+12. [**Physics: Colliding with Different Kinds of Entities**](lectures/physics_2/)
+13. [**Music and Sound Effects**](lectures/sound-fx/)
 
 <!-- 
-13. [**Music and Sound Effects**](lectures/sound-fx/)
 14. [**Basic Enemy AI**](lectures/enemy-ai/)
 15. [**Tilesets and Tilemaps**](lectures/platform-levels/)
 16. [**Scenes**](lectures/scenes/)
