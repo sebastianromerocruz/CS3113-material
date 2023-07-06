@@ -2,7 +2,7 @@
 
 <h1 align=center>Exercise: <em>Entity Types</em></h1>
 
-<h3 align=center>1 Messidor, Year CCXXXI</h3>
+<h3 align=center>17 Messidor, Year CCXXXI</h3>
 
 ### Instructions
 
@@ -12,7 +12,7 @@ Using the enum [**`EntityType`**](SDLProject/Entity.h) and the `Entity` class's 
 
 <sub>**Figure 1**: Desired behaviour.</sub>
 
-Note that, in order to generate a random integer from 0 to `limit` in C++, one needs to do the following:
+Note that you'll have to copy the code from not just [**`main.cpp`**](SDLProject/main.cpp), but also [**`Entity.h`**](SDLProject/Entity.h) and [**`Entity.cpp`**](SDLProject/Entity.cpp) to be in the same starting point as me. Also, in order to generate a random integer from 0 to `limit` in C++, one needs to do the following:
 
 ```cpp
 #include <cstdlib>
