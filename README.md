@@ -59,6 +59,7 @@
 - _06/15_: **[User Input](exercises/player_input/)**
 - _06/20_: **[Collision Detection](exercises/collision-detection/)**
 - _06/22_: **[Animation](exercises/animation/)**
+- _07/06_: **[Entity Types](exercises/entity_types/)**
 
 ### _Instructor_
 
