@@ -25,3 +25,7 @@ int main()
     return 0;
 }
 ```
+
+---
+
+The solution can be found [**here**](SDLProject/files/main_complete.cpp), [**here**](SDLProject/files/Entity_complete.cpp), and [**here**](SDLProject/files/Entity_complete.h).

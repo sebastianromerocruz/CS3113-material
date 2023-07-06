@@ -134,20 +134,17 @@ void initialise()
         g_state.platforms[i].m_texture_id = platform_texture_id;
         g_state.platforms[i].set_position(glm::vec3(i - 1.0f, -3.0f, 0.0f));
         g_state.platforms[i].set_width(0.4f);
-        g_state.platforms[i].set_entity_type(PLATFORM);
         g_state.platforms[i].update(0.0f, NULL, 0);
     }
     
     g_state.platforms[PLATFORM_COUNT - 1].m_texture_id = platform_texture_id;
     g_state.platforms[PLATFORM_COUNT - 1].set_position(glm::vec3(-1.5f, -2.35f, 0.0f));
     g_state.platforms[PLATFORM_COUNT - 1].set_width(0.4f);
-    g_state.platforms[PLATFORM_COUNT - 1].set_entity_type(PLATFORM);
     g_state.platforms[PLATFORM_COUNT - 1].update(0.0f, NULL, 0);
     
     g_state.platforms[PLATFORM_COUNT - 2].m_texture_id = platform_texture_id;
     g_state.platforms[PLATFORM_COUNT - 2].set_position(glm::vec3(2.5f, -2.5f, 0.0f));
     g_state.platforms[PLATFORM_COUNT - 2].set_width(0.4f);
-    g_state.platforms[PLATFORM_COUNT - 2].set_entity_type(PLATFORM);
     g_state.platforms[PLATFORM_COUNT - 2].update(0.0f, NULL, 0);
     
     // ––––– PLAYER (GEORGE) ––––– //
@@ -176,9 +173,6 @@ void initialise()
     
     // Jumping
     g_state.player->m_jumping_power = 3.0f;
-    
-    // And set a trap by making one of the platforms a TRAP type
-    g_state.platforms[rand() % PLATFORM_COUNT].set_entity_type(TRAP);
     
     // ––––– GENERAL ––––– //
     glEnable(GL_BLEND);

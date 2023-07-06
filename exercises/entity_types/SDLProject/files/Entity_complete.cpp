@@ -112,10 +112,7 @@ void Entity::update(float delta_time, Entity *collidable_entities, int collidabl
     // ––––– JUMPING ––––– //
     if (m_is_jumping)
     {
-        // STEP 1: Immediately return the flag to its original false state
         m_is_jumping = false;
-        
-        // STEP 2: The player now acquires an upward velocity
         m_velocity.y += m_jumping_power;
     }
     
@@ -128,19 +125,23 @@ void const Entity::check_collision_y(Entity *collidable_entities, int collidable
 {
     for (int i = 0; i < collidable_entity_count; i++)
     {
-        // STEP 1: For every entity that our player can collide with...
         Entity *collidable_entity = &collidable_entities[i];
         
         if (check_collision(collidable_entity))
         {
-            // STEP 2: Calculate the distance between its centre and our centre
-            //         and use that to calculate the amount of overlap between
-            //         both bodies.
+            // If there is a collision, check if the entity we are colliding
+            // with is a TRAP
+            if (collidable_entity->get_entity_type() == TRAP)
+            {
+                // If it is, deactivate the entity we are colliding with
+                // and skip to the next entity
+                collidable_entity->deactivate();
+                continue;
+            }
+            
             float y_distance = fabs(m_position.y - collidable_entity->m_position.y);
             float y_overlap = fabs(y_distance - (m_height / 2.0f) - (collidable_entity->m_height / 2.0f));
             
-            // STEP 3: "Unclip" ourselves from the other entity, and zero our
-            //         vertical velocity.
             if (m_velocity.y > 0) {
                 m_position.y   -= y_overlap;
                 m_velocity.y    = 0;
@@ -207,7 +208,6 @@ void Entity::render(ShaderProgram *program)
 
 bool const Entity::check_collision(Entity *other) const
 {
-    // If either entity is inactive, there shouldn't be any collision
     if (!m_is_active || !other->m_is_active) return false;
     
     float x_distance = fabs(m_position.x - other->m_position.x) - ((m_width  + other->m_width)  / 2.0f);
@@ -215,4 +215,3 @@ bool const Entity::check_collision(Entity *other) const
     
     return x_distance < 0.0f && y_distance < 0.0f;
 }
-

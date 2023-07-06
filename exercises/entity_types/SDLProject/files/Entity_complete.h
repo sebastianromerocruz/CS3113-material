@@ -1,4 +1,4 @@
-enum EntityType { PLATFORM, PLAYER, ITEM };
+enum EntityType { PLATFORM, PLAYER, TRAP };
 
 class Entity
 {
@@ -71,12 +71,13 @@ public:
     void deactivate() { m_is_active = false; };
     
     // ––––– GETTERS ––––– //
-    glm::vec3 const get_position()     const { return m_position;     };
-    glm::vec3 const get_movement()     const { return m_movement;     };
-    glm::vec3 const get_velocity()     const { return m_velocity;     };
-    glm::vec3 const get_acceleration() const { return m_acceleration; };
-    int       const get_width()        const { return m_width;        };
-    int       const get_height()       const { return m_height;       };
+    glm::vec3  const get_position()     const { return m_position;     };
+    glm::vec3  const get_movement()     const { return m_movement;     };
+    glm::vec3  const get_velocity()     const { return m_velocity;     };
+    glm::vec3  const get_acceleration() const { return m_acceleration; };
+    int        const get_width()        const { return m_width;        };
+    int        const get_height()       const { return m_height;       };
+    EntityType const get_entity_type()  const { return m_type;         };
     
     // ––––– SETTERS ––––– //
     void const set_position(glm::vec3 new_position)         { m_position = new_position;         };
@@ -85,4 +86,5 @@ public:
     void const set_acceleration(glm::vec3 new_acceleration) { m_acceleration = new_acceleration; };
     void const set_width(float new_width)                   { m_width  = new_width;              };
     void const set_height(float new_height)                 { m_height = new_height;             };
+    void const set_entity_type(EntityType new_type)         { m_type = new_type;                 };
 };
