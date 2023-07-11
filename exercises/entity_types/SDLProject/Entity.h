@@ -1,4 +1,4 @@
-enum EntityType { PLATFORM, PLAYER };
+enum EntityType { PLATFORM, PLAYER, TRAP };
 
 class Entity
 {

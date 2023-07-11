@@ -11,6 +11,7 @@
 
 #include <SDL.h>
 #include <SDL_opengl.h>
+#include <SDL_mixer.h>
 #include "glm/mat4x4.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "ShaderProgram.h"
@@ -52,6 +53,21 @@ const char PLATFORM_FILEPATH[]    = "assets/platformPack_tile027.png";
 const int NUMBER_OF_TEXTURES = 1;
 const GLint LEVEL_OF_DETAIL  = 0;
 const GLint TEXTURE_BORDER   = 0;
+
+const int CD_QUAL_FREQ    = 44100,
+          AUDIO_CHAN_AMT  = 2,     // stereo
+          AUDIO_BUFF_SIZE = 4096;
+
+const char BGM_FILEPATH[] = "assets/crypto.mp3",
+           SFX_FILEPATH[] = "assets/bounce.wav";
+
+const int PLAY_ONCE = 0,    // play once, loop never
+          NEXT_CHNL = -1,   // next available channel
+          ALL_SFX_CHNL = -1;
+
+
+Mix_Music *g_music;
+Mix_Chunk *g_jump_sfx;
 
 // ––––– GLOBAL VARIABLES ––––– //
 GameState g_state;
@@ -96,7 +112,7 @@ GLuint load_texture(const char* filepath)
 
 void initialise()
 {
-    SDL_Init(SDL_INIT_VIDEO);
+    SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
     g_display_window = SDL_CreateWindow("Hello, Physics (again)!",
                                       SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                                       WINDOW_WIDTH, WINDOW_HEIGHT,
@@ -109,6 +125,7 @@ void initialise()
     glewInit();
 #endif
     
+    // ––––– VIDEO ––––– //
     glViewport(VIEWPORT_X, VIEWPORT_Y, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
     
     g_program.Load(V_SHADER_PATH, F_SHADER_PATH);
@@ -123,6 +140,24 @@ void initialise()
     
     glClearColor(BG_RED, BG_BLUE, BG_GREEN, BG_OPACITY);
     
+    // ––––– BGM ––––– //
+    Mix_OpenAudio(CD_QUAL_FREQ, MIX_DEFAULT_FORMAT, AUDIO_CHAN_AMT, AUDIO_BUFF_SIZE);
+    
+    // STEP 1: Have openGL generate a pointer to your music file
+    g_music = Mix_LoadMUS(BGM_FILEPATH); // works only with mp3 files
+    
+    // STEP 2: Play music
+    Mix_PlayMusic(
+                  g_music,  // music file
+                  -1        // -1 means loop forever; 0 means play once, look never
+                  );
+    
+    // STEP 3: Set initial volume
+    Mix_VolumeMusic(MIX_MAX_VOLUME / 2.0);
+    
+    // ––––– SFX ––––– //
+    g_jump_sfx = Mix_LoadWAV(SFX_FILEPATH);
+    
     // ––––– PLATFORMS ––––– //
     GLuint platform_texture_id = load_texture(PLATFORM_FILEPATH);
     
@@ -134,18 +169,24 @@ void initialise()
         g_state.platforms[i].m_texture_id = platform_texture_id;
         g_state.platforms[i].set_position(glm::vec3(i - 1.0f, -3.0f, 0.0f));
         g_state.platforms[i].set_width(0.4f);
+        g_state.platforms[i].set_entity_type(PLATFORM);
         g_state.platforms[i].update(0.0f, NULL, 0);
     }
     
     g_state.platforms[PLATFORM_COUNT - 1].m_texture_id = platform_texture_id;
     g_state.platforms[PLATFORM_COUNT - 1].set_position(glm::vec3(-1.5f, -2.35f, 0.0f));
     g_state.platforms[PLATFORM_COUNT - 1].set_width(0.4f);
+    g_state.platforms[PLATFORM_COUNT - 1].set_entity_type(PLATFORM);
     g_state.platforms[PLATFORM_COUNT - 1].update(0.0f, NULL, 0);
     
     g_state.platforms[PLATFORM_COUNT - 2].m_texture_id = platform_texture_id;
     g_state.platforms[PLATFORM_COUNT - 2].set_position(glm::vec3(2.5f, -2.5f, 0.0f));
     g_state.platforms[PLATFORM_COUNT - 2].set_width(0.4f);
+    g_state.platforms[PLATFORM_COUNT - 2].set_entity_type(PLATFORM);
     g_state.platforms[PLATFORM_COUNT - 2].update(0.0f, NULL, 0);
+    
+    // Setting a trap
+    g_state.platforms[rand() % PLATFORM_COUNT].set_entity_type(TRAP);
     
     // ––––– PLAYER (GEORGE) ––––– //
     // Existing
@@ -170,6 +211,7 @@ void initialise()
     g_state.player->m_animation_rows   = 4;
     g_state.player->set_height(0.9f);
     g_state.player->set_width(0.9f);
+    g_state.player->set_entity_type(PLAYER);
     
     // Jumping
     g_state.player->m_jumping_power = 3.0f;
@@ -202,8 +244,26 @@ void process_input()
                         
                     case SDLK_SPACE:
                         // Jump
-                        if (g_state.player->m_collided_bottom) g_state.player->m_is_jumping = true;
+                        if (g_state.player->m_collided_bottom)
+                        {
+                            g_state.player->m_is_jumping = true;
+                            Mix_PlayChannel(NEXT_CHNL, g_jump_sfx, 0);
+                            
+                            /**
+                             Mix_FadeInChannel(channel_id, sound_chunk, loops, fade_in_time);
+                             
+                             
+                             */
+                        }
                         break;
+                        
+                    case SDLK_h:
+                        // Stop music
+                        Mix_HaltMusic();
+                        break;
+                        
+                    case SDLK_p:
+                        Mix_PlayMusic(g_music, -1);
                         
                     default:
                         break;
