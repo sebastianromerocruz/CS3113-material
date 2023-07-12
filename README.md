@@ -41,9 +41,9 @@
 12. [**Physics: Colliding with Different Kinds of Entities**](lectures/physics_2/)
 13. [**Music and Sound Effects**](lectures/sound-fx/)
 14. [**Basic Enemy AI**](lectures/enemy-ai/)
+15. [**Tilesets and Tilemaps**](lectures/platform-levels/)
 
 <!-- 
-15. [**Tilesets and Tilemaps**](lectures/platform-levels/)
 16. [**Scenes**](lectures/scenes/)
 17. [**Effects**](lectures/fx/)
 18. [**Shaders**](lectures/shaders/)
@@ -103,7 +103,7 @@ You will also need a [**Github**](https://github.com/) account!
 | **_Project 1_**: [**Draw a Simple 2D Scene**](assignments/project_1.md) | 10%            |
 | **_Project 2_**: [**Pong**](assignments/project_2.md)                   | 10%            |
 | **_Project 3_**: [**Lunar Lander**](assignments/project_3.md)           | 15%            |
-| **_Project 4_**: **Rise of the AI**                                     | 15%            |
+| **_Project 4_**: [**Rise of the AI**](assignments/project_4.md)         | 15%            |
 | **_Project 5_**: **Platformer**                                         | 15%            |
 | **_Final Project_**: **Students’ Choice**                               | 30%            |
 | **_Extra Credit_**                                                      | 05%            |
