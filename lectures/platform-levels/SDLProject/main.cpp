@@ -182,7 +182,7 @@ void initialise()
     
     g_state.bgm = Mix_LoadMUS(BGM_FILEPATH);
     Mix_PlayMusic(g_state.bgm, -1);
-    Mix_VolumeMusic(MIX_MAX_VOLUME / 4.0f);
+    Mix_VolumeMusic(MIX_MAX_VOLUME / 16.0f);
     
     g_state.jump_sfx = Mix_LoadWAV(JUMP_SFX_FILEPATH);
     
