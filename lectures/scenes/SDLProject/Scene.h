@@ -21,26 +21,32 @@
 */
 struct GameState
 {
+    // ————— GAME OBJECTS ————— //
     Map *map;
     Entity *player;
     Entity *enemies;
     
+    // ————— AUDIO ————— //
     Mix_Music *bgm;
     Mix_Chunk *jump_sfx;
     
+    // ————— POINTERS TO OTHER SCENES ————— //
     int next_scene_id;
 };
 
 class Scene {
 public:
+    // ————— ATTRIBUTES ————— //
     int m_number_of_enemies = 1;
     
     GameState m_state;
     
+    // ————— METHODS ————— //
     virtual void initialise() = 0;
     virtual void update(float delta_time) = 0;
     virtual void render(ShaderProgram *program) = 0;
     
+    // ————— GETTERS ————— //
     GameState const get_state()             const { return m_state;             }
     int       const get_number_of_enemies() const { return m_number_of_enemies; }
 };

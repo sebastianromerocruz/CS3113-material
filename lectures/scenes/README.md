@@ -176,6 +176,27 @@ This, in spite of not really being heavy on gameplay, is considered one of the m
 states = { start_screen, save_file_screen, level_1, level_2 }
 ```
 
+In other words, the player will turn on the game and immediately be taken to the `start_screen` state, or **scene**, and then proceed to the rest of the levels accordingly:
+
+```
++––––––––––––––+
+| Start Screen |
++––––––––––––––+
+       |      +––––––––––––––––––––+       +–––––––––+       +–––––––––+
+       +––––> | File Select Screen | ––––> | Level 1 | ––––> | Level 2 | ––––> ...
+              +––––––––––––––––––––+       +–––––––––+       +–––––––––+
+                           ^                    ^                ^
+                            \                    \              /
+                             \–––––––––––––––––\  \––\      /––/
+                                                \     \    /
+                                                 \     v  v
+                                                +––––––––––––––+
+                                                | Start Screen |
+                                                +––––––––––––––+
+```
+
+<sub>**Figure 2**: How our game's scenes might be connected. Think of each of those arrows as pointers, where a player's button press or achievement in-level might trigger our scene to "swap out" for another one (e.g. pressing the `Start` button would swap out the `Level 1` scene for the `Start Screen` screen).</sub>
+
 This turns out to be pretty close to what we'll achieve today. We would like our game to simply switch from state to state whenever the player performs certain actions, and each other states will have their own `initialise()`, `update()`, and `render()` methods. We're gonna call these special states "scenes", and will define them via the `Scene` class:
 
 ```c++
@@ -345,7 +366,10 @@ void LevelA::initialise()
     m_state.jump_sfx = Mix_LoadWAV("assets/bounce.wav");
 }
 
-void LevelA::update(float delta_time) { m_state.player->update(delta_time, m_state.player, m_state.enemies, ENEMY_COUNT, m_state.map); }
+void LevelA::update(float delta_time) 
+{ 
+    m_state.player->update(delta_time, m_state.player, m_state.enemies, ENEMY_COUNT, m_state.map);
+}
 
 
 void LevelA::render(ShaderProgram *program)
@@ -374,7 +398,6 @@ Essentially:
 3. Create a standalone function (or one that statically belongs to the `Utility` class) that will switch the pointer from step 1 into the current scene. This function will be triggered every time we switch scenes (e.g. when we finish level A and we want to move on to level B).
 4. Delete basically all of the code involving entities from `initialise()` and instead instantiate your pointers from steps 1 and 2.
 5. Everywhere in `main.cpp` where we previously did `state.player` will be now replaced by `current_scene->state.player`. `update()` and `render()` in particular will be reduced to a single call of `current_scene->update()`.
-6. Clean up your 
 
 Cleaning this up is a laborious process, but after doing so properly, your program should work in exactly the same way as it did before this lecture:
 

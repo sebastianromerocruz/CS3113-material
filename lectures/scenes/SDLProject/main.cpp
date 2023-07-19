@@ -24,9 +24,7 @@
 #include "Scene.h"
 #include "LevelA.h"
 
-/**
- CONSTANTS
- */
+// ————— CONSTANTS ————— //
 const int WINDOW_WIDTH  = 640,
           WINDOW_HEIGHT = 480;
 
@@ -45,9 +43,7 @@ const char V_SHADER_PATH[] = "shaders/vertex_textured.glsl",
 
 const float MILLISECONDS_IN_SECOND = 1000.0;
 
-/**
- VARIABLES
- */
+// ————— GLOBAL VARIABLES ————— //
 Scene *g_current_scene;
 LevelA *g_level_a;
 
@@ -68,6 +64,7 @@ void switch_to_scene(Scene *scene)
 
 void initialise()
 {
+    // ————— VIDEO ————— //
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
     g_display_window = SDL_CreateWindow("Hello, Scenes!",
                                       SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
@@ -81,10 +78,10 @@ void initialise()
     glewInit();
 #endif
     
+    // ————— GENERAL ————— //
     glViewport(VIEWPORT_X, VIEWPORT_Y, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
-    
     g_program.Load(V_SHADER_PATH, F_SHADER_PATH);
-    
+
     g_view_matrix = glm::mat4(1.0f);
     g_projection_matrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);
     
@@ -95,24 +92,25 @@ void initialise()
     
     glClearColor(BG_RED, BG_BLUE, BG_GREEN, BG_OPACITY);
     
+    // ————— LEVEL A SETUP ————— //
     g_level_a = new LevelA();
     switch_to_scene(g_level_a);
     
-    // enable blending
+    // ————— BLENDING ————— //
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void process_input()
 {
-    // VERY IMPORTANT: If nothing is pressed, we don't want to go anywhere
     g_current_scene->m_state.player->set_movement(glm::vec3(0.0f));
     
     SDL_Event event;
     while (SDL_PollEvent(&event))
     {
+        // ————— KEYSTROKES ————— //
         switch (event.type) {
-            // End game
+            // ————— END GAME ————— //
             case SDL_QUIT:
             case SDL_WINDOWEVENT_CLOSE:
                 g_game_is_running = false;
@@ -126,7 +124,7 @@ void process_input()
                         break;
                         
                     case SDLK_SPACE:
-                        // Jump
+                        // ————— JUMPING ————— //
                         if (g_current_scene->m_state.player->m_collided_bottom)
                         {
                             g_current_scene->m_state.player->m_is_jumping = true;
@@ -143,6 +141,7 @@ void process_input()
         }
     }
     
+    // ————— KEY HOLD ————— //
     const Uint8 *key_state = SDL_GetKeyboardState(NULL);
 
     if (key_state[SDL_SCANCODE_LEFT])
@@ -156,6 +155,7 @@ void process_input()
         g_current_scene->m_state.player->m_animation_indices = g_current_scene->m_state.player->m_walking[g_current_scene->m_state.player->RIGHT];
     }
     
+    // ————— NORMALISATION ————— //
     if (glm::length(g_current_scene->m_state.player->m_movement) > 1.0f)
     {
         g_current_scene->m_state.player->m_movement = glm::normalize(g_current_scene->m_state.player->m_movement);
@@ -164,6 +164,7 @@ void process_input()
 
 void update()
 {
+    // ————— DELTA TIME / FIXED TIME STEP CALCULATION ————— //
     float ticks = (float)SDL_GetTicks() / MILLISECONDS_IN_SECOND;
     float delta_time = ticks - g_previous_ticks;
     g_previous_ticks = ticks;
@@ -177,6 +178,7 @@ void update()
     }
     
     while (delta_time >= FIXED_TIMESTEP) {
+        // ————— UPDATING THE SCENE (i.e. map, character, enemies...) ————— //
         g_current_scene->update(FIXED_TIMESTEP);
         
         delta_time -= FIXED_TIMESTEP;
@@ -185,14 +187,14 @@ void update()
     g_accumulator = delta_time;
     
     
-    // Prevent the camera from showing anything outside of the "edge" of the level
+    // ————— PLAYER CAMERA ————— //
     g_view_matrix = glm::mat4(1.0f);
     
-    if (g_current_scene->m_state.player->get_position().x > LEVEL1_LEFT_EDGE) {
-        g_view_matrix = glm::translate(g_view_matrix, glm::vec3(-g_current_scene->m_state.player->get_position().x, 3.75, 0));
-    } else {
-        g_view_matrix = glm::translate(g_view_matrix, glm::vec3(-5, 3.75, 0));
-    }
+//    if (g_current_scene->m_state.player->get_position().x > LEVEL1_LEFT_EDGE) {
+//        g_view_matrix = glm::translate(g_view_matrix, glm::vec3(-g_current_scene->m_state.player->get_position().x, 3.75, 0));
+//    } else {
+//        g_view_matrix = glm::translate(g_view_matrix, glm::vec3(-5, 3.75, 0));
+//    }
 }
 
 void render()
@@ -201,6 +203,7 @@ void render()
     
     glClear(GL_COLOR_BUFFER_BIT);
     
+    // ————— RENDERING THE SCENE (i.e. map, character, enemies...) ————— //
     g_current_scene->render(&g_program);
     
     SDL_GL_SwapWindow(g_display_window);
@@ -210,12 +213,11 @@ void shutdown()
 {    
     SDL_Quit();
     
+    // ————— DELETING LEVEL A DATA (i.e. map, character, enemies...) ————— //
     delete g_level_a;
 }
 
-/**
- DRIVER GAME LOOP
- */
+// ————— GAME LOOP ————— //
 int main(int argc, char* argv[])
 {
     initialise();

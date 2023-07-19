@@ -88,7 +88,15 @@ void LevelA::initialise()
     m_state.jump_sfx = Mix_LoadWAV("assets/bounce.wav");
 }
 
-void LevelA::update(float delta_time) { m_state.player->update(delta_time, m_state.player, m_state.enemies, ENEMY_COUNT, m_state.map); }
+void LevelA::update(float delta_time)
+{
+    m_state.player->update(delta_time, m_state.player, m_state.enemies, ENEMY_COUNT, m_state.map);
+    
+    for (int i = 0; i < ENEMY_COUNT; i++)
+    {
+        m_state.enemies[i].update(delta_time, m_state.player, null, null, m_state.map);
+    }
+}
 
 
 void LevelA::render(ShaderProgram *program)

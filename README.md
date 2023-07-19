@@ -43,9 +43,9 @@
 14. [**Basic Enemy AI**](lectures/enemy-ai/)
 15. [**Tilesets and Tilemaps**](lectures/platform-levels/)
 16. [**Scenes**](lectures/scenes/)
+17. [**Effects**](lectures/fx/)
 
 <!-- 
-17. [**Effects**](lectures/fx/)
 18. [**Shaders**](lectures/shaders/)
 19. [**Intro to 3D**](lectures/SDL3D/SDLProject/)
 20. [**3D Models**](lectures/3d-models/SDLProject/)
