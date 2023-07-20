@@ -258,8 +258,16 @@ void Effects::render()
     {
         case NONE:   break;
         case FADEIN:
+            // Scale the model matrix to cover the whole screen
+            model_matrix = glm::scale(model_matrix, glm::vec3(10.0f, 10.0f, 0.0f));
+
+            // Apply the model matrix to the overlay
             m_program.SetModelMatrix(model_matrix);
+
+            // Make it black (or whichever colour you want) and solid
             m_program.SetColor(0.0f, 0.0f, 0.0f, alpha); // current α-value
+            
+            // Draw
             draw_overlay();
 
             break;
@@ -277,7 +285,7 @@ Effects *g_effects;
 void initialise()
 {
     g_effects = new Effects(projection_matrix, view_matrix);
-    g_effects->start(FADEIN, 5.0f);
+    g_effects->start(FADEIN);
 }
 
 void update()
@@ -300,6 +308,50 @@ And we get the following effect:
 ![fadein](assets/fadein.gif)
 
 <sub>**Figure 2**: Fade-in transition effect.</sub>
+
+We can make this go a little bit slower, too, by adding an effect "speed" factor:
+
+```c++
+// Effect.h
+class EffectManager {
+private:
+    float         m_effect_speed;
+
+public:
+    void start(EffectType effect_type, float effect_speed);
+};
+```
+```cpp
+// Effects.cpp
+EffectManager::EffectManager(glm::mat4 projection_matrix, glm::mat4 view_matrix)
+{
+    // Initial value
+    m_effect_speed = 1.0f;
+}
+
+void EffectManager::start(EffectType effect_type, float effect_speed)
+{
+    m_effect_speed = effect_speed;
+}
+
+void EffectManager::update(float delta_time)
+{
+   switch (m_current_effect)
+   {
+       case FADEIN:
+            m_alpha -= delta_time * m_effect_speed;
+            if (m_alpha <= 0) m_current_effect = NONE;
+                
+            break;
+   }
+}
+```
+```cpp
+void initialise()
+{
+    g_effect_manager->start(FADEIN, 0.5f);
+}
+```
 
 #### Fade-Out
 
@@ -343,7 +395,7 @@ void Effects::render()
         case FADEOUT:
         case FADEIN:
             m_program.SetModelMatrix(model_matrix);
-            m_program.SetColor(0.0f, 0.0f, 0.0f, m_salpha);
+            m_program.SetColor(0.0f, 0.0f, 0.0f, m_alpha);
             draw_overlay();
 
             break;
@@ -371,46 +423,25 @@ The result:
 Having our overlay grow and shrink in and out of the screen works pretty much identical to the fading effects, except instead of changing `alpha`, we can change a `size` attribute:
 
 ```c++
+// Effects.h
 enum EffectType { NONE, FADEIN, FADEOUT, GROW, SHRINK };
 
 class Effects {
 private:
-    ShaderProgram m_program;
-    EffectType    m_current_effect;
-
-    float m_alpha;
     float m_size;
-public:
-    Effects(glm::mat4 projection_matrix, glm::mat4 view_matrix);
-
-    void draw_overlay();
-    void start(EffectType effect_type);
-    void update(float delta_time);
-    void render();
 };
 ```
 ```c++
+// Effects.cpp
 Effects::Effects(glm::mat4 projection_matrix, glm::mat4 view_matrix)
 {
-    // Non textured Shader
-    m_program.Load("shaders/vertex.glsl", "shaders/fragment.glsl");
-    m_program.SetProjectionMatrix(projection_matrix);
-    m_program.SetViewMatrix(view_matrix);
-    
-    m_current_effect = NONE;
-    m_alpha = 1.0f;
     m_size = 10.0f;
 }
 
 void Effects::start(EffectType effect_type)
 {
-    m_current_effect = effect_type;
-
     switch (m_current_effect)
     {
-        case NONE:                         break;
-        case FADEIN:  m_alpha     = 1.0f;  break;
-        case FADEOUT: m_alpha     = 0.0f;  break;
         case GROW:    m_size      = 0.0f;  break;
         case SHRINK:  m_size      = 10.0f; break;
     }
@@ -420,21 +451,9 @@ void Effects::update(float delta_time)
 {
    switch (m_current_effect)
    {
-       case NONE: break;
-           
-       // Fades
-       case FADEIN:
-           m_alpha -= delta_time * m_effect_speed;
-           if (m_alpha <= 0) m_current_effect = NONE;
-           
-           break;
-       case FADEOUT:
-           if (m_alpha < 1.0f) m_alpha += delta_time * m_effect_speed;
-           
-           break;
-           
        case GROW:
-           if (m_size < 10.0f) m_size += delta_time * m_effect_speed; break;
+           if (m_size < 10.0f) m_size += delta_time * m_effect_speed;
+           break;
            
        case SHRINK:
            if (m_size >= 0.0f) m_size -= delta_time * m_effect_speed;
@@ -485,19 +504,19 @@ Notice here that we had to modify the model matrix to reflect the size changes o
 A really cool effect that you can add to your game is a shaking effect to simulate the ground shaking. For this, we will have the view matrix shift rapidly for a second or two. So we need to keep track of both the time remaining and random directions that it will be shifting:
 
 ```c++
+// Effects.h
 enum EffectType { NONE, FADEIN, FADEOUT, GROW, SHRINK, SHAKE };
 
 class Effects {
 private:
     float      m_time_left;
-    EffectType m_current_effect;
-
 public:
     // How much the view matrix will be shifted in a random direction
     glm::vec3 m_view_offset;
 };
 ```
 ```c++
+// Effects.cpp
 Effects::Effects(glm::mat4 projection_matrix, glm::mat4 view_matrix)
 {
     m_view_offset = glm::vec3(0.0f);
@@ -537,6 +556,7 @@ void Effects::update(float delta_time)
 }
 ```
 ```c++
+// main.cpp
 bool is_colliding_bottom = false;
 
 void update()
