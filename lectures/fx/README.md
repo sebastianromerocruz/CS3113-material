@@ -501,7 +501,9 @@ Notice here that we had to modify the model matrix to reflect the size changes o
 
 ### Shaking
 
-A really cool effect that you can add to your game is a shaking effect to simulate the ground shaking. For this, we will have the view matrix shift rapidly for a second or two. So we need to keep track of both the time remaining and random directions that it will be shifting:
+Shame on you.
+
+<!-- A really cool effect that you can add to your game is a shaking effect to simulate the ground shaking. For this, we will have the view matrix shift rapidly for a second or two. So we need to keep track of both the time remaining and random directions that it will be shifting:
 
 ```c++
 // Effects.h
@@ -575,4 +577,4 @@ Result:
 
 ![shake](assets/shake.gif)
 
-<sub>**Figure 6**: Really adds to the experience, I think.</sub>
+<sub>**Figure 6**: Really adds to the experience, I think.</sub> -->
