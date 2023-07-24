@@ -44,9 +44,9 @@
 15. [**Tilesets and Tilemaps**](lectures/platform-levels/)
 16. [**Scenes**](lectures/scenes/)
 17. [**Effects**](lectures/fx/)
+18. [**Shaders**](lectures/shaders/)
 
 <!-- 
-18. [**Shaders**](lectures/shaders/)
 19. [**Intro to 3D**](lectures/SDL3D/SDLProject/)
 20. [**3D Models**](lectures/3d-models/SDLProject/)
 21. [**3D Levels: Floors, Movement, and Collisions**](lectures/3d-levels/SDLProject/)
@@ -104,7 +104,7 @@ You will also need a [**Github**](https://github.com/) account!
 | **_Project 2_**: [**Pong**](assignments/project_2.md)                   | 10%            |
 | **_Project 3_**: [**Lunar Lander**](assignments/project_3.md)           | 15%            |
 | **_Project 4_**: [**Rise of the AI**](assignments/project_4.md)         | 15%            |
-| **_Project 5_**: **Platformer**                                         | 15%            |
+| **_Project 5_**: [**Platformer**](assignments/project_5.md)             | 15%            |
 | **_Final Project_**: **Students’ Choice**                               | 30%            |
 | **_Extra Credit_**                                                      | 05%            |
 
