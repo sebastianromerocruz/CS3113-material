@@ -4,10 +4,10 @@
 <h3 align=center><em>Due: 11:59pm, Tuesday, August 1st, 2023</em></h3>
  
 ### Submission instructions
-1. You _must_ use delta time, the `Entity` and `Map` classes, and fixed time steps in this assignment.
+1. You _must_ use delta time, the `Entity`, `Map`, and `Scene` classes, and fixed time steps in this assignment.
 2. You should submit your homework on [**Brightspace**](https://brightspace.nyu.edu/d2l/lms/dropbox/admin/folders_manage.d2l?ou=289892).
 3. You should also push that same version to your GitHub account. Note that any commits done after the deadline will be ignored.
-4. For this assignment you should turn only the C++ files that are relevant to your project (`main.cpp`, `Entity.cpp`, `Entity.h`/`Entity.hpp`, `Map.cpp`, k`Map.h`/`Map.hpp`, `Utility.cpp`, `Utility.h`/`Utility.cpp`, etc.). You _must_ also submit any image and audio files that you used in your project. Do **not** submit any other files.
+4. For this assignment you should turn only the C++ files that are relevant to your project (`main.cpp`, `Entity.cpp`, `Entity.h`/`Entity.hpp`, `Map.cpp`, `Map.h`/`Map.hpp`, `Utility.cpp`, `Utility.h`/`Utility.cpp`, etc.). You _must_ also submit any image and audio files that you used in your project. Do **not** submit any other files.
 4. Do not use any OpenGL functionality that we have not learned in class.
 5. All of your `main.cpp` file should contain a header comment block as follows:
 
