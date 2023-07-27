@@ -3,9 +3,9 @@
 Effects::Effects(glm::mat4 projection_matrix, glm::mat4 view_matrix)
 {
     // Non textured Shader
-    m_program.Load("shaders/vertex.glsl", "shaders/fragment.glsl");
-    m_program.SetProjectionMatrix(projection_matrix);
-    m_program.SetViewMatrix(view_matrix);
+    m_program.load("shaders/vertex.glsl", "shaders/fragment.glsl");
+    m_program.set_projection_matrix(projection_matrix);
+    m_program.set_view_matrix(view_matrix);
     
     m_current_effect = NONE;
     m_alpha = 1.0f;
@@ -17,7 +17,7 @@ Effects::Effects(glm::mat4 projection_matrix, glm::mat4 view_matrix)
 
 void Effects::draw_overlay()
 {
-    glUseProgram(this->m_program.programID);
+    glUseProgram(this->m_program.m_program_id);
 
     float vertices[] =
     {
@@ -30,10 +30,10 @@ void Effects::draw_overlay()
         -0.5,  0.5
     };
 
-    glVertexAttribPointer(m_program.positionAttribute, 2, GL_FLOAT, false, 0, vertices);
-    glEnableVertexAttribArray(m_program.positionAttribute);
+    glVertexAttribPointer(m_program.m_position_attribute, 2, GL_FLOAT, false, 0, vertices);
+    glEnableVertexAttribArray(m_program.m_position_attribute);
     glDrawArrays(GL_TRIANGLES, 0, 6);
-    glDisableVertexAttribArray(m_program.positionAttribute);
+    glDisableVertexAttribArray(m_program.m_position_attribute);
 }
 
 void Effects::start(EffectType effect_type, float effect_speed)
@@ -116,8 +116,8 @@ void Effects::render()
                                                     m_size : m_size * 0.75f,
                                                 0.0f));
             
-            this->m_program.SetModelMatrix(model_matrix);
-            this->m_program.SetColor(0.0f, 0.0f, 0.0f, m_alpha);
+            this->m_program.set_model_matrix(model_matrix);
+            this->m_program.set_color(0.0f, 0.0f, 0.0f, m_alpha);
             this->draw_overlay();
 
             break;

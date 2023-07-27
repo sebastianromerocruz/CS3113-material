@@ -14,30 +14,30 @@
 class ShaderProgram {
     public:
 	
-		void Load(const char *vertexShaderFile, const char *fragmentShaderFile);
-		void Cleanup();
+		void load(const char *vertex_shader_file, const char *fragment_shader_file);
+		void cleanup();
 
-		void SetModelMatrix(const glm::mat4 &matrix);
-        void SetProjectionMatrix(const glm::mat4 &matrix);
-        void SetViewMatrix(const glm::mat4 &matrix);
-        void SetLightPosition(glm::vec3 position);
+		void set_model_matrix(const glm::mat4 &matrix);
+        void set_projection_matrix(const glm::mat4 &matrix);
+        void set_view_matrix(const glm::mat4 &matrix);
+        void set_light_position(glm::vec3 position);
 	
-		void SetColor(float r, float g, float b, float a);
+		void set_color(float r, float g, float b, float a);
 	
-        GLuint LoadShaderFromString(const std::string &shaderContents, GLenum type);
-        GLuint LoadShaderFromFile(const std::string &shaderFile, GLenum type);
+        GLuint load_shader_from_string(const std::string &shader_contents, GLenum type);
+        GLuint load_shader_from_file(const std::string &shader_file, GLenum type);
     
-        GLuint programID;
+        GLuint m_program_id;
     
-        GLuint projectionMatrixUniform;
-        GLuint modelMatrixUniform;
-        GLuint viewMatrixUniform;
-		GLuint colorUniform;
-        GLuint lightPositionUniform;
+        GLuint m_projection_matrix_uniform;
+        GLuint m_model_matrix_uniform;
+        GLuint m_view_matrix_uniform;
+		GLuint m_color_uniform;
+        GLuint m_light_position_uniform;
 	
-        GLuint positionAttribute;
-        GLuint texCoordAttribute;
+        GLuint m_position_attribute;
+        GLuint m_tex_coord_attribute;
     
-        GLuint vertexShader;
-        GLuint fragmentShader;
+        GLuint m_vertex_shader;
+        GLuint m_fragment_shader;
 };

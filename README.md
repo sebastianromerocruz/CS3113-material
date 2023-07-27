@@ -45,9 +45,9 @@
 16. [**Scenes**](lectures/scenes/)
 17. [**Effects**](lectures/fx/)
 18. [**Shaders**](lectures/shaders/)
+19. [**Intro to 3D**](lectures/SDL3D/SDLProject/)
 
 <!-- 
-19. [**Intro to 3D**](lectures/SDL3D/SDLProject/)
 20. [**3D Models**](lectures/3d-models/SDLProject/)
 21. [**3D Levels: Floors, Movement, and Collisions**](lectures/3d-levels/SDLProject/)
 22. [**Billboards**](lectures/billboards/SDLProject/) -->

@@ -89,15 +89,15 @@ void initialise()
     
     glViewport(VIEWPORT_X, VIEWPORT_Y, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
     
-    g_program.Load(V_SHADER_PATH, F_SHADER_PATH);
+    g_program.load(V_SHADER_PATH, F_SHADER_PATH);
     
     g_view_matrix = glm::mat4(1.0f);
     g_projection_matrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);
     
-    g_program.SetProjectionMatrix(g_projection_matrix);
-    g_program.SetViewMatrix(g_view_matrix);
+    g_program.set_projection_matrix(g_projection_matrix);
+    g_program.set_view_matrix(g_view_matrix);
     
-    glUseProgram(g_program.programID);
+    glUseProgram(g_program.m_program_id);
     
     glClearColor(BG_RED, BG_BLUE, BG_GREEN, BG_OPACITY);
     
@@ -216,15 +216,15 @@ void update()
     if (g_current_scene == g_levelA && g_current_scene->m_state.player->get_position().y < -10.0f) switch_to_scene(g_levelB);
     
     g_view_matrix = glm::translate(g_view_matrix, g_effects->m_view_offset);
-    g_program.SetLightPosition(g_current_scene->m_state.player->get_position());
+    g_program.set_light_position(g_current_scene->m_state.player->get_position());
 }
 
 void render()
 {
-    g_program.SetViewMatrix(g_view_matrix);
+    g_program.set_view_matrix(g_view_matrix);
     glClear(GL_COLOR_BUFFER_BIT);
  
-    glUseProgram(g_program.programID);
+    glUseProgram(g_program.m_program_id);
     g_current_scene->render(&g_program);
     g_effects->render();
     

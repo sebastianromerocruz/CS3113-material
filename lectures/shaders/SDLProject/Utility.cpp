@@ -87,18 +87,18 @@ void Utility::draw_text(ShaderProgram *program, GLuint font_texture_id, std::str
     glm::mat4 model_matrix = glm::mat4(1.0f);
     model_matrix = glm::translate(model_matrix, position);
     
-    program->SetModelMatrix(model_matrix);
-    glUseProgram(program->programID);
+    program->set_model_matrix(model_matrix);
+    glUseProgram(program->m_program_id);
     
-    glVertexAttribPointer(program->positionAttribute, 2, GL_FLOAT, false, 0, vertices.data());
-    glEnableVertexAttribArray(program->positionAttribute);
-    glVertexAttribPointer(program->texCoordAttribute, 2, GL_FLOAT, false, 0, texture_coordinates.data());
-    glEnableVertexAttribArray(program->texCoordAttribute);
+    glVertexAttribPointer(program->m_position_attribute, 2, GL_FLOAT, false, 0, vertices.data());
+    glEnableVertexAttribArray(program->m_position_attribute);
+    glVertexAttribPointer(program->m_tex_coord_attribute, 2, GL_FLOAT, false, 0, texture_coordinates.data());
+    glEnableVertexAttribArray(program->m_tex_coord_attribute);
     
     glBindTexture(GL_TEXTURE_2D, font_texture_id);
     glDrawArrays(GL_TRIANGLES, 0, (int) (text.size() * 6));
     
-    glDisableVertexAttribArray(program->positionAttribute);
-    glDisableVertexAttribArray(program->texCoordAttribute);
+    glDisableVertexAttribArray(program->m_position_attribute);
+    glDisableVertexAttribArray(program->m_tex_coord_attribute);
 }
 
