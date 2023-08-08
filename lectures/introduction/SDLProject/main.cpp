@@ -10,12 +10,12 @@
 #include <GL/glew.h>
 #endif
 
-const int WINDOW_WIDTH = 640,
+const int WINDOW_WIDTH  = 640,
           WINDOW_HEIGHT = 480;
 
-const float BG_RED = 0.20f,
-            BG_BLUE = 0.90f,
-            BG_GREEN = 0.59f,
+const float BG_RED     = 0.20f,
+            BG_BLUE    = 0.90f,
+            BG_GREEN   = 0.59f,
             BG_OPACITY = 1.0f;
 
 SDL_Window* g_display_window;

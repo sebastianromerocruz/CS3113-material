@@ -11,16 +11,11 @@
 Hey, my name is Sebastián, and my last names are Romero Cruz. I teach about programming for a living and, incredibly, 
 sometimes even enjoy programming itself.
 
-I'm actually very excited to teach this class; I have done both game development on Unity and interactive computer 
-graphics with OpenGL before. Having the previlege of putting these two together by teaching this class and learning with
-everyone is something I am super exited about.
-
-Anyway, other things I enjoy are:
+Outside of programming, things I enjoy include:
 
 - **Slice of life anime**: my favourite is [***Liz and the Blue Bird***](https://youtu.be/QR33NrbOUgE)
-- **French history**: anything starting with the French Revolution of 1789. 
-- **Reading**: my current favourite is [***Virtuoso***](https://www.goodreads.com/book/show/40139305-virtuoso).
-- **Playing music**: I play a [**Rickenbacker 4001C64**](http://www.rickenbacker.com/model.asp?model=4001C64).
+- **Reading**: my current favourite is [***The Fawn by Magda Szabó***](https://www.themodernnovel.org/europe/europe/hungary/szabo/fawn/).
+- **Playing music**: I play a [**Rickenbacker 4001C64**](http://www.rickenbacker.com/model.asp?model=4001C64) and a cute [**Squier FSR Classic Vibe Bass VI**](https://www.guitar.co.uk/media/catalog/product/cache/1/image/1800x900/9df78eab33525d08d6e5fb8d27136e95/s/q/squier_squier_fsr_classic_vibe_bass_vi_laurel_fingerboard_parchment_pickguard_matching_headstock_shell_pink_front.jpeg).
 
 Let's talk about the course (see [**syllabus**](CS3113-material/README.md)).
 

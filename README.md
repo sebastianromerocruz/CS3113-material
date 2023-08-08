@@ -27,28 +27,45 @@
 
 ### _Lecture Notes_
 
-1.  [**Introduction**](lectures/introduction/)
-2.  [**Triangles**](lectures/triangle/)
-3.  [**You're getting old, Matrix**](lectures/matrices/)
-4.  [**Transformations**](lectures/transformations/)
-5.  [**Delta Time**](lectures/delta-time/)
-6.  [**Textures**](lectures/textures/)
-7.  [**Player Input**](lectures/player-input/)
-8.  [**Collision Detection**](lectures/collision-detection/)
-9.  [**Sprite Animation and Text**](lectures/sprites-and-text/)
-10. [**Entities**](lectures/entities/)
-11. [**Physics: Gravity**](lectures/physics_1/)
-12. [**Physics: Colliding with Different Kinds of Entities**](lectures/physics_2/)
-13. [**Music and Sound Effects**](lectures/sound-fx/)
-14. [**Basic Enemy AI**](lectures/enemy-ai/)
-15. [**Tilesets and Tilemaps**](lectures/platform-levels/)
-16. [**Scenes**](lectures/scenes/)
-17. [**Effects**](lectures/fx/)
-18. [**Shaders**](lectures/shaders/)
-19. [**Intro to 3D**](lectures/SDL3D/SDLProject/)
+1. **Week 1**: The basics
+    1.  [**Introduction**](lectures/introduction/)
+    2.  [**Triangles**](lectures/triangle/)
+2. **Week 2**: Moving in video games
+    1.  [**You're getting old, Matrix**](lectures/matrices/)
+    2.  [**Transformations**](lectures/transformations/)
+3. **Week 3**: Applying art to our games
+    1.  [**Delta Time**](lectures/delta-time/)
+    2.  [**Textures**](lectures/textures/)
+4. **Week 4**: Player input and basic collision detection
+    1.  [**Player Input**](lectures/player-input/)
+    2.  [**Collision Detection**](lectures/collision-detection/)
+5. **Week 5**: Animation and refactoring our code
+    1.  [**Sprite Animation and Text**](lectures/sprites-and-text/)
+    2. [**Entities**](lectures/entities/)
+6. **Week 6**: Physics
+    1. [**Physics: Gravity**](lectures/physics_1/)
+    2. [**Physics: Colliding with Different Kinds of Entities**](lectures/physics_2/)
+7. **Week 7**: Music, sound effects, and basic enemy AI
+    1. [**Music and Sound Effects**](lectures/sound-fx/)
+    2. [**Basic Enemy AI**](lectures/enemy-ai/)
+8. **Week 8**: Map and stage building
+    1. [**Tilesets and Tilemaps**](lectures/platform-levels/)
+    2. [**Scenes**](lectures/scenes/)
+9. **Week 9**: Special effects
+    1. [**Effects**](lectures/fx/)
+    2. [**Shaders**](lectures/shaders/)
+10. **Week 10**: Intro to 3D
+    1. [**Intro to 3D**](lectures/SDL3D/SDLProject/)
+    2. [**3D Models**](lectures/3d-models/SDLProject/)
+11. **Week 11**: Playtesting and publishing your game
+    1. **Playtesting**
+    2. **Publishing your game on Itch.io**
+12. **Week 12**: NES game development and playtesting your final projects
+    1. [**NES game development using 6502 assembly**](https://github.com/sebastianromerocruz/game-programming-in-assembly)
+    2. **Playtesting your final project**
+13. **Week 13**: Presenting your final projects
 
 <!-- 
-20. [**3D Models**](lectures/3d-models/SDLProject/)
 21. [**3D Levels: Floors, Movement, and Collisions**](lectures/3d-levels/SDLProject/)
 22. [**Billboards**](lectures/billboards/SDLProject/) -->
 
@@ -157,7 +174,7 @@ All work is to be done on your own. There are no group projects.
 If you are emailing me for help with your projects, upload your entire project to github and email me with the link 
 (I need to see everything so I can help you). Do not email screenshots of your code. 
 
-**Discord Server**: We will be using Slack to answer quick questions that you may have about the course throughout the 
+**Slack Server**: We will be using Slack to answer quick questions that you may have about the course throughout the 
 summer; please click [**here**](https://join.slack.com/t/slack-v0o3051/shared_invite/zt-1vgnlp091-3rHFzfkFold83o7tN7cJEQ) to join. While I’m usually pretty lax in terms of behavior in our server (see: #off-topic), this server is still a university environment and should be treated as such. Be respectful to me, your course assistant, and to your fellow students. Please adhere to the following rules:
 
 - Do not post your homework assignment code, or anybody else's, on this server. Doing so will have you automatically banned and flagged for plagiarism. You may, however, share small code blocks that don’t give away your implementation in order to ask questions.

@@ -55,7 +55,9 @@ const float TRIANGLE_RED     = 1.0,
 
 bool g_game_is_running = true;
 SDL_Window* g_display_window;
-ShaderProgram g_program;
+
+ShaderProgram g_shader_program;
+
 glm::mat4 g_view_matrix,        // Defines the position (location and orientation) of the camera
           g_model_matrix,       // Defines every translation, rotation, and/or scaling applied to an object; we'll look at these next week
           g_projection_matrix;  // Defines the characteristics of your camera, such as clip panes, field of view, projection method, etc.
@@ -79,7 +81,7 @@ void initialise()
     glViewport(VIEWPORT_X, VIEWPORT_Y, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
     
     // Load up our shaders
-    g_program.Load(V_SHADER_PATH, F_SHADER_PATH);
+    g_shader_program.load(V_SHADER_PATH, F_SHADER_PATH);
     
     // Initialise our view, model, and projection matrices
     g_view_matrix       = glm::mat4(1.0f);  // Defines the position (location and orientation) of the camera
@@ -88,14 +90,14 @@ void initialise()
     
 //    g_model_matrix = glm::translate(g_model_matrix, glm::vec3(5.0f, 0.0f, 0.0f));
     
-    g_program.SetProjectionMatrix(g_projection_matrix);
-    g_program.SetViewMatrix(g_view_matrix);
+    g_shader_program.set_projection_matrix(g_projection_matrix);
+    g_shader_program.set_view_matrix(g_view_matrix);
     // Notice we haven't set our model matrix yet!
     
-    g_program.SetColor(TRIANGLE_RED, TRIANGLE_BLUE, TRIANGLE_GREEN, TRIANGLE_OPACITY);
+    g_shader_program.set_colour(TRIANGLE_RED, TRIANGLE_BLUE, TRIANGLE_GREEN, TRIANGLE_OPACITY);
     
     // Each object has its own unique ID
-    glUseProgram(g_program.programID);
+    glUseProgram(g_shader_program.get_program_id());
     
     glClearColor(BG_RED, BG_BLUE, BG_GREEN, BG_OPACITY);
 }
@@ -135,7 +137,7 @@ void update()
 void render() {
     glClear(GL_COLOR_BUFFER_BIT);
     
-    g_program.SetModelMatrix(g_model_matrix);
+    g_shader_program.set_model_matrix(g_model_matrix);
     
     float vertices[] =
     {
@@ -144,10 +146,10 @@ void render() {
         -0.5f, -0.5f
     };
     
-    glVertexAttribPointer(g_program.positionAttribute, 2, GL_FLOAT, false, 0, vertices);
-    glEnableVertexAttribArray(g_program.positionAttribute);
+    glVertexAttribPointer(g_shader_program.get_position_attribute(), 2, GL_FLOAT, false, 0, vertices);
+    glEnableVertexAttribArray(g_shader_program.get_position_attribute());
     glDrawArrays(GL_TRIANGLES, 0, 3);
-    glDisableVertexAttribArray(g_program.positionAttribute);
+    glDisableVertexAttribArray(g_shader_program.get_position_attribute());
     
     SDL_GL_SwapWindow(g_display_window);
 }
