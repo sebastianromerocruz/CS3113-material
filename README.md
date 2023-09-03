@@ -31,38 +31,38 @@
     1.  [**Introduction**](lectures/introduction/)
     2.  [**Triangles**](lectures/triangle/)
 2. **Week 2**: Moving in video games
-    1.  [**You're getting old, Matrix**](lectures/matrices/)
-    2.  [**Transformations**](lectures/transformations/)
+    <!-- 1.  [**You're getting old, Matrix**](lectures/matrices/)
+    2.  [**Transformations**](lectures/transformations/) -->
 3. **Week 3**: Applying art to our games
-    1.  [**Delta Time**](lectures/delta-time/)
-    2.  [**Textures**](lectures/textures/)
+    <!-- 1.  [**Delta Time**](lectures/delta-time/)
+    2.  [**Textures**](lectures/textures/) -->
 4. **Week 4**: Player input and basic collision detection
-    1.  [**Player Input**](lectures/player-input/)
-    2.  [**Collision Detection**](lectures/collision-detection/)
+    <!-- 1.  [**Player Input**](lectures/player-input/)
+    2.  [**Collision Detection**](lectures/collision-detection/) -->
 5. **Week 5**: Animation and refactoring our code
-    1.  [**Sprite Animation and Text**](lectures/sprites-and-text/)
-    2. [**Entities**](lectures/entities/)
+    <!-- 1.  [**Sprite Animation and Text**](lectures/sprites-and-text/)
+    2. [**Entities**](lectures/entities/) -->
 6. **Week 6**: Physics
-    1. [**Physics: Gravity**](lectures/physics_1/)
-    2. [**Physics: Colliding with Different Kinds of Entities**](lectures/physics_2/)
+    <!-- 1. [**Physics: Gravity**](lectures/physics_1/)
+    2. [**Physics: Colliding with Different Kinds of Entities**](lectures/physics_2/) -->
 7. **Week 7**: Music, sound effects, and basic enemy AI
-    1. [**Music and Sound Effects**](lectures/sound-fx/)
-    2. [**Basic Enemy AI**](lectures/enemy-ai/)
+    <!-- 1. [**Music and Sound Effects**](lectures/sound-fx/)
+    2. [**Basic Enemy AI**](lectures/enemy-ai/) -->
 8. **Week 8**: Map and stage building
-    1. [**Tilesets and Tilemaps**](lectures/platform-levels/)
-    2. [**Scenes**](lectures/scenes/)
+    <!-- 1. [**Tilesets and Tilemaps**](lectures/platform-levels/)
+    2. [**Scenes**](lectures/scenes/) -->
 9. **Week 9**: Special effects
-    1. [**Effects**](lectures/fx/)
-    2. [**Shaders**](lectures/shaders/)
+    <!-- 1. [**Effects**](lectures/fx/)
+    2. [**Shaders**](lectures/shaders/) -->
 10. **Week 10**: Intro to 3D
-    1. [**Intro to 3D**](lectures/SDL3D/SDLProject/)
-    2. [**3D Models**](lectures/3d-models/SDLProject/)
+    <!-- 1. [**Intro to 3D**](lectures/SDL3D/SDLProject/)
+    2. [**3D Models**](lectures/3d-models/SDLProject/) -->
 11. **Week 11**: Playtesting and publishing your game
-    1. **Playtesting**
-    2. **Publishing your game on Itch.io**
+    <!-- 1. **Playtesting**
+    2. **Publishing your game on Itch.io** -->
 12. **Week 12**: NES game development and playtesting your final projects
-    1. [**NES game development using 6502 assembly**](https://github.com/sebastianromerocruz/game-programming-in-assembly)
-    2. **Playtesting your final project**
+    <!-- 1. [**NES game development using 6502 assembly**](https://github.com/sebastianromerocruz/game-programming-in-assembly)
+    2. **Playtesting your final project** -->
 13. **Week 13**: Presenting your final projects
 
 <!-- 
@@ -73,19 +73,26 @@
 
 ### _Exercises_
 
-- _06/15_: **[User Input](exercises/player_input/)**
+<!-- - _06/15_: **[User Input](exercises/player_input/)**
 - _06/20_: **[Collision Detection](exercises/collision-detection/)**
 - _06/22_: **[Animation](exercises/animation/)**
-- _07/06_: **[Entity Types](exercises/entity_types/)**
+- _07/06_: **[Entity Types](exercises/entity_types/)** -->
 
-### _Instructor_
+<sub>To be released every lecture day before class.</sub>
+
+### _Instructor and Course Assistant_
 
 [**Sebastián Romero Cruz**](https://github.com/sebastianromerocruz)  _(They / Them)_
 
 | **E-Mail**                                  | **Office Hours**                                                                                                     |
 |---------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
-| [**src402@nyu.edu**](mailto:src402@nyu.edu) | [**calendly**](https://calendly.com/profromerocruz/office-hours-sebastian) |
+| [**sebastian.romerocruz@nyu.edu**](mailto:src402@nyu.edu) | [**calendly**](https://calendly.com/profromerocruz/office-hours-sebastian) |
 
+**Thu Vu**
+
+| **E-Mail**                                  | **Office Hours**                                                                                                     |
+|---------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
+| [**thu.vu@nyu.edu**](mailto:thu.vu@nyu.edu) | Mon (11:00am - 1:00pm) / Fri (12:00pm - 2:00pm), location TBD                                                        |
 
 ### _Class Information_
 
@@ -122,8 +129,9 @@ You will also need a [**Github**](https://github.com/) account!
 | **_Project 3_**: [**Lunar Lander**](assignments/project_3.md)           | 15%            |
 | **_Project 4_**: [**Rise of the AI**](assignments/project_4.md)         | 15%            |
 | **_Project 5_**: [**Platformer**](assignments/project_5.md)             | 15%            |
-| **_Final Project_**: [**Students’ Choice**](assignments/project_6.md)   | 30%            |
+| **_Final Project_**: [**Students’ Choice**](assignments/project_6.md)   | 25%            |
 | **_Extra Credit_**                                                      | 05%            |
+| **_Participation_**                                                      | 05%            |
 
 Every assignment will have an extra credit portion. While these sections are not at all necessary, I will add **5% to your final grade** at the end of the semester if you complete the extra credit portion of **at least 3 of the projects**. While 5% may not seem like a lot, it can mean the difference between two letter grades. This can be especially helpful later in the semester, when the projects get more long and complex.
 
@@ -135,7 +143,7 @@ As for your final letter grade, the following scale will be used:
 
 ### _Deadlines_
 
-- All projects are due at **11:59pm on Fridays**.
+- All projects are due at **11:59pm on Saturdays**.
     - Due by 11:59pm means your project was successfully uploaded _by that time_. This means that the version to be graded must be uploaded in both Brightspace and GitHub at that time.
     - Start uploading your project at least an hour before the deadline.
     - Projects received **1 minute late** are considered to be **a day** late.
@@ -175,7 +183,7 @@ If you are emailing me for help with your projects, upload your entire project t
 (I need to see everything so I can help you). Do not email screenshots of your code. 
 
 **Slack Server**: We will be using Slack to answer quick questions that you may have about the course throughout the 
-summer; please click [**here**](https://join.slack.com/t/slack-v0o3051/shared_invite/zt-1vgnlp091-3rHFzfkFold83o7tN7cJEQ) to join. While I’m usually pretty lax in terms of behavior in our server (see: #off-topic), this server is still a university environment and should be treated as such. Be respectful to me, your course assistant, and to your fellow students. Please adhere to the following rules:
+summer; the join link will be provided during the first day of class. While I’m usually pretty lax in terms of behavior in our server (see: #off-topic), this server is still a university environment and should be treated as such. Be respectful to me, your course assistant, and to your fellow students. Please adhere to the following rules:
 
 - Do not post your homework assignment code, or anybody else's, on this server. Doing so will have you automatically banned and flagged for plagiarism. You may, however, share small code blocks that don’t give away your implementation in order to ask questions.
 
