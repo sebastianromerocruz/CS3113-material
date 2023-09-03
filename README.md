@@ -125,15 +125,26 @@ You will also need a [**Github**](https://github.com/) account!
 | **Item**                                                                | **Percentage** |
 |-------------------------------------------------------------------------|----------------|
 | **_Project 1_**: [**Draw a Simple 2D Scene**](assignments/project_1.md) | 10%            |
-| **_Project 2_**: [**Pong**](assignments/project_2.md)                   | 10%            |
-| **_Project 3_**: [**Lunar Lander**](assignments/project_3.md)           | 15%            |
-| **_Project 4_**: [**Rise of the AI**](assignments/project_4.md)         | 15%            |
-| **_Project 5_**: [**Platformer**](assignments/project_5.md)             | 15%            |
-| **_Final Project_**: [**Students’ Choice**](assignments/project_6.md)   | 25%            |
-| **_Extra Credit_**                                                      | 05%            |
-| **_Participation_**                                                      | 05%            |
+| **_Project 2_**: **Pong**                                               | 10%            |
+| **_Project 2_**: **Lunar Lander**                                       | 15%            |
+| **_Project 2_**: **Rise of the AI**                                     | 15%            |
+| **_Project 2_**: **Platformer**                                         | 15%            |
+| **_Project 2_**: **Students' Choice**                                   | 25%            |
+<!-- | **_Project 2_**: [**Pong**](assignments/project_2.md)                   | 10%            | -->
+<!-- | **_Project 3_**: [**Lunar Lander**](assignments/project_3.md)           | 15%            | -->
+<!-- | **_Project 4_**: [**Rise of the AI**](assignments/project_4.md)         | 15%            | -->
+<!-- | **_Project 5_**: [**Platformer**](assignments/project_5.md)             | 15%            | -->
+<!-- | **_Final Project_**: [**Students’ Choice**](assignments/project_6.md)   | 25%            | -->
+| **_Extra Credit_**                                                       | 05%           |
+| **_Participation_**                                                      | 05%           |
 
 Every assignment will have an extra credit portion. While these sections are not at all necessary, I will add **5% to your final grade** at the end of the semester if you complete the extra credit portion of **at least 3 of the projects**. While 5% may not seem like a lot, it can mean the difference between two letter grades. This can be especially helpful later in the semester, when the projects get more long and complex.
+
+When I say "participation" I do not mean that I will literally be keeping track of how much you speak in class. It's basically an indication of how much I get to know you throughout the semester. I know speaking in an online class is not necessarily easy, so here are some other ways to get this participation grade:
+
+- Have your webcam on as much as you can.
+- Come to my and Thu's office hours.
+- Volunteer your projects to be presented to the class.
 
 As for your final letter grade, the following scale will be used:
 
