@@ -132,6 +132,21 @@ You will also need a [**Github**](https://github.com/) account!
 | **_Project 6_**: **Students' Choice**                                   | 25%            |
 | **_Extra Credit_**                                                      | 05%            |
 | **_Participation_**                                                     | 05%            |
+
+Every assignment will have an extra credit portion. While these sections are not at all necessary, I will add **5% to your final grade** at the end of the semester if you complete the extra credit portion of **at least 3 of the projects**. While 5% may not seem like a lot, it can mean the difference between two letter grades. This can be especially helpful later in the semester, when the projects get more long and complex.
+
+When I say "participation" I do not mean that I will literally be keeping track of how much you speak in class. It's basically an indication of how much I get to know you throughout the semester. I know speaking in an online class is not necessarily easy, so here are some other ways to get this participation grade:
+
+- Have your webcam on as much as you can.
+- Come to my and Thu's office hours.
+- Volunteer your projects to be presented to the class.
+
+As for your final letter grade, the following scale will be used:
+
+| **Letter Grade** | **A**  | **A-** | **B+** | **B** | **B-** | **C+** | **C** | **C-** | **D+** | **D** | **F** |
+|------------------|--------|--------|--------|-------|--------|--------|-------|--------|--------|-------|-------|
+| **Range**        | 93-100 | 90-92  | 87-89  | 83-86 | 80-82  | 77-79  | 73-76 | 70-72  | 67-69  | 60-66 | 0-60  |
+
 <!-- | **_Project 2_**: [**Pong**](assignments/project_2.md)                   | 10%            | -->
 <!-- | **_Project 3_**: [**Lunar Lander**](assignments/project_3.md)           | 15%            | -->
 <!-- | **_Project 4_**: [**Rise of the AI**](assignments/project_4.md)         | 15%            | -->
