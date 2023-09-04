@@ -1,7 +1,7 @@
 <h4 align=center>NYU Tandon School of Engineering<h4>
-<h3 align=center>CS-UY 3113 Summer 2023</h3>
+<h3 align=center>CS-UY 3113 Fall 2023</h3>
 <h1 align=center>Project 1: <em>Simple 2D Scene</em></h1>
-<h3 align=center><em>Due: 11:59pm, Sunday, June 11th, 2023</em></h3>
+<h3 align=center><em>Due: 11:59pm, Saturday, September 30th, 2023</em></h3>
  
 ### Submission instructions
 1. You must use delta time in your animations.
