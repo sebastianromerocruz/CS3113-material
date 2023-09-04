@@ -1,4 +1,4 @@
-<h1 align=center>CS505 <em>Introduction to Game Programming</em></h1>
+<h1 align=center>CS3113 <em>Introduction to Game Programming</em></h1>
 
 <h2 align=center>New York University Tandon School of Engineering</h2>
 
