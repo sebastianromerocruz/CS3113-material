@@ -86,7 +86,7 @@
 
 | **E-Mail**                                  | **Office Hours**                                                                                                     |
 |---------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
-| [**sebastian.romerocruz@nyu.edu**](mailto:src402@nyu.edu) | [**calendly**](https://calendly.com/profromerocruz/office-hours-sebastian) |
+| [**sebastian.romerocruz@nyu.edu**](mailto:src402@nyu.edu) | [**calendly**](https://calendly.com/profromerocruz) |
 
 **Thu Vu**
 
