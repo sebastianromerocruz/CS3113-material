@@ -5,9 +5,8 @@
  
 ### Submission instructions
 1. You must use delta time in your animations.
-2. You should submit your homework on [**Brightspace**](https://brightspace.nyu.edu/d2l/lms/dropbox/admin/folders_manage.d2l?ou=289892).
-3. You should also push that same version to your GitHub account. Note that any commits done after the deadline will be ignored.
-4. For this assignment you should turn in **one** C++ file named `main.cpp` _and_ any image files that you used in your project. Do **not** submit any other files.
+2. You should push your homework to your GitHub account. Note that any commits done after the deadline will be ignored.
+3. You should also submit the link to your repository to [**Brightspace**](https://brightspace.nyu.edu/d2l/lms/dropbox/admin/folders_manage.d2l?ou=311022).
 4. Do not use any OpenGL functionality that we have not learned in class.
 5. The `main.cpp` file you submit should contain a header comment block as follows:
 
@@ -15,7 +14,7 @@
 /**
 * Author: [Your name here]
 * Assignment: Simple 2D Scene
-* Date due: 2023-06-11, 11:59pm
+* Date due: 2023-09-30, 11:59pm
 * I pledge that I have completed this assignment without
 * collaborating with anyone else, in conformance with the
 * NYU School of Engineering Policies and Procedures on
