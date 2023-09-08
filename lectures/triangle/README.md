@@ -258,11 +258,11 @@ void initialise()
     g_model_matrix      = glm::mat4(1.0f);
     g_projection_matrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);  // Orthographic means perpendicular—meaning that our camera will be looking perpendicularly down to our triangle
 
-    g_program.setViewMatrix(g_view_matrix);
-    g_program.setProjectionMatrix(g_projection_matrix);
+    g_program.set_view_matrix(g_view_matrix);
+    g_program.set_projection_matrix(g_projection_matrix);
     // Notice we haven't set our model matrix yet!
 
-    g_program.SetColor(TRIANGLE_RED, TRIANGLE_BLUE, TRIANGLE_GREEN, TRIANGLE_OPACITY);
+    g_program.set_colour(TRIANGLE_RED, TRIANGLE_BLUE, TRIANGLE_GREEN, TRIANGLE_OPACITY);
     glUseProgram(g_program.programID);
 
     // Old stuff
@@ -291,7 +291,7 @@ void render() {
     glClear(GL_COLOR_BUFFER_BIT);
     
     // Step 2
-    program.SetModelMatrix(g_model_matrix);
+    g_program.SetModelMatrix(g_model_matrix);
     
     // Step 3
     float vertices[] =
@@ -304,7 +304,7 @@ void render() {
     glVertexAttribPointer(g_program.positionAttribute, 2, GL_FLOAT, false, 0, vertices);
     glEnableVertexAttribArray(g_program.positionAttribute);
     glDrawArrays(GL_TRIANGLES, 0, 3);
-    glDisableVertexAttribArray(prg_programogram.positionAttribute);
+    glDisableVertexAttribArray(g_program.positionAttribute);
     
     // Step 4
     SDL_GL_SwapWindow(g_display_window);
