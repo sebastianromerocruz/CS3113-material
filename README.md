@@ -31,8 +31,7 @@
     1.  [**Introduction**](lectures/introduction/)
     2.  [**Triangles**](lectures/triangle/)
 2. **Week 2**: Moving in video games
-    <!-- 1.  [**You're getting old, Matrix**](lectures/matrices/)
-    2.  [**Transformations**](lectures/transformations/) -->
+s
 3. **Week 3**: Applying art to our games
     <!-- 1.  [**Delta Time**](lectures/delta-time/)
     2.  [**Textures**](lectures/textures/) -->
