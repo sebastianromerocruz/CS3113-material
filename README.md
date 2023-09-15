@@ -92,7 +92,7 @@
 
 | **E-Mail**                                  | **Office Hours**                                                                                                     |
 |---------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
-| [**thu.vu@nyu.edu**](mailto:thu.vu@nyu.edu) | Mon (11:00am - 1:00pm) / Fri (12:00pm - 2:00pm), location TBD                                                        |
+| [**thu.vu@nyu.edu**](mailto:thu.vu@nyu.edu) | Mon (11:00am - 1:00pm, 370 Jay St., 8th Floor, Lounge Area) / Fri (12:00pm - 2:00pm, online)                                                        |
 
 ### _Class Information_
 
