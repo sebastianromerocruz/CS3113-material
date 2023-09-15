@@ -1,3 +1,4 @@
+
 #define GL_SILENCE_DEPRECATION
 
 #ifdef _WINDOWS
@@ -11,7 +12,7 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "ShaderProgram.h"
 
-const int WINDOW_WIDTH = 640,
+const int WINDOW_WIDTH  = 640,
           WINDOW_HEIGHT = 480;
 
 const float BG_RED     = 0.1922f,
@@ -32,12 +33,7 @@ const int TRIANGLE_RED     = 1.0,
           TRIANGLE_GREEN   = 0.4,
           TRIANGLE_OPACITY = 1.0;
 
-const float GROWTH_FACTOR = 1.01f;
-const float SHRINK_FACTOR = 0.99f;
-const int MAX_FRAME = 40;
-
-int  g_frame_counter = 0;
-bool g_is_growing    = true;
+int g_frame_counter = 0;
 
 SDL_Window* g_display_window;
 bool g_game_is_running = true;
@@ -93,18 +89,7 @@ void process_input()
     }
 }
 
-void update()
-{
-    // This scale vector will make the x- and y-coordinates of the triangle
-    // grow by a factor of 1% of it of its original size every frame.
-    float scale_factor = 1.01;
-    glm::vec3 scale_vector = glm::vec3(scale_factor, scale_factor, 1.0f);
-    
-    // We replace the previous value of the model matrix with the scaled
-    // value of model matrix. This would mean that  glm::scale() returns
-    // a matrix, which it does!
-    g_model_matrix = glm::scale(g_model_matrix, scale_vector);
-}
+void update() { }
 
 void render() {
     glClear(GL_COLOR_BUFFER_BIT);

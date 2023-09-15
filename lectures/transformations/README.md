@@ -2,9 +2,9 @@
 
 <h1 align=center>Transformations</h1>
 
-<h3 align=center>12 Prairial, Year CCXXXI</h3>
+<h3 align=center>15 Horsebow Moon, Imperial Year 1180</h3>
 
-***Song of the day***: _[**I Constantly Thank God For Esteban**](https://youtu.be/QSLBRvv0_0w) by Panic! at the Disco (2005)._
+<p align=center><strong><em>Song of the day</strong>: <a href="https://youtu.be/t8JyN05G68I?si=mF-9jEIYETEhLn1A"><strong><u>Dreamin' Keihin-Touhoku Line 7"</u></strong></a> by Beef [feat. Marina] (2015)</em></p>
 
 ### Sections
 
