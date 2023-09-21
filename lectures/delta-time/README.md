@@ -37,9 +37,9 @@ Recall our three transformations, with their respective matrices:
 Thus far, we have been applying these transformations to the model matrix one after the other:
 
 ```c++
-model_matrix = glm::translate(model_matrix, glm::vec3(TRANS_VALUE, 0.0f, 0.0f));
-model_matrix = glm::scale(model_matrix, scale_vector);
-model_matrix = glm::rotate(model_matrix, ROT_ANGLE, glm::vec3(0.0f, 0.0f, 1.0f));
+g_model_matrix = glm::translate(g_model_matrix, glm::vec3(TRANS_VALUE, 0.0f, 0.0f));
+g_model_matrix = glm::scale(g_model_matrix, scale_vector);
+g_model_matrix = glm::rotate(g_model_matrix, ROT_ANGLE, glm::vec3(0.0f, 0.0f, 1.0f));
 ```
 
 Mathematically speaking, there's nothing inherently wrong with doing this. Ideally, though, we would like to minimise the amount of times our model matrix gets operated on. In other words, it would be great if we could simply apply a single transformation matrix—complete with scaling rotation, and translation—onto our model matrix and apply _that_ every frame. In terms of code, this would mean that our model matrix would simply start as an identity matrix, and then the appropriate transformation would be applied to it.
@@ -175,16 +175,16 @@ item_model_matrix = glm::rotate(character_model_matrix, ANGLE, glm::vec3(0.0f, 0
 Now, it goes without saying that games require movement to actually be games. What we have been doing so far is something akin to the following:
 
 ```c++
-glm::mat4 model_matrix;
+glm::mat4 g_model_matrix;
 
 void initialise() 
 {
-    model_matrix = glm::mat4(1.0f);
+    g_model_matrix = glm::mat4(1.0f);
 }
 
 void update()
 {
-    model_matrix = glm::translate(model_matrix, glm::vec3(0.1f, 0.0f, 0.0f));
+    g_model_matrix = glm::translate(g_model_matrix, glm::vec3(0.1f, 0.0f, 0.0f));
 }
 ```
 
@@ -197,19 +197,22 @@ Take as an example something that happened to several people in the class: their
 The first is, instead of keeping track of the matrix's transformations per frame, we keep track of the arguments values being passed into them:
 
 ```c++
-float model_x;
-float model_y;
+glm::mat4 g_model_matrix;
+
+float g_model_x;
+float g_model_y;
 
 void initialise() 
 {
-    model_x = 0.1f;
-    model_y = 0.0f;
+    g_model_matrix = glm::mat4(1.0f)
+    g_model_x = 0.1f;
+    g_model_y = 0.0f;
 }
 
 void update()
 {
-    glm::mat4 model_matrix = glm::mat4(1.0f);
-    model_matrix = glm::translate(model_matrix, glm::vec3(model_x, model_y, 0.0f));
+    g_model_matrix = glm::mat4(1.0f);
+    g_model_matrix = glm::translate(g_model_matrix, glm::vec3(g_model_x, g_model_y, 0.0f));
 }
 ```
 
@@ -222,7 +225,7 @@ The second is, instead of relying on our computer's speed to update our frame, w
 Faster hardware updates more times than its slower counterpart. This means that, unfortunately, if your computer is running at 60 frames-per-second (fps) and mine at 30 fps, the game _will_ run twice as fast on your machine than in mine.
 
 ```c++
-float x_player = 0.0f;
+float g_x_player = 0.0f;
 
 void update()
 {
@@ -230,13 +233,13 @@ void update()
     * This line of code will run more times on a faster machine.
     * At 60fps, it will run 60 times per second, for example.
     */
-    x_player += 1.0f;
+    g_x_player += 1.0f;
 }
 
 void render()
 {
-    glm::mat4 model_matrix = glm::mat4(1.0f);
-    model_matrix = glm::translate(model_matrix, glm::vec3(x_player, 0.0f, 0.0f));
+    glm::mat4 g_model_matrix = glm::mat4(1.0f);
+    g_model_matrix = glm::translate(g_model_matrix, glm::vec3(g_x_player, 0.0f, 0.0f));
 }
 ```
 
@@ -250,22 +253,22 @@ The way we standardise all of our players' play speed is by using something we c
 Our code above would thus change to the following if we were running at 30fps:
 
 ```c++
-float x_player = 0.0f;
-float z_rotate = 0.04f;
-float delta_time = 0.0333f;  // But how do we calculate this? We're about to find out
+float g_x_player = 0.0f;
+float g_z_rotate = 0.04f;
+float g_delta_time = 0.0333f;  // But how do we calculate this? We're about to find out
 
 void update()
 {
     // This also works with rotation!
-    x_player += 1.0 * delta_time;
-    z_rotate += 0.001 * delta_time;
+    g_x_player += 1.0 * delta_time;
+    g_z_rotate += 0.001 * delta_time;
 }
 
 void render()
 {
-    glm::mat4 model_matrix = glm::mat4(1.0f);
-    model_matrix = glm::translate(model_matrix, glm::vec3(x_player, 0.0f, 0.0f));
-    model_matrix = glm::rotate(model_matrix, z_rotate, glm::vec3(1.0f, 0.0f, 0.0f));
+    g_model_matrix = glm::mat4(1.0f);
+    g_model_matrix = glm::translate(g_model_matrix, glm::vec3(g_x_player, 0.0f, 0.0f));
+    g_model_matrix = glm::rotate(g_model_matrix, g_z_rotate, glm::vec3(1.0f, 0.0f, 0.0f));
 }
 ```
 
@@ -278,15 +281,15 @@ Let's apply this delta time to a simplified version of our triangle program. Let
 ```c++
 /* Some code... */
 
-float triangle_x = 0.0f;
+float g_triangle_x = 0.0f;
 
 /* More code... */
 
 void update()
 {
-    triangle_x += 0.01f;
-    model_matrix = glm::mat4(1.0f);
-    model_matrix = glm::translate(model_matrix, glm::vec3(triangle_x, 0.0f, 0.0f));
+    g_triangle_x += 0.01f;
+    g_model_matrix = glm::mat4(1.0f);
+    g_model_matrix = glm::translate(g_model_matrix, glm::vec3(g_triangle_x, 0.0f, 0.0f));
 }
 
 /* More code... */
@@ -302,7 +305,7 @@ The way we do this is by keeping track of our **ticks**. Ticks are basically the
 Start by creating a global variable to keep track of the ticks from the previous frame. Something like:
 
 ```c++
-float previous_ticks = 0.0f;
+float g_previous_ticks = 0.0f;
 ```
 
 The formula to then calculate the delta time every frame is as follows:
@@ -311,12 +314,12 @@ The formula to then calculate the delta time every frame is as follows:
 void update()
 {
     float ticks = (float) SDL_GetTicks() / 1000.0f;  // get the current number of ticks
-    float delta_time = ticks - previous_ticks;       // the delta time is the difference from the last frame
-    previous_ticks = ticks;
+    float delta_time = ticks - g_previous_ticks;     // the delta time is the difference from the last frame
+    g_previous_ticks = ticks;
 
-    triangle_x += 1.0f * delta_time;                 // let's try a much higher value to test our changes
-    model_matrix = glm::mat4(1.0f);
-    model_matrix = glm::translate(model_matrix, glm::vec3(triangle_x, 0.0f, 0.0f));
+    g_triangle_x += 1.0f * delta_time;               // let's try a much higher value to test our changes
+    g_model_matrix = glm::mat4(1.0f);
+    g_model_matrix = glm::translate(g_model_matrix, glm::vec3(g_model_matrix, 0.0f, 0.0f));
 }
 ```
 
@@ -331,25 +334,25 @@ void update()
 By the way, what would happen if we applied this delta time concept to rotation now?
 
 ```c++
-float triangle_x = 0.0f;
-float triangle_rotate = 0.0f;
-float previous_ticks = 0.0f;
+float g_triangle_x = 0.0f;
+float g_triangle_rotate = 0.0f;
+float g_previous_ticks = 0.0f;
 
 /* Some code here... */
 
 void update()
 {
     float ticks = (float) SDL_GetTicks() / 1000.0f;  // get the current number of ticks
-    float delta_time = ticks - previous_ticks;       // the delta time is the difference from the last frame
-    previous_ticks = ticks;
+    float delta_time = ticks - g_previous_ticks;       // the delta time is the difference from the last frame
+    g_previous_ticks = ticks;
 
-    triangle_x += 1.0f * delta_time;
-    triangle_rotate += 90.0 * delta_time;            // 90-degrees per second
-    model_matrix = glm::mat4(1.0f);
+    g_triangle_x += 1.0f * delta_time;
+    g_triangle_rotate += 90.0 * delta_time;            // 90-degrees per second
+    g_model_matrix = glm::mat4(1.0f);
 
     /* Translate -> Rotate */
-    model_matrix = glm::translate(model_matrix, glm::vec3(triangle_x, 0.0f, 0.0f));
-    model_matrix = glm::rotate(model_matrix, glm::radians(triangle_rotate), glm::vec3(0.0f, 0.0f, 1.0f));
+    g_model_matrix = glm::translate(g_model_matrix, glm::vec3(g_triangle_x, 0.0f, 0.0f));
+    g_model_matrix = glm::rotate(g_model_matrix, glm::radians(g_triangle_rotate), glm::vec3(0.0f, 0.0f, 1.0f));
 }
 ```
 

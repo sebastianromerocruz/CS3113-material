@@ -57,7 +57,7 @@ void initialise()
     /* Some code here... */
 
     // Load the shaders for handling textures
-    program.Load(V_SHADER_PATH, F_SHADER_PATH);
+    g_program.load(V_SHADER_PATH, F_SHADER_PATH);
 
     // Load our player image
     player_texture_id = load_texture(PLAYER_SPRITE);
@@ -207,7 +207,7 @@ float vertices[] =
     -0.5f, -0.5f
 };
 
-glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, vertices);
+glVertexAttribPointer(g_program.positionAttribute, 2, GL_FLOAT, false, 0, vertices);
 ```
 
 Well, gone are those good old days. 
@@ -254,7 +254,7 @@ Taking all of this into account, we can now update `render()` to match our new s
 void render() {
     glClear(GL_COLOR_BUFFER_BIT);
     
-    program.SetModelMatrix(model_matrix);
+    g_program.SetModelMatrix(model_matrix);
     
     // Vertices
     float vertices[] = {
@@ -262,8 +262,8 @@ void render() {
         -0.5f, -0.5f, 0.5f, 0.5f, -0.5f, 0.5f   // triangle 2
     };
     
-    glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, vertices);
-    glEnableVertexAttribArray(program.positionAttribute);
+    glVertexAttribPointer(g_program.positionAttribute, 2, GL_FLOAT, false, 0, vertices);
+    glEnableVertexAttribArray(g_program.positionAttribute);
 
     // Textures
     float texture_coordinates[] = {
@@ -271,16 +271,16 @@ void render() {
         0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f,     // triangle 2
     };
     
-    glVertexAttribPointer(program.texCoordAttribute, 2, GL_FLOAT, false, 0, texture_coordinates);
-    glEnableVertexAttribArray(program.texCoordAttribute);
+    glVertexAttribPointer(g_program.texCoordAttribute, 2, GL_FLOAT, false, 0, texture_coordinates);
+    glEnableVertexAttribArray(g_program.texCoordAttribute);
     
     // Bind texture
     glBindTexture(GL_TEXTURE_2D, player_texture_id);
     glDrawArrays(GL_TRIANGLES, 0, 6); // we are now drawing 2 triangles, so we use 6 instead of 3
     
     // We disable two attribute arrays now
-    glDisableVertexAttribArray(program.positionAttribute);
-    glDisableVertexAttribArray(program.texCoordAttribute);
+    glDisableVertexAttribArray(g_program.positionAttribute);
+    glDisableVertexAttribArray(g_program.texCoordAttribute);
     
     SDL_GL_SwapWindow(display_window);
 }
@@ -315,7 +315,7 @@ If at this point, your images do not load, and you are on...
 One of the most common errors I've seen students encounter so far comes when they try to create multiple objects on the screen. Here's a tip: the three lines that actually draw the object on the screen are the following, which exist in the `render()` part of our program:
 
 ```c++
-program.SetModelMatrix(model_matrix);
+g_program.SetModelMatrix(model_matrix);
 glBindTexture(GL_TEXTURE_2D, texture_id);
 glDrawArrays(GL_TRIANGLES, 0, 6);
 ```
@@ -325,7 +325,7 @@ Basically, every object will have its own model matrix and its own texture ID, s
 ```c++
 void draw_object(glm::mat4 &object_model_matrix, GLuint &object_texture_id)
 {
-    program.SetModelMatrix(object_model_matrix);
+    g_program.SetModelMatrix(object_model_matrix);
     glBindTexture(GL_TEXTURE_2D, object_texture_id);
     glDrawArrays(GL_TRIANGLES, 0, 6); // we are now drawing 2 triangles, so we use 6 instead of 3
 }
