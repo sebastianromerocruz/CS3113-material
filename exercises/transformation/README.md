@@ -4,18 +4,18 @@
 
 ### Instructions
 
-In this exercise, you will implement transformations on your object, in this case a simple triangle is enough. You will need to make your triangle move in the following formation:
+In this exercise, we will implement transformations on your object, in this case a simple triangle is enough. Our goal is to make our triangle move in the following star-like formation:
 
 ![transformation_gif](assets/transformation.gif)
-<sub>**Figure 1**: Target behavior</sub>
 
-If you run the [**following `main.cpp`**](SDLProject/main.cpp) file, you will see the following animated sprites (which you can download [**here**](SDLProject/sprites/flower.png) and [**here**](SDLProject/sprites/cup.png)):
+<sub>**Figure 1**: Star-like (ish?) movement</sub>
 
-Our goal is to add a gameplay mechanic to our scene whereby **the flower will shrink into non-existence _if_ it touches the cup**. The exact point of collision doesn't really matter for this exercise, as long you see something like this happening:
+You can find the starter code [**here**](SDLProject/main.cpp).
 
-![flower_example](assets/col-ex-2.gif)
-
-<sub>**Figure 2**: Desired behaviour.</sub>
+The triangle's movement has to satisfy the following:
+1) Initial position at y-coordinate = 0, start by moving to the right
+2) Bounce back to the center whenever the triangle reaches the edge of the screen (you can set your own limit conditions, as long as we can see the triangle the whole time)
+3) Angle of transformation starts at 0°, increases by 45° every time until reaches 180°
 
 We will achieve this through the following three steps:
 
