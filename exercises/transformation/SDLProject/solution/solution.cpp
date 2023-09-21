@@ -51,12 +51,15 @@ glm::mat4 g_view_matrix,
           g_projection_matrix,
           g_tran_matrix;
 
-// Define your variables and constants here
-// ———————————————— PART 1 ———————————————— //
+// Stuff for transformation
+// Define variables for path[1-5] = { _, \, |, /, _}
+int path_num = 0;
 
-glm:vec3 g_position;
+const std::vector<float> x_right = {TRAN_VALUE, TRAN_VALUE, 0.0f, -TRAN_VALUE, -TRAN_VALUE};
+const std::vector<float> y_right = {0.0f, TRAN_VALUE, TRAN_VALUE, TRAN_VALUE, 0.0f};
 
-// ———————————————— PART 1 ———————————————— //
+bool to_the_right = false;      // bool for transformation direction
+glm::vec3 g_position(0.0f);     // keep track of position
 
 
 
@@ -119,12 +122,31 @@ void update()
         g_frame_counter = 0;
     }
     
-    // Implement your transformation logic here
-    // ———————————————— PART 2 ———————————————— //
+    // ---- Step 2: update g_position ----
+    // If reaches the center, increment path_num and change direction
+    if (g_position.x <= 0.001 && g_position.x >= -0.001 && path_num != 3)
+    {
+        path_num += 1;
+        to_the_right = !to_the_right;
+    }
+    else if (path_num == 3)
+    {
+        if (g_position.y <= 0.0f) path_num += 1;
+        if (g_position.y <= 0.0f || g_position.y >= 3.0f) to_the_right = !to_the_right;
+    }
+    // if out-of-bound, change direction
+    else if (g_position.x >= 3.0f || g_position.x <= -3.0f)
+    {
+        to_the_right = !to_the_right;
+    }
+    // reset path_num when reaches 6
+    if (path_num == 6) path_num = 1;
     
-    // ———————————————— PART 2 ———————————————— //
+    // change position depending on direction
+    if (to_the_right) g_position += glm::vec3(x_right[path_num - 1], y_right[path_num - 1], 0.0f);
+    else g_position += glm::vec3(-x_right[path_num - 1], -y_right[path_num - 1], 0.0f);
     
-    // ————— Step 3: reset model matrix and translate —————
+    // ---- Step 3: reset model matrix and translate ----
     g_model_matrix = glm::mat4(1.0f);
     g_model_matrix = glm::translate(g_model_matrix, g_position);
 }
