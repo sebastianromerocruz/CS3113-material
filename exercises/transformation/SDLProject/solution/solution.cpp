@@ -51,11 +51,11 @@ g_model_matrix,
 g_projection_matrix,
 g_tran_matrix;
 
-// Stuff for transformation
-const float RADIUS = 2.0f;
-const float ROT_SPEED = 0.01f;
-float angle = 0.0f;
-float x_coord = RADIUS,
+/** ———— VAR AND CONSTS FOR TRANSFORMATION ———— **/
+const float RADIUS = 2.0f;      // radius of your circle
+const float ROT_SPEED = 0.01f;  // rotational speed
+float angle = 0.0f;             // current angle
+float x_coord = RADIUS,         // current x and y coordinates
       y_coord = 0.0f;
 
 
@@ -111,23 +111,23 @@ void update()
     //    LOG(++frame_counter);
     g_frame_counter++;
 
-    // Step 1
     if (g_frame_counter >= MAX_FRAME)
     {
         g_is_growing = !g_is_growing;
         g_frame_counter = 0;
     }
 
-    // ---- Step 2: update g_position ----
-    angle += ROT_SPEED;
-    if (angle >= 360.0f) angle = 0.0f;
+    /** ———— SETTING UP TRANSFORMATION LOGIC ———— **/
+    angle += ROT_SPEED;     // increment angle by ROT_SPEED
 
+    // calculate x,y using trigonometry
     x_coord = RADIUS * std::cos(angle);
     y_coord = RADIUS * std::sin(angle);
 
-    // ---- Step 3: reset model matrix and translate ----
+    /** ———— RESETTING MODEL MATRIX ———— **/
     g_model_matrix = glm::mat4(1.0f);
     g_model_matrix = glm::translate(g_model_matrix, glm::vec3(x_coord, y_coord, 0.0f));
+
 }
 
 void render() {
