@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		688717E32ABB6C1E003D5649 /* shaders in CopyFiles */ = {isa = PBXBuildFile; fileRef = 68F638232A61CBD200B15171 /* shaders */; };
-		68F638252A61CBD200B15171 /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 68F638172A61CBC800B15171 /* sprite.cpp */; };
 		68F638262A61CBD200B15171 /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 68F638182A61CBC800B15171 /* ShaderProgram.cpp */; };
 		68F6382A2A61CBD200B15171 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 68F638222A61CBD200B15171 /* main.cpp */; };
 		DBDF1B632323DEDA007CECB1 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBDF1B622323DEDA007CECB1 /* OpenGL.framework */; };
@@ -33,13 +32,12 @@
 
 /* Begin PBXFileReference section */
 		68F638162A61CBC800B15171 /* ShaderProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderProgram.h; sourceTree = "<group>"; };
-		68F638172A61CBC800B15171 /* sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite.cpp; sourceTree = "<group>"; };
 		68F638182A61CBC800B15171 /* ShaderProgram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderProgram.cpp; sourceTree = "<group>"; };
 		68F638192A61CBC800B15171 /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
 		68F6381B2A61CBC900B15171 /* glm */ = {isa = PBXFileReference; lastKnownFileType = folder; path = glm; sourceTree = "<group>"; };
 		68F638222A61CBD200B15171 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		68F638232A61CBD200B15171 /* shaders */ = {isa = PBXFileReference; lastKnownFileType = folder; path = shaders; sourceTree = "<group>"; };
-		68F638242A61CBD200B15171 /* sprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = sprite.hpp; sourceTree = "<group>"; };
+		8408C78F2ABD5E150047EA48 /* solution */ = {isa = PBXFileReference; lastKnownFileType = folder; path = solution; sourceTree = "<group>"; };
 		DBDF1B4F2323DE3F007CECB1 /* SDLProject */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDLProject; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBDF1B622323DEDA007CECB1 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		DBDF1B642323DEDF007CECB1 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -84,13 +82,12 @@
 		DBDF1B512323DE3F007CECB1 /* SDLProject */ = {
 			isa = PBXGroup;
 			children = (
+				8408C78F2ABD5E150047EA48 /* solution */,
 				68F6381B2A61CBC900B15171 /* glm */,
 				68F638222A61CBD200B15171 /* main.cpp */,
 				68F638182A61CBC800B15171 /* ShaderProgram.cpp */,
 				68F638162A61CBC800B15171 /* ShaderProgram.h */,
 				68F638232A61CBD200B15171 /* shaders */,
-				68F638172A61CBC800B15171 /* sprite.cpp */,
-				68F638242A61CBD200B15171 /* sprite.hpp */,
 				68F638192A61CBC800B15171 /* stb_image.h */,
 			);
 			path = SDLProject;
@@ -165,7 +162,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				68F6382A2A61CBD200B15171 /* main.cpp in Sources */,
-				68F638252A61CBD200B15171 /* sprite.cpp in Sources */,
 				68F638262A61CBD200B15171 /* ShaderProgram.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

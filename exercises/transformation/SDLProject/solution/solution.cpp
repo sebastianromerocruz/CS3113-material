@@ -12,32 +12,27 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "ShaderProgram.h"
 
+
 const char V_SHADER_PATH[] = "shaders/vertex.glsl",
-F_SHADER_PATH[] = "shaders/fragment.glsl";
+           F_SHADER_PATH[] = "shaders/fragment.glsl";
 
 const int WINDOW_WIDTH = 640,
-WINDOW_HEIGHT = 480;
+          WINDOW_HEIGHT = 480;
 
 const float BG_RED = 0.1922f,
-BG_BLUE = 0.549f,
-BG_GREEN = 0.9059f,
-BG_OPACITY = 1.0f;
+            BG_BLUE = 0.549f,
+            BG_GREEN = 0.9059f,
+            BG_OPACITY = 1.0f;
 
 const int VIEWPORT_X = 0,
-VIEWPORT_Y = 0,
-VIEWPORT_WIDTH = WINDOW_WIDTH,
-VIEWPORT_HEIGHT = WINDOW_HEIGHT;
+          VIEWPORT_Y = 0,
+          VIEWPORT_WIDTH = WINDOW_WIDTH,
+          VIEWPORT_HEIGHT = WINDOW_HEIGHT;
 
-const int TRIANGLE_RED = 1.0,
-TRIANGLE_BLUE = 0.4,
-TRIANGLE_GREEN = 0.4,
-TRIANGLE_OPACITY = 1.0;
-
-const float GROWTH_FACTOR = 1.01f;
-const float SHRINK_FACTOR = 0.99f;
-const int MAX_FRAME = 40;
-
-const float TRAN_VALUE = 0.025f;
+const int TRIANGLE_RED     = 1.0,
+          TRIANGLE_BLUE    = 0.4,
+          TRIANGLE_GREEN   = 0.4,
+          TRIANGLE_OPACITY = 1.0;
 
 SDL_Window* g_display_window;
 
@@ -47,17 +42,18 @@ int  g_frame_counter = 0;
 
 ShaderProgram g_shader_program;
 glm::mat4 g_view_matrix,
-g_model_matrix,
-g_projection_matrix,
-g_tran_matrix;
+          g_model_matrix,
+          g_projection_matrix;
 
-/** ———— VAR AND CONSTS FOR TRANSFORMATION ———— **/
+// ——————————— GLOBAL VARS AND CONSTS FOR TRANSFORMATIONS ——————————— //
+
 const float RADIUS = 2.0f;      // radius of your circle
 const float ROT_SPEED = 0.01f;  // rotational speed
-float angle = 0.0f;             // current angle
-float x_coord = RADIUS,         // current x and y coordinates
-      y_coord = 0.0f;
+float       g_angle = 0.0f;     // current angle
+float       g_x_coord = RADIUS, // current x and y coordinates
+            g_y_coord = 0.0f;
 
+// —————————————————————————————————————————————————————————————————— //
 
 void initialise()
 {
@@ -78,15 +74,12 @@ void initialise()
 
     g_shader_program.load(V_SHADER_PATH, F_SHADER_PATH);
 
-    g_view_matrix = glm::mat4(1.0f);  // Defines the position (location and orientation) of the camera
-    g_model_matrix = glm::mat4(1.0f);  // Defines every translation, rotations, or scaling applied to an object
-    g_projection_matrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);  // Defines the characteristics of your camera, such as clip planes, field of view, projection method etc.
-    g_tran_matrix = g_model_matrix;
+    g_view_matrix       = glm::mat4(1.0f);
+    g_model_matrix      = glm::mat4(1.0f);
+    g_projection_matrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);
 
     g_shader_program.set_projection_matrix(g_projection_matrix);
     g_shader_program.set_view_matrix(g_view_matrix);
-    // Notice we haven't set our model matrix yet!
-
     g_shader_program.set_colour(TRIANGLE_RED, TRIANGLE_BLUE, TRIANGLE_GREEN, TRIANGLE_OPACITY);
 
     glUseProgram(g_shader_program.get_program_id());
@@ -108,26 +101,20 @@ void process_input()
 
 void update()
 {
-    //    LOG(++frame_counter);
-    g_frame_counter++;
+    // ——————————— YOUR ORBIT TRANSFORMATIONS SHOULD GO HERE ——————————— //
+    
+    // 1. Setting up transformation logic
+    g_angle += ROT_SPEED;     // increment g_angle by ROT_SPEED
 
-    if (g_frame_counter >= MAX_FRAME)
-    {
-        g_is_growing = !g_is_growing;
-        g_frame_counter = 0;
-    }
+    // 2. Calculate x,y using trigonometry
+    g_x_coord = RADIUS * glm::cos(g_angle);
+    g_y_coord = RADIUS * glm::sin(g_angle);
 
-    /** ———— SETTING UP TRANSFORMATION LOGIC ———— **/
-    angle += ROT_SPEED;     // increment angle by ROT_SPEED
-
-    // calculate x,y using trigonometry
-    x_coord = RADIUS * std::cos(angle);
-    y_coord = RADIUS * std::sin(angle);
-
-    /** ———— RESETTING MODEL MATRIX ———— **/
+    // 3. Reset the model matrix and apply transformation
     g_model_matrix = glm::mat4(1.0f);
-    g_model_matrix = glm::translate(g_model_matrix, glm::vec3(x_coord, y_coord, 0.0f));
-
+    g_model_matrix = glm::translate(g_model_matrix, glm::vec3(g_x_coord, g_y_coord, 0.0f));
+    
+    // ————————————————————————————————————————————————————————————————— //
 }
 
 void render() {
