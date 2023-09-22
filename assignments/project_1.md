@@ -44,7 +44,8 @@
 
 ### Requirement 2: _Movement (25%)_
 
-- At least one of your objects must be **moving** (i.e. translation).
+- Both of your objects must be **moving** (i.e. translation).
+- One of your objects must be moving in [**relation to the other object**](https://github.com/sebastianromerocruz/CS3113-material/tree/main/lectures/delta-time#part-2-spaces).
 
 ### Requirement 3: _Rotation (25%)_
 
