@@ -37,8 +37,8 @@
     1.  [**Delta Time**](lectures/delta-time/)
     2.  [**Textures**](lectures/textures/)
 4. **Week 4**: Player input and basic collision detection
-    <!-- 1.  [**Player Input**](lectures/player-input/)
-    2.  [**Collision Detection**](lectures/collision-detection/) -->
+    1.  [**Player Input**](lectures/player-input/)
+    2.  [**Collision Detection**](lectures/collision-detection/)
 5. **Week 5**: Animation and refactoring our code
     <!-- 1.  [**Sprite Animation and Text**](lectures/sprites-and-text/)
     2. [**Entities**](lectures/entities/) -->
