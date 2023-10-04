@@ -5,7 +5,7 @@
  
 ### Submission instructions
 1. You must use delta time in your animations. Do not use the `Entity` class in this assignment.
-2. You should submit your homework on [**Brightspace**](https://brightspace.nyu.edu/d2l/lms/dropbox/admin/folders_manage.d2l?ou=311022&dst=1).
+2. You should submit the link to your repo as a comment on [**Brightspace**](https://brightspace.nyu.edu/d2l/lms/dropbox/admin/folders_manage.d2l?ou=311022&dst=1).
 3. You should also push that same version to your GitHub account. Note that any commits done after the deadline will be ignored.
 4. For this assignment you should turn in **one** C++ file named `main.cpp` _and_ any image files that you used in your project. Do **not** submit any other files.
 4. Do not use any OpenGL functionality that we have not learned in class.
