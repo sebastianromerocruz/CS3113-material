@@ -1,5 +1,5 @@
-<h4 align=center>NYU Tandon School of Engineering<h4>
-<h3 align=center>CS-UY 3113 Summer 2023</h3>
+<h4 align=center>NYU Tandon School of Engineering</h4>
+<h3 align=center>CS-UY 3113 Fall 2023</h3>
 <h1 align=center>Project 2: <em>Pong Clone!</em></h1>
 <h3 align=center><em>Due: 11:59pm, Saturday, October 14th, 2023</em></h3>
  
