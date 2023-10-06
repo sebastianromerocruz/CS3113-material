@@ -1,8 +1,8 @@
-<h2 align=center>Lecture 08</h2>
+<h2 align=center>Lecture 04: <em>In-Class Exercise</em></h2>
 
 <h1 align=center>Exercise: <em>User Input</em></h1>
 
-<h3 align=center>26 Prairial, Year CCXXXI</h3>
+<h3 align=center>6 Wyvern Moon, Imperial Year MMXXIII<h3>
 
 ### Instructions
 
@@ -64,7 +64,7 @@ Write the necessary C++ code to record whether the user has moved (and if so, in
 
 #### STEP 3: _Apply the necessary transformations_
 
-Finally, just like we did on [**Tuesday**](https://github.com/sebastianromerocruz/CS3113-material/tree/main/lectures/player-input#part-5-keeping-track-of-the-players-motion) (code block 12), write necessary C++ code to properly apply the translations onto our flower's model matrix in order for it at the speed we chose in step 1. Don't forget to adjust for different frame rates!
+Finally, just like we did [**earlier**](https://github.com/sebastianromerocruz/CS3113-material/tree/main/lectures/player-input#part-3-keeping-track-of-the-players-motion) (code block 12), write necessary C++ code to properly apply the translations onto our flower's model matrix in order for it at the speed we chose in step 1. Don't forget to adjust for different frame rates!
 
 ```c++
     // ———————————————— PART 3 ———————————————— //
