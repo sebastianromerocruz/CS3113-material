@@ -23,7 +23,7 @@ We will achieve this through the following three steps:
 
 #### STEP 1: _Set up the necessary data structures_
 
-As the [**notes**](https://github.com/sebastianromerocruz/CS3113-material/tree/main/lectures/player-input#part-5-keeping-track-of-the-players-motion) from last class explain, in order efficiently translate objects in OpenGL, we need:
+As the [**notes**](https://github.com/sebastianromerocruz/CS3113-material/tree/main/lectures/player-input#part-3-keeping-track-of-the-players-motion) from last class explain, in order efficiently translate objects in OpenGL, we need:
 
 1. A vector to keep track of **how much we have moved in all three Cartesian directions**.
 2. A vector to keep track of **whether the player has moved in a given frame or not**, and if so, **in what direction**.
@@ -48,7 +48,7 @@ The second data structure from step 1 is used to keep track of whether the user 
 - **Left-arrow key**: Our data structure would mark a `-1.0f` in the x-direction.
 - **Right-arrow key**: Our data structure would mark a `1.0f` in the x-direction.
 
-You can check out the relevant notes [**here**](https://github.com/sebastianromerocruz/CS3113-material/tree/main/lectures/player-input#keyboard-state) (code block 5).
+You can check out the relevant notes [**here**](https://github.com/sebastianromerocruz/CS3113-material/tree/main/lectures/player-input#keystrokes) (code block 5).
 
 Keep in mind that, if the user is moving in both the x- and y-direction, you will need to **normalise** this behaviour so that the sprite doesn't move faster than necessary.
 
@@ -72,4 +72,4 @@ Finally, just like we did [**earlier**](https://github.com/sebastianromerocruz/C
     // ———————————————— PART 3 ———————————————— //
 ```
 
-You can find the solutions [**here**](SDLProject/solution/solution.cpp), though you should of course give it a shot before you look at it!
+<!-- You can find the solutions [**here**](SDLProject/solution/solution.cpp), though you should of course give it a shot before you look at it! -->
