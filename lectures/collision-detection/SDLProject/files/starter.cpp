@@ -14,11 +14,6 @@
 #include "ShaderProgram.h"
 #include "stb_image.h"
 
-// —— NEW STUFF —— //
-#include <ctime>   //
-#include "cmath"   //
-// ——————————————— //
-
 const int WINDOW_WIDTH  = 640,
           WINDOW_HEIGHT = 480;
 
@@ -188,18 +183,6 @@ void process_input()
 }
 
 
-// ————————————————————————— NEW STUFF ———————————————————————————— //
-bool check_collision(glm::vec3 &position_a, glm::vec3 &position_b)  //
-{                                                                   //
-    // —————————————————  Distance Formula ———————————————————————— //
-    return sqrt(                                                    //
-                pow(position_b[0] - position_a[0], 2) +             //
-                pow(position_b[1] - position_b[1], 2)               //
-            ) < MINIMUM_COLLISION_DISTANCE;                         //
-}                                                                   //
-// ———————————————————————————————————————————————————————————————— //
-
-
 void update()
 {
     float ticks = (float) SDL_GetTicks() / MILLISECONDS_IN_SECOND;
@@ -209,13 +192,6 @@ void update()
     g_model_matrix     = glm::mat4(1.0f);
     g_player_position += g_player_movement * g_player_speed * delta_time;
     g_model_matrix     = glm::translate(g_model_matrix, g_player_position);
-    
-    // —————————————————————— NEW STUFF ——————————————————————— //
-    if (check_collision(g_player_position, g_other_position))   //
-    {                                                           //
-        std::cout << std::time(nullptr) << ": Collision.\n";    //
-    }                                                           //
-    // —————————————————————————————————————————————————————————//
 }
 
 

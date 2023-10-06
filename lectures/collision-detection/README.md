@@ -2,7 +2,7 @@
 
 <h1 align=center>Basic Collision Detection</h1>
 
-<h3 align=center>29 Horesebow Moon, Imperial Year MMXXIII<h3>
+<h3 align=center>6 Wyvern Moon, Imperial Year MMXXIII<h3>
 
 <p align=center><strong><em>Song of the day</strong>: <a href="https://youtu.be/CZGOECYAU_8?si=xVH2Y0StehykAHAs"><strong><u>All Over The World</u></strong></a> by Electric Light Orchestra (1980).</em></p>
 

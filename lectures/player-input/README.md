@@ -2,7 +2,7 @@
 
 <h1 align=center>Player Input</h1>
 
-<h3 align=center>29 Horesebow Moon, Imperial Year MMXXIII<h3>
+<h3 align=center>6 Wyvern Moon, Imperial Year MMXXIII<h3>
 
 <p align=center><strong><em>Song of the day</strong>: <a href="https://youtu.be/CZGOECYAU_8?si=xVH2Y0StehykAHAs"><strong><u>All Over The World</u></strong></a> by Electric Light Orchestra (1980).</em></p>
 
@@ -12,9 +12,9 @@
 2. [**Keyboard Input**](#part-2-keyboard-input)
     1. [**Keystrokes**](#keystrokes)
     2. [**Keyboard State: Holding Keys Down**](#keystrokes)
-3. [**Mouse Input**](#part-3-mouse-input)
-4. [**Controller Input**](#part-4-controller-input)
-5. [**Keeping Track Of The Player's Motion**](#part-5-keeping-track-of-the-players-motion)
+3. [**Keeping Track Of The Player's Motion**](#part-3-keeping-track-of-the-players-motion)
+4. [**Mouse Input**](#part-4-mouse-input)
+5. [**Controller Input**](#part-5-controller-input)
 
 ### Part 1: _Player Input_
 
@@ -156,7 +156,67 @@ if (key_state[SDL_SCANCODE_RIGHT])
 
 We'll apply this, as well at the keystroke stuff from code block 4, in just a bit. Let's quickly cover mouse input first.
 
-### Part 3: _Mouse Input_
+### Part 3: _Keeping Track Of The Player's Motion_
+
+So far, we've been keeping track of our sprite's motion with simple `float` variables, but now it's time to get a little more finessed. Let's graduate to vectors:
+
+```c++
+// Start at 0, 0, 0
+glm::vec3 g_player_position = glm::vec3(0, 0, 0);
+
+// Don't go anywhere (yet)
+glm::vec3 g_player_movement = glm::vec3(0, 0, 0);
+```
+
+The way we update these is inside `process_input()`, with code similar to code block 5:
+
+```c++
+const Uint8 *key_state = SDL_GetKeyboardState(NULL);
+
+if (key_state[SDL_SCANCODE_LEFT])
+{
+    g_player_movement.x = -1.0f;
+}
+else if (key_state[SDL_SCANCODE_RIGHT])
+{
+    g_player_movement.x = 1.0f;
+}
+```
+
+<sub>**Code Block 11**: Keeping track of _how much the player will move_ during this frame.</sub>
+
+And then, we update the player's position in `update()`:
+
+```c++
+void update()
+{
+    float ticks = (float) SDL_GetTicks() / MILLISECONDS_IN_SECOND; // get the current number of ticks
+    float delta_time = ticks - g_previous_ticks; // the delta time is the difference from the last frame
+    g_previous_ticks = ticks;
+
+    // Add direction * units per second * elapsed time
+    g_player_position += g_player_movement * g_player_speed * delta_time;
+    
+    g_model_matrix = glm::mat4(1.0f); 
+    g_model_matrix = glm::translate(g_model_matrix, g_player_position);
+}
+```
+
+<sub>**Code Block 12**: Here, `player_speed` is how many units you want your player to move.</sub>
+
+---
+
+The last thing we have to take care of is to normalise the player movement at the end of `process_input()`. Normalisation, grossly oversimplified, makes sure than none of the values in `player_movement` are over `1.0f`. This can happen when players break a game and find a way to increase the amount of units they can move per second. This is just a simple OpenGL function:
+
+```c++
+// This makes sure that the player can't "cheat" their way into moving faster
+if (glm::length(g_player_movement) > 1.0f)
+{
+    g_player_movement = glm::normalize(g_player_movement);
+}
+```
+
+### Part 4: _Mouse Input_
 
 Just like there is an event for keyboard events, there is an event for mouse event that is only triggered when the mouse moves, or when one of its buttons is
 pressed:
@@ -237,7 +297,7 @@ float get_screen_to_ortho(float coordinate, Coordinate axis)
 
 <sub>**Code Block 6**: A nice function using [**enums**](https://www.learncpp.com/cpp-tutorial/unscoped-enumerations/) to translate screen to orthographic coordinates.</sub>
 
-### Part 4: _Controller Input_
+### Part 5: _Controller Input_
 
 Finally, for controller input we need to let OpenGL know that we have some additional hardware that it needs to take into consideration. This is done in the `initialisation()` function:
 
@@ -330,63 +390,3 @@ SDL_JoystickGetButton(g_player_one_controller, button_index);
 ```
 
 <sub>**Code Block 10**: Recall that these go _outside_ the game loop.</sub>
-
-### Part 5: _Keeping Track Of The Player's Motion_
-
-So far, we've been keeping track of our sprite's motion with simple `float` variables, but now it's time to get a little more finessed. Let's graduate to vectors:
-
-```c++
-// Start at 0, 0, 0
-glm::vec3 g_player_position = glm::vec3(0, 0, 0);
-
-// Don't go anywhere (yet)
-glm::vec3 g_player_movement = glm::vec3(0, 0, 0);
-```
-
-The way we update these is inside `process_input()`, with code similar to code block 5:
-
-```c++
-const Uint8 *key_state = SDL_GetKeyboardState(NULL);
-
-if (key_state[SDL_SCANCODE_LEFT])
-{
-    g_player_movement.x = -1.0f;
-}
-else if (key_state[SDL_SCANCODE_RIGHT])
-{
-    g_player_movement.x = 1.0f;
-}
-```
-
-<sub>**Code Block 11**: Keeping track of _how much the player will move_ during this frame.</sub>
-
-And then, we update the player's position in `update()`:
-
-```c++
-void update()
-{
-    float ticks = (float) SDL_GetTicks() / MILLISECONDS_IN_SECOND; // get the current number of ticks
-    float delta_time = ticks - g_previous_ticks; // the delta time is the difference from the last frame
-    g_previous_ticks = ticks;
-
-    // Add direction * units per second * elapsed time
-    g_player_position += g_player_movement * g_player_speed * delta_time;
-    
-    g_model_matrix = glm::mat4(1.0f); 
-    g_model_matrix = glm::translate(g_model_matrix, g_player_position);
-}
-```
-
-<sub>**Code Block 12**: Here, `player_speed` is how many units you want your player to move.</sub>
-
----
-
-The last thing we have to take care of is to normalise the player movement at the end of `process_input()`. Normalisation, grossly oversimplified, makes sure than none of the values in `player_movement` are over `1.0f`. This can happen when players break a game and find a way to increase the amount of units they can move per second. This is just a simple OpenGL function:
-
-```c++
-// This makes sure that the player can't "cheat" their way into moving faster
-if (glm::length(g_player_movement) > 1.0f)
-{
-    g_player_movement = glm::normalize(g_player_movement);
-}
-```
