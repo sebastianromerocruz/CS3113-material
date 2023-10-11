@@ -75,8 +75,9 @@
 
 - _09/22_: [**Transformations**](exercises/transformation/)
 - _10/06_: [**User Input**](exercises/player_input/)
+- _10/20_: [**Collision Detection**](exercises/collision-detection/)
+
 <!--
-- _06/20_: **[Collision Detection](exercises/collision-detection/)**
 - _06/22_: **[Animation](exercises/animation/)**
 - _07/06_: **[Entity Types](exercises/entity_types/)** -->
 

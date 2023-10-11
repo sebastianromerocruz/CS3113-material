@@ -1,5 +1,5 @@
 /**
-* Author: Sebastián Romero Cruz
+* Author: Allan V
 * CS 3113: User input exercise
 * 26 Prairial, Year CCXXXI
 * Tandon School of Engineering
@@ -65,6 +65,9 @@ float g_previous_ticks  = 0.0f;
 float g_rot_angle = 0.0f;
 
 // ———————————————— PART 1 ———————————————— //
+glm::vec3 g_position;
+glm::vec3 g_movement;
+float speed = 2.0;
 
 float x = 0.0;
 
@@ -123,6 +126,9 @@ void initialise()
     g_flower_program.SetProjectionMatrix(g_projection_matrix);
     g_flower_program.SetViewMatrix(g_view_matrix);
     
+    g_position = glm::vec3(0.0f, 0.0f, 0.0f);
+    g_movement = glm::vec3(0.0f, 0.0f, 0.0f);
+    
     glUseProgram(g_flower_program.programID);
     g_flower_texture_id = load_texture(FLOWER_SPRITE);
     
@@ -148,7 +154,19 @@ void process_input()
         }
     }
     // ———————————————— PART 2 ———————————————— //
-    
+    const Uint8 *key_state = SDL_GetKeyboardState(NULL);
+    if (key_state[SDL_SCANCODE_LEFT]) {
+        g_movement.x = -1.0;
+    }
+    if (key_state[SDL_SCANCODE_RIGHT]) {
+        g_movement.x = 1.0;
+    }
+    if (key_state[SDL_SCANCODE_UP]) {
+        g_movement.y = 1.0;
+    }
+    if (key_state[SDL_SCANCODE_DOWN]) {
+        g_movement.y = -1.0;
+    }
     // ———————————————— PART 2 ———————————————— //
 }
 
@@ -166,7 +184,8 @@ void update()
     g_flower_model_matrix = glm::translate(g_flower_model_matrix, FLOWER_INIT_POS);
     
     // ———————————————— PART 3 ———————————————— //
-    
+    g_position += g_movement * speed * delta_time;
+    g_flower_model_matrix = glm::translate(g_flower_model_matrix, g_position);
     // ———————————————— PART 3 ———————————————— //
     
     /** ———— ROTATING SPRITE ———— **/

@@ -1,7 +1,7 @@
 /**
 * Author: Sebastián Romero Cruz
 * CS 3113: Collision Detection Exercise
-* 26 Prairial, Year CCXXXI
+* 13 Wyvern Moon, Imperial Year MMXXIII
 * Tandon School of Engineering
 **/
 #define LOG(argument) std::cout << argument << '\n'
@@ -38,7 +38,7 @@ const char V_SHADER_PATH[] = "shaders/vertex_textured.glsl",
            F_SHADER_PATH[] = "shaders/fragment_textured.glsl";
 
 const char FLOWER_SPRITE[] = "sprites/flower.png";
-const char CUP_SPRITE[] = "sprites/cup.png";
+const char CUP_SPRITE[]    = "sprites/cup.png";
 
 const float ROT_SPEED = 100.0f;
 
@@ -72,11 +72,11 @@ float g_rot_angle = 0.0f;
 float g_speed = 1.0f;
 
 glm::vec3 g_flower_movement = glm::vec3(0.0f, 0.0f, 0.0f),
-          g_flower_position = glm::vec3(0.0f, 0.0f, 0.0f),
+          g_flower_position = glm::vec3(0.0f, 0.0f, 0.0f);
 
 // ———————————————— PART 1 ———————————————— //
-          g_flower_growth = glm::vec3(0.0f, 0.0f, 0.0f),
-          g_flower_scale  = glm::vec3(1.0f, 1.0f, 0.0f);
+
+
 // ———————————————— PART 1 ———————————————— //
 
 
@@ -202,18 +202,8 @@ void process_input()
 void update()
 {
     // ———————————————— PART 2 ———————————————— //
-    float collision_factor = 0.09;
     
-    /** ———— COLLISION DETECTION ———— **/
-    float x_distance = fabs(g_flower_position.x - CUP_INIT_POS.x) - ((FLOWER_INIT_SCA.x * collision_factor + CUP_INIT_SCA.x * collision_factor) / 2.0f);
-    float y_distance = fabs(g_flower_position.y - CUP_INIT_POS.y) - ((FLOWER_INIT_SCA.y * collision_factor + CUP_INIT_SCA.y * collision_factor) / 2.0f);
-
-    if (x_distance < 0.0f && y_distance < 0.0f)
-    {
-        // If collision occurs, record it and its direction
-        g_flower_growth.x = -1.0f;
-        g_flower_growth.y = -1.0f;
-    }
+    
     // ———————————————— PART 2 ———————————————— //
     
     // ———————————————— DELTA TIME CALCULATIONS ———————————————— //
@@ -240,12 +230,7 @@ void update()
     g_flower_model_matrix = glm::rotate(g_flower_model_matrix, glm::radians(g_rot_angle), glm::vec3(0.0f, 1.0f, 0.0f));
     
     // ———————————————— PART 3 ———————————————— //
-    g_flower_scale += g_flower_growth * delta_time;
-    g_flower_scale.x = g_flower_scale.x > 0.0f ? g_flower_scale.x : 0.0f;
-    g_flower_scale.y = g_flower_scale.y > 0.0f ? g_flower_scale.y : 0.0f;
-    
-    g_flower_model_matrix = glm::scale(g_flower_model_matrix, g_flower_scale);
-    
+
     
     // ———————————————— PART 3 ———————————————— //
 }

@@ -1,8 +1,8 @@
-<h2 align=center>Lecture 09</h2>
+<h2 align=center>Week 05</h2>
 
 <h1 align=center>Exercise: <em>Collision Detection</em></h1>
 
-<h3 align=center>1 Messidor, Year CCXXXI</h3>
+<h3 align=center>11 Wyvern Moon, Imperial Year MMXXIII</h3>
 
 ### Instructions
 

@@ -4,13 +4,13 @@
 * 26 Prairial, Year CCXXXI
 * Tandon School of Engineering
 **/
-#define GL_SILENCE_DEPRECATION
-#define GL_GLEXT_PROTOTYPES 1
 #define LOG(argument) std::cout << argument << '\n'
 #define STB_IMAGE_IMPLEMENTATION
+#define GL_SILENCE_DEPRECATION
+#define GL_GLEXT_PROTOTYPES 1
 
 #ifdef _WINDOWS
-#include <GL/glew.h>
+    #include <GL/glew.h>
 #endif
 
 #include <SDL.h>
@@ -57,11 +57,10 @@ const float MILLISECONDS_IN_SECOND = 1000.0;
 SDL_Window* g_display_window;
 bool g_game_is_running = true;
 
-ShaderProgram g_flower_program;
-GLuint        g_flower_texture_id;
+ShaderProgram g_shader_program;
 
-ShaderProgram g_cup_program;
-GLuint        g_cup_texture_id;
+GLuint        g_flower_texture_id,
+              g_cup_texture_id;
 
 glm::mat4 g_view_matrix,
           g_flower_model_matrix,
@@ -73,11 +72,11 @@ float g_rot_angle = 0.0f;
 float g_speed = 1.0f;
 
 glm::vec3 g_flower_movement = glm::vec3(0.0f, 0.0f, 0.0f),
-          g_flower_position = glm::vec3(0.0f, 0.0f, 0.0f),
+          g_flower_position = glm::vec3(0.0f, 0.0f, 0.0f);
 
 // ———————————————— PART 1 ———————————————— //
-          g_flower_growth = glm::vec3(0.0f, 0.0f, 0.0f),
-          g_flower_scale  = glm::vec3(1.0f, 1.0f, 0.0f);
+
+
 // ———————————————— PART 1 ———————————————— //
 
 
@@ -126,29 +125,22 @@ void initialise()
     g_projection_matrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);
     
     // ———————————————— FLOWER ———————————————— //
-    g_flower_program.Load(V_SHADER_PATH, F_SHADER_PATH);
+    g_shader_program.load(V_SHADER_PATH, F_SHADER_PATH);
     
     g_flower_model_matrix = glm::mat4(1.0f);
     g_flower_model_matrix = glm::translate(g_flower_model_matrix, FLOWER_INIT_POS);
     g_flower_model_matrix = glm::scale(g_flower_model_matrix, FLOWER_INIT_SCA);
     
-    g_flower_program.SetProjectionMatrix(g_projection_matrix);
-    g_flower_program.SetViewMatrix(g_view_matrix);
+    g_shader_program.set_projection_matrix(g_projection_matrix);
+    g_shader_program.set_view_matrix(g_view_matrix);
     
-    glUseProgram(g_flower_program.programID);
+    glUseProgram(g_shader_program.get_program_id());
     g_flower_texture_id = load_texture(FLOWER_SPRITE);
     
     // ———————————————— CUP ———————————————— //
-    g_cup_program.Load(V_SHADER_PATH, F_SHADER_PATH);
-    
     g_cup_model_matrix = glm::mat4(1.0f);
     g_cup_model_matrix = glm::translate(g_cup_model_matrix, CUP_INIT_POS);
     g_cup_model_matrix = glm::scale(g_cup_model_matrix, CUP_INIT_SCA);
-    
-    g_cup_program.SetProjectionMatrix(g_projection_matrix);
-    g_cup_program.SetViewMatrix(g_view_matrix);
-    
-    glUseProgram(g_cup_program.programID);
     g_cup_texture_id = load_texture(CUP_SPRITE);
     
     // ———————————————— GENERAL ———————————————— //
@@ -171,7 +163,8 @@ void process_input()
                 break;
             
             case SDL_KEYDOWN:
-                switch (event.key.keysym.sym) {
+                switch (event.key.keysym.sym)
+                {
                     case SDLK_q:
                         g_game_is_running = !g_game_is_running;
                         break;
@@ -209,18 +202,8 @@ void process_input()
 void update()
 {
     // ———————————————— PART 2 ———————————————— //
-    float collision_factor = 0.09;
     
-    /** ———— COLLISION DETECTION ———— **/
-    float x_distance = fabs(g_flower_position.x - CUP_INIT_POS.x) - ((FLOWER_INIT_SCA.x * collision_factor + CUP_INIT_SCA.x * collision_factor) / 2.0f);
-    float y_distance = fabs(g_flower_position.y - CUP_INIT_POS.y) - ((FLOWER_INIT_SCA.y * collision_factor + CUP_INIT_SCA.y * collision_factor) / 2.0f);
-
-    if (x_distance < 0.0f && y_distance < 0.0f)
-    {
-        // If collision occurs, record it and its direction
-        g_flower_growth.x = -1.0f;
-        g_flower_growth.y = -1.0f;
-    }
+    
     // ———————————————— PART 2 ———————————————— //
     
     // ———————————————— DELTA TIME CALCULATIONS ———————————————— //
@@ -247,12 +230,7 @@ void update()
     g_flower_model_matrix = glm::rotate(g_flower_model_matrix, glm::radians(g_rot_angle), glm::vec3(0.0f, 1.0f, 0.0f));
     
     // ———————————————— PART 3 ———————————————— //
-    g_flower_scale += g_flower_growth * delta_time;
-    g_flower_scale.x = g_flower_scale.x > 0.0f ? g_flower_scale.x : 0.0f;
-    g_flower_scale.y = g_flower_scale.y > 0.0f ? g_flower_scale.y : 0.0f;
-    
-    g_flower_model_matrix = glm::scale(g_flower_model_matrix, g_flower_scale);
-    
+
     
     // ———————————————— PART 3 ———————————————— //
 }
@@ -261,52 +239,42 @@ void render() {
     glClear(GL_COLOR_BUFFER_BIT);
     
     // ———————————————— FLOWER ———————————————— //
-    float flower_vertices[] = {
+    float vertices[] = {
         -0.5f, -0.5f, 0.5f, -0.5f, 0.5f, 0.5f,
         -0.5f, -0.5f, 0.5f, 0.5f, -0.5f, 0.5f
     };
 
-    float flower_texture_coordinates[] = {
+    float texture_coordinates[] = {
         0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
         0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f,
     };
     
-    glVertexAttribPointer(g_flower_program.positionAttribute, 2, GL_FLOAT, false, 0, flower_vertices);
-    glEnableVertexAttribArray(g_flower_program.positionAttribute);
+    glVertexAttribPointer(g_shader_program.get_position_attribute(), 2, GL_FLOAT, false, 0, vertices);
+    glEnableVertexAttribArray(g_shader_program.get_position_attribute());
     
-    glVertexAttribPointer(g_flower_program.texCoordAttribute, 2, GL_FLOAT, false, 0, flower_texture_coordinates);
-    glEnableVertexAttribArray(g_flower_program.texCoordAttribute);
+    glVertexAttribPointer(g_shader_program.get_tex_coordinate_attribute(), 2, GL_FLOAT, false, 0, texture_coordinates);
+    glEnableVertexAttribArray(g_shader_program.get_tex_coordinate_attribute());
     
-    g_flower_program.SetModelMatrix(g_flower_model_matrix);
+    g_shader_program.set_model_matrix(g_flower_model_matrix);
     glBindTexture(GL_TEXTURE_2D, g_flower_texture_id);
     glDrawArrays(GL_TRIANGLES, 0, 6);
     
-    glDisableVertexAttribArray(g_flower_program.positionAttribute);
-    glDisableVertexAttribArray(g_flower_program.texCoordAttribute);
+    glDisableVertexAttribArray(g_shader_program.get_position_attribute());
+    glDisableVertexAttribArray(g_shader_program.get_tex_coordinate_attribute());
     
     // ———————————————— CUP ———————————————— //
-    float cup_vertices[] = {
-        -0.5f, -0.5f, 0.5f, -0.5f, 0.5f, 0.5f,
-        -0.5f, -0.5f, 0.5f, 0.5f, -0.5f, 0.5f
-    };
-
-    float cup_texture_coordinates[] = {
-        0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,
-        0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f,
-    };
+    glVertexAttribPointer(g_shader_program.get_position_attribute(), 2, GL_FLOAT, false, 0, vertices);
+    glEnableVertexAttribArray(g_shader_program.get_position_attribute());
     
-    glVertexAttribPointer(g_cup_program.positionAttribute, 2, GL_FLOAT, false, 0, cup_vertices);
-    glEnableVertexAttribArray(g_cup_program.positionAttribute);
+    glVertexAttribPointer(g_shader_program.get_tex_coordinate_attribute(), 2, GL_FLOAT, false, 0, texture_coordinates);
+    glEnableVertexAttribArray(g_shader_program.get_tex_coordinate_attribute());
     
-    glVertexAttribPointer(g_cup_program.texCoordAttribute, 2, GL_FLOAT, false, 0, cup_texture_coordinates);
-    glEnableVertexAttribArray(g_cup_program.texCoordAttribute);
-    
-    g_cup_program.SetModelMatrix(g_cup_model_matrix);
+    g_shader_program.set_model_matrix(g_cup_model_matrix);
     glBindTexture(GL_TEXTURE_2D, g_cup_texture_id);
     glDrawArrays(GL_TRIANGLES, 0, 6);
     
-    glDisableVertexAttribArray(g_cup_program.positionAttribute);
-    glDisableVertexAttribArray(g_cup_program.texCoordAttribute);
+    glDisableVertexAttribArray(g_shader_program.get_position_attribute());
+    glDisableVertexAttribArray(g_shader_program.get_tex_coordinate_attribute());
     
     // ———————————————— GENERAL ———————————————— //
     SDL_GL_SwapWindow(g_display_window);
