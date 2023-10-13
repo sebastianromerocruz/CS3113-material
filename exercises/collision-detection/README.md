@@ -1,4 +1,4 @@
-<!-- <h2 align=center>Week 05</h2>
+<h2 align=center>Week 05</h2>
 
 <h1 align=center>Exercise: <em>Collision Detection</em></h1>
 
@@ -61,4 +61,4 @@ As always, make sure to adjuct for different frame rates, and watch out for nega
     // ———————————————— PART 3 ———————————————— //
 ```
 
-You can find the solutions [**here**](SDLProject/solutions/solution.cpp), though you should of course give it a shot before you look at it! -->
+You can find the solutions [**here**](SDLProject/solutions/solution.cpp), though you should of course give it a shot before you look at it!

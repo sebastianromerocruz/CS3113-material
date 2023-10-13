@@ -14,8 +14,8 @@
 #include "ShaderProgram.h"
 #include "stb_image.h"
 
-const int WINDOW_WIDTH  = 640,
-          WINDOW_HEIGHT = 480;
+const int WINDOW_WIDTH  = 640 * 2,
+          WINDOW_HEIGHT = 480 * 2;
 
 const float BG_RED     = 0.1922f,
             BG_BLUE    = 0.549f,
@@ -79,6 +79,9 @@ GLuint load_texture(const char* filepath)
     // STEP 3: Setting our texture filter parameters
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     
     // STEP 4: Releasing our file from memory and returning our texture id
     stbi_image_free(image);
@@ -215,8 +218,8 @@ void render()
 
     // Textures
     float texture_coordinates[] = {
-        0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,     // triangle 1
-        0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f,     // triangle 2
+        0.0f, 2.0f, 2.0f, 2.0f, 2.0f, 0.0f,     // triangle 1
+        0.0f, 2.0f, 2.0f, 0.0f, 0.0f, 0.0f,     // triangle 2
     };
     
     glVertexAttribPointer(g_shader_program.get_position_attribute(), 2, GL_FLOAT, false, 0, vertices);
