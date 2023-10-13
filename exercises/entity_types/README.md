@@ -1,4 +1,4 @@
-<h2 align=center>Lecture 13</h2>
+<!-- <h2 align=center>Lecture 13</h2>
 
 <h1 align=center>Exercise: <em>Entity Types</em></h1>
 
@@ -28,4 +28,4 @@ int main()
 
 ---
 
-The solution can be found [**here**](SDLProject/files/main_complete.cpp), [**here**](SDLProject/files/Entity_complete.cpp), and [**here**](SDLProject/files/Entity_complete.h).
+The solution can be found [**here**](SDLProject/files/main_complete.cpp), [**here**](SDLProject/files/Entity_complete.cpp), and [**here**](SDLProject/files/Entity_complete.h). -->
