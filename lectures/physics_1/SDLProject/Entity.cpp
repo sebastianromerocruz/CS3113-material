@@ -15,10 +15,8 @@
 
 Entity::Entity()
 {
-    m_position     = glm::vec3(0.0f);
-    m_velocity     = glm::vec3(0.0f);
-    m_acceleration = glm::vec3(0.0f);
-    m_speed        = 0.0f;
+    m_position     = glm::vec3(0);
+    m_speed        = 0;
     m_model_matrix = glm::mat4(1.0f);
 }
 
@@ -57,35 +55,20 @@ void Entity::draw_sprite_from_texture_atlas(ShaderProgram *program, GLuint textu
     // Step 4: And render
     glBindTexture(GL_TEXTURE_2D, texture_id);
     
-    glVertexAttribPointer(program->positionAttribute, 2, GL_FLOAT, false, 0, vertices);
-    glEnableVertexAttribArray(program->positionAttribute);
+    glVertexAttribPointer(program->get_position_attribute(), 2, GL_FLOAT, false, 0, vertices);
+    glEnableVertexAttribArray(program->get_position_attribute());
     
-    glVertexAttribPointer(program->texCoordAttribute, 2, GL_FLOAT, false, 0, tex_coords);
-    glEnableVertexAttribArray(program->texCoordAttribute);
+    glVertexAttribPointer(program->get_tex_coordinate_attribute(), 2, GL_FLOAT, false, 0, tex_coords);
+    glEnableVertexAttribArray(program->get_tex_coordinate_attribute());
     
     glDrawArrays(GL_TRIANGLES, 0, 6);
     
-    glDisableVertexAttribArray(program->positionAttribute);
-    glDisableVertexAttribArray(program->texCoordAttribute);
+    glDisableVertexAttribArray(program->get_position_attribute());
+    glDisableVertexAttribArray(program->get_tex_coordinate_attribute());
 }
 
-
-bool const Entity::check_collision(Entity *other) const
+void Entity::update(float delta_time)
 {
-    float x_distance = fabs(m_position.x - other->m_position.x) - ((m_width  + other->m_width)  / 2.0f);
-    float y_distance = fabs(m_position.y - other->m_position.y) - ((m_height + other->m_height) / 2.0f);
-    
-    return x_distance < 0.0f && y_distance < 0.0f;
-}
-
-
-void Entity::update(float delta_time, Entity *collidable_entities, int entity_count)
-{
-    for (int i = 0; i < entity_count; i++)
-    {
-        if (check_collision(&collidable_entities[i])) return;
-    }
-    
     if (m_animation_indices != NULL)
     {
         if (glm::length(m_movement) != 0)
@@ -106,20 +89,14 @@ void Entity::update(float delta_time, Entity *collidable_entities, int entity_co
         }
     }
     
-    // Our character moves from left to right, so they need an initial velocity
-    m_velocity.x = m_movement.x * m_speed;
-    
-    // And we add the gravity next
-    m_velocity += m_acceleration * delta_time;
-    m_position += m_velocity * delta_time;
-
+    m_position += m_movement * m_speed * delta_time;
     m_model_matrix = glm::mat4(1.0f);
     m_model_matrix = glm::translate(m_model_matrix, m_position);
 }
 
 void Entity::render(ShaderProgram *program)
 {
-    program->SetModelMatrix(m_model_matrix);
+    program->set_model_matrix(m_model_matrix);
     
     if (m_animation_indices != NULL)
     {
@@ -132,13 +109,13 @@ void Entity::render(ShaderProgram *program)
     
     glBindTexture(GL_TEXTURE_2D, m_texture_id);
     
-    glVertexAttribPointer(program->positionAttribute, 2, GL_FLOAT, false, 0, vertices);
-    glEnableVertexAttribArray(program->positionAttribute);
-    glVertexAttribPointer(program->texCoordAttribute, 2, GL_FLOAT, false, 0, tex_coords);
-    glEnableVertexAttribArray(program->texCoordAttribute);
+    glVertexAttribPointer(program->get_position_attribute(), 2, GL_FLOAT, false, 0, vertices);
+    glEnableVertexAttribArray(program->get_position_attribute());
+    glVertexAttribPointer(program->get_tex_coordinate_attribute(), 2, GL_FLOAT, false, 0, tex_coords);
+    glEnableVertexAttribArray(program->get_tex_coordinate_attribute());
     
     glDrawArrays(GL_TRIANGLES, 0, 6);
     
-    glDisableVertexAttribArray(program->positionAttribute);
-    glDisableVertexAttribArray(program->texCoordAttribute);
+    glDisableVertexAttribArray(program->get_position_attribute());
+    glDisableVertexAttribArray(program->get_tex_coordinate_attribute());
 }
