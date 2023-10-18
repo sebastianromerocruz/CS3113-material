@@ -5,7 +5,7 @@
 void ShaderProgram::load(const char *vertex_shader_file, const char *fragment_shader_file) {
     
     // create the vertex shader
-    m_vertex_shader = load_shader_from_file(vertex_shader_file, GL_VERTEX_SHADER);
+    m_vertex_shader   = load_shader_from_file(vertex_shader_file, GL_VERTEX_SHADER);
     // create the fragment shader
     m_fragment_shader = load_shader_from_file(fragment_shader_file, GL_FRAGMENT_SHADER);
     
