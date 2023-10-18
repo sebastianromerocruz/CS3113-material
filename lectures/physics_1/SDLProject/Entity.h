@@ -3,7 +3,7 @@ class Entity
 private:
     int* m_animation_right = NULL, // move to the right
         * m_animation_left = NULL, // move to the left
-        * m_animation_up = NULL, // move upwards
+        * m_animation_up   = NULL, // move upwards
         * m_animation_down = NULL; // move downwards
 
     glm::vec3 m_position;
@@ -17,8 +17,8 @@ public:
     static const int SECONDS_PER_FRAME = 4;
     static const int LEFT = 0,
         RIGHT = 1,
-        UP = 2,
-        DOWN = 3;
+        UP    = 2,
+        DOWN  = 3;
 
     // ————— ANIMATION ————— //
     int** m_walking = new int* [4]
