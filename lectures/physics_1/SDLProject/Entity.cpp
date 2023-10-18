@@ -38,7 +38,7 @@ void Entity::draw_sprite_from_texture_atlas(ShaderProgram* program, GLuint textu
     float v_coord = (float)(index / m_animation_cols) / (float)m_animation_rows;
 
     // Step 2: Calculate its UV size
-    float width = 1.0f / (float)m_animation_cols;
+    float width  = 1.0f / (float)m_animation_cols;
     float height = 1.0f / (float)m_animation_rows;
 
     // Step 3: Just as we have done before, match the texture coordinates to the vertices
@@ -90,7 +90,7 @@ void Entity::update(float delta_time, Entity* collidable_entities, int entity_co
     {
         if (glm::length(m_movement) != 0)
         {
-            m_animation_time += delta_time;
+            m_animation_time       += delta_time;
             float frames_per_second = (float)1 / SECONDS_PER_FRAME;
 
             if (m_animation_time >= frames_per_second)
@@ -127,7 +127,7 @@ void Entity::render(ShaderProgram* program)
         return;
     }
 
-    float vertices[] = { -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5 };
+    float vertices[]   = { -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5 };
     float tex_coords[] = { 0.0,  1.0, 1.0,  1.0, 1.0, 0.0,  0.0,  1.0, 1.0, 0.0,  0.0, 0.0 };
 
     glBindTexture(GL_TEXTURE_2D, m_texture_id);
