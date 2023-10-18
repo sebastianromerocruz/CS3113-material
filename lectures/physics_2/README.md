@@ -161,15 +161,15 @@ We need to make some changes to our collision detection, since we don't ever acc
 
 ```c++
 // Entity.cpp
-void Entity::update(float delta_time, Entity *collidable_entities, int collidable_entity_count)
+void Entity::update(float delta_time, Entity* collidable_entities, int collidable_entity_count)
 {
     m_velocity += m_acceleration * delta_time;
 
-    m_position.y += m_velocity.y * delta_time;                              // move on Y
-    check_collisions_y(collidable_entities, collidable_entity_count);   // fix if needed
+    m_position.y += m_velocity.y * delta_time;
+    check_collision_y(collidable_entities, collidable_entity_count);
 
-    m_position.x += m_velocity.x * delta_time;                              // move on x
-    check_collisions_x(collidable_entities, collidable_entity_count);   // fix if needed
+    m_position.x += m_velocity.x * delta_time;
+    check_collision_x(collidable_entities, collidable_entity_count);
 }
 
 void const Entity::check_collision_y(Entity *collidable_entities, int collidable_entity_count)
