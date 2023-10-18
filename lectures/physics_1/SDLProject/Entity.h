@@ -6,12 +6,15 @@ private:
         *m_animation_up    = NULL, // move upwards
         *m_animation_down  = NULL; // move downwards
     
+    // ————— TRANSFORMATIONS ————— //
+    glm::vec3 m_movement;
     glm::vec3 m_position;
-    glm::vec3 m_velocity;
-    glm::vec3 m_acceleration;
+    glm::mat4 m_model_matrix;
+    float     m_speed;
     
-    int m_width  = 1,
-        m_height = 1;
+    // ————— TEXTURES ————— //
+    GLuint    m_texture_id;
+    
 public:
     // ————— STATIC VARIABLES ————— //
     static const int SECONDS_PER_FRAME = 4;
@@ -36,33 +39,29 @@ public:
     
     int  *m_animation_indices = NULL;
     float m_animation_time    = 0.0f;
-    
-    // ————— TRANSFORMATIONS ————— //
-    float     m_speed;
-    glm::vec3 m_movement;
-    glm::mat4 m_model_matrix;
-    
-    GLuint    m_texture_id;
 
     // ————— METHODS ————— //
     Entity();
     ~Entity();
 
     void draw_sprite_from_texture_atlas(ShaderProgram *program, GLuint texture_id, int index);
-    bool const check_collision (Entity* other) const;
-    
-    void update(float delta_time, Entity *collidable_entities, int entity_count);
+    void update(float delta_time);
     void render(ShaderProgram *program);
     
+    void move_left()  { m_movement.x = -1.0f; };
+    void move_right() { m_movement.x = 1.0f;  };
+    void move_up()    { m_movement.y = 1.0f;  };
+    void move_down()  { m_movement.y = -1.0f; };
+    
     // ————— GETTERS ————— //
-    glm::vec3 const get_position()     const { return m_position;     };
-    glm::vec3 const get_velocity()     const { return m_velocity;     };
-    glm::vec3 const get_acceleration() const { return m_acceleration; };
-    glm::vec3 const get_movement()     const { return m_movement;     };
+    glm::vec3 const get_position()   const { return m_position;   };
+    glm::vec3 const get_movement()   const { return m_movement;   };
+    GLuint    const get_texture_id() const { return m_texture_id; };
+    float     const get_speed()      const { return m_speed;      };
     
     // ————— SETTERS ————— //
-    void const set_position(glm::vec3 new_position)     { m_position     = new_position; };
-    void const set_velocity(glm::vec3 new_velocity)     { m_velocity     = new_velocity; };
-    void const set_acceleration(glm::vec3 new_position) { m_acceleration = new_position; };
-    void const set_movement(glm::vec3 new_movement)     { m_movement     = new_movement; };
+    void const set_position(glm::vec3 new_position)  { m_position   = new_position;     };
+    void const set_movement(glm::vec3 new_movement)  { m_movement   = new_movement;     };
+    void const set_texture_id(GLuint new_texture_id) { m_texture_id = new_texture_id;   };
+    void const set_speed(float new_speed)            { m_speed      = new_speed;        };
 };
