@@ -79,7 +79,7 @@ bool const Entity::check_collision(Entity* other) const
 }
 
 
-void Entity::update(float delta_time, Entity* collidable_entities, int entity_count)
+void Entity::update(float delta_time, Entity* collidable_entities, int collidable_entity_count)
 {
     for (int i = 0; i < entity_count; i++)
     {
