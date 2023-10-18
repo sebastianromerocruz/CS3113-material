@@ -10,7 +10,12 @@ private:
     glm::vec3 m_velocity;
     glm::vec3 m_acceleration;
 
-    int m_width = 1,
+    // ————— TRANSFORMATIONS ————— //
+    float     m_speed;
+    glm::vec3 m_movement;
+    glm::mat4 m_model_matrix;
+
+    int m_width  = 1,
         m_height = 1;
 public:
     // ————— STATIC VARIABLES ————— //
@@ -37,11 +42,6 @@ public:
     int* m_animation_indices = NULL;
     float m_animation_time = 0.0f;
 
-    // ————— TRANSFORMATIONS ————— //
-    float     m_speed;
-    glm::vec3 m_movement;
-    glm::mat4 m_model_matrix;
-
     GLuint    m_texture_id;
 
     // ————— METHODS ————— //
@@ -59,10 +59,12 @@ public:
     glm::vec3 const get_velocity()     const { return m_velocity; };
     glm::vec3 const get_acceleration() const { return m_acceleration; };
     glm::vec3 const get_movement()     const { return m_movement; };
+    float     const get_speed()        const { return m_speed; };
 
     // ————— SETTERS ————— //
     void const set_position(glm::vec3 new_position) { m_position = new_position; };
     void const set_velocity(glm::vec3 new_velocity) { m_velocity = new_velocity; };
     void const set_acceleration(glm::vec3 new_position) { m_acceleration = new_position; };
     void const set_movement(glm::vec3 new_movement) { m_movement = new_movement; };
+    void const set_speed(float new_speed) { m_speed = new_speed; };
 };
