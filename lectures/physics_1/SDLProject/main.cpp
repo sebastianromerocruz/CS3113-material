@@ -128,7 +128,7 @@ void initialise()
     g_game_state.player->set_position(glm::vec3(0.0f));
     g_game_state.player->set_movement(glm::vec3(0.0f));
     g_game_state.player->set_acceleration(glm::vec3(0.0f, ACC_OF_GRAVITY * 0.1, 0.0f));
-    g_game_state.player->m_speed = 1.0f;
+    g_game_state.player->set_speed(1.0f);
     g_game_state.player->m_texture_id = load_texture(SPRITESHEET_FILEPATH);
 
     g_game_state.player->m_walking[g_game_state.player->LEFT] = new int[4] { 1, 5, 9, 13 };
