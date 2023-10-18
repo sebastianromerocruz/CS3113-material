@@ -26,29 +26,29 @@ float g_time_accumulator = 0.0f;
 void update()
 {
     // ————— DELTA TIME ————— //
-    float ticks = (float) SDL_GetTicks() / MILLISECONDS_IN_SECOND; // get the current number of ticks
+    float ticks = (float)SDL_GetTicks() / MILLISECONDS_IN_SECOND; // get the current number of ticks
     float delta_time = ticks - g_previous_ticks; // the delta time is the difference from the last frame
     g_previous_ticks = ticks;
-    
+
     // ————— FIXED TIMESTEP ————— //
     // STEP 1: Keep track of how much time has passed since last step
     delta_time += g_time_accumulator;
-    
+
     // STEP 2: Accumulate the ammount of time passed while we're under our fixed timestep
     if (delta_time < FIXED_TIMESTEP)
     {
         g_time_accumulator = delta_time;
         return;
     }
-    
+
     // STEP 3: Once we exceed our fixed timestep, apply that elapsed time into the objects' update function invocation
     while (delta_time >= FIXED_TIMESTEP)
     {
         // Notice that we're using FIXED_TIMESTEP as our delta time
-        g_state.player->update(FIXED_TIMESTEP);
+        g_game_state.player->update(FIXED_TIMESTEP, g_game_state.platforms, PLATFORM_COUNT);
         delta_time -= FIXED_TIMESTEP;
     }
-    
+
     g_time_accumulator = delta_time;
 }
 ```
@@ -72,14 +72,16 @@ private:
 
 public:
     // ————— GETTERS ————— //
-    glm::vec3 const get_position()     const { return m_position;     };
-    glm::vec3 const get_velocity()     const { return m_velocity;     };
+    glm::vec3 const get_position()     const { return m_position; };
+    glm::vec3 const get_velocity()     const { return m_velocity; };
     glm::vec3 const get_acceleration() const { return m_acceleration; };
+    glm::vec3 const get_movement()     const { return m_movement; };
 
     // ————— SETTERS ————— //
-    void const set_position(glm::vec3 new_position)     { m_position     = new_position; };
-    void const set_velocity(glm::vec3 new_velocity)     { m_velocity     = new_velocity; };
+    void const set_position(glm::vec3 new_position) { m_position = new_position; };
+    void const set_velocity(glm::vec3 new_velocity) { m_velocity = new_velocity; };
     void const set_acceleration(glm::vec3 new_position) { m_acceleration = new_position; };
+    void const set_movement(glm::vec3 new_movement) { m_movement = new_movement; };
 }
 ```
 ```c++
@@ -119,10 +121,10 @@ void initialise()
     // Some code...
 
     // ————— PLAYER ————— //
-    g_state.player = new Entity();
-    g_state.player->set_position(glm::vec3(0.0f));
-    g_state.player->set_movement(glm::vec3(0.0f));
-    g_state.player->set_acceleration(glm::vec3(0.0f, ACC_OF_GRAVITY, 0.0f));
+    g_game_state.player = new Entity();
+    g_game_state.player->set_position(glm::vec3(0.0f));
+    g_game_state.player->set_movement(glm::vec3(0.0f));
+    g_game_state.player->set_acceleration(glm::vec3(0.0f, ACC_OF_GRAVITY, 0.0f));
 }
 ```
 
@@ -143,19 +145,19 @@ struct GameState
 void initialise()
 {
     // ————— PLATFORM ————— //
-    g_state.platforms = new Entity[PLATFORM_COUNT];
-    
+    g_game_state.platforms = new Entity[PLATFORM_COUNT];
+
     for (int i = 0; i < PLATFORM_COUNT; i++)
     {
-        g_state.platforms[i].m_texture_id = load_texture(PLATFORM_FILEPATH);
-        g_state.platforms[i].set_position(glm::vec3(i - 1.0f, -3.0f, 0.0f));
-        g_state.platforms[i].update(0.0f, NULL, 0);
+        g_game_state.platforms[i].m_texture_id = load_texture(PLATFORM_FILEPATH);
+        g_game_state.platforms[i].set_position(glm::vec3(i - 1.0f, -3.0f, 0.0f));
+        g_game_state.platforms[i].update(0.0f, NULL, 0);
     }
 }
 
-void update()
+void render()
 {
-    for (int i = 0; i < PLATFORM_COUNT; i++) g_state.platforms[i].render(&g_program);
+    for (int i = 0; i < PLATFORM_COUNT; i++) g_game_state.platforms[i].render(&g_shader_program);
 }
 ```
 
@@ -179,20 +181,20 @@ public:
     bool const check_collision(Entity *other) const;
 
     // This is where keeping Entity objects nicely organised works nicely
-    void update(float delta_time, Entity *collidable_entities, int collidable_intity_count);
+    void update(float delta_time, Entity* collidable_entities, int entity_count);
 }
 ```
 ```c++
 // Entity.cpp
-bool const Entity::check_collision(Entity *other) const
+bool const Entity::check_collision(Entity* other) const
 {
-    float x_distance = fabs(m_position.x - other->m_position.x) - ((m_width  + other->m_width)  / 2.0f);
+    float x_distance = fabs(m_position.x - other->m_position.x) - ((m_width + other->m_width) / 2.0f);
     float y_distance = fabs(m_position.y - other->m_position.y) - ((m_height + other->m_height) / 2.0f);
-    
+
     return x_distance < 0.0f && y_distance < 0.0f;
 }
 
-void Entity::update(float delta_time, Entity *collidable_entities, int collidable_entity_count)
+void Entity::update(float delta_time, Entity* collidable_entities, int entity_count)
 {
     // Check for collisions
     for (int i = 0; i < entity_count; i++)
@@ -206,13 +208,13 @@ void Entity::update(float delta_time, Entity *collidable_entities, int collidabl
 void initialise()
 {
     // ————— PLATFORM ————— //
-    g_state.platforms = new Entity[PLATFORM_COUNT];
-    
+    g_game_state.platforms = new Entity[PLATFORM_COUNT];
+
     for (int i = 0; i < PLATFORM_COUNT; i++)
     {
-        g_state.platforms[i].m_texture_id = load_texture(PLATFORM_FILEPATH);
-        g_state.platforms[i].set_position(glm::vec3(i - 1.0f, -3.0f, 0.0f));
-        g_state.platforms[i].update(0.0f, NULL, 0);
+        g_game_state.platforms[i].m_texture_id = load_texture(PLATFORM_FILEPATH);
+        g_game_state.platforms[i].set_position(glm::vec3(i - 1.0f, -3.0f, 0.0f));
+        g_game_state.platforms[i].update(0.0f, NULL, 0);
     }
 }
 
@@ -220,7 +222,7 @@ void update()
 {
     while (delta_time >= FIXED_TIMESTEP)
     {
-        g_state.player->update(FIXED_TIMESTEP, g_state.platforms, PLATFORM_COUNT);
+        g_game_state.player->update(FIXED_TIMESTEP, g_game_state.platforms, PLATFORM_COUNT);
         delta_time -= FIXED_TIMESTEP;
     }
 }
