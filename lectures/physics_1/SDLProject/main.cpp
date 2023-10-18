@@ -48,19 +48,19 @@ const char V_SHADER_PATH[] = "shaders/vertex_textured.glsl",
 
 const float MILLISECONDS_IN_SECOND = 1000.0;
 const char SPRITESHEET_FILEPATH[] = "assets/george_0.png",
-           PLATFORM_FILEPATH[]    = "assets/platform.png";
+           PLATFORM_FILEPATH[]    = "assets/platformPack_tile027.png";
 
 const int NUMBER_OF_TEXTURES = 1;  // to be generated, that is
 const GLint LEVEL_OF_DETAIL  = 0;  // base image level; Level n is the nth mipmap reduction image
 const GLint TEXTURE_BORDER   = 0;  // this value MUST be zero
 
 // ————— VARIABLES ————— //
-GameState g_state;
+GameState g_game_state;
 
 SDL_Window* g_display_window;
 bool g_game_is_running = true;
 
-ShaderProgram g_program;
+ShaderProgram g_shader_program;
 glm::mat4 g_view_matrix, g_projection_matrix;
 
 float g_previous_ticks   = 0.0f;
@@ -69,7 +69,6 @@ float g_time_accumulator = 0.0f;
 // ———— GENERAL FUNCTIONS ———— //
 GLuint load_texture(const char* filepath)
 {
-    // STEP 1: Loading the image file
     int width, height, number_of_components;
     unsigned char* image = stbi_load(filepath, &width, &height, &number_of_components, STBI_rgb_alpha);
     
@@ -79,21 +78,17 @@ GLuint load_texture(const char* filepath)
         assert(false);
     }
     
-    // STEP 2: Generating and binding a texture ID to our image
     GLuint textureID;
     glGenTextures(NUMBER_OF_TEXTURES, &textureID);
     glBindTexture(GL_TEXTURE_2D, textureID);
     glTexImage2D(GL_TEXTURE_2D, LEVEL_OF_DETAIL, GL_RGBA, width, height, TEXTURE_BORDER, GL_RGBA, GL_UNSIGNED_BYTE, image);
     
-    // STEP 3: Setting our texture filter modes
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     
-    // STEP 4: Setting our texture wrapping modes
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT); // the last argument can change depending on what you are looking for
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     
-    // STEP 5: Releasing our file from memory and returning our texture id
     stbi_image_free(image);
     
     return textureID;
@@ -102,7 +97,7 @@ GLuint load_texture(const char* filepath)
 void initialise()
 {
     SDL_Init(SDL_INIT_VIDEO);
-    g_display_window = SDL_CreateWindow("Hello, Physics!",
+    g_display_window = SDL_CreateWindow("Hello, Entities!",
                                       SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                                       WINDOW_WIDTH, WINDOW_HEIGHT,
                                       SDL_WINDOW_OPENGL);
@@ -116,46 +111,46 @@ void initialise()
     
     glViewport(VIEWPORT_X, VIEWPORT_Y, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
     
-    g_program.Load(V_SHADER_PATH, F_SHADER_PATH);
+    g_shader_program.load(V_SHADER_PATH, F_SHADER_PATH);
     
-    g_view_matrix = glm::mat4(1.0f);  // Defines the position (location and orientation) of the camera
-    g_projection_matrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);  // Defines the characteristics of your camera, such as clip planes, field of view, projection method etc.
+    g_view_matrix       = glm::mat4(1.0f);
+    g_projection_matrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);
     
-    g_program.SetProjectionMatrix(g_projection_matrix);
-    g_program.SetViewMatrix(g_view_matrix);
+    g_shader_program.set_projection_matrix(g_projection_matrix);
+    g_shader_program.set_view_matrix(g_view_matrix);
     
-    glUseProgram(g_program.programID);
+    glUseProgram(g_shader_program.get_program_id());
     
     glClearColor(BG_RED, BG_BLUE, BG_GREEN, BG_OPACITY);
     
     // ————— PLAYER ————— //
-    g_state.player = new Entity();
-    g_state.player->set_position(glm::vec3(0.0f));
-    g_state.player->set_movement(glm::vec3(0.0f));
-    g_state.player->set_acceleration(glm::vec3(0.0f, ACC_OF_GRAVITY * 0.1, 0.0f));
-    g_state.player->m_speed = 1.0f;
-    g_state.player->m_texture_id = load_texture(SPRITESHEET_FILEPATH);
+    g_game_state.player = new Entity();
+    g_game_state.player->set_position(glm::vec3(0.0f));
+    g_game_state.player->set_movement(glm::vec3(0.0f));
+    g_game_state.player->set_acceleration(glm::vec3(0.0f, ACC_OF_GRAVITY * 0.1, 0.0f));
+    g_game_state.player->m_speed = 1.0f;
+    g_game_state.player->m_texture_id = load_texture(SPRITESHEET_FILEPATH);
     
-    g_state.player->m_walking[g_state.player->LEFT]  = new int[4] { 1, 5, 9,  13 };
-    g_state.player->m_walking[g_state.player->RIGHT] = new int[4] { 3, 7, 11, 15 };
-    g_state.player->m_walking[g_state.player->UP]    = new int[4] { 2, 6, 10, 14 };
-    g_state.player->m_walking[g_state.player->DOWN]  = new int[4] { 0, 4, 8,  12 };
+    g_game_state.player->m_walking[g_game_state.player->LEFT]  = new int[4] { 1, 5, 9,  13 };
+    g_game_state.player->m_walking[g_game_state.player->RIGHT] = new int[4] { 3, 7, 11, 15 };
+    g_game_state.player->m_walking[g_game_state.player->UP]    = new int[4] { 2, 6, 10, 14 };
+    g_game_state.player->m_walking[g_game_state.player->DOWN]  = new int[4] { 0, 4, 8,  12 };
 
-    g_state.player->m_animation_indices = g_state.player->m_walking[g_state.player->RIGHT];  // start George looking right
-    g_state.player->m_animation_frames = 4;
-    g_state.player->m_animation_index  = 0;
-    g_state.player->m_animation_time   = 0.0f;
-    g_state.player->m_animation_cols   = 4;
-    g_state.player->m_animation_rows   = 4;
+    g_game_state.player->m_animation_indices = g_game_state.player->m_walking[g_game_state.player->RIGHT];  // start George looking right
+    g_game_state.player->m_animation_frames = 4;
+    g_game_state.player->m_animation_index  = 0;
+    g_game_state.player->m_animation_time   = 0.0f;
+    g_game_state.player->m_animation_cols   = 4;
+    g_game_state.player->m_animation_rows   = 4;
     
     // ————— PLATFORM ————— //
-    g_state.platforms = new Entity[PLATFORM_COUNT];
+    g_game_state.platforms = new Entity[PLATFORM_COUNT];
     
     for (int i = 0; i < PLATFORM_COUNT; i++)
     {
-        g_state.platforms[i].m_texture_id = load_texture(PLATFORM_FILEPATH);
-        g_state.platforms[i].set_position(glm::vec3(i - 1.0f, -3.0f, 0.0f));
-        g_state.platforms[i].update(0.0f, NULL, 0);
+        g_game_state.platforms[i].m_texture_id = load_texture(PLATFORM_FILEPATH);
+        g_game_state.platforms[i].set_position(glm::vec3(i - 1.0f, -3.0f, 0.0f));
+        g_game_state.platforms[i].update(0.0f, NULL, 0);
     }
     
     // ————— GENERAL ————— //
@@ -166,7 +161,7 @@ void initialise()
 void process_input()
 {
     // VERY IMPORTANT: If nothing is pressed, we don't want to go anywhere
-    g_state.player->set_movement(glm::vec3(0.0f));
+    g_game_state.player->set_movement(glm::vec3(0.0f));
     
     SDL_Event event;
     while (SDL_PollEvent(&event))
@@ -198,19 +193,19 @@ void process_input()
 
     if (key_state[SDL_SCANCODE_LEFT])
     {
-        g_state.player->m_movement.x = -1.0f;
-        g_state.player->m_animation_indices = g_state.player->m_walking[g_state.player->LEFT];
+        g_game_state.player->m_movement.x = -1.0f;
+        g_game_state.player->m_animation_indices = g_game_state.player->m_walking[g_game_state.player->LEFT];
     }
     else if (key_state[SDL_SCANCODE_RIGHT])
     {
-        g_state.player->m_movement.x = 1.0f;
-        g_state.player->m_animation_indices = g_state.player->m_walking[g_state.player->RIGHT];
+        g_game_state.player->m_movement.x = 1.0f;
+        g_game_state.player->m_animation_indices = g_game_state.player->m_walking[g_game_state.player->RIGHT];
     }
     
     // This makes sure that the player can't move faster diagonally
-    if (glm::length(g_state.player->m_movement) > 1.0f)
+    if (glm::length(g_game_state.player->m_movement) > 1.0f)
     {
-        g_state.player->m_movement = glm::normalize(g_state.player->m_movement);
+        g_game_state.player->m_movement = glm::normalize(g_game_state.player->m_movement);
     }
 }
 
@@ -236,7 +231,7 @@ void update()
     while (delta_time >= FIXED_TIMESTEP)
     {
         // Notice that we're using FIXED_TIMESTEP as our delta time
-        g_state.player->update(FIXED_TIMESTEP, g_state.platforms, PLATFORM_COUNT);
+        g_game_state.player->update(FIXED_TIMESTEP, g_game_state.platforms, PLATFORM_COUNT);
         delta_time -= FIXED_TIMESTEP;
     }
     
@@ -249,10 +244,10 @@ void render()
     glClear(GL_COLOR_BUFFER_BIT);
     
     // ————— PLAYER ————— //
-    g_state.player->render(&g_program);
+    g_game_state.player->render(&g_shader_program);
     
     // ————— PLATFORM ————— //
-    for (int i = 0; i < PLATFORM_COUNT; i++) g_state.platforms[i].render(&g_program);
+    for (int i = 0; i < PLATFORM_COUNT; i++) g_game_state.platforms[i].render(&g_shader_program);
     
     // ————— GENERAL ————— //
     SDL_GL_SwapWindow(g_display_window);
