@@ -2,44 +2,48 @@
 
 #include "ShaderProgram.h"
 
-void ShaderProgram::Load(const char *vertexShaderFile, const char *fragmentShaderFile) {
+void ShaderProgram::load(const char *vertex_shader_file, const char *fragment_shader_file) {
     
     // create the vertex shader
-    vertexShader = LoadShaderFromFile(vertexShaderFile, GL_VERTEX_SHADER);
+    m_vertex_shader   = load_shader_from_file(vertex_shader_file, GL_VERTEX_SHADER);
     // create the fragment shader
-    fragmentShader = LoadShaderFromFile(fragmentShaderFile, GL_FRAGMENT_SHADER);
+    m_fragment_shader = load_shader_from_file(fragment_shader_file, GL_FRAGMENT_SHADER);
     
     // Create the final shader program from our vertex and fragment shaders
-    programID = glCreateProgram();
-    glAttachShader(programID, vertexShader);
-    glAttachShader(programID, fragmentShader);
-    glLinkProgram(programID);
+    m_program_id = glCreateProgram();
+    glAttachShader(m_program_id, m_vertex_shader);
+    glAttachShader(m_program_id, m_fragment_shader);
+    glLinkProgram(m_program_id);
     
-    GLint linkSuccess;
-    glGetProgramiv(programID, GL_LINK_STATUS, &linkSuccess);
-    if(linkSuccess == GL_FALSE) {
-	printf("Error linking shader program!\n");
+    GLint link_success;
+    glGetProgramiv(m_program_id, GL_LINK_STATUS, &link_success);
+    
+    if(link_success == GL_FALSE)
+    {
+        printf("Error linking shader program!\n");
     }
     
-    modelMatrixUniform = glGetUniformLocation(programID, "modelMatrix");
-    projectionMatrixUniform = glGetUniformLocation(programID, "projectionMatrix");
-    viewMatrixUniform = glGetUniformLocation(programID, "viewMatrix");
-	colorUniform = glGetUniformLocation(programID, "color");
+    m_model_matrix_uniform      = glGetUniformLocation(m_program_id, "modelMatrix");
+    m_projection_matrix_uniform = glGetUniformLocation(m_program_id, "projectionMatrix");
+    m_view_matrix_uniform       = glGetUniformLocation(m_program_id, "viewMatrix");
+    m_colour_uniform            = glGetUniformLocation(m_program_id, "color");
     
-    positionAttribute = glGetAttribLocation(programID, "position");
-    texCoordAttribute = glGetAttribLocation(programID, "texCoord");
-	
-	SetColor(1.0f, 1.0f, 1.0f, 1.0f);
+    m_position_attribute  = glGetAttribLocation(m_program_id, "position");
+    m_tex_coord_attribute = glGetAttribLocation(m_program_id, "texCoord");
+    
+    set_colour(1.0f, 1.0f, 1.0f, 1.0f);
     
 }
 
-void ShaderProgram::Cleanup() {
-    glDeleteProgram(programID);
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragmentShader);
+void ShaderProgram::cleanup()
+{
+    glDeleteProgram(m_program_id);
+    glDeleteShader(m_vertex_shader);
+    glDeleteShader(m_fragment_shader);
 }
 
-GLuint ShaderProgram::LoadShaderFromFile(const std::string &shaderFile, GLenum type) {
+GLuint ShaderProgram::load_shader_from_file(const std::string &shaderFile, GLenum type)
+{
     //Open a file stream with the file name
     std::ifstream infile(shaderFile);
     
@@ -52,29 +56,29 @@ GLuint ShaderProgram::LoadShaderFromFile(const std::string &shaderFile, GLenum t
     buffer << infile.rdbuf();
     
     // Load the shader from the contents of the file
-    return LoadShaderFromString(buffer.str(), type);
+    return load_shader_from_string(buffer.str(), type);
 }
 
-GLuint ShaderProgram::LoadShaderFromString(const std::string &shaderContents, GLenum type) {
-    
-    
+GLuint ShaderProgram::load_shader_from_string(const std::string &shaderContents, GLenum type)
+{
     // Create a shader of specified type
     GLuint shaderID = glCreateShader(type);
     
     // Get the pointer to the C string from the STL string
-    const char *shaderString = shaderContents.c_str();
-    GLint shaderStringLength = (GLint) shaderContents.size();
+    const char *shader_string  = shaderContents.c_str();
+    GLint shader_string_length = (GLint) shaderContents.size();
     
     // Set the shader source to the string and compile shader
-    glShaderSource(shaderID, 1, &shaderString, &shaderStringLength);
+    glShaderSource(shaderID, 1, &shader_string, &shader_string_length);
     glCompileShader(shaderID);
     
     // Check if the shader compiled properly
-    GLint compileSuccess;
-    glGetShaderiv(shaderID, GL_COMPILE_STATUS, &compileSuccess);
+    GLint compile_success;
+    glGetShaderiv(shaderID, GL_COMPILE_STATUS, &compile_success);
     
     // If the shader did not compile, print the error to stdout
-    if (compileSuccess == GL_FALSE) {
+    if (compile_success == GL_FALSE)
+    {
         GLchar messages[512];
         glGetShaderInfoLog(shaderID, sizeof(messages), 0, &messages[0]);
         std::cout << messages << std::endl;
@@ -84,22 +88,26 @@ GLuint ShaderProgram::LoadShaderFromString(const std::string &shaderContents, GL
     return shaderID;
 }
 
-void ShaderProgram::SetColor(float r, float g, float b, float a) {
-	glUseProgram(programID);
-	glUniform4f(colorUniform, r, g, b, a);
+void ShaderProgram::set_colour(float red, float green, float blue, float alpha)
+{
+    glUseProgram(m_program_id);
+    glUniform4f(m_colour_uniform, red, green, blue, alpha);
 }
 
-void ShaderProgram::SetViewMatrix(const glm::mat4 &matrix) {
-    glUseProgram(programID);
-    glUniformMatrix4fv(viewMatrixUniform, 1, GL_FALSE, &matrix[0][0]);
+void ShaderProgram::set_view_matrix(const glm::mat4 &matrix)
+{
+    glUseProgram(m_program_id);
+    glUniformMatrix4fv(m_view_matrix_uniform, 1, GL_FALSE, &matrix[0][0]);
 }
 
-void ShaderProgram::SetModelMatrix(const glm::mat4 &matrix) {
-    glUseProgram(programID);
-    glUniformMatrix4fv(modelMatrixUniform, 1, GL_FALSE, &matrix[0][0]);
+void ShaderProgram::set_model_matrix(const glm::mat4 &matrix)
+{
+    glUseProgram(m_program_id);
+    glUniformMatrix4fv(m_model_matrix_uniform, 1, GL_FALSE, &matrix[0][0]);
 }
 
-void ShaderProgram::SetProjectionMatrix(const glm::mat4 &matrix) {
-    glUseProgram(programID);
-    glUniformMatrix4fv(projectionMatrixUniform, 1, GL_FALSE, &matrix[0][0]);    
+void ShaderProgram::set_projection_matrix(const glm::mat4 &matrix)
+{
+    glUseProgram(m_program_id);
+    glUniformMatrix4fv(m_projection_matrix_uniform, 1, GL_FALSE, &matrix[0][0]);
 }
