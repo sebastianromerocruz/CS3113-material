@@ -1,10 +1,10 @@
-<h2 align=center>Lecture 11</h2>
+<h2 align=center>Week 6: <em>Part 1</em></h2>
 
 <h1 align=center>Physics: <em>Gravity</em></h1>
 
-<h3 align=center>8 Messidor, Year CCXXX</h3>
+<h3 align=center>20 Wyvern Moon, Imperial Year MMXXIII</h3>
 
-***Song of the day***: _[**Far far away**](https://youtu.be/2GM3X-GBt5E) by Yohane [CV: Aika Kobayashi] (2023)._
+<p align=center><strong><em>Song of the day</strong>: <a href="https://youtu.be/Y45cVOrRZZs?si=csiJZYE_3g1GDEzl"><strong><u>ワタシダケユウレイ (Only I'm A Ghost)</u></strong></a> by SICK HACK (2022).</em></p>
 
 ### Sections
 
@@ -13,7 +13,7 @@
 
 ### Part 1: _Fixed Time-Step_
 
-Just like in real life, video game physics must follow very rigid, consistent laws. One of those axiomatic measures that must be foolproof is the amount of space a body moves over time. We took our first step towards standarising this by adopting delta time. Currently, however, our timestep is as fast as our computer can go, which makes it variable. For instance, if our computer slows down / speeds up for whatever reason, we might end up with something like this:
+Just like in real life, video game physics must follow very rigid, consistent laws. One of those axiomatic measures that must be foolproof is the amount of space a body moves over time. We took our first step towards standardising this by adopting delta time. Currently, however, our timestep is as fast as our computer can go, which makes it variable. For instance, if our computer slows down / speeds up for whatever reason, we might end up with something like this:
 
 ![skip-collision](assets/skip-collision.png)
 

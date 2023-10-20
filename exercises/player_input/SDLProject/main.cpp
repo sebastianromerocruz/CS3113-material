@@ -184,6 +184,8 @@ void update()
     g_flower_model_matrix = glm::translate(g_flower_model_matrix, FLOWER_INIT_POS);
     
     // ———————————————— PART 3 ———————————————— //
+    if (g_position.x >= 3.0f) g_movement.x *= -1.0f;
+    
     g_position += g_movement * speed * delta_time;
     g_flower_model_matrix = glm::translate(g_flower_model_matrix, g_position);
     // ———————————————— PART 3 ———————————————— //

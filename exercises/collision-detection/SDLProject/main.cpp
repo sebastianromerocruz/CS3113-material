@@ -38,7 +38,7 @@ const char V_SHADER_PATH[] = "shaders/vertex_textured.glsl",
            F_SHADER_PATH[] = "shaders/fragment_textured.glsl";
 
 const char FLOWER_SPRITE[] = "sprites/flower.png";
-const char CUP_SPRITE[] = "sprites/cup.png";
+const char CUP_SPRITE[]    = "sprites/cup.png";
 
 const float ROT_SPEED = 100.0f;
 

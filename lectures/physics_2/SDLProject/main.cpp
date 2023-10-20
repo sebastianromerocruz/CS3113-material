@@ -205,12 +205,12 @@ void process_input()
 
     if (key_state[SDL_SCANCODE_LEFT])
     {
-        g_game_state.player->set_movement(glm::vec3(-1.0f, g_game_state.player->get_movement().y, g_game_state.player->get_movement().z));
+        g_game_state.player->move_left();
         g_game_state.player->m_animation_indices = g_game_state.player->m_walking[g_game_state.player->LEFT];
     }
     else if (key_state[SDL_SCANCODE_RIGHT])
     {
-        g_game_state.player->set_movement(glm::vec3(1.0f, g_game_state.player->get_movement().y, g_game_state.player->get_movement().z));
+        g_game_state.player->move_right();
         g_game_state.player->m_animation_indices = g_game_state.player->m_walking[g_game_state.player->RIGHT];
     }
 

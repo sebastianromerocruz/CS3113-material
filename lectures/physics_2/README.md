@@ -1,10 +1,10 @@
-<h2 align=center>Lecture 12</h2>
+<h2 align=center>Week 6: <em>Part 2</em></h2>
 
-<h1 align=center>Colliding with Different Kinds of Entities</h1>
+<h1 align=center>Physics: <em>Colliding with Different Kinds of Entities</em></h1>
 
-<h3 align=center>10 Messidor, Year CCXXXI</h3>
+<h3 align=center>20 Wyvern Moon, Imperial Year MMXXIII</h3>
 
-***Song of the day***: _[**Songbirds**](https://youtu.be/f8D9-sa2piI) by Homecomings (2018)._
+<p align=center><strong><em>Song of the day</strong>: <a href="https://youtu.be/Y45cVOrRZZs?si=csiJZYE_3g1GDEzl"><strong><u>ワタシダケユウレイ (Only I'm A Ghost)</u></strong></a> by SICK HACK (2022).</em></p>
 
 ### Sections
 

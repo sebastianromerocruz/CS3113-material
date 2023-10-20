@@ -1,7 +1,7 @@
 /**
-* Author: Sebastián Romero Cruz
-* CS 3113: User input exercise (SOLUTION; copy and paste this code onto main.cpp to test)
-* 6 Wyvern Moon, Imperial Year MMXXIII
+* Author: Allan V
+* CS 3113: User input exercise
+* 26 Prairial, Year CCXXXI
 * Tandon School of Engineering
 **/
 #define GL_SILENCE_DEPRECATION
@@ -41,7 +41,8 @@ const char FLOWER_SPRITE[] = "sprites/flower.png";
 
 const float ROT_SPEED = 100.0f;
 
-const glm::vec3 FLOWER_INIT_SCA = glm::vec3(2.0f, 2.0f, 0.0f);
+const glm::vec3 FLOWER_INIT_POS = glm::vec3(0.0f, 0.0f, 0.0f),
+                FLOWER_INIT_SCA = glm::vec3(1.5f, 1.5f, 0.0f);
 
 const int NUMBER_OF_TEXTURES = 1;
 const GLint LEVEL_OF_DETAIL  = 0,
@@ -64,11 +65,11 @@ float g_previous_ticks  = 0.0f;
 float g_rot_angle = 0.0f;
 
 // ———————————————— PART 1 ———————————————— //
+glm::vec3 g_position;
+glm::vec3 g_movement;
+float speed = 2.0;
 
-glm::vec3 g_flower_movement = glm::vec3(0.0f, 0.0f, 0.0f);
-glm::vec3 g_flower_position = glm::vec3(0.0f, 0.0f, 0.0f);
-
-float g_speed = 1.0f;
+float x = 0.0;
 
 // ———————————————— PART 1 ———————————————— //
 
@@ -119,11 +120,14 @@ void initialise()
     g_flower_program.Load(V_SHADER_PATH, F_SHADER_PATH);
     
     g_flower_model_matrix = glm::mat4(1.0f);
-    g_flower_model_matrix = glm::translate(g_flower_model_matrix, glm::vec3(0.0f, 0.0f, 0.0f));
+    g_flower_model_matrix = glm::translate(g_flower_model_matrix, FLOWER_INIT_POS);
     g_flower_model_matrix = glm::scale(g_flower_model_matrix, FLOWER_INIT_SCA);
     
     g_flower_program.SetProjectionMatrix(g_projection_matrix);
     g_flower_program.SetViewMatrix(g_view_matrix);
+    
+    g_position = glm::vec3(0.0f, 0.0f, 0.0f);
+    g_movement = glm::vec3(0.0f, 0.0f, 0.0f);
     
     glUseProgram(g_flower_program.programID);
     g_flower_texture_id = load_texture(FLOWER_SPRITE);
@@ -133,6 +137,7 @@ void initialise()
     
     glClearColor(BG_RED, BG_BLUE, BG_GREEN, BG_OPACITY);
 }
+
 
 void process_input()
 {
@@ -145,44 +150,26 @@ void process_input()
             case SDL_WINDOWEVENT_CLOSE:
                 g_game_is_running = !g_game_is_running;
                 break;
-            
-            case SDL_KEYDOWN:
-                switch (event.key.keysym.sym) {
-                    case SDLK_q:
-                        g_game_is_running = !g_game_is_running;
-                        break;
-                        
-                    default: break;
-                }
+                
         }
     }
     // ———————————————— PART 2 ———————————————— //
     const Uint8 *key_state = SDL_GetKeyboardState(NULL);
-    
-    if (key_state[SDL_SCANCODE_LEFT])
-    {
-        g_flower_movement.x = -1.0f;
+    if (key_state[SDL_SCANCODE_LEFT]) {
+        g_movement.x = -1.0;
     }
-    else if (key_state[SDL_SCANCODE_RIGHT])
-    {
-        g_flower_movement.x = 1.0f;
+    if (key_state[SDL_SCANCODE_RIGHT]) {
+        g_movement.x = 1.0;
     }
-    
-    if (key_state[SDL_SCANCODE_UP])
-    {
-        g_flower_movement.y = 1.0f;
+    if (key_state[SDL_SCANCODE_UP]) {
+        g_movement.y = 1.0;
     }
-    else if (key_state[SDL_SCANCODE_DOWN])
-    {
-        g_flower_movement.y = -1.0f;
-    }
-    
-    if (glm::length(g_flower_movement) > 1.0f)
-    {
-        g_flower_movement = glm::normalize(g_flower_movement);
+    if (key_state[SDL_SCANCODE_DOWN]) {
+        g_movement.y = -1.0;
     }
     // ———————————————— PART 2 ———————————————— //
 }
+
 
 void update()
 {
@@ -193,21 +180,19 @@ void update()
     
     /** ———— RESETTING MODEL MATRIX ———— **/
     g_flower_model_matrix = glm::mat4(1.0f);
-    g_flower_model_matrix = glm::translate(g_flower_model_matrix, glm::vec3(0.0f, 0.0f, 0.0f));
     g_flower_model_matrix = glm::scale(g_flower_model_matrix, FLOWER_INIT_SCA);
-
-
-    // ———————————————— PART 3 ———————————————— //
-    
-    g_flower_position += g_flower_movement * g_speed * delta_time;
-    g_flower_model_matrix = glm::translate(g_flower_model_matrix, g_flower_position);
-    g_flower_movement = glm::vec3(0.0f, 0.0f, 0.0f);
+    g_flower_model_matrix = glm::translate(g_flower_model_matrix, FLOWER_INIT_POS);
     
     // ———————————————— PART 3 ———————————————— //
+    g_position += g_movement * speed * delta_time;
+    g_flower_model_matrix = glm::translate(g_flower_model_matrix, g_position);
+    // ———————————————— PART 3 ———————————————— //
     
+    /** ———— ROTATING SPRITE ———— **/
     g_rot_angle += ROT_SPEED * delta_time;
     g_flower_model_matrix = glm::rotate(g_flower_model_matrix, glm::radians(g_rot_angle), glm::vec3(0.0f, 1.0f, 0.0f));
 }
+
 
 void render() {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -238,11 +223,10 @@ void render() {
     SDL_GL_SwapWindow(g_display_window);
 }
 
+
 void shutdown() { SDL_Quit(); }
 
-/**
- Start here—we can see the general structure of a game loop without worrying too much about the details yet.
- */
+
 int main(int argc, char* argv[])
 {
     initialise();
