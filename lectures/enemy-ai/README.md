@@ -1,12 +1,10 @@
-<h2 align=center>Lecture 14<h2>
+<h2 align=center>Week 07: <em>Part 2</em></h2>
 
-<h1 align=center>Basic Enemy AI</h1>
+<h1 align=center>Sound Effects</h1>
 
-<h3 align=center>22 Messidor, Year CCXXXI</h3>
+<h3 align=center>27 Wyvern Moon, Imperial Year MMXXIII<h3>
 
-***Song of the day***: _[**Happiness**](https://youtu.be/rR1lgEMMJwo) performed by The 1975 (2022)._
-
----
+<p align=center><strong><em>Song of the day</strong>: <a href="https://youtu.be/SRLLHIE8RZU?si=RXmDYewrTPi1OK88"><strong><u>Of All The Gin Joints In The World</u></strong></a> by Fall Out Boy (2005).</em></p>
 
 ### Sections
 

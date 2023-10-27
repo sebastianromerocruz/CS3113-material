@@ -180,7 +180,7 @@ void initialise()
     // ––––– PLAYER (GEORGE) ––––– //
     // Existing
     g_game_state.player = new Entity();
-    g_game_state.player->set_position(glm::vec3(-1.5f, 2.0f, 0.0f));
+    g_game_state.player->set_position(glm::vec3(0.0f));
     g_game_state.player->set_movement(glm::vec3(0.0f));
     g_game_state.player->set_speed(1.0f);
     g_game_state.player->set_acceleration(glm::vec3(0.0f, -4.905f, 0.0f));
@@ -192,7 +192,7 @@ void initialise()
     g_game_state.player->m_walking[g_game_state.player->UP]     = new int[4] { 2, 6, 10, 14 };
     g_game_state.player->m_walking[g_game_state.player->DOWN]   = new int[4] { 0, 4, 8,  12 };
 
-    g_game_state.player->m_animation_indices = g_game_state.player->m_walking[g_game_state.player->RIGHT];  // start George looking left
+    g_game_state.player->m_animation_indices = g_game_state.player->m_walking[g_game_state.player->LEFT];  // start George looking left
     g_game_state.player->m_animation_frames  = 4;
     g_game_state.player->m_animation_index   = 0;
     g_game_state.player->m_animation_time    = 0.0f;
@@ -202,19 +202,17 @@ void initialise()
     g_game_state.player->set_width(0.9f);
 
     // Jumping
-    g_game_state.player->set_jumping_power(4.0f);
+    g_game_state.player->m_jumping_power = 3.0f;
 
     // ––––– ENEMY (SOPHIE) ––––– //
     GLuint enemy_texture_id = load_texture(ENEMY_FILEPATH);
 
     g_game_state.enemies = new Entity[ENEMY_COUNT];
     g_game_state.enemies[0].set_entity_type(ENEMY);
-    g_game_state.enemies[0].set_ai_type(GUARD);
-    g_game_state.enemies[0].set_ai_state(IDLE);
     g_game_state.enemies[0].m_texture_id = enemy_texture_id;
     g_game_state.enemies[0].set_position(glm::vec3(2.5f, 0.0f, 0.0f));
     g_game_state.enemies[0].set_movement(glm::vec3(0.0f));
-    g_game_state.enemies[0].set_speed(0.5f);
+    g_game_state.enemies[0].set_speed(1.0f);
     g_game_state.enemies[0].set_acceleration(glm::vec3(0.0f, -9.81f, 0.0f));
 
     // ––––– AUDIO STUFF ––––– //

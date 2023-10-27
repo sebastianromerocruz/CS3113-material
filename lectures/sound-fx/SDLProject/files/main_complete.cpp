@@ -1,10 +1,10 @@
+
 #define GL_SILENCE_DEPRECATION
 #define STB_IMAGE_IMPLEMENTATION
 #define LOG(argument) std::cout << argument << '\n'
 #define GL_GLEXT_PROTOTYPES 1
 #define FIXED_TIMESTEP 0.0166666f
-#define PLATFORM_COUNT 11
-#define ENEMY_COUNT 1
+#define PLATFORM_COUNT 5
 
 #ifdef _WINDOWS
 #include <GL/glew.h>
@@ -27,10 +27,6 @@ struct GameState
 {
     Entity* player;
     Entity* platforms;
-    Entity* enemies;
-
-    Mix_Music* bgm;
-    Mix_Chunk* jump_sfx;
 };
 
 // ––––– CONSTANTS ––––– //
@@ -51,13 +47,11 @@ const char  V_SHADER_PATH[] = "shaders/vertex_textured.glsl",
             F_SHADER_PATH[] = "shaders/fragment_textured.glsl";
 
 const float MILLISECONDS_IN_SECOND  = 1000.0;
-const char  SPRITESHEET_FILEPATH[]  = "assets/george_0.png",
-            PLATFORM_FILEPATH[]     = "assets/platformPack_tile027.png",
-            ENEMY_FILEPATH[]        = "assets/soph.png";
+const char  SPRITESHEET_FILEPATH[]  = "assets/george_0.png";
+const char  PLATFORM_FILEPATH[]     = "assets/platformPack_tile027.png";
 
-
-const char  BGM_FILEPATH[]          = "assets/audio/dooblydoo.mp3",
-            BOUNCING_SFX_FILEPATH[] = "assets/audio/bounce.wav";
+const char  BGM_FILEPATH[]              = "assets/audio/dooblydoo.mp3",
+            BOUNCING_SFX_FILEPATH[]     = "assets/audio/bounce.wav";
 const int   LOOP_FOREVER     = -1;  // -1 means loop forever in Mix_PlayMusic; 0 means play once and loop zero times
 
 const int NUMBER_OF_TEXTURES = 1;
@@ -152,7 +146,31 @@ void initialise()
 
     glClearColor(BG_RED, BG_BLUE, BG_GREEN, BG_OPACITY);
 
-  
+    // ––––– AUDIO SETUP ––––– //
+    // Start Audio
+    Mix_OpenAudio(
+        CD_QUAL_FREQ,        // the frequency to playback audio at (in Hz)
+        MIX_DEFAULT_FORMAT,  // audio format
+        AUDIO_CHAN_AMT,      // number of channels (1 is mono, 2 is stereo, etc).
+        AUDIO_BUFF_SIZE      // audio buffer size in sample FRAMES (total samples divided by channel count)
+    );
+
+    // Similar to our custom function load_texture
+    g_music = Mix_LoadMUS(BGM_FILEPATH);
+    g_bouncing_sfx = Mix_LoadWAV(BOUNCING_SFX_FILEPATH);
+
+    // This will schedule the music object to begin mixing for playback.
+    // The first parameter is the pointer to the mp3 we loaded
+    // and second parameter is the number of times to loop.
+    Mix_PlayMusic(g_music, LOOP_FOREVER);
+
+    // Set the music to half volume
+    // MIX_MAX_VOLUME is a pre-defined constant
+    Mix_VolumeMusic(MIX_MAX_VOLUME / 2);
+    Mix_VolumeChunk(
+        g_bouncing_sfx,     // Set the volume of the bounce sound...
+        MIX_MAX_VOLUME / 4  // ... to 1/4th.
+    );
 
     // ––––– PLATFORMS ––––– //
     GLuint platform_texture_id = load_texture(PLATFORM_FILEPATH);
@@ -162,25 +180,25 @@ void initialise()
     g_game_state.platforms[PLATFORM_COUNT - 1].m_texture_id = platform_texture_id;
     g_game_state.platforms[PLATFORM_COUNT - 1].set_position(glm::vec3(-1.5f, -2.35f, 0.0f));
     g_game_state.platforms[PLATFORM_COUNT - 1].set_width(0.4f);
-    g_game_state.platforms[PLATFORM_COUNT - 1].update(0.0f, NULL, NULL, 0);
+    g_game_state.platforms[PLATFORM_COUNT - 1].update(0.0f, NULL, 0);
 
     for (int i = 0; i < PLATFORM_COUNT - 2; i++)
     {
         g_game_state.platforms[i].m_texture_id = platform_texture_id;
         g_game_state.platforms[i].set_position(glm::vec3(i - 1.0f, -3.0f, 0.0f));
         g_game_state.platforms[i].set_width(0.4f);
-        g_game_state.platforms[i].update(0.0f, NULL, NULL, 0);
+        g_game_state.platforms[i].update(0.0f, NULL, 0);
     }
 
     g_game_state.platforms[PLATFORM_COUNT - 2].m_texture_id = platform_texture_id;
     g_game_state.platforms[PLATFORM_COUNT - 2].set_position(glm::vec3(2.5f, -2.5f, 0.0f));
     g_game_state.platforms[PLATFORM_COUNT - 2].set_width(0.4f);
-    g_game_state.platforms[PLATFORM_COUNT - 2].update(0.0f, NULL, NULL, 0);
+    g_game_state.platforms[PLATFORM_COUNT - 2].update(0.0f, NULL, 0);
 
     // ––––– PLAYER (GEORGE) ––––– //
     // Existing
     g_game_state.player = new Entity();
-    g_game_state.player->set_position(glm::vec3(-1.5f, 2.0f, 0.0f));
+    g_game_state.player->set_position(glm::vec3(0.0f));
     g_game_state.player->set_movement(glm::vec3(0.0f));
     g_game_state.player->set_speed(1.0f);
     g_game_state.player->set_acceleration(glm::vec3(0.0f, -4.905f, 0.0f));
@@ -192,7 +210,7 @@ void initialise()
     g_game_state.player->m_walking[g_game_state.player->UP]     = new int[4] { 2, 6, 10, 14 };
     g_game_state.player->m_walking[g_game_state.player->DOWN]   = new int[4] { 0, 4, 8,  12 };
 
-    g_game_state.player->m_animation_indices = g_game_state.player->m_walking[g_game_state.player->RIGHT];  // start George looking left
+    g_game_state.player->m_animation_indices = g_game_state.player->m_walking[g_game_state.player->LEFT];  // start George looking left
     g_game_state.player->m_animation_frames  = 4;
     g_game_state.player->m_animation_index   = 0;
     g_game_state.player->m_animation_time    = 0.0f;
@@ -202,29 +220,7 @@ void initialise()
     g_game_state.player->set_width(0.9f);
 
     // Jumping
-    g_game_state.player->set_jumping_power(4.0f);
-
-    // ––––– ENEMY (SOPHIE) ––––– //
-    GLuint enemy_texture_id = load_texture(ENEMY_FILEPATH);
-
-    g_game_state.enemies = new Entity[ENEMY_COUNT];
-    g_game_state.enemies[0].set_entity_type(ENEMY);
-    g_game_state.enemies[0].set_ai_type(GUARD);
-    g_game_state.enemies[0].set_ai_state(IDLE);
-    g_game_state.enemies[0].m_texture_id = enemy_texture_id;
-    g_game_state.enemies[0].set_position(glm::vec3(2.5f, 0.0f, 0.0f));
-    g_game_state.enemies[0].set_movement(glm::vec3(0.0f));
-    g_game_state.enemies[0].set_speed(0.5f);
-    g_game_state.enemies[0].set_acceleration(glm::vec3(0.0f, -9.81f, 0.0f));
-
-    // ––––– AUDIO STUFF ––––– //
-    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096);
-
-    g_game_state.bgm = Mix_LoadMUS(BGM_FILEPATH);
-    Mix_PlayMusic(g_game_state.bgm, -1);
-    Mix_VolumeMusic(MIX_MAX_VOLUME / 4.0f);
-
-    g_game_state.jump_sfx = Mix_LoadWAV(BOUNCING_SFX_FILEPATH);
+    g_game_state.player->m_jumping_power = 3.0f;
 
     // ––––– GENERAL ––––– //
     glEnable(GL_BLEND);
@@ -313,11 +309,9 @@ void update()
         return;
     }
 
-    while (delta_time >= FIXED_TIMESTEP) {
-        g_game_state.player->update(FIXED_TIMESTEP, g_game_state.player, g_game_state.platforms, PLATFORM_COUNT);
-
-        for (int i = 0; i < ENEMY_COUNT; i++) g_game_state.enemies[i].update(FIXED_TIMESTEP, g_game_state.player, g_game_state.platforms, PLATFORM_COUNT);
-
+    while (delta_time >= FIXED_TIMESTEP)
+    {
+        g_game_state.player->update(FIXED_TIMESTEP, g_game_state.platforms, PLATFORM_COUNT);
         delta_time -= FIXED_TIMESTEP;
     }
 
@@ -331,17 +325,18 @@ void render()
     g_game_state.player->render(&g_shader_program);
 
     for (int i = 0; i < PLATFORM_COUNT; i++) g_game_state.platforms[i].render(&g_shader_program);
-    for (int i = 0; i < ENEMY_COUNT; i++)    g_game_state.enemies[i].render(&g_shader_program);
 
     SDL_GL_SwapWindow(g_display_window);
 }
 
 void shutdown()
 {
-    SDL_Quit();
-
+    Mix_FreeChunk(g_bouncing_sfx);
+    Mix_FreeMusic(g_music);
+    
     delete[] g_game_state.platforms;
     delete   g_game_state.player;
+    SDL_Quit();
 }
 
 // ––––– GAME LOOP ––––– //

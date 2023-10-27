@@ -76,10 +76,8 @@
 - _09/22_: [**Transformations**](exercises/transformation/)
 - _10/06_: [**User Input**](exercises/player_input/)
 - _10/13_: [**Collision Detection**](exercises/collision-detection/)
-
-<!--
-- _06/22_: **[Animation](exercises/animation/)**
-- _07/06_: **[Entity Types](exercises/entity_types/)** -->
+<!-- - _06/22_: **[Animation](exercises/animation/)** -->
+<!-- - _07/06_: **[Entity Types](exercises/entity_types/)** -->
 
 <sub>To be released every lecture day before class.</sub>
 
@@ -129,7 +127,7 @@ You will also need a [**Github**](https://github.com/) account!
 |-------------------------------------------------------------------------|----------------|
 | **_Project 1_**: [**Draw a Simple 2D Scene**](assignments/project_1.md) | 10%            |
 | **_Project 2_**: [**Pong**](assignments/project_2.md)                   | 10%            |
-| **_Project 3_**: **Lunar Lander**                                       | 15%            |
+| **_Project 3_**: [**Lunar Lander**](assignments/project_3.md)           | 15%            |
 | **_Project 4_**: **Rise of the AI**                                     | 15%            |
 | **_Project 5_**: **Platformer**                                         | 15%            |
 | **_Project 6_**: **Students' Choice**                                   | 25%            |

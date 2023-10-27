@@ -1,4 +1,3 @@
-
 #define GL_SILENCE_DEPRECATION
 #define STB_IMAGE_IMPLEMENTATION
 
@@ -56,62 +55,18 @@ void Entity::draw_sprite_from_texture_atlas(ShaderProgram *program, GLuint textu
     
     glBindTexture(GL_TEXTURE_2D, texture_id);
     
-    glVertexAttribPointer(program->positionAttribute, 2, GL_FLOAT, false, 0, vertices);
-    glEnableVertexAttribArray(program->positionAttribute);
+    glVertexAttribPointer(program->get_position_attribute(), 2, GL_FLOAT, false, 0, vertices);
+    glEnableVertexAttribArray(program->get_position_attribute());
     
-    glVertexAttribPointer(program->texCoordAttribute, 2, GL_FLOAT, false, 0, tex_coords);
-    glEnableVertexAttribArray(program->texCoordAttribute);
+    glVertexAttribPointer(program->get_tex_coordinate_attribute(), 2, GL_FLOAT, false, 0, tex_coords);
+    glEnableVertexAttribArray(program->get_tex_coordinate_attribute());
     
     glDrawArrays(GL_TRIANGLES, 0, 6);
     
-    glDisableVertexAttribArray(program->positionAttribute);
-    glDisableVertexAttribArray(program->texCoordAttribute);
+    glDisableVertexAttribArray(program->get_position_attribute());
+    glDisableVertexAttribArray(program->get_tex_coordinate_attribute());
 }
 
-void Entity::ai_activate(Entity *player)
-{
-    switch (m_ai_type)
-    {
-        case WALKER:
-            ai_walk();
-            break;
-            
-        case GUARD:
-            ai_guard(player);
-            break;
-            
-        default:
-            break;
-    }
-}
-
-void Entity::ai_walk()
-{
-    m_movement = glm::vec3(-1.0f, 0.0f, 0.0f);
-}
-
-void Entity::ai_guard(Entity *player)
-{
-    switch (m_ai_state) {
-        case IDLE:
-            if (glm::distance(m_position, player->get_position()) < 3.0f) m_ai_state = WALKING;
-            break;
-            
-        case WALKING:
-            if (m_position.x > player->get_position().x) {
-                m_movement = glm::vec3(-1.0f, 0.0f, 0.0f);
-            } else {
-                m_movement = glm::vec3(1.0f, 0.0f, 0.0f);
-            }
-            break;
-            
-        case ATTACKING:
-            break;
-            
-        default:
-            break;
-    }
-}
 
 void Entity::update(float delta_time, Entity *player, Entity *collidable_entities, int collidable_entity_count)
 {
@@ -121,8 +76,6 @@ void Entity::update(float delta_time, Entity *player, Entity *collidable_entitie
     m_collided_bottom = false;
     m_collided_left   = false;
     m_collided_right  = false;
-    
-    if (m_entity_type == ENEMY) ai_activate(player);
     
     if (m_animation_indices != NULL)
     {
@@ -213,7 +166,7 @@ void Entity::render(ShaderProgram *program)
 {
     if (!m_is_active) return;
     
-    program->SetModelMatrix(m_model_matrix);
+    program->set_model_matrix(m_model_matrix);
     
     if (m_animation_indices != NULL)
     {
@@ -226,15 +179,15 @@ void Entity::render(ShaderProgram *program)
     
     glBindTexture(GL_TEXTURE_2D, m_texture_id);
     
-    glVertexAttribPointer(program->positionAttribute, 2, GL_FLOAT, false, 0, vertices);
-    glEnableVertexAttribArray(program->positionAttribute);
-    glVertexAttribPointer(program->texCoordAttribute, 2, GL_FLOAT, false, 0, tex_coords);
-    glEnableVertexAttribArray(program->texCoordAttribute);
+    glVertexAttribPointer(program->get_position_attribute(), 2, GL_FLOAT, false, 0, vertices);
+    glEnableVertexAttribArray(program->get_position_attribute());
+    glVertexAttribPointer(program->get_tex_coordinate_attribute(), 2, GL_FLOAT, false, 0, tex_coords);
+    glEnableVertexAttribArray(program->get_tex_coordinate_attribute());
     
     glDrawArrays(GL_TRIANGLES, 0, 6);
     
-    glDisableVertexAttribArray(program->positionAttribute);
-    glDisableVertexAttribArray(program->texCoordAttribute);
+    glDisableVertexAttribArray(program->get_position_attribute());
+    glDisableVertexAttribArray(program->get_tex_coordinate_attribute());
 }
 
 bool const Entity::check_collision(Entity *other) const
@@ -248,3 +201,4 @@ bool const Entity::check_collision(Entity *other) const
     
     return x_distance < 0.0f && y_distance < 0.0f;
 }
+
