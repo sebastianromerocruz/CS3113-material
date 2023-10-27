@@ -330,10 +330,12 @@ void render()
 
 void shutdown()
 {
-    SDL_Quit();
-
+    Mix_FreeChunk(g_bouncing_sfx);
+    Mix_FreeMusic(g_music);
+    
     delete[] g_game_state.platforms;
     delete   g_game_state.player;
+    SDL_Quit();
 }
 
 // ––––– GAME LOOP ––––– //
