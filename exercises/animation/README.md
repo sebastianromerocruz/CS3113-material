@@ -1,8 +1,8 @@
-<h2 align=center>Lecture 10</h2>
+<h2 align=center>Lecture 07: <em>In-Class Exercise</em></h2>
 
 <h1 align=center>Exercise: <em>Animation</em></h1>
 
-<h3 align=center>3 Messidor, Year CCXXXI</h3>
+<h3 align=center>27 Wyvern Moon, Imperial Year MMXXIII<h3>
 
 ### Instructions
 
@@ -23,7 +23,7 @@ We will achieve this through the following three steps:
 
 #### STEP 1: _Set up the necessary global variables_
 
-As the [**notes**](https://github.com/sebastianromerocruz/CS3113-material/tree/main/lectures/sprites-and-text#part-4-animation) from last class explain, animation is basically a "selection" of a specific area from a sprite sheet. The function that allows us to select a specific area from a spritesheet to render (**`draw_sprite_from_texture_atlas`**) is already included in the [**`main.cpp`**](SDLProject/main.cpp) file, (you can see it being used in `update).
+As the [**notes**](https://github.com/sebastianromerocruz/CS3113-material/tree/main/lectures/sprites-and-text#part-4-animation) from two weeks ago explain, animation is basically a "selection" of a specific area from a sprite sheet. The function that allows us to select a specific area from a spritesheet to render (**`draw_sprite_from_texture_atlas`**) is already included in the [**`main.cpp`**](SDLProject/main.cpp) file, (you can see it being used in `update).
 
 The trick to circulating through all these character sprites is to keep track of:
 
@@ -31,7 +31,7 @@ The trick to circulating through all these character sprites is to keep track of
 2. **A value keeping track of which of the four characters we are currently rendering on the screen**. Since we have four characters in our spritesheet, the first character would be represented by a `0`, while the last woudl be represented by a `3`.
 3. **A value that keeps track of how much time has transpired from frame to frame**. Since animation is based on frames-per-second, we need to keep track of how many fractions of a second pass between frames so that we know when to update the sprite.
 
-In the space provided for part 1 (lines 81 - 83):
+In the space provided for part 1 (lines 79 - 81):
 
 ```c++
 // ———————————————— PART 1 ———————————————— //

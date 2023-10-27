@@ -63,7 +63,9 @@ SDL_Window* g_display_window;
 bool g_game_is_running = true;
 bool g_is_growing      = true;
 
-ShaderProgram g_shader_program;
+ShaderProgram g_character_program,
+              g_frame_program,
+              g_text_program;
 
 glm::mat4 g_view_matrix,
           g_character_model_matrix,
@@ -231,7 +233,9 @@ void initialise()
     
     glViewport(VIEWPORT_X, VIEWPORT_Y, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
     
-    g_shader_program.load(V_SHADER_PATH, F_SHADER_PATH);
+    g_character_program.load(V_SHADER_PATH, F_SHADER_PATH);
+    g_frame_program.load(V_SHADER_PATH, F_SHADER_PATH);
+    g_text_program.load(V_SHADER_PATH, F_SHADER_PATH);
     
     // ————— INSTANTIATING VIEW AND PROJ MATRICES ———— //
     g_view_matrix = glm::mat4(1.0f);  // Defines the position (location and orientation) of the camera
@@ -239,20 +243,25 @@ void initialise()
     
     // ————— CHARACTER ———— //
     g_character_model_matrix = glm::mat4(1.0f);
-    g_shader_program.set_projection_matrix(g_projection_matrix);
-    g_shader_program.set_view_matrix(g_view_matrix);
+    g_character_program.set_projection_matrix(g_projection_matrix);
+    g_character_program.set_view_matrix(g_view_matrix);
     
-    glUseProgram(g_shader_program.get_program_id());
+    glUseProgram(g_character_program.get_program_id());
     g_character_texture_id = load_texture(PLAYER_SPRITE_FILEPATH);
     
     // ————— FRAME ———— //
     g_frame_model_matrix     = glm::mat4(1.0f);
+    g_frame_program.set_projection_matrix(g_projection_matrix);
+    g_frame_program.set_view_matrix(g_view_matrix);
     
-    glUseProgram(g_shader_program.get_program_id());
+    glUseProgram(g_frame_program.get_program_id());
     g_frame_texture_id = load_texture(FRAME_SPRITE_FILEPATH);
     
     // ———— TEXT ———— //
-    glUseProgram(g_shader_program.get_program_id());
+    g_text_program.set_projection_matrix(g_projection_matrix);
+    g_text_program.set_view_matrix(g_view_matrix);
+    
+    glUseProgram(g_text_program.get_program_id());
     g_text_texture_id = load_texture(FONT_SPRITE_FILEPATH);
     
     // ————— GENERAL ———— //
@@ -317,17 +326,17 @@ void update()
 void render() {
     glClear(GL_COLOR_BUFFER_BIT);
     
-    g_shader_program.set_model_matrix(g_character_model_matrix);
+    g_character_program.set_model_matrix(g_character_model_matrix);
     
     // ———— PART 4 ———— //
-    draw_sprite_from_texture_atlas(&g_shader_program, g_character_texture_id, 0, CHARACTER_SHEET_ROWS, CHARACTER_SHEET_COLS);
+    draw_sprite_from_texture_atlas(&g_character_program, g_character_texture_id, 0, CHARACTER_SHEET_ROWS, CHARACTER_SHEET_COLS);
     // ———— PART 4 ———— //
     
-    g_shader_program.set_model_matrix(g_frame_model_matrix);
-    draw_sprite_from_texture_atlas(&g_shader_program, g_frame_texture_id, 0, FRAME_ROWS, FRAME_COLS);
+    g_frame_program.set_model_matrix(g_frame_model_matrix);
+    draw_sprite_from_texture_atlas(&g_frame_program, g_frame_texture_id, 0, FRAME_ROWS, FRAME_COLS);
     
-    draw_text(&g_shader_program, g_text_texture_id, std::string("PRESS S TO"), 0.25f, 0.0f, glm::vec3(-1.25f, 2.0f, 0.0f));
-    draw_text(&g_shader_program, g_text_texture_id, std::string("CHOOSE YOUR CHARACTER"), 0.25f, 0.01f, glm::vec3(-2.5f, 1.5f, 0.0f));
+    draw_text(&g_text_program, g_text_texture_id, std::string("PRESS S TO"), 0.25f, 0.0f, glm::vec3(-1.25f, 2.0f, 0.0f));
+    draw_text(&g_text_program, g_text_texture_id, std::string("CHOOSE YOUR CHARACTER"), 0.25f, 0.01f, glm::vec3(-2.5f, 1.5f, 0.0f));
     
     SDL_GL_SwapWindow(g_display_window);
 }
