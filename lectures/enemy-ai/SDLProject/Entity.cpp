@@ -73,7 +73,54 @@ void Entity::draw_sprite_from_texture_atlas(ShaderProgram* program, GLuint textu
     glDisableVertexAttribArray(program->get_tex_coordinate_attribute());
 }
 
-void Entity::update(float delta_time, Entity* collidable_entities, int collidable_entity_count)
+void Entity::ai_activate(Entity* player)
+{
+    switch (m_ai_type)
+    {
+    case WALKER:
+        ai_walk();
+        break;
+
+    case GUARD:
+        ai_guard(player);
+        break;
+
+    default:
+        break;
+    }
+}
+
+void Entity::ai_walk()
+{
+    m_movement = glm::vec3(-1.0f, 0.0f, 0.0f);
+}
+
+void Entity::ai_guard(Entity* player)
+{
+    switch (m_ai_state) {
+    case IDLE:
+        if (glm::distance(m_position, player->get_position()) < 3.0f) m_ai_state = WALKING;
+        break;
+
+    case WALKING:
+        if (m_position.x > player->get_position().x) {
+            m_movement = glm::vec3(-1.0f, 0.0f, 0.0f);
+        }
+        else {
+            m_movement = glm::vec3(1.0f, 0.0f, 0.0f);
+        }
+        break;
+
+    case ATTACKING:
+        break;
+
+    default:
+        break;
+    }
+}
+
+
+void Entity::update(float delta_time, Entity* player, Entity* collidable_entities, int collidable_entity_count)
 {
     if (!m_is_active) return;
 
@@ -81,6 +128,8 @@ void Entity::update(float delta_time, Entity* collidable_entities, int collidabl
     m_collided_bottom = false;
     m_collided_left = false;
     m_collided_right = false;
+
+    if (m_entity_type == ENEMY) ai_activate(player);
 
     // ––––– ANIMATION ––––– //
     if (m_animation_indices != NULL)
@@ -132,19 +181,12 @@ void const Entity::check_collision_y(Entity* collidable_entities, int collidable
 {
     for (int i = 0; i < collidable_entity_count; i++)
     {
-        // STEP 1: For every entity that our player can collide with...
         Entity* collidable_entity = &collidable_entities[i];
 
         if (check_collision(collidable_entity))
         {
-            // STEP 2: Calculate the distance between its centre and our centre
-            //         and use that to calculate the amount of overlap between
-            //         both bodies.
-            float y_distance = fabs(m_position.y - collidable_entity->m_position.y);
-            float y_overlap = fabs(y_distance - (m_height / 2.0f) - (collidable_entity->m_height / 2.0f));
-
-            // STEP 3: "Unclip" ourselves from the other entity, and zero our
-            //         vertical velocity.
+            float y_distance = fabs(m_position.y - collidable_entity->get_position().y);
+            float y_overlap = fabs(y_distance - (m_height / 2.0f) - (collidable_entity->get_height() / 2.0f));
             if (m_velocity.y > 0) {
                 m_position.y -= y_overlap;
                 m_velocity.y = 0;
@@ -167,8 +209,8 @@ void const Entity::check_collision_x(Entity* collidable_entities, int collidable
 
         if (check_collision(collidable_entity))
         {
-            float x_distance = fabs(m_position.x - collidable_entity->m_position.x);
-            float x_overlap = fabs(x_distance - (m_width / 2.0f) - (collidable_entity->m_width / 2.0f));
+            float x_distance = fabs(m_position.x - collidable_entity->get_position().x);
+            float x_overlap = fabs(x_distance - (m_width / 2.0f) - (collidable_entity->get_width() / 2.0f));
             if (m_velocity.x > 0) {
                 m_position.x -= x_overlap;
                 m_velocity.x = 0;
@@ -182,6 +224,7 @@ void const Entity::check_collision_x(Entity* collidable_entities, int collidable
         }
     }
 }
+
 
 void Entity::render(ShaderProgram* program)
 {
@@ -211,6 +254,7 @@ void Entity::render(ShaderProgram* program)
 
 bool const Entity::check_collision(Entity* other) const
 {
+    if (other == this) return false;
     // If either entity is inactive, there shouldn't be any collision
     if (!m_is_active || !other->m_is_active) return false;
 
