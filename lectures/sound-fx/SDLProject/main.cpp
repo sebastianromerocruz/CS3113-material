@@ -165,11 +165,13 @@ void initialise()
 
     // Set the music to half volume
     // MIX_MAX_VOLUME is a pre-defined constant
-    Mix_VolumeMusic(MIX_MAX_VOLUME / 2);
+    Mix_VolumeMusic(MIX_MAX_VOLUME / 4);
     Mix_VolumeChunk(
         g_bouncing_sfx,     // Set the volume of the bounce sound...
-        MIX_MAX_VOLUME / 4  // ... to 1/4th.
+        MIX_MAX_VOLUME / 2  // ... to 1/4th.
     );
+    
+//    Mix_HaltMusic();
 
     // ––––– PLATFORMS ––––– //
     GLuint platform_texture_id = load_texture(PLATFORM_FILEPATH);
