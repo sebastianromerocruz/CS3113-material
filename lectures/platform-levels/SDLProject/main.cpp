@@ -84,8 +84,8 @@ bool g_game_is_running  = true;
 ShaderProgram g_shader_program;
 glm::mat4 g_view_matrix, g_projection_matrix;
 
-float m_previous_ticks = 0.0f,
-m_accumulator = 0.0f;
+float   g_previous_ticks = 0.0f,
+        g_accumulator = 0.0f;
 
 // ————— GENERAL FUNCTIONS ————— //
 GLuint load_texture(const char* filepath)
@@ -252,14 +252,14 @@ void process_input()
 void update()
 {
     float ticks = (float)SDL_GetTicks() / MILLISECONDS_IN_SECOND;
-    float delta_time = ticks - m_previous_ticks;
-    m_previous_ticks = ticks;
+    float delta_time = ticks - g_previous_ticks;
+    g_previous_ticks = ticks;
 
-    delta_time += m_accumulator;
+    delta_time += g_accumulator;
 
     if (delta_time < FIXED_TIMESTEP)
     {
-        m_accumulator = delta_time;
+        g_accumulator = delta_time;
         return;
     }
 
@@ -269,7 +269,7 @@ void update()
         delta_time -= FIXED_TIMESTEP;
     }
 
-    m_accumulator = delta_time;
+    g_accumulator = delta_time;
 
     g_view_matrix = glm::mat4(1.0f);
     g_view_matrix = glm::translate(g_view_matrix, glm::vec3(-g_game_state.player->get_position().x, 0.0f, 0.0f));
