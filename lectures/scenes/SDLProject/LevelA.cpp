@@ -103,4 +103,8 @@ void LevelA::render(ShaderProgram *program)
 {
     m_state.map->render(program);
     m_state.player->render(program);
+    for (int i = 0; i < ENEMY_COUNT; i++)
+    {
+        m_state.enemies[i].render(program);
+    }
 }
