@@ -19,8 +19,8 @@ private:
     int m_height;
     
     // Here, the level_data is the numerical "drawing" of the map
-    unsigned int *m_level_data;
-    GLuint m_texture_id;
+    unsigned int    *m_level_data;
+    GLuint          m_texture_id;
     
     float m_tile_size;
     int   m_tile_count_x;
