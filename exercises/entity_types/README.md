@@ -16,7 +16,7 @@ Let's make a simplified simulation of this behaviour. Using the enum [**`EntityT
 
 ![example](assets/example.gif)
 
-<sub>**Figure 1**: Desired behaviour.</sub>
+<sub>**Figure 2**: Desired behaviour.</sub>
 
 Note that you'll have to copy the code from not just [**`main.cpp`**](SDLProject/main.cpp), but also [**`Entity.h`**](SDLProject/Entity.h) and [**`Entity.cpp`**](SDLProject/Entity.cpp) to be in the same starting point as me. Also, in order to generate a random integer from 0 to `limit` in C++, one needs to do the following:
 
