@@ -1,4 +1,4 @@
-enum EntityType { PLATFORM, PLAYER, ENEMY };
+enum EntityType { PLATFORM, PLAYER, ENEMY, TRAP   };
 enum AIType     { WALKER, GUARD             };
 enum AIState    { WALKING, IDLE, ATTACKING  };
 

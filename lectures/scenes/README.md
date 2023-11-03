@@ -1,12 +1,10 @@
-<h2 align=center>Lecture 16</h2>
+<h2 align=center>Week 8: <em>Part 2</em></h2>
 
 <h1 align=center>Scenes</h1>
 
-<h3 align=center>28 Messidor, Year CCXXXI</h3>
+<h3 align=center>3 Red Wolf Moon, Imperial Year MMXXIII</h3>
 
-***Song of the day***: _[**Cosmic Sermonettes EP**](https://youtu.be/mZq7RZd-9l8) by The Unperson (2019)._
-
----
+<p align=center><strong><em>Song of the day</strong>: <a href="https://youtu.be/Opxhh9Oh3rg?si=QVt7OJAMzZXbR8s_"><strong><u>Now and Then</u></strong></a> by The Beatles (2023).</em></p>
 
 ### Sections
 

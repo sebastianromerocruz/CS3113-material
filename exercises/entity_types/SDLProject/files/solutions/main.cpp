@@ -185,6 +185,9 @@ void initialise()
     g_state.platforms[PLATFORM_COUNT - 2].set_entity_type(PLATFORM);
     g_state.platforms[PLATFORM_COUNT - 2].update(0.0f, g_state.player, NULL, 0);
     
+    // Setting a trap
+    g_state.platforms[rand() % PLATFORM_COUNT].set_entity_type(TRAP);
+    
     // ––––– PLAYER (GEORGE) ––––– //
     // Existing
     g_state.player = new Entity();
@@ -329,7 +332,7 @@ void render()
 }
 
 void shutdown()
-{    
+{
     SDL_Quit();
     
     delete [] g_state.platforms;

@@ -120,3 +120,4 @@ public:
     void const set_width(float new_width)                   { m_width = new_width;                  };
     void const set_height(float new_height)                 { m_height = new_height;                };
 };
+

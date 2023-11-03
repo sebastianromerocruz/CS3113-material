@@ -185,6 +185,16 @@ void const Entity::check_collision_y(Entity* collidable_entities, int collidable
 
         if (check_collision(collidable_entity))
         {
+            // If there is a collision, check if the entity we are colliding
+            // with is a TRAP
+            if (collidable_entity->get_entity_type() == TRAP)
+            {
+                // If it is, deactivate the entity we are colliding with
+                // and skip to the next entity
+                collidable_entity->deactivate();
+                continue;
+            }
+            
             float y_distance = fabs(m_position.y - collidable_entity->get_position().y);
             float y_overlap = fabs(y_distance - (m_height / 2.0f) - (collidable_entity->get_height() / 2.0f));
             if (m_velocity.y > 0) {

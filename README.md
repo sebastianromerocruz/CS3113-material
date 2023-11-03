@@ -77,7 +77,7 @@
 - _10/06_: [**User Input**](exercises/player_input/)
 - _10/13_: [**Collision Detection**](exercises/collision-detection/)
 - _10/27_: [**Animation**](exercises/animation/)
-<!-- - _07/06_: **[Entity Types](exercises/entity_types/)** -->
+- _11/03_: [**Entity Types**](exercises/entity_types/)
 
 <sub>To be released every lecture day before class.</sub>
 

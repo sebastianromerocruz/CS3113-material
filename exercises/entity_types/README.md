@@ -1,12 +1,18 @@
-<!-- <h2 align=center>Lecture 13</h2>
+<h2 align=center>Week 8</h2>
 
 <h1 align=center>Exercise: <em>Entity Types</em></h1>
 
-<h3 align=center>17 Messidor, Year CCXXXI</h3>
+<h3 align=center>3 Red Wolf Moon, Imperial Year MMXXIII</h3>
 
 ### Instructions
 
-Using the enum [**`EntityType`**](SDLProject/Entity.h) and the `Entity` class's `m_is_active` and `m_type` attributes, write code that will make a random platform disappear when our player steps on it:
+A classic staple of video games is the collapsing platform, wherein the platform that they player is stepping on suddenly collapses or disappears:
+
+![mario](https://media.tenor.com/LZuXSlobT0YAAAAC/mario-super-mario-bros-movie.gif)
+
+<sub>**Figure 1**: A platform collapsing on Mario as soon as they step on it.</sub>
+
+Let's make a simplified simulation of this behaviour. Using the enum [**`EntityType`**](SDLProject/Entity.h) and the `Entity` class's `m_is_active` and `m_type` attributes, write code that will make a random platform disappear when our player steps on it:
 
 ![example](assets/example.gif)
 
@@ -26,6 +32,8 @@ int main()
 }
 ```
 
----
+Be sure to:
 
-The solution can be found [**here**](SDLProject/files/main_complete.cpp), [**here**](SDLProject/files/Entity_complete.cpp), and [**here**](SDLProject/files/Entity_complete.h). -->
+1. Create an entity type that represents the trap (`Entity.h`)
+2. Assign that new type to a random platform tile (`main.cpp`)
+3. Make sure that if a player-type entity makes a vertical collision with a trap-type platform, to make that platform disappear and not register a collision (`Entity.cpp`)

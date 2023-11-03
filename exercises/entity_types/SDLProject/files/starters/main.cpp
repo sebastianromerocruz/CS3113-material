@@ -11,6 +11,7 @@
 
 #include <SDL.h>
 #include <SDL_opengl.h>
+#include <SDL_mixer.h>
 #include "glm/mat4x4.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "ShaderProgram.h"
@@ -52,6 +53,21 @@ const char PLATFORM_FILEPATH[]    = "assets/platformPack_tile027.png";
 const int NUMBER_OF_TEXTURES = 1;
 const GLint LEVEL_OF_DETAIL  = 0;
 const GLint TEXTURE_BORDER   = 0;
+
+const int CD_QUAL_FREQ    = 44100,
+          AUDIO_CHAN_AMT  = 2,     // stereo
+          AUDIO_BUFF_SIZE = 4096;
+
+const char BGM_FILEPATH[] = "assets/crypto.mp3",
+           SFX_FILEPATH[] = "assets/bounce.wav";
+
+const int PLAY_ONCE = 0,    // play once, loop never
+          NEXT_CHNL = -1,   // next available channel
+          ALL_SFX_CHNL = -1;
+
+
+Mix_Music *g_music;
+Mix_Chunk *g_jump_sfx;
 
 // ––––– GLOBAL VARIABLES ––––– //
 GameState g_state;
@@ -96,7 +112,7 @@ GLuint load_texture(const char* filepath)
 
 void initialise()
 {
-    SDL_Init(SDL_INIT_VIDEO);
+    SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
     g_display_window = SDL_CreateWindow("Hello, Physics (again)!",
                                       SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                                       WINDOW_WIDTH, WINDOW_HEIGHT,
@@ -109,19 +125,38 @@ void initialise()
     glewInit();
 #endif
     
+    // ––––– VIDEO ––––– //
     glViewport(VIEWPORT_X, VIEWPORT_Y, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
     
-    g_program.Load(V_SHADER_PATH, F_SHADER_PATH);
+    g_program.load(V_SHADER_PATH, F_SHADER_PATH);
     
     g_view_matrix = glm::mat4(1.0f);
     g_projection_matrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);
     
-    g_program.SetProjectionMatrix(g_projection_matrix);
-    g_program.SetViewMatrix(g_view_matrix);
+    g_program.set_projection_matrix(g_projection_matrix);
+    g_program.set_view_matrix(g_view_matrix);
     
-    glUseProgram(g_program.programID);
+    glUseProgram(g_program.get_program_id());
     
     glClearColor(BG_RED, BG_BLUE, BG_GREEN, BG_OPACITY);
+    
+    // ––––– BGM ––––– //
+    Mix_OpenAudio(CD_QUAL_FREQ, MIX_DEFAULT_FORMAT, AUDIO_CHAN_AMT, AUDIO_BUFF_SIZE);
+    
+    // STEP 1: Have openGL generate a pointer to your music file
+    g_music = Mix_LoadMUS(BGM_FILEPATH); // works only with mp3 files
+    
+    // STEP 2: Play music
+    Mix_PlayMusic(
+                  g_music,  // music file
+                  -1        // -1 means loop forever; 0 means play once, look never
+                  );
+    
+    // STEP 3: Set initial volume
+    Mix_VolumeMusic(MIX_MAX_VOLUME / 2.0);
+    
+    // ––––– SFX ––––– //
+    g_jump_sfx = Mix_LoadWAV(SFX_FILEPATH);
     
     // ––––– PLATFORMS ––––– //
     GLuint platform_texture_id = load_texture(PLATFORM_FILEPATH);
@@ -135,27 +170,27 @@ void initialise()
         g_state.platforms[i].set_position(glm::vec3(i - 1.0f, -3.0f, 0.0f));
         g_state.platforms[i].set_width(0.4f);
         g_state.platforms[i].set_entity_type(PLATFORM);
-        g_state.platforms[i].update(0.0f, NULL, 0);
+        g_state.platforms[i].update(0.0f, g_state.player, NULL, 0);
     }
     
     g_state.platforms[PLATFORM_COUNT - 1].m_texture_id = platform_texture_id;
     g_state.platforms[PLATFORM_COUNT - 1].set_position(glm::vec3(-1.5f, -2.35f, 0.0f));
     g_state.platforms[PLATFORM_COUNT - 1].set_width(0.4f);
     g_state.platforms[PLATFORM_COUNT - 1].set_entity_type(PLATFORM);
-    g_state.platforms[PLATFORM_COUNT - 1].update(0.0f, NULL, 0);
+    g_state.platforms[PLATFORM_COUNT - 1].update(0.0f, g_state.player, NULL, 0);
     
     g_state.platforms[PLATFORM_COUNT - 2].m_texture_id = platform_texture_id;
     g_state.platforms[PLATFORM_COUNT - 2].set_position(glm::vec3(2.5f, -2.5f, 0.0f));
     g_state.platforms[PLATFORM_COUNT - 2].set_width(0.4f);
     g_state.platforms[PLATFORM_COUNT - 2].set_entity_type(PLATFORM);
-    g_state.platforms[PLATFORM_COUNT - 2].update(0.0f, NULL, 0);
+    g_state.platforms[PLATFORM_COUNT - 2].update(0.0f, g_state.player, NULL, 0);
     
     // ––––– PLAYER (GEORGE) ––––– //
     // Existing
     g_state.player = new Entity();
     g_state.player->set_position(glm::vec3(0.0f));
     g_state.player->set_movement(glm::vec3(0.0f));
-    g_state.player->m_speed = 1.0f;
+    g_state.player->set_speed(1.0f);
     g_state.player->set_acceleration(glm::vec3(0.0f, -4.905f, 0.0f));
     g_state.player->m_texture_id = load_texture(SPRITESHEET_FILEPATH);
     
@@ -173,12 +208,10 @@ void initialise()
     g_state.player->m_animation_rows   = 4;
     g_state.player->set_height(0.9f);
     g_state.player->set_width(0.9f);
+    g_state.player->set_entity_type(PLAYER);
     
     // Jumping
     g_state.player->m_jumping_power = 3.0f;
-    
-    // And set a trap by making one of the platforms a TRAP type
-    g_state.platforms[rand() % PLATFORM_COUNT].set_entity_type(TRAP);
     
     // ––––– GENERAL ––––– //
     glEnable(GL_BLEND);
@@ -208,8 +241,26 @@ void process_input()
                         
                     case SDLK_SPACE:
                         // Jump
-                        if (g_state.player->m_collided_bottom) g_state.player->m_is_jumping = true;
+                        if (g_state.player->m_collided_bottom)
+                        {
+                            g_state.player->m_is_jumping = true;
+                            Mix_PlayChannel(NEXT_CHNL, g_jump_sfx, 0);
+                            
+                            /**
+                             Mix_FadeInChannel(channel_id, sound_chunk, loops, fade_in_time);
+                             
+                             
+                             */
+                        }
                         break;
+                        
+                    case SDLK_h:
+                        // Stop music
+                        Mix_HaltMusic();
+                        break;
+                        
+                    case SDLK_p:
+                        Mix_PlayMusic(g_music, -1);
                         
                     default:
                         break;
@@ -224,18 +275,22 @@ void process_input()
 
     if (key_state[SDL_SCANCODE_LEFT])
     {
-        g_state.player->m_movement.x = -1.0f;
+        g_state.player->move_left();
         g_state.player->m_animation_indices = g_state.player->m_walking[g_state.player->LEFT];
     }
     else if (key_state[SDL_SCANCODE_RIGHT])
     {
-        g_state.player->m_movement.x = 1.0f;
+        g_state.player->move_right();
         g_state.player->m_animation_indices = g_state.player->m_walking[g_state.player->RIGHT];
     }
     
-    if (glm::length(g_state.player->m_movement) > 1.0f)
+    if (glm::length(g_state.player->get_movement()) > 1.0f)
     {
-        g_state.player->m_movement = glm::normalize(g_state.player->m_movement);
+        g_state.player->set_movement(
+                                     glm::normalize(
+                                                    g_state.player->get_movement()
+                                                    )
+                                     );
     }
 }
 
@@ -255,7 +310,7 @@ void update()
     
     while (delta_time >= FIXED_TIMESTEP)
     {
-        g_state.player->update(FIXED_TIMESTEP, g_state.platforms, PLATFORM_COUNT);
+        g_state.player->update(FIXED_TIMESTEP, g_state.player, g_state.platforms, PLATFORM_COUNT);
         delta_time -= FIXED_TIMESTEP;
     }
     
@@ -296,3 +351,4 @@ int main(int argc, char* argv[])
     shutdown();
     return 0;
 }
+
