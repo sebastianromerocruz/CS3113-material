@@ -1,7 +1,7 @@
 <h4 align=center>NYU Tandon School of Engineering<h4>
 <h3 align=center>CS-UY 3113 Summer 2023</h3>
 <h1 align=center>Project 4: <em>Rise of the AI</em></h1>
-<h3 align=center><em>Due: 11:59pm, Saturday, October 18th, 2023</em></h3>
+<h3 align=center><em>Due: 11:59pm, Saturday, November 18th, 2023</em></h3>
  
 ### Submission instructions
 1. You _must_ use delta time, the `Entity` and `Map` classes, and fixed time steps in this assignment.
@@ -14,7 +14,7 @@
 /**
 * Author: [Your name here]
 * Assignment: Rise of the AI
-* Date due: 2023-10-18, 11:59pm
+* Date due: 2023-11-18, 11:59pm
 * I pledge that I have completed this assignment without
 * collaborating with anyone else, in conformance with the
 * NYU School of Engineering Policies and Procedures on
