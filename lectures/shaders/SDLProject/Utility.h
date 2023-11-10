@@ -16,5 +16,5 @@
 class Utility {
 public:
     static GLuint load_texture(const char* filepath);
-    static void draw_text(ShaderProgram *program, GLuint font_texture_id, std::string text, float screen_size, float spacing, glm::vec3 position);
+    static void draw_text(ShaderProgram* program, GLuint font_texture_id, std::string text, float screen_size, float spacing, glm::vec3 position);
 };
