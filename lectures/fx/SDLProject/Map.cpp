@@ -59,23 +59,23 @@ void Map::build()
     this->m_bottom_bound = -(m_tile_size * m_height) + (m_tile_size / 2);
 }
 
-void Map::render(ShaderProgram *program)
+void Map::render(ShaderProgram* program)
 {
     glm::mat4 model_matrix = glm::mat4(1.0f);
-    program->SetModelMatrix(model_matrix);
-    
-    glUseProgram(program->programID);
-    
-    glVertexAttribPointer(program->positionAttribute, 2, GL_FLOAT, false, 0, m_vertices.data());
-    glEnableVertexAttribArray(program->positionAttribute);
-    glVertexAttribPointer(program->texCoordAttribute, 2, GL_FLOAT, false, 0, m_texture_coordinates.data());
-    glEnableVertexAttribArray(program->texCoordAttribute);
-    
+    program->set_model_matrix(model_matrix);
+
+    glUseProgram(program->get_program_id());
+
+    glVertexAttribPointer(program->get_position_attribute(), 2, GL_FLOAT, false, 0, m_vertices.data());
+    glEnableVertexAttribArray(program->get_position_attribute());
+    glVertexAttribPointer(program->get_tex_coordinate_attribute(), 2, GL_FLOAT, false, 0, m_texture_coordinates.data());
+    glEnableVertexAttribArray(program->get_tex_coordinate_attribute());
+
     glBindTexture(GL_TEXTURE_2D, m_texture_id);
-    
-    glDrawArrays(GL_TRIANGLES, 0, (int) m_vertices.size() / 2);
-    glDisableVertexAttribArray(program->positionAttribute);
-    glDisableVertexAttribArray(program->texCoordAttribute);
+
+    glDrawArrays(GL_TRIANGLES, 0, (int)m_vertices.size() / 2);
+    glDisableVertexAttribArray(program->get_position_attribute());
+    glDisableVertexAttribArray(program->get_position_attribute());
 }
 
 bool Map::is_solid(glm::vec3 position, float *penetration_x, float *penetration_y)
