@@ -57,7 +57,7 @@ Scene   *g_levels[2];
 SDL_Window* g_display_window;
 bool g_game_is_running = true;
 
-ShaderProgram g_program;
+ShaderProgram g_shader_program;
 glm::mat4 g_view_matrix, g_projection_matrix;
 
 float g_previous_ticks = 0.0f;
@@ -88,17 +88,17 @@ void initialise()
 #endif
     
     glViewport(VIEWPORT_X, VIEWPORT_Y, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
-    
-    g_program.Load(V_SHADER_PATH, F_SHADER_PATH);
-    
+
+    g_shader_program.load(V_SHADER_PATH, F_SHADER_PATH);
+
     g_view_matrix = glm::mat4(1.0f);
     g_projection_matrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);
-    
-    g_program.SetProjectionMatrix(g_projection_matrix);
-    g_program.SetViewMatrix(g_view_matrix);
-    
-    glUseProgram(g_program.programID);
-    
+
+    g_shader_program.set_projection_matrix(g_projection_matrix);
+    g_shader_program.set_view_matrix(g_view_matrix);
+
+    glUseProgram(g_shader_program.get_program_id());
+
     glClearColor(BG_RED, BG_BLUE, BG_GREEN, BG_OPACITY);
     
     // enable blending
@@ -220,11 +220,11 @@ void update()
 
 void render()
 {
-    g_program.SetViewMatrix(g_view_matrix);
+    g_shader_program.set_view_matrix(g_view_matrix);
     glClear(GL_COLOR_BUFFER_BIT);
  
-    glUseProgram(g_program.programID);
-    g_current_scene->render(&g_program);
+    glUseProgram(g_shader_program.get_program_id());
+    g_current_scene->render(&g_shader_program);
     g_effects->render();
     
     SDL_GL_SwapWindow(g_display_window);

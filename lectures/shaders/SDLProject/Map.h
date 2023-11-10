@@ -17,43 +17,43 @@ class Map {
 private:
     int m_width;
     int m_height;
-    
-    unsigned int *m_level_data;
+
+    unsigned int* m_level_data;
     GLuint        m_texture_id;
-    
+
     float m_tile_size;
     int   m_tile_count_x;
     int   m_tile_count_y;
-    
+
     std::vector<float> m_vertices;
     std::vector<float> m_texture_coordinates;
-    
+
     float m_left_bound, m_right_bound, m_top_bound, m_bottom_bound;
-    
+
 public:
-    Map(int width, int height, unsigned int *level_data, GLuint texture_id, float tile_size, int
-    tile_count_x, int tile_count_y);
-    
+    Map(int width, int height, unsigned int* level_data, GLuint texture_id, float tile_size, int
+        tile_count_x, int tile_count_y);
+
     void build();
-    void render(ShaderProgram *program);
-    bool is_solid(glm::vec3 position, float *penetration_x, float *penetration_y);
-    
+    void render(ShaderProgram* program);
+    bool is_solid(glm::vec3 position, float* penetration_x, float* penetration_y);
+
     // Getters
-    int const get_width()  const  { return this->m_width;  }
-    int const get_height() const  { return this->m_height; }
-    
+    int const get_width()  const { return this->m_width; }
+    int const get_height() const { return this->m_height; }
+
     unsigned int* const get_level_data() const { return this->m_level_data; }
     GLuint        const get_texture_id() const { return this->m_texture_id; }
-    
+
     float const get_tile_size() const { return this->m_tile_size; }
     int const get_tile_count_x() const { return this->m_tile_count_x; }
     int const get_tile_count_y() const { return this->m_tile_count_y; }
-    
-    std::vector<float> const get_vertices()            const { return this->m_vertices;             }
-    std::vector<float> const get_texture_coordinates() const { return this-> m_texture_coordinates; }
-    
-    float const get_left_bound()   const { return this->m_left_bound;   }
-    float const get_right_bound()  const { return this->m_right_bound;  }
-    float const get_top_bound()    const { return this->m_top_bound;    }
+
+    std::vector<float> const get_vertices()            const { return this->m_vertices; }
+    std::vector<float> const get_texture_coordinates() const { return this->m_texture_coordinates; }
+
+    float const get_left_bound()   const { return this->m_left_bound; }
+    float const get_right_bound()  const { return this->m_right_bound; }
+    float const get_top_bound()    const { return this->m_top_bound; }
     float const get_bottom_bound() const { return this->m_bottom_bound; }
 };

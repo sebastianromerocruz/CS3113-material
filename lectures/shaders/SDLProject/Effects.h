@@ -20,7 +20,7 @@ class Effects {
 private:
     ShaderProgram m_program;
     EffectType    m_current_effect;
-    
+
     float m_alpha;
     float m_effect_speed;
     float m_size;
@@ -28,7 +28,7 @@ private:
 
 public:
     glm::vec3 m_view_offset;
-    
+
     Effects(glm::mat4 projection_matrix, glm::mat4 view_matrix);
 
     void draw_overlay();
