@@ -162,18 +162,18 @@ void process_input()
 
     if (key_state[SDL_SCANCODE_LEFT])
     {
-        g_current_scene->m_state.player->m_movement.x = -1.0f;
+        g_current_scene->m_state.player->move_left();
         g_current_scene->m_state.player->m_animation_indices = g_current_scene->m_state.player->m_walking[g_current_scene->m_state.player->LEFT];
     }
     else if (key_state[SDL_SCANCODE_RIGHT])
     {
-        g_current_scene->m_state.player->m_movement.x = 1.0f;
+        g_current_scene->m_state.player->move_right();
         g_current_scene->m_state.player->m_animation_indices = g_current_scene->m_state.player->m_walking[g_current_scene->m_state.player->RIGHT];
     }
     
-    if (glm::length(g_current_scene->m_state.player->m_movement) > 1.0f)
+    if (glm::length(g_current_scene->m_state.player->get_movement()) > 1.0f)
     {
-        g_current_scene->m_state.player->m_movement = glm::normalize(g_current_scene->m_state.player->m_movement);
+        g_current_scene->m_state.player->set_movement(glm::normalize(g_current_scene->m_state.player->get_movement()));
     }
 }
 

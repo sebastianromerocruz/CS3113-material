@@ -1,12 +1,10 @@
-<h2 align=center>Lecture 18</h2>
+<h2 align=center>Week 9: <em>Part 1</em></h2>
 
 <h1 align=center>Shaders</h1>
 
-<h3 align=center>6 Thermidor, Year CCXXXI</h3>
+<h3 align=center>10 Red Wolf Moon, Imperial Year MMXXIII</h3>
 
-***Song of the day***: _[**Where Was You At**](https://youtu.be/PSBWtq4evTw) by War (1972)._
-
----
+<p align=center><strong><em>Song of the day</strong>: <a href="https://youtu.be/y3nwDlcYaUg?si=4nMK-QQeOvH8fOxC"><strong><u>DONT YOU THINK IT'D BE NICE?</u></strong></a> by PAPOOZ (2023).</em></p>
 
 ### Sections
 

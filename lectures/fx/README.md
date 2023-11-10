@@ -1,12 +1,10 @@
-<h2 align=center>Lecture 17</h2>
+<h2 align=center>Week 9: <em>Part 1</em></h2>
 
 <h1 align=center>Effects</h1>
 
-<h3 align=center>1 Thermidor, Year CCXXXI</h3>
+<h3 align=center>10 Red Wolf Moon, Imperial Year MMXXIII</h3>
 
-***Song of the day***: _[**Canção Que Morre No Ar**](https://youtu.be/G_Dw4Pie32E) by Gal Costa (1974)_
-
----
+<p align=center><strong><em>Song of the day</strong>: <a href="https://youtu.be/y3nwDlcYaUg?si=4nMK-QQeOvH8fOxC"><strong><u>DONT YOU THINK IT'D BE NICE?</u></strong></a> by PAPOOZ (2023).</em></p>
 
 ### Sections
 
