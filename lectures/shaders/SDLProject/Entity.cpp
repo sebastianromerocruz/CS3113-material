@@ -59,16 +59,16 @@ void Entity::draw_sprite_from_texture_atlas(ShaderProgram* program, GLuint textu
     // Step 4: And render
     glBindTexture(GL_TEXTURE_2D, texture_id);
 
-    glVertexAttribPointer(program->m_position_attribute, 2, GL_FLOAT, false, 0, vertices);
-    glEnableVertexAttribArray(program->m_position_attribute);
+    glVertexAttribPointer(program->get_position_attribute(), 2, GL_FLOAT, false, 0, vertices);
+    glEnableVertexAttribArray(program->get_position_attribute());
 
-    glVertexAttribPointer(program->m_tex_coord_attribute, 2, GL_FLOAT, false, 0, tex_coords);
-    glEnableVertexAttribArray(program->m_tex_coord_attribute);
+    glVertexAttribPointer(program->get_tex_coordinate_attribute(), 2, GL_FLOAT, false, 0, tex_coords);
+    glEnableVertexAttribArray(program->get_tex_coordinate_attribute());
 
     glDrawArrays(GL_TRIANGLES, 0, 6);
 
-    glDisableVertexAttribArray(program->m_position_attribute);
-    glDisableVertexAttribArray(program->m_tex_coord_attribute);
+    glDisableVertexAttribArray(program->get_position_attribute());
+    glDisableVertexAttribArray(program->get_tex_coordinate_attribute());
 }
 
 void Entity::ai_activate(Entity* player)
@@ -317,15 +317,15 @@ void Entity::render(ShaderProgram* program)
 
     glBindTexture(GL_TEXTURE_2D, m_texture_id);
 
-    glVertexAttribPointer(program->m_position_attribute, 2, GL_FLOAT, false, 0, vertices);
-    glEnableVertexAttribArray(program->m_position_attribute);
-    glVertexAttribPointer(program->m_tex_coord_attribute, 2, GL_FLOAT, false, 0, tex_coords);
-    glEnableVertexAttribArray(program->m_tex_coord_attribute);
+    glVertexAttribPointer(program->get_position_attribute(), 2, GL_FLOAT, false, 0, vertices);
+    glEnableVertexAttribArray(program->get_position_attribute());
+    glVertexAttribPointer(program->get_tex_coordinate_attribute(), 2, GL_FLOAT, false, 0, tex_coords);
+    glEnableVertexAttribArray(program->get_tex_coordinate_attribute());
 
     glDrawArrays(GL_TRIANGLES, 0, 6);
 
-    glDisableVertexAttribArray(program->m_position_attribute);
-    glDisableVertexAttribArray(program->m_tex_coord_attribute);
+    glDisableVertexAttribArray(program->get_position_attribute());
+    glDisableVertexAttribArray(program->get_tex_coordinate_attribute());
 }
 
 bool const Entity::check_collision(Entity* other) const
