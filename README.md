@@ -51,10 +51,10 @@
 8. **Week 8**: Map and stage building
     1. [**Tilesets and Tilemaps**](lectures/platform-levels/)
     2. [**Scenes**](lectures/scenes/)
-9. **Week 9**: Special effects
+9. **Weeks 9 and 10**: Special effects
     1. [**Effects**](lectures/fx/)
     2. [**Shaders**](lectures/shaders/)
-10. **Week 10**: Intro to 3D
+<!-- 10. **Week 10**: Intro to 3D
     <!-- 1. [**Intro to 3D**](lectures/SDL3D/SDLProject/)
     2. [**3D Models**](lectures/3d-models/SDLProject/) -->
 11. **Week 11**: Playtesting and publishing your game
