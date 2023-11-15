@@ -20,10 +20,10 @@
 7.  [**Computer/Software Requirements**](#computersoftware-requirements)
 8.  [**Grading Scheme**](#grading-scheme)
 9.  [**Deadlines**](#deadlines)
-10. [**Course Weekly Schedule**](#course-weekly-schedule)
-11. [**Getting Help and Slack**](#getting-help-and-slack)
-12. [**Moses Center Statement of Disability**](#moses-center-statement-of-disability)
-13. [**Academic Integrity**](#academic-integrity)
+<!-- 10. [**Course Weekly Schedule**](#course-weekly-schedule) -->
+10. [**Getting Help and Slack**](#getting-help-and-slack)
+11. [**Moses Center Statement of Disability**](#moses-center-statement-of-disability)
+12. [**Academic Integrity**](#academic-integrity)
 
 ### _Lecture Notes_
 
@@ -166,7 +166,7 @@ As for your final letter grade, the following scale will be used:
     - While I check email regularly, do not expect a response over the weekend or close to deadlines.
     - Your code must compile. Code that does not compile will receive a grade of 0.
     - Late projects will have 10 points deducted per day. Late projects will not be accepted after 2 days.
-
+<!-- 
 ### _Course Weekly Schedule_
 
 | **Week**    | **Topic**                       |
@@ -185,7 +185,7 @@ As for your final letter grade, the following scale will be used:
 | **Week 12** | Introduction to 3D Graphics     |
 | **Week 13** | Advanced 3D Graphics            |
 | **Week 14** | Prototyping and Polishing       |
-| **Week 15** | Final Project Presentations     |
+| **Week 15** | Final Project Presentations     | -->
 
 All work is to be done on your own. There are no group projects.
 **There is no extra credit** in this course and the grades are **not curved**.
