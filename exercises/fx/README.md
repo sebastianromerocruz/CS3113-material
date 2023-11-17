@@ -10,7 +10,7 @@ Last class, we learnt how to create the fading in and out special effects for ou
 
 ![shake](assets/shake.gif)
 
-<sub>**Figure 1**: George so heavy the ground shakes when he falls down</sub>
+<sub>**Figure 1**: Desired behavior</sub>
 
 Modify [**`main.cpp`**](SDLProject/main.cpp), [**`Effects.cpp`**](SDLProject/Effects.cpp), and [**`Effects.h`**](SDLProject/Effects.h) to make the screen shake after George landed after falling down (but not necessarily from jumping).
 
