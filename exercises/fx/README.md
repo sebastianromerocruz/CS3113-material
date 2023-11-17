@@ -8,7 +8,7 @@
 
 Last class, we learnt how to create the fading in and out special effects for our program. In this exercise, let's try to implement an earthquake effect.
 
-![shake](/assets/shake.gif)
+![shake](assets/shake.gif)
 
 <sub>**Figure 1**: George so heavy the ground shakes when he falls down</sub>
 
