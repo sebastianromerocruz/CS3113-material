@@ -140,16 +140,16 @@ void draw_sprite_from_texture_atlas(ShaderProgram *program, GLuint texture_id, i
     // Step 4: And render
     glBindTexture(GL_TEXTURE_2D, texture_id);
     
-    glVertexAttribPointer(program->positionAttribute, 2, GL_FLOAT, false, 0, vertices);
-    glEnableVertexAttribArray(program->positionAttribute);
+    glVertexAttribPointer(program.get_position_attribute(), 2, GL_FLOAT, false, 0, vertices);
+    glEnableVertexAttribArray(program.get_position_attribute());
     
-    glVertexAttribPointer(program->texCoordAttribute, 2, GL_FLOAT, false, 0, tex_coords);
-    glEnableVertexAttribArray(program->texCoordAttribute);
+    glVertexAttribPointer(program.get_tex_coordinate_attribute(), 2, GL_FLOAT, false, 0, tex_coords);
+    glEnableVertexAttribArray(program.get_tex_coordinate_attribute());
     
     glDrawArrays(GL_TRIANGLES, 0, 6);
     
-    glDisableVertexAttribArray(program->positionAttribute);
-    glDisableVertexAttribArray(program->texCoordAttribute);
+    glDisableVertexAttribArray(program.get_position_attribute();
+    glDisableVertexAttribArray(program.get_tex_coordinate_attribute());
 }
 ```
 
@@ -164,7 +164,7 @@ void render()
 {
     glClear(GL_COLOR_BUFFER_BIT);
   
-    program.SetModelMatrix(model_matrix);
+    program.set_model_matrix(model_matrix);
 
     // Here, the 0th sprite is being rendered. Hence, the 0
     draw_sprite_from_texture_atlas(&program, player_texture_id, 0, SPRITESHEET_DIMENSIONS, SPRITESHEET_DIMENSIONS);
@@ -297,7 +297,7 @@ if (glm::length(g_player_movement) != 0)
 
 <sub>**Code Block 6**: As simple as this.</sub>
 
-#### Part 5: _Text_
+### Part 5: _Text_
 
 When picking out character sets, using those that are located and spaced in an organised way goes a long way when it comes to actually putting them on screen. Take a look at the sprite sheet in figure 9. The fact that the letters are placed in alphabetical order can help us make extracting these specific characters a matter of a simple loop—it also happens to follow ASCII values.
 
@@ -306,7 +306,7 @@ For text, it's actually pretty handy to use C++'s `std::vector` class to store o
 ```c++
 const int FONTBANK_SIZE = 16;
 
-void DrawText(ShaderProgram *program, GLuint font_texture_id, std::string text, float screen_size, float spacing, glm::vec3 position)
+void draw_text(ShaderProgram *program, GLuint font_texture_id, std::string text, float screen_size, float spacing, glm::vec3 position)
 {
     // Scale the size of the fontbank in the UV-plane
     // We will use this for spacing and positioning
@@ -353,19 +353,19 @@ void DrawText(ShaderProgram *program, GLuint font_texture_id, std::string text, 
     glm::mat4 model_matrix = glm::mat4(1.0f);
     model_matrix = glm::translate(model_matrix, position);
     
-    program->SetModelMatrix(model_matrix);
-    glUseProgram(program->programID);
+    program->set_model_matrix(model_matrix);
+    glUseProgram(program.get_program_id());
     
-    glVertexAttribPointer(program->positionAttribute, 2, GL_FLOAT, false, 0, vertices.data());
-    glEnableVertexAttribArray(program->positionAttribute);
-    glVertexAttribPointer(program->texCoordAttribute, 2, GL_FLOAT, false, 0, texture_coordinates.data());
-    glEnableVertexAttribArray(program->texCoordAttribute);
+    glVertexAttribPointer(program.get_position_attribute(), 2, GL_FLOAT, false, 0, vertices.data());
+    glEnableVertexAttribArray(program.get_position_attribute());
+    glVertexAttribPointer(program.get_tex_coordinate_attribute(), 2, GL_FLOAT, false, 0, texture_coordinates.data());
+    glEnableVertexAttribArray(program.get_tex_coordinate_attribute());
     
     glBindTexture(GL_TEXTURE_2D, font_texture_id);
     glDrawArrays(GL_TRIANGLES, 0, (int) (text.size() * 6));
     
-    glDisableVertexAttribArray(program->positionAttribute);
-    glDisableVertexAttribArray(program->texCoordAttribute);
+    glDisableVertexAttribArray(program.get_position_attribute());
+    glDisableVertexAttribArray(program.get_tex_coordinate_attribute());
 }
 ```
 
