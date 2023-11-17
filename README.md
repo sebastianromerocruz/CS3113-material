@@ -78,7 +78,7 @@
 - _10/13_: [**Collision Detection**](exercises/collision-detection/)
 - _10/27_: [**Animation**](exercises/animation/)
 - _11/03_: [**Entity Types**](exercises/entity_types/)
-- _11/17_: [**FX**](exercises/entity_types/README.md)
+- _11/17_: [**FX**](exercises/fx/README.md)
 
 <sub>To be released every lecture day before class.</sub>
 
