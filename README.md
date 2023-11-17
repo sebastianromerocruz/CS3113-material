@@ -20,10 +20,10 @@
 7.  [**Computer/Software Requirements**](#computersoftware-requirements)
 8.  [**Grading Scheme**](#grading-scheme)
 9.  [**Deadlines**](#deadlines)
-<!-- 10. [**Course Weekly Schedule**](#course-weekly-schedule) -->
 10. [**Getting Help and Slack**](#getting-help-and-slack)
 11. [**Moses Center Statement of Disability**](#moses-center-statement-of-disability)
 12. [**Academic Integrity**](#academic-integrity)
+<!-- 10. [**Course Weekly Schedule**](#course-weekly-schedule) -->
 
 ### _Lecture Notes_
 
@@ -54,9 +54,6 @@
 9. **Weeks 9 and 10**: Special effects
     1. [**Effects**](lectures/fx/)
     2. [**Shaders**](lectures/shaders/)
-<!-- 10. **Week 10**: Intro to 3D
-    <!-- 1. [**Intro to 3D**](lectures/SDL3D/SDLProject/)
-    2. [**3D Models**](lectures/3d-models/SDLProject/) -->
 11. **Week 11**: Playtesting and publishing your game
     <!-- 1. **Playtesting**
     2. **Publishing your game on Itch.io** -->
@@ -65,6 +62,9 @@
     2. **Playtesting your final project** -->
 13. **Week 13**: Presenting your final projects
 
+<!-- 10. **Week 10**: Intro to 3D
+    <!-- 1. [**Intro to 3D**](lectures/SDL3D/SDLProject/)
+    2. [**3D Models**](lectures/3d-models/SDLProject/) -->
 <!-- 
 21. [**3D Levels: Floors, Movement, and Collisions**](lectures/3d-levels/SDLProject/)
 22. [**Billboards**](lectures/billboards/SDLProject/) -->
@@ -78,6 +78,7 @@
 - _10/13_: [**Collision Detection**](exercises/collision-detection/)
 - _10/27_: [**Animation**](exercises/animation/)
 - _11/03_: [**Entity Types**](exercises/entity_types/)
+- _11/17_: [**FX**](exercises/entity_types/README.md)
 
 <sub>To be released every lecture day before class.</sub>
 

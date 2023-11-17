@@ -2,7 +2,7 @@
 
 <h1 align=center>Exercise: <em>Special Effects</em></h1>
 
-<h3 align=center>UH IDK WHAT TO PUT HERE PLEASE EDIT THIS</h3>
+<h3 align=center>10 Red Wolf Moon, Imperial Year MMXXIII</h3>
 
 ### Instructions
 
@@ -15,7 +15,7 @@ Last class, we learnt how to create the fading in and out special effects for ou
 Modify [**`main.cpp`**](SDLProject/main.cpp), [**`Effects.cpp`**](SDLProject/Effects.cpp), and [**`Effects.h`**](SDLProject/Effects.h) to make the screen shake after George landed after falling down (but not necessarily from jumping). There is no "right" way to do this, you can implement it however you want to. Nonetheless, we will give you an outline to help you get started.
 
 #### Step 1: Set up the necessary components
-1. In [**`Effects.h`**](SDLProject/Effects.h), assign a new EffectType - `SHAKE`. If you need some variables for your shaking effect, also add them here.
+1. In [**`Effects.h`**](SDLProject/Effects.h), assign a new `EffectType`: **`SHAKE`**. If you need some variables for your shaking effect, also add them here.
 
 **Note** that if you added any variables, don't forget to initialize them in [**`Effects::Effects`**](SDLProject/Effects.cpp) if necessary!
 
