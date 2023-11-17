@@ -6,15 +6,13 @@
 
 ### Instructions
 
-Last class, we learnt how to create the fading in and out special effects for our program. In this exercise, let's try to implement an earthquake effect.
+Last class, we learnt how to create the fading in and out special effects for our program. In this exercise, let's try to implement a shaking effect.
 
 ![shake](assets/shake.gif)
 
 <sub>**Figure 1**: Desired behavior</sub>
 
-Modify [**`main.cpp`**](SDLProject/main.cpp), [**`Effects.cpp`**](SDLProject/Effects.cpp), and [**`Effects.h`**](SDLProject/Effects.h) to make the screen shake after George landed after falling down (but not necessarily from jumping).
-
-There is no "right" way to do this, you can implement it however you want to. Nonetheless, we will give you an outline to help you get started.
+Modify [**`main.cpp`**](SDLProject/main.cpp), [**`Effects.cpp`**](SDLProject/Effects.cpp), and [**`Effects.h`**](SDLProject/Effects.h) to make the screen shake after George landed after falling down (but not necessarily from jumping). There is no "right" way to do this, you can implement it however you want to. Nonetheless, we will give you an outline to help you get started.
 
 #### Step 1: Set up the necessary components
 1. In [**`Effects.h`**](SDLProject/Effects.h), assign a new EffectType - `SHAKE`. If you need some variables for your shaking effect, also add them here.
