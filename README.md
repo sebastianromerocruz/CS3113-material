@@ -23,7 +23,6 @@
 10. [**Getting Help and Slack**](#getting-help-and-slack)
 11. [**Moses Center Statement of Disability**](#moses-center-statement-of-disability)
 12. [**Academic Integrity**](#academic-integrity)
-<!-- 10. [**Course Weekly Schedule**](#course-weekly-schedule) -->
 
 ### _Lecture Notes_
 
@@ -130,7 +129,7 @@ You will also need a [**Github**](https://github.com/) account!
 | **_Project 2_**: [**Pong**](assignments/project_2.md)                   | 10%            |
 | **_Project 3_**: [**Lunar Lander**](assignments/project_3.md)           | 15%            |
 | **_Project 4_**: [**Rise of the AI**](assignments/project_4.md)         | 15%            |
-| **_Project 5_**: **Platformer**                                         | 15%            |
+| **_Project 5_**: [**Platformer**](assignments/project_5.md)             | 15%            |
 | **_Project 6_**: **Students' Choice**                                   | 25%            |
 | **_Extra Credit_**                                                      | 05%            |
 | **_Participation_**                                                     | 05%            |

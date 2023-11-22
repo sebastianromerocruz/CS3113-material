@@ -13,7 +13,8 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "ShaderProgram.h"
 
-class Map {
+class Map
+{
 private:
     int m_width;
     int m_height;
