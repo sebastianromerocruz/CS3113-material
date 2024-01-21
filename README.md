@@ -72,12 +72,12 @@
 
 ### _Exercises_
 
-- _09/22_: [**Transformations**](exercises/transformation/)
+<!-- - _09/22_: [**Transformations**](exercises/transformation/)
 - _10/06_: [**User Input**](exercises/player_input/)
 - _10/13_: [**Collision Detection**](exercises/collision-detection/)
 - _10/27_: [**Animation**](exercises/animation/)
 - _11/03_: [**Entity Types**](exercises/entity_types/)
-- _11/17_: [**FX**](exercises/fx/README.md)
+- _11/17_: [**FX**](exercises/fx/README.md) -->
 
 <sub>To be released every lecture day before class.</sub>
 
@@ -126,11 +126,11 @@ You will also need a [**Github**](https://github.com/) account!
 | **Item**                                                                | **Percentage** |
 |-------------------------------------------------------------------------|----------------|
 | **_Project 1_**: [**Draw a Simple 2D Scene**](assignments/project_1.md) | 10%            |
-| **_Project 2_**: [**Pong**](assignments/project_2.md)                   | 10%            |
-| **_Project 3_**: [**Lunar Lander**](assignments/project_3.md)           | 15%            |
-| **_Project 4_**: [**Rise of the AI**](assignments/project_4.md)         | 15%            |
-| **_Project 5_**: [**Platformer**](assignments/project_5.md)             | 15%            |
-| **_Project 6_**: [**Students' Choice**](assignments/project_6.md)       | 25%            |
+| **_Project 2_**: [**Pong**]()                   | 10%            |
+| **_Project 3_**: [**Lunar Lander**]()           | 15%            |
+| **_Project 4_**: [**Rise of the AI**]()         | 15%            |
+| **_Project 5_**: [**Platformer**]()             | 15%            |
+| **_Project 6_**: [**Students' Choice**]()       | 25%            |
 | **_Extra Credit_**                                                      | 05%            |
 | **_Participation_**                                                     | 05%            |
 
@@ -166,29 +166,9 @@ As for your final letter grade, the following scale will be used:
     - While I check email regularly, do not expect a response over the weekend or close to deadlines.
     - Your code must compile. Code that does not compile will receive a grade of 0.
     - Late projects will have 10 points deducted per day. Late projects will not be accepted after 2 days.
-<!-- 
-### _Course Weekly Schedule_
-
-| **Week**    | **Topic**                       |
-|-------------|---------------------------------|
-| **Week 1**  | Introduction                    |
-| **Week 2**  | Linear Algebra                  |
-| **Week 3**  | Basic Graphics with OpenGL      |
-| **Week 4**  | Input, Time-Based Movement      |
-| **Week 5**  | Sprites and Sprite Animation    |
-| **Week 6**  | Game Physics and Fixed Timestep |
-| **Week 7**  | Audio                           |
-| **Week 8**  | AI Programming                  |
-| **Week 9**  | Platformer Levels               |
-| **Week 10** | Effects and Shaders             |
-| **Week 11** | Particle Systems                |
-| **Week 12** | Introduction to 3D Graphics     |
-| **Week 13** | Advanced 3D Graphics            |
-| **Week 14** | Prototyping and Polishing       |
-| **Week 15** | Final Project Presentations     | -->
 
 All work is to be done on your own. There are no group projects.
-**There is no extra credit** in this course and the grades are **not curved**.
+**There is no additional extra credit** in this course and the grades are **not curved**.
 
 ### _Getting Help and Slack_
 
