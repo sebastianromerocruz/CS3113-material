@@ -30,29 +30,29 @@
     1.  [**Introduction**](lectures/introduction/)
     2.  [**Triangles**](lectures/triangle/)
 2. **Week 2**: Moving in video games
-    1.  [**You're getting old, Matrix**](lectures/matrices/)
-    2.  [**Transformations**](lectures/transformations/)
+    <!-- 1.  [**You're getting old, Matrix**](lectures/matrices/)
+    2.  [**Transformations**](lectures/transformations/) -->
 3. **Week 3**: Applying art to our games
-    1.  [**Delta Time**](lectures/delta-time/)
-    2.  [**Textures**](lectures/textures/)
+    <!-- 1.  [**Delta Time**](lectures/delta-time/)
+    2.  [**Textures**](lectures/textures/) -->
 4. **Week 4**: Player input and basic collision detection
-    1.  [**Player Input**](lectures/player-input/)
-    2.  [**Collision Detection**](lectures/collision-detection/)
+    <!-- 1.  [**Player Input**](lectures/player-input/) -->
+    <!-- 2.  [**Collision Detection**](lectures/collision-detection/) -->
 5. **Week 5**: Animation and refactoring our code
-    1. [**Sprite Animation and Text**](lectures/sprites-and-text/)
-    2. [**Entities**](lectures/entities/)
+    <!-- 1. [**Sprite Animation and Text**](lectures/sprites-and-text/) -->
+    <!-- 2. [**Entities**](lectures/entities/) -->
 6. **Week 6**: Physics
-    1. [**Physics: Gravity**](lectures/physics_1/)
-    2. [**Physics: Colliding with Different Kinds of Entities**](lectures/physics_2/)
+    <!-- 1. [**Physics: Gravity**](lectures/physics_1/) -->
+    <!-- 2. [**Physics: Colliding with Different Kinds of Entities**](lectures/physics_2/) -->
 7. **Week 7**: Music, sound effects, and basic enemy AI
-    1. [**Music and Sound Effects**](lectures/sound-fx/)
-    2. [**Basic Enemy AI**](lectures/enemy-ai/)
+    <!-- 1. [**Music and Sound Effects**](lectures/sound-fx/) -->
+    <!-- 2. [**Basic Enemy AI**](lectures/enemy-ai/) -->
 8. **Week 8**: Map and stage building
-    1. [**Tilesets and Tilemaps**](lectures/platform-levels/)
-    2. [**Scenes**](lectures/scenes/)
+    <!-- 1. [**Tilesets and Tilemaps**](lectures/platform-levels/) -->
+    <!-- 2. [**Scenes**](lectures/scenes/) -->
 9. **Weeks 9 and 10**: Special effects
-    1. [**Effects**](lectures/fx/)
-    2. [**Shaders**](lectures/shaders/)
+    <!-- 1. [**Effects**](lectures/fx/) -->
+    <!-- 2. [**Shaders**](lectures/shaders/) -->
 11. **Week 11**: Playtesting and publishing your game
     <!-- 1. **Playtesting**
     2. **Publishing your game on Itch.io** -->
@@ -134,7 +134,7 @@ You will also need a [**Github**](https://github.com/) account!
 | **_Extra Credit_**                                                      | 05%            |
 | **_Participation_**                                                     | 05%            |
 
-Every assignment will have an extra credit portion. While these sections are not at all necessary, I will add **5% to your final grade** at the end of the semester if you complete the extra credit portion of **at least 3 of the projects**. While 5% may not seem like a lot, it can mean the difference between two letter grades. This can be especially helpful later in the semester, when the projects get more long and complex.
+Every assignment will have an "extra credit" portion. This will count for **5% to your final grade** at the end of the semester if you complete the extra credit portion of **at least 3 of the projects**. While 5% may not seem like a lot, it can mean the difference between two letter grades. This can be especially helpful later in the semester, when the projects get more long and complex.
 
 When I say "participation" I do not mean that I will literally be keeping track of how much you speak in class. It's basically an indication of how much I get to know you throughout the semester. I know speaking in an online class is not necessarily easy, so here are some other ways to get this participation grade:
 
