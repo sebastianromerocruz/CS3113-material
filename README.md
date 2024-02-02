@@ -5,7 +5,7 @@
 <p align=center>
     <a href="https://www.learncpp.com/"><img src="https://img.shields.io/badge/Language-C%2B%2B-5E97D0"></img></a>
     <a href="https://developer.apple.com/xcode/"><img src="https://img.shields.io/badge/IDE%20(MacOS)-XCode-lightgrey"></img></a>
-    <a href="https://code.visualstudio.com/"><img src="https://img.shields.io/badge/IDE%20(Windows)-VS%20Code-blue"></img></a>
+    <a href="https://code.visualstudio.com/"><img src="https://img.shields.io/badge/IDE%20(Windows)-Visual%20Studio-blue"></img></a>
     <a href="https://www.opengl.org/"><img src="https://img.shields.io/badge/Library-OpenGL-yellow"></img></a>
 </p>
 
@@ -30,8 +30,8 @@
     1.  [**Introduction**](lectures/introduction/)
     2.  [**Triangles**](lectures/triangle/)
 2. **Week 2**: Moving in video games
-    <!-- 1.  [**You're getting old, Matrix**](lectures/matrices/)
-    2.  [**Transformations**](lectures/transformations/) -->
+    1.  [**You're getting old, Matrix**](lectures/matrices/)
+    2.  [**Transformations**](lectures/transformations/)
 3. **Week 3**: Applying art to our games
     <!-- 1.  [**Delta Time**](lectures/delta-time/)
     2.  [**Textures**](lectures/textures/) -->
@@ -93,7 +93,7 @@
 
 | **E-Mail**                                  | **Office Hours**                                                                                                     |
 |---------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
-| [**thu.vu@nyu.edu**](mailto:thu.vu@nyu.edu) | Mon (11:00am - 1:00pm, 370 Jay St., 8th Floor, Lounge Area) / Fri (12:00pm - 2:00pm, online)                                                        |
+| [**thu.vu@nyu.edu**](mailto:thu.vu@nyu.edu) | TBD                                                        |
 
 ### _Class Information_
 

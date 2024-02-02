@@ -2,7 +2,7 @@
 
 <h1 align=center>Introduction</h1>
 
-<h3 align=center>8 Horsebow Moon, Imperial Year 1180</h3>
+<h3 align=center>26 Guardian Moon, Imperial Year MMXXIV</h3>
 
 ***Song of the day***: _[**ELECTRONIC FREEEEE!!!**](https://youtu.be/gSMcTyyH90Q?si=Dycy5i4nBpAX1ur2) by Mashinomi (feat. Pasocom Music Club)._
 

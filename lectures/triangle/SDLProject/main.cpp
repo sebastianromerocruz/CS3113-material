@@ -15,19 +15,7 @@
 const int WINDOW_WIDTH  = 640,
           WINDOW_HEIGHT = 480;
 
-// Heartbeat stuff
-const float GROWTH_FACTOR = 1.01f;  // grow by 1.0% / frame
-const float SHRINK_FACTOR = 0.99f;  // grow by -1.0% / frame
-const int MAX_FRAMES = 40;
-
-// Rotation stuff
-const float ROT_ANGLE = glm::radians(1.0f);
-
-// Translation stuff
-const float TRAN_VALUE = 0.025f;
-
 int g_frame_counter = 0;
-bool g_is_growing = true;
 
 // Background color components
 const float BG_RED     = 0.1922f,
@@ -114,25 +102,7 @@ void process_input()
     }
 }
 
-void update()
-{
-    glm::vec3 scale_vector;
-    g_frame_counter += 1;
-    
-    if (g_frame_counter >= MAX_FRAMES)
-    {
-        g_is_growing = !g_is_growing;
-        g_frame_counter = 0;
-    }
-    
-    scale_vector = glm::vec3(g_is_growing ? GROWTH_FACTOR : SHRINK_FACTOR,
-                             g_is_growing ? GROWTH_FACTOR : SHRINK_FACTOR,
-                             1.0f);
-    
-    g_model_matrix = glm::translate(g_model_matrix, glm::vec3(TRAN_VALUE, 0.0f, 0.0f));
-    g_model_matrix = glm::rotate(g_model_matrix, ROT_ANGLE, glm::vec3(0.0f, 1.0f, 0.0f));
-    g_model_matrix = glm::scale(g_model_matrix, scale_vector);
-}
+void update() {}
 
 void render() {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -141,7 +111,7 @@ void render() {
     
     float vertices[] =
     {
-         1.0f, -0.5f,
+         0.5f, -0.5f,
          0.0f,  0.5f,
         -0.5f, -0.5f
     };
