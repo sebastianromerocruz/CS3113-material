@@ -4,7 +4,7 @@
 
 <h3 align=center>9 Pegasus Moon, Imperial Year MMXXIV0</h3>
 
-<p align=center><strong><em>Song of the day</strong>: <a href="https://youtu.be/f_G43LhHEos"><strong><u>Burgundy Red</u></strong></a> by 落日飛車 (SUNSET ROLLERCOASTER) (2016)</em></p>
+<p align=center><strong><em>Song of the day</strong>: <a href="https://www.youtube.com/watch?v=u9Di0D1DQps"><strong><u>Pump! (feat. chelmico) [live]</u></strong></a> by PASOCOM MUSIC CLUB (2023)</em></p>
 
 ### Sections
 
