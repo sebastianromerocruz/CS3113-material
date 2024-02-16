@@ -47,12 +47,7 @@ glm::mat4 g_view_matrix,
           g_projection_matrix;
 
 // ——————————— GLOBAL VARS AND CONSTS FOR TRANSFORMATIONS ——————————— //
-const float RADIUS = 2.0f;      // radius of circle
-const float ROT_SPEED = 0.01f;  // rotational speed
 
-float g_angle    = 0.0f;        // current angle accumulated
-float g_x_coords = RADIUS;      // current x-coord
-float g_y_coords = 0.0f;        // current y-coord
 // —————————————————————————————————————————————————————————————————— //
 
 void initialise()
@@ -103,16 +98,7 @@ void process_input()
 void update()
 {
     // ——————————— YOUR ORBIT TRANSFORMATIONS SHOULD GO HERE ——————————— //
-    // 1. Setting up our transformation logic
-    g_angle += ROT_SPEED;
     
-    // 2. Calculate x,y-coordinates based on angle using trig
-    g_x_coords = RADIUS * glm::cos(g_angle);
-    g_y_coords = RADIUS * glm::sin(g_angle);
-    
-    // 3. Reset model matrix back to the origin, and apply translation based on step 2
-    g_model_matrix = glm::mat4(1.0f);
-    g_model_matrix = glm::translate(g_model_matrix, glm::vec3(g_x_coords, g_y_coords, 0.0f));
     // ————————————————————————————————————————————————————————————————— //
 }
 
