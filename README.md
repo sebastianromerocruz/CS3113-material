@@ -72,7 +72,8 @@
 
 ### _Exercises_
 
-<!-- - _09/22_: [**Transformations**](exercises/transformation/)
+- [**Transformations**](exercises/transformation/)
+<!--
 - _10/06_: [**User Input**](exercises/player_input/)
 - _10/13_: [**Collision Detection**](exercises/collision-detection/)
 - _10/27_: [**Animation**](exercises/animation/)

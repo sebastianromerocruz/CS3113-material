@@ -21,8 +21,8 @@ enum Coordinate
 
 #define LOG(argument) std::cout << argument << '\n'
 
-const int WINDOW_WIDTH = 640,
-          WINDOW_HEIGHT = 480;
+const int WINDOW_WIDTH = 640 * 2,
+          WINDOW_HEIGHT = 480 * 2;
 
 const float BG_RED = 0.1922f,
             BG_BLUE = 0.549f,
