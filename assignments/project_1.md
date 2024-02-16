@@ -7,7 +7,7 @@
 1. You must use delta time in your animations.
 2. You should push your homework to your GitHub account. Note that any commits done after the deadline will be ignored.
 3. You should also submit the **link** to your repository to [**Brightspace**](https://brightspace.nyu.edu/d2l/lms/dropbox/admin/folders_manage.d2l?ou=354438).
-4. Do not use any OpenGL functionality that we have not learned in class.
+4. Do not use anything that we have not learned in class.
 5. The `main.cpp` file you submit should contain a header comment block as follows:
 
 ```c++
