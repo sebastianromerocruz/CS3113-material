@@ -1,5 +1,5 @@
 <h4 align=center>NYU Tandon School of Engineering<h4>
-<h3 align=center>CS-UY 3113 Fall 2023</h3>
+<h3 align=center>CS-UY 3113 Fall 2024</h3>
 <h1 align=center>Project 1: <em>Simple 2D Scene</em></h1>
 <h3 align=center><em>Due: 11:59pm, Saturday, February 17th, 2024</em></h3>
  
