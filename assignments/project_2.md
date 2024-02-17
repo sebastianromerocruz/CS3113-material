@@ -65,7 +65,7 @@
 
 - **Have fun with it and have a theme**. Instead of square paddles and a ball, have other kinds of objects/images with the same mechanics. It doesn't need to be super polished–anything that looks fun is welcome.
 - **Have an endgame UI message**. When someone wins, you can show an image of text saying who won.
-- **Have an option to generate number of balls**. Prompt the user for the number of balls before the game start. Allow the player to press number keys from 1-3 (do NOT generate more than 3 balls). 
+- **Have an option to choose number of balls**. Allow the player to press number keys from 1-3 and generate that number of balls on the screen (do NOT generate more than 3 balls). Player should be able to change the number of balls any time during the game.
 
-    ***HINT***: Any object that isn't being used should not be **rendered** nor **updated**.
+    ***HINT***: Generate every object that could be on the screen at any given time, but any object that isn't currently being used should not be **rendered** nor **updated**.
 
