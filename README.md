@@ -73,6 +73,7 @@
 ### _Exercises_
 
 - [**Transformations**](exercises/transformation/)
+- [**Player Input**](exercises/player_input/)
 <!--
 - _10/06_: [**User Input**](exercises/player_input/)
 - _10/13_: [**Collision Detection**](exercises/collision-detection/)

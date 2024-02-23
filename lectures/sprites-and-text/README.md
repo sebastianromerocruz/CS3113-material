@@ -4,7 +4,7 @@
 
 <h3 align=center>23 Pegasus Moon, Imperial Year MMXXIV</h3>
 
-<p align=center><strong><em>Song of the day</strong>: <a href="https://youtu.be/BI4zNteRP7E?si=PIHVKHxtjegdF9En"><strong><u>憐れみの讃歌 (Eulogy to Compassion)</u></strong></a> by Kyrie (Aina the End) (2023).</em></p>
+<p align=center><strong><em>Song of the day</strong>: <a href="https://youtu.be/nGCd8cNFLd0?si=BZo6tzFSBTY4tes7"><strong><u>When Winter Comes Around</u></strong></a> by The Lemon Twigs (2023).</em></p>
 
 ### Sections
 
