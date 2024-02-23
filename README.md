@@ -39,8 +39,8 @@
     1.  [**Player Input**](lectures/player-input/)
     2.  [**Collision Detection**](lectures/collision-detection/)
 5. **Week 5**: Animation and refactoring our code
-    <!-- 1. [**Sprite Animation and Text**](lectures/sprites-and-text/) -->
-    <!-- 2. [**Entities**](lectures/entities/) -->
+    1. [**Sprite Animation and Text**](lectures/sprites-and-text/)
+    2. [**Entities**](lectures/entities/)
 6. **Week 6**: Physics
     <!-- 1. [**Physics: Gravity**](lectures/physics_1/) -->
     <!-- 2. [**Physics: Colliding with Different Kinds of Entities**](lectures/physics_2/) -->
