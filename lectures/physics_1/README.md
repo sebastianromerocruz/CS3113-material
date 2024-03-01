@@ -4,7 +4,7 @@
 
 <h3 align=center>1 Lone  Moon, Imperial Year MMXXIV</h3>
 
-<p align=center><strong><em>Song of the day</strong>: <a href="https://youtu.be/Y45cVOrRZZs?si=csiJZYE_3g1GDEzl"><strong><u>ワタシダケユウレイ (Only I'm A Ghost)</u></strong></a> by SICK HACK (2022).</em></p>
+<p align=center><strong><em>Song of the day</strong>: <a href="https://youtu.be/0TYq9RjdYYU?si=eU8M0wXC63TOgS9a"><strong><u>Marrakesh Express</u></strong></a> by Crosby, Stills and Nash (1969).</em></p>
 
 ### Sections
 
