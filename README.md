@@ -42,8 +42,8 @@
     1. [**Sprite Animation and Text**](lectures/sprites-and-text/)
     2. [**Entities**](lectures/entities/)
 6. **Week 6**: Physics
-    <!-- 1. [**Physics: Gravity**](lectures/physics_1/) -->
-    <!-- 2. [**Physics: Colliding with Different Kinds of Entities**](lectures/physics_2/) -->
+    1. [**Physics: Gravity**](lectures/physics_1/)
+    2. [**Physics: Colliding with Different Kinds of Entities**](lectures/physics_2/)
 7. **Week 7**: Music, sound effects, and basic enemy AI
     <!-- 1. [**Music and Sound Effects**](lectures/sound-fx/) -->
     <!-- 2. [**Basic Enemy AI**](lectures/enemy-ai/) -->
