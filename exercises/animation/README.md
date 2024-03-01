@@ -2,7 +2,7 @@
 
 <h1 align=center>Exercise: <em>Animation</em></h1>
 
-<h3 align=center>27 Wyvern Moon, Imperial Year MMXXIII<h3>
+<h3 align=center>1 Lone Moon, Imperial Year MMXXIV<h3>
 
 ### Instructions
 
