@@ -2,7 +2,7 @@
 
 <h1 align=center>Physics: <em>Gravity</em></h1>
 
-<h3 align=center>20 Wyvern Moon, Imperial Year MMXXIII</h3>
+<h3 align=center>1 Lone  Moon, Imperial Year MMXXIV</h3>
 
 <p align=center><strong><em>Song of the day</strong>: <a href="https://youtu.be/Y45cVOrRZZs?si=csiJZYE_3g1GDEzl"><strong><u>ワタシダケユウレイ (Only I'm A Ghost)</u></strong></a> by SICK HACK (2022).</em></p>
 
