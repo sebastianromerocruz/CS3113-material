@@ -9,6 +9,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <vector>
 #include "glm/mat4x4.hpp"
 
 class ShaderProgram
