@@ -17,7 +17,7 @@ Outside of programming, things I enjoy include:
 - **Reading**: my current favourite is [***The Fawn by Magda Szabó***](https://www.themodernnovel.org/europe/europe/hungary/szabo/fawn/).
 - **Playing music**: I play a [**Rickenbacker 4001C64**](http://www.rickenbacker.com/model.asp?model=4001C64) and a cute [**Squier FSR Classic Vibe Bass VI**](https://www.guitar.co.uk/media/catalog/product/cache/1/image/1800x900/9df78eab33525d08d6e5fb8d27136e95/s/q/squier_squier_fsr_classic_vibe_bass_vi_laurel_fingerboard_parchment_pickguard_matching_headstock_shell_pink_front.jpeg).
 
-Let's talk about the course (see [**syllabus**](https://github.com/sebastianromerocruz/CS3113-material/blob/main/README.md)
+Let's talk about the course see [**syllabus**](https://github.com/sebastianromerocruz/CS3113-material/blob/main/README.md)
 
 ---
 

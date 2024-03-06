@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		68F7412D2B98E22200022F50 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68F7412A2B98E22200022F50 /* SDL2.framework */; };
+		68F7412F2B98E22200022F50 /* SDL2_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68F7412B2B98E22200022F50 /* SDL2_mixer.framework */; };
+		68F741312B98E22200022F50 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68F7412C2B98E22200022F50 /* SDL2_image.framework */; };
 		844DC28E286650FA0099B183 /* assets in CopyFiles */ = {isa = PBXBuildFile; fileRef = 844DC28D28664F990099B183 /* assets */; };
 		845C739D2846DACD000D6994 /* helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 845C739C2846DACD000D6994 /* helper.cpp */; };
 		8493D153286BFEC300217CD6 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8493D151286BFEC300217CD6 /* Entity.cpp */; };
@@ -15,9 +18,6 @@
 		DBDF1B612323DE9E007CECB1 /* shaders in CopyFiles */ = {isa = PBXBuildFile; fileRef = DBDF1B5C2323DE8D007CECB1 /* shaders */; };
 		DBDF1B632323DEDA007CECB1 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBDF1B622323DEDA007CECB1 /* OpenGL.framework */; };
 		DBDF1B652323DEDF007CECB1 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBDF1B642323DEDF007CECB1 /* Cocoa.framework */; };
-		DBDF1B692323DEEA007CECB1 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBDF1B662323DEEA007CECB1 /* SDL2.framework */; };
-		DBDF1B6A2323DEEA007CECB1 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBDF1B672323DEEA007CECB1 /* SDL2_image.framework */; };
-		DBDF1B6B2323DEEA007CECB1 /* SDL2_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBDF1B682323DEEA007CECB1 /* SDL2_mixer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,6 +35,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		68F7412A2B98E22200022F50 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Downloads/SDL2.framework; sourceTree = "<group>"; };
+		68F7412B2B98E22200022F50 /* SDL2_mixer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_mixer.framework; path = ../../../../../Downloads/SDL2_mixer.framework; sourceTree = "<group>"; };
+		68F7412C2B98E22200022F50 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../../Downloads/SDL2_image.framework; sourceTree = "<group>"; };
 		844DC28D28664F990099B183 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
 		845C739C2846DACD000D6994 /* helper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = helper.cpp; sourceTree = "<group>"; };
 		8493D151286BFEC300217CD6 /* Entity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
@@ -49,9 +52,6 @@
 		DBDF1B5D2323DE8D007CECB1 /* ShaderProgram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderProgram.cpp; sourceTree = "<group>"; };
 		DBDF1B622323DEDA007CECB1 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		DBDF1B642323DEDF007CECB1 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		DBDF1B662323DEEA007CECB1 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
-		DBDF1B672323DEEA007CECB1 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
-		DBDF1B682323DEEA007CECB1 /* SDL2_mixer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_mixer.framework; path = ../../../../../Library/Frameworks/SDL2_mixer.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,11 +59,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68F7412D2B98E22200022F50 /* SDL2.framework in Frameworks */,
+				68F7412F2B98E22200022F50 /* SDL2_mixer.framework in Frameworks */,
 				DBDF1B652323DEDF007CECB1 /* Cocoa.framework in Frameworks */,
 				DBDF1B632323DEDA007CECB1 /* OpenGL.framework in Frameworks */,
-				DBDF1B692323DEEA007CECB1 /* SDL2.framework in Frameworks */,
-				DBDF1B6A2323DEEA007CECB1 /* SDL2_image.framework in Frameworks */,
-				DBDF1B6B2323DEEA007CECB1 /* SDL2_mixer.framework in Frameworks */,
+				68F741312B98E22200022F50 /* SDL2_image.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,9 +108,9 @@
 		DBDF1B5F2323DE92007CECB1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				DBDF1B672323DEEA007CECB1 /* SDL2_image.framework */,
-				DBDF1B682323DEEA007CECB1 /* SDL2_mixer.framework */,
-				DBDF1B662323DEEA007CECB1 /* SDL2.framework */,
+				68F7412C2B98E22200022F50 /* SDL2_image.framework */,
+				68F7412B2B98E22200022F50 /* SDL2_mixer.framework */,
+				68F7412A2B98E22200022F50 /* SDL2.framework */,
 				DBDF1B642323DEDF007CECB1 /* Cocoa.framework */,
 				DBDF1B622323DEDA007CECB1 /* OpenGL.framework */,
 			);
@@ -298,19 +298,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(LOCAL_LIBRARY_DIR)/Frameworks",
-				);
+				FRAMEWORK_SEARCH_PATHS = /Users/thuvu/Downloads;
 				HEADER_SEARCH_PATHS = (
-					/Library/Frameworks/SDL2_image.framework/Versions/A/Headers,
-					/Library/Frameworks/SDL2.framework/Versions/A/Headers,
-					/Library/Frameworks/SDL2_mixer.framework/Versions/A/Headers,
+					/Users/thuvu/Downloads/SDL2_image.framework/Versions/A/Headers,
+					/Users/thuvu/Downloads/SDL2.framework/Versions/A/Headers,
+					/Users/thuvu/Downloads/SDL2_mixer.framework/Versions/A/Headers,
 				);
 				"HEADER_SEARCH_PATHS[arch=*]" = (
-					/Library/Frameworks/SDL2_image.framework/Versions/A/Headers,
-					/Library/Frameworks/SDL2.framework/Versions/A/Headers,
-					/Library/Frameworks/SDL2_mixer.framework/Versions/A/Headers,
+					/Users/thuvu/Downloads/SDL2_image.framework/Versions/A/Headers,
+					/Users/thuvu/Downloads/SDL2.framework/Versions/A/Headers,
+					/Users/thuvu/Downloads/SDL2_mixer.framework/Versions/A/Headers,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -320,14 +317,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(LOCAL_LIBRARY_DIR)/Frameworks",
-				);
+				FRAMEWORK_SEARCH_PATHS = /Users/thuvu/Downloads;
 				HEADER_SEARCH_PATHS = (
-					/Library/Frameworks/SDL2_image.framework/Versions/A/Headers,
-					/Library/Frameworks/SDL2.framework/Versions/A/Headers,
-					/Library/Frameworks/SDL2_mixer.framework/Versions/A/Headers,
+					/Users/thuvu/Downloads/SDL2_image.framework/Versions/A/Headers,
+					/Users/thuvu/Downloads/SDL2.framework/Versions/A/Headers,
+					/Users/thuvu/Downloads/SDL2_mixer.framework/Versions/A/Headers,
 				);
 				"HEADER_SEARCH_PATHS[arch=*]" = (
 					/Library/Frameworks/SDL2_image.framework/Versions/A/Headers,
