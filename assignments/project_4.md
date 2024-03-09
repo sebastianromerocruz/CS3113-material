@@ -51,7 +51,7 @@ There are some great sources for free assets:
 ### Requirement 1: _3 AI With Different Behaviors (40%)_
 
 - There needs to be **3 or more enemies** with basic AI.
-- Each AI should have a **different behavior**. For instance, one could me walking, another patrolling, another jumping or shooting. All AI must be doing _something_ other than standing around.
+- Each AI should have a **different behavior**. For instance, one could be walking, another patrolling, another jumping or shooting. All AI must be doing _something_ other than standing around.
 - It is OK to use the same image/textures for all 3 of your AI.
 - Note on the level's layout:
     - Your AI must not all be on one (flat) floor. You will lose points if all 3 of your AI are on the same floor.
@@ -74,7 +74,7 @@ There are some great sources for free assets:
 
 ### _Common Issues_
 
-Check collisions from the players perspective. In other words, check if the player collided with the enemy, not if the enemy collided with the player. You may need to add code to `Entity.h` and `Entity.cpp` to make this work.
+Check collisions from the player's perspective. In other words, check if the player collided with the enemy, not if the enemy collided with the player. You may need to add code to `Entity.h` and `Entity.cpp` to make this work.
 
 ### _Extra Credit_
 
