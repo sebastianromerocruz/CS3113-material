@@ -51,8 +51,8 @@
     1. [**Tilesets and Tilemaps**](lectures/platform-levels/)
     2. [**Scenes**](lectures/scenes/)
 9. **Weeks 9 and 10**: Special effects
-    <!-- 1. [**Effects**](lectures/fx/) -->
-    <!-- 2. [**Shaders**](lectures/shaders/) -->
+    1. [**Effects**](lectures/fx/)
+    2. [**Shaders**](lectures/shaders/)
 11. **Week 11**: Playtesting and publishing your game
     <!-- 1. **Playtesting**
     2. **Publishing your game on Itch.io** -->
