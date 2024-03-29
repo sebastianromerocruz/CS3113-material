@@ -1,7 +1,7 @@
 <h4 align=center>NYU Tandon School of Engineering<h4>
 <h3 align=center>CS-UY 3113 Spring 2024</h3>
 <h1 align=center>Project 4: <em>Rise of the AI</em></h1>
-<h3 align=center><em>Due: 11:59pm, Saturday, March 23rd, 2024</em></h3>
+<h3 align=center><em>Due: 11:59pm, Saturday, March 30th, 2024</em></h3>
  
 ### Submission instructions
 1. You _must_ use delta time, the `Entity` and `Map` classes, and fixed time steps in this assignment.
@@ -14,7 +14,7 @@
 /**
 * Author: [Your name here]
 * Assignment: Rise of the AI
-* Date due: 2024-03-23, 11:59pm
+* Date due: 2024-03-30, 11:59pm
 * I pledge that I have completed this assignment without
 * collaborating with anyone else, in conformance with the
 * NYU School of Engineering Policies and Procedures on
@@ -68,7 +68,7 @@ There are some great sources for free assets:
 
 ### Requirement 4: _'You Win' Message (20%)_
 
-- If the player gets rid of all enemies, show text the text “You Lose”. Each letter must be rendered independently using the text function we wrote in class.
+- If the player gets rid of all enemies, show text the text “You Win”. Each letter must be rendered independently using the text function we wrote in class.
 
 ---
 
