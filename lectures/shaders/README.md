@@ -22,16 +22,16 @@ First, let's take a look at that code that uses them:
 
 ```c++
 // Using these files is considered as loading the entire program by OpenGL
-g_program.Load("shaders/vertex_textured.glsl",
+g_shader_program.load("shaders/vertex_textured.glsl",
         "shaders/fragment_textured.glsl");
 
 // Onto which we them set the projection, view, and model matrices
-g_program.SetProjectionMatrix(g_projection_matrix);
-g_program.SetViewMatrix(g_view_matrix);
-g_program.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
-g_program.SetModelMatrix(g_model_matrix);
+g_shader_program.set_projection_matrix(g_projection_matrix);
+g_shader_program.set_view_matrix(g_view_matrix);
+g_shader_program.set_color(1.0f, 1.0f, 1.0f, 1.0f);
+g_shader_program.set_model_matrix(g_model_matrix);
 
-glUseProgram(g_program.programID);
+glUseProgram(g_shader_program.programID);
 ```
 
 <sub>**Code Block 1**: Shaders are what we throw everything in our game into.</sub>
