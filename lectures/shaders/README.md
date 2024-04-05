@@ -31,7 +31,7 @@ g_shader_program.set_view_matrix(g_view_matrix);
 g_shader_program.set_color(1.0f, 1.0f, 1.0f, 1.0f);
 g_shader_program.set_model_matrix(g_model_matrix);
 
-glUseProgram(g_shader_program.programID);
+glUseProgram(g_shader_program.m_program_id);
 ```
 
 <sub>**Code Block 1**: Shaders are what we throw everything in our game into.</sub>
@@ -268,22 +268,22 @@ And now, we need to add some code outside of the shaders so that we can set the 
 class ShaderProgram
 {
 public:
-    void SetLightPosition(glm::vec3 position);
+    void set_light_position(glm::vec3 position);
     
-    GLuint lightPositionUniform;
+    GLuint m_light_position_uniform;
 }
 ```
 ```c++
 // ShaderProgram.cpp
 void ShaderProgram::Load(const char *vertexShaderFile, const char *fragmentShaderFile)
 {
-    lightPositionUniform = glGetUniformLocation(programID, "lightPosition");
+    m_light_position_uniform = glGetUniformLocation(m_program_id, "lightPosition");
 }
 
-void ShaderProgram::SetLightPosition(glm::vec3 position)
+void ShaderProgram::set_light_position(glm::vec3 position)
 {
-    glUseProgram(programID);
-    glUniform2f(lightPositionUniform, position.x, position.y);
+    glUseProgram(m_program_id);
+    glUniform2f(m_light_position_uniform, position.x, position.y);
 }
 ```
 ```c++
@@ -293,7 +293,7 @@ const char V_SHADER_PATH[] = "shaders/vertex_lit.glsl",
 
 void render()
 {
-    program.SetLightPosition(current_scene->state.player->get_position());
+    program.set_light_position(current_scene->state.player->get_position());
 }
 ```
 
