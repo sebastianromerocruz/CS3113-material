@@ -53,9 +53,9 @@
 9. **Weeks 9 and 10**: Special effects
     1. [**Effects**](lectures/fx/)
     2. [**Shaders**](lectures/shaders/)
-11. **Week 11**: Playtesting and publishing your game
-    <!-- 1. **Playtesting**
-    2. **Publishing your game on Itch.io** -->
+11. **Week 11**: [**Playtesting and publishing your game**](lectures/playtesting/)
+    <!-- 1. **Playtesting** -->
+    <!-- 2. **Publishing your game on Itch.io** -->
 12. **Week 12**: NES game development and playtesting your final projects
     <!-- 1. [**NES game development using 6502 assembly**](https://github.com/sebastianromerocruz/game-programming-in-assembly)
     2. **Playtesting your final project** -->
