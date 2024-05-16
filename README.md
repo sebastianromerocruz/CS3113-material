@@ -54,8 +54,6 @@
     1. [**Effects**](lectures/fx/)
     2. [**Shaders**](lectures/shaders/)
 11. **Week 11**: [**Playtesting and publishing your game**](lectures/playtesting/) -->
-    <!-- 1. **Playtesting** -->
-    <!-- 2. **Publishing your game on Itch.io** -->
 <!-- 12. **Week 12**: NES game development and playtesting your final projects -->
 <!-- 13. **Week 13**: Presenting your final projects -->
 
@@ -68,7 +66,7 @@
 
 <sub>To be released every lecture day before class.</sub>
 
-### _Exercises_
+<!-- ### _Exercises_
 
 - [**Transformations**](exercises/transformation/)
 - [**Player Input**](exercises/player_input/)
@@ -79,7 +77,7 @@
 - _11/03_: [**Entity Types**](exercises/entity_types/)
 - _11/17_: [**FX**](exercises/fx/README.md) -->
 
-<sub>To be released every lecture day before class.</sub>
+<!-- <sub>To be released every lecture day before class.</sub> -->
 
 ### _Instructor and Course Assistant_
 
@@ -89,11 +87,11 @@
 |---------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
 | [**sebastian.romerocruz@nyu.edu**](mailto:src402@nyu.edu) | [**calendly**](https://calendly.com/profromerocruz) |
 
-[**Thu Vu**](https://github.com/thuvu17)
+<!-- [**Thu Vu**](https://github.com/thuvu17)
 
 | **E-Mail**                                  | **Office Hours**                                                                                                     |
 |---------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
-| [**thu.vu@nyu.edu**](mailto:thu.vu@nyu.edu) | TBD                                                        |
+| [**thu.vu@nyu.edu**](mailto:thu.vu@nyu.edu) | TBD                                                        | -->
 
 ### _Class Information_
 
@@ -125,8 +123,8 @@ You will also need a [**Github**](https://github.com/) account!
 
 | **Item**                                                                | **Percentage** |
 |-------------------------------------------------------------------------|----------------|
-| **_Project 1_**: [**Draw a Simple 2D Scene**](assignments/project_1.md) | 10%            |
-| **_Project 2_**: [**Pong**](assignments/project_2.md)                   | 10%            |
+| **_Project 1_**: [**Draw a Simple 2D Scene**]() | 10%            |
+| **_Project 2_**: [**Pong**]()                   | 10%            |
 | **_Project 3_**: [**Lunar Lander**]()           | 15%            |
 | **_Project 4_**: [**Rise of the AI**]()         | 15%            |
 | **_Project 5_**: [**Platformer**]()             | 15%            |
