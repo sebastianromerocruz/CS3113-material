@@ -9,6 +9,8 @@
     <a href="https://www.opengl.org/"><img src="https://img.shields.io/badge/Library-OpenGL-yellow"></img></a>
 </p>
 
+---
+
 ### _Sections_
 
 1.  [**Lecture Notes**](#lecture-notes)
@@ -23,6 +25,8 @@
 10. [**Getting Help and Slack**](#getting-help-and-slack)
 11. [**Moses Center Statement of Disability**](#moses-center-statement-of-disability)
 12. [**Academic Integrity**](#academic-integrity)
+
+---
 
 ### _Lecture Notes_
 
@@ -79,6 +83,8 @@
 
 <!-- <sub>To be released every lecture day before class.</sub> -->
 
+<br>
+
 ### _Instructor and Course Assistant_
 
 [**Sebastián Romero Cruz**](https://github.com/sebastianromerocruz)  _(They / Them)_
@@ -93,6 +99,8 @@
 |---------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
 | [**wz2445@nyu.edu**](mailto:wz2445@nyu.edu) | TBD                                                        |
 
+<br>
+
 ### _Class Information_
 
 - **Pre-Requisites**: [_**Data Structures and Algorithms**_](http://bulletin.engineering.nyu.edu/preview_course_nopop.php?catoid=15&coid=36541) (C- or better)
@@ -105,11 +113,13 @@ sprite-based programming, we examine and experiment with animation, physics, art
 and audio. In addition, the course explores the mathematics of transformations (both 2D and 3D) and 
 the ways they may be represented.
 
+<br>
+
 ### _Objectives_
 
-You will be able to create simple 2D games. You will learn about vectors, coordinate systems, sprites,
-collisions, physics, audio and handling input. This will all be done with C++ programming and utilizing
-the SDL (Simple DirectMedia Layer) libraries along with OpenGL.
+This class is, fundamentally, an exercise in building your own game enginer. You will learn about vectors, coordinate systems, sprites, collisions, physics, audio and handling input. This will all be done with C++ programming and utilizing the SDL (Simple DirectMedia Layer) libraries along with OpenGL. You will be able to create simple 2D games in your enginer.
+
+<br>
 
 ### _Computer/Software Requirements_
 
@@ -118,6 +128,8 @@ not writing anything super complicated. For Mac users, you’ll be using Xcode. 
 be using Visual Studio. These are both freely available.
 
 You will also need a [**Github**](https://github.com/) account!
+
+<br>
 
 ### _Grading Scheme_
 
@@ -152,6 +164,8 @@ As for your final letter grade, the following scale will be used:
 <!-- | **_Project 5_**: [**Platformer**](assignments/project_5.md)             | 15%            | -->
 <!-- | **_Final Project_**: [**Students’ Choice**](assignments/project_6.md)   | 25%            | -->
 
+<br>
+
 ### _Deadlines_
 
 - All projects are due at **11:59pm on Saturdays**.
@@ -167,6 +181,8 @@ As for your final letter grade, the following scale will be used:
 
 All work is to be done on your own. There are no group projects.
 **There is no additional extra credit** in this course and the grades are **not curved**.
+
+<br>
 
 ### _Getting Help and Slack_
 
@@ -192,9 +208,13 @@ summer; the join link will be provided during the first day of class. While I’
 
 - You may not invite any people outside of our class into this server.
 
+<br>
+
 ### Moses Center Statement of Disability
 
 If you are a student with a disability who is requesting accommodations, please contact New York University’s Moses Center for Students with Disabilities (CSD) at 212-998-4980 or **mosescsd@nyu.edu**​. You must be registered with CSD to receive accommodations. Information about the Moses Center can be found at [**www.nyu.edu/csd**](**www.nyu.edu/csd**)​. The Moses Center is located at 726 Broadway on the 3rd floor.
+
+<br>
 
 ### Academic Integrity
 
