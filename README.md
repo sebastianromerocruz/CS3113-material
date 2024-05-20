@@ -117,7 +117,7 @@ the ways they may be represented.
 
 ### _Objectives_
 
-This class is, fundamentally, an exercise in building your own game enginer. You will learn about vectors, coordinate systems, sprites, collisions, physics, audio and handling input. This will all be done with C++ programming and utilizing the SDL (Simple DirectMedia Layer) libraries along with OpenGL. You will be able to create simple 2D games in your enginer.
+This class is, fundamentally, an exercise in building your own game engine. You will learn about vectors, coordinate systems, sprites, collisions, physics, audio and handling input. This will all be done with C++ programming and utilizing the SDL (Simple DirectMedia Layer) libraries along with OpenGL. You will be able to create simple 2D games in your engine.
 
 <br>
 
