@@ -87,11 +87,11 @@
 |---------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
 | [**sebastian.romerocruz@nyu.edu**](mailto:src402@nyu.edu) | [**calendly**](https://calendly.com/profromerocruz) |
 
-<!-- [**Thu Vu**](https://github.com/thuvu17)
+[**Wesley Zhuang**](https://github.com/Wea3el)
 
 | **E-Mail**                                  | **Office Hours**                                                                                                     |
 |---------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
-| [**thu.vu@nyu.edu**](mailto:thu.vu@nyu.edu) | TBD                                                        | -->
+| [**wz2445@nyu.edu**](mailto:wz2445@nyu.edu) | TBD                                                        |
 
 ### _Class Information_
 
