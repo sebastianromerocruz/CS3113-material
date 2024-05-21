@@ -146,11 +146,13 @@ You will also need a [**Github**](https://github.com/) account!
 
 Every assignment will have an "extra credit" portion. This will count for **5% to your final grade** at the end of the semester if you complete the extra credit portion of **at least 3 of the projects**. While 5% may not seem like a lot, it can mean the difference between two letter grades. This can be especially helpful later in the semester, when the projects get more long and complex.
 
-When I say "participation" I do not mean that I will literally be keeping track of how much you speak in class. It's basically an indication of how much I get to know you throughout the semester. I know speaking in an online class is not necessarily easy, so here are some other ways to get this participation grade:
+When I say "participation" I do not mean that I will literally be keeping track of how much you speak in class. It's basically an indication of how much I get to know you throughout the semester. 
+
+<!-- I know speaking in an online class is not necessarily easy, so here are some other ways to get this participation grade:
 
 - Have your webcam on as much as you can.
 - Come to my and Wesley's office hours.
-- Volunteer your projects to be presented to the class.
+- Volunteer your projects to be presented to the class. -->
 
 As for your final letter grade, the following scale will be used:
 
