@@ -149,7 +149,7 @@ Every assignment will have an "extra credit" portion. This will count for **5% t
 When I say "participation" I do not mean that I will literally be keeping track of how much you speak in class. It's basically an indication of how much I get to know you throughout the semester. I know speaking in an online class is not necessarily easy, so here are some other ways to get this participation grade:
 
 - Have your webcam on as much as you can.
-- Come to my and Thu's office hours.
+- Come to my and Wesley's office hours.
 - Volunteer your projects to be presented to the class.
 
 As for your final letter grade, the following scale will be used:
