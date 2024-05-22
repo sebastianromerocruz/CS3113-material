@@ -91,8 +91,8 @@
 
 | **E-Mail**                                  | **Office Hours**                                                                                                     |
 |---------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
-| [**wz2445@nyu.edu**](mailto:wz2445@nyu.edu) | Online:
-Tuesdays 6:00-7:00 pm, Thursdays 6:00-7:00 pm https://nyu.zoom.us/j/93461175171  In Person: TBD                                                     |
+| [**wz2445@nyu.edu**](mailto:wz2445@nyu.edu) | [**Online**](https://nyu.zoom.us/j/93461175171):
+Tuesdays 6:00-7:00 pm, Thursdays 6:00-7:00 pm In Person: TBD                                                     |
 
 ### _Class Information_
 
