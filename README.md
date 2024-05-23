@@ -31,7 +31,7 @@
 
 1. **Week 1**: The basics
     1.  [**Introduction**](lectures/introduction/)
-    2.  [**Triangles**](lectures/triangle/)
+    <!-- 2.  [**Triangles**](lectures/triangle/) -->
 <!-- 2. **Week 2**: Moving in video games
     1.  [**You're getting old, Matrix**](lectures/matrices/)
     2.  [**Transformations**](lectures/transformations/)
@@ -83,7 +83,8 @@
 
 | **E-Mail**                                  | **Office Hours**                                                                                                     |
 |---------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
-| [**wz2445@nyu.edu**](mailto:wz2445@nyu.edu) | TBD                                                        |
+| [**wz2445@nyu.edu**](mailto:wz2445@nyu.edu) | [**Online**](https://nyu.zoom.us/j/93461175171):
+Tuesdays 6:00-7:00 pm, Thursdays 6:00-7:00 pm In Person: TBD                                                     |
 
 <br>
 
