@@ -14,17 +14,16 @@
 ### _Sections_
 
 1.  [**Lecture Notes**](#lecture-notes)
-2.  [**Exercises**](#exercises)
-3.  [**Instructor**](#instructor)
-4.  [**Class Information**](#class-information)
-5.  [**Description**](#description)
-6.  [**Objectives**](#objectives)
-7.  [**Computer/Software Requirements**](#computersoftware-requirements)
-8.  [**Grading Scheme**](#grading-scheme)
-9.  [**Deadlines**](#deadlines)
-10. [**Getting Help and Slack**](#getting-help-and-slack)
-11. [**Moses Center Statement of Disability**](#moses-center-statement-of-disability)
-12. [**Academic Integrity**](#academic-integrity)
+2.  [**Instructor**](#instructor)
+3.  [**Class Information**](#class-information)
+4.  [**Description**](#description)
+5.  [**Objectives**](#objectives)
+6.  [**Computer/Software Requirements**](#computersoftware-requirements)
+7.  [**Grading Scheme**](#grading-scheme)
+8.  [**Deadlines**](#deadlines)
+9. [**Getting Help and Slack**](#getting-help-and-slack)
+10. [**Moses Center Statement of Disability**](#moses-center-statement-of-disability)
+11. [**Academic Integrity**](#academic-integrity)
 
 ---
 
@@ -32,7 +31,7 @@
 
 1. **Week 1**: The basics
     1.  [**Introduction**](lectures/introduction/)
-    <!-- 2.  [**Triangles**](lectures/triangle/) -->
+    2.  [**Triangles**](lectures/triangle/)
 <!-- 2. **Week 2**: Moving in video games
     1.  [**You're getting old, Matrix**](lectures/matrices/)
     2.  [**Transformations**](lectures/transformations/)
@@ -69,19 +68,6 @@
 22. [**Billboards**](lectures/billboards/SDLProject/) -->
 
 <sub>To be released every lecture day before class.</sub>
-
-<!-- ### _Exercises_
-
-- [**Transformations**](exercises/transformation/)
-- [**Player Input**](exercises/player_input/)
-<!--
-- _10/06_: [**User Input**](exercises/player_input/)
-- _10/13_: [**Collision Detection**](exercises/collision-detection/)
-- _10/27_: [**Animation**](exercises/animation/)
-- _11/03_: [**Entity Types**](exercises/entity_types/)
-- _11/17_: [**FX**](exercises/fx/README.md) -->
-
-<!-- <sub>To be released every lecture day before class.</sub> -->
 
 <br>
 
@@ -148,23 +134,11 @@ Every assignment will have an "extra credit" portion. This will count for **5% t
 
 When I say "participation" I do not mean that I will literally be keeping track of how much you speak in class. It's basically an indication of how much I get to know you throughout the semester. 
 
-<!-- I know speaking in an online class is not necessarily easy, so here are some other ways to get this participation grade:
-
-- Have your webcam on as much as you can.
-- Come to my and Wesley's office hours.
-- Volunteer your projects to be presented to the class. -->
-
 As for your final letter grade, the following scale will be used:
 
 | **Letter Grade** | **A**  | **A-** | **B+** | **B** | **B-** | **C+** | **C** | **C-** | **D+** | **D** | **F** |
 |------------------|--------|--------|--------|-------|--------|--------|-------|--------|--------|-------|-------|
 | **Range**        | 93-100 | 90-92  | 87-89  | 83-86 | 80-82  | 77-79  | 73-76 | 70-72  | 67-69  | 60-66 | 0-60  |
-
-<!-- | **_Project 2_**: [**Pong**](assignments/project_2.md)                   | 10%            | -->
-<!-- | **_Project 3_**: [**Lunar Lander**](assignments/project_3.md)           | 15%            | -->
-<!-- | **_Project 4_**: [**Rise of the AI**](assignments/project_4.md)         | 15%            | -->
-<!-- | **_Project 5_**: [**Platformer**](assignments/project_5.md)             | 15%            | -->
-<!-- | **_Final Project_**: [**Students’ Choice**](assignments/project_6.md)   | 25%            | -->
 
 <br>
 

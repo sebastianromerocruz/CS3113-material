@@ -22,8 +22,8 @@
  tho.
  */
 // The size of our literal game window
-constexpr int WINDOW_WIDTH = 640,
-              WINDOW_HEIGHT = 480;
+constexpr int WINDOW_WIDTH = 640 * 2,
+              WINDOW_HEIGHT = 480 * 2;
 
 // The background colours may change in the course of our games, so they can also be
 // variables
@@ -49,7 +49,7 @@ int main(int argc, char* argv[])
     // If the window could not be created, then we should quit the program
     if (g_display_window == nullptr)
     {
-        std::cerr << "Error: SDL window could not be created." << std::endl;
+        std::cerr << "Error: SDL window could not be created.\n";
         SDL_Quit();
         return 1;
     }
