@@ -31,7 +31,7 @@
 
 1. **Week 1**: The basics
     1.  [**Introduction**](lectures/introduction/)
-    <!-- 2.  [**Triangles**](lectures/triangle/) -->
+    2.  [**Triangles**](lectures/triangle/)
 <!-- 2. **Week 2**: Moving in video games
     1.  [**You're getting old, Matrix**](lectures/matrices/)
     2.  [**Transformations**](lectures/transformations/)
