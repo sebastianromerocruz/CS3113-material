@@ -22,30 +22,30 @@
 #include "glm/gtc/matrix_transform.hpp"  
 #include "ShaderProgram.h" 
 
-const int WINDOW_WIDTH = 640,
+constexpr int WINDOW_WIDTH = 640,
           WINDOW_HEIGHT = 480;
 
-const float BG_RED = 0.1922f,
+constexpr float BG_RED = 0.1922f,
             BG_BLUE = 0.549f,
             BG_GREEN = 0.9059f,
             BG_OPACITY = 1.0f;
 
-const int VIEWPORT_X = 0,
+constexpr int VIEWPORT_X = 0,
           VIEWPORT_Y = 0,
           VIEWPORT_WIDTH = WINDOW_WIDTH,
           VIEWPORT_HEIGHT = WINDOW_HEIGHT;
 
-const char V_SHADER_PATH[] = "shaders/vertex.glsl",
+constexpr char V_SHADER_PATH[] = "shaders/vertex.glsl",
            F_SHADER_PATH[] = "shaders/fragment.glsl";
 
-const int TRIANGLE_RED = 1.0,
+constexpr int TRIANGLE_RED = 1.0,
           TRIANGLE_BLUE = 0.4,
           TRIANGLE_GREEN = 0.4,
           TRIANGLE_OPACITY = 1.0;
 
-const float GROWTH_FACTOR = 1.01f;
-const float SHRINK_FACTOR = 0.99f;
-const int MAX_FRAME = 40;
+constexpr float GROWTH_FACTOR = 1.01f;
+constexpr float SHRINK_FACTOR = 0.99f;
+constexpr int MAX_FRAME = 40;
 
 int g_frame_counter = 0;
 bool g_is_growing = true;
