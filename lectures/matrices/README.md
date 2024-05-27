@@ -1,22 +1,29 @@
-<h2 align=center>Lecture 03</h2>
+<h2 align=center>Week 02: <em>Day 1</em></h2>
 
 <h1 align=center>You're getting old, Matrix</h1>
 
-<h3 align=center> 28 Harpstring Moon, Imperial Year CCXXIV</h3>
+<h3 align=center>28 Harpstring Moon, Imperial Year CCXXIV</h3>
 
-***Song of the day***: _[**Lucky**](https://www.youtube.com/watch?v=1w1GUN80KrI) by  Nulbarich and Sunny(feat. UMI)(2024)._
+***Song of the day***: _[**Lucky**](https://www.youtube.com/watch?v=1w1GUN80KrI) by Nulbarich and Sunny (feat. UMI) (2024)._
+
+---
 
 ### Sections
 
-1. [**The XYZs of Animation**](#part-1-the-xyzs-of-animation)
-2. [**Matrix Arithmetic**](#part-2-matrix-arithmetic)
+1. [**The XYZs of Animation**](#one)
+2. [**Matrix Arithmetic**](#two)
     1. [**Scalar Multiplication**](#scalar-multiplication)
     2. [**Matrix Multiplication**](#matrix-multiplication)
-3. [**Modeling Operations**](#part-3-modeling-operations)
+3. [**Modeling Operations**](#three)
     1. [**Scaling**](#scaling)
     2. [**Rotation**](#rotation)
     3. [**Translation**](#translation)
-4. [**Matrices in OpenGL**](#part-4-matrices-in-opengl)
+4. [**Why Do We Use Homogeneous Coordinates?**](#four)
+5. [**Matrices in OpenGL**](#five)
+
+---
+
+<a id="one"></a>
 
 ### Part 1: _The XYZs of Movement_
 
@@ -37,6 +44,10 @@ Naturally, there are ways with which OpenGL performs these operations, and they 
 ![matrix](assets/Matris.png)
 
 <sub>**Figure 2**: An _m_ × _n_ matrix. The _m_ rows are horizontal and the _n_ columns are vertical. Each element of a matrix is often denoted by a variable with two subscripts. For example, a<sub>2,1</sub> represents the element at the second row and first column of the matrix.</sub>
+
+<br>
+
+<a id="two"></a>
 
 ### Part 2: _Matrix Arithmetic_
 
@@ -73,6 +84,10 @@ Taking the 15 in location (1, 1) of the the resulting matrix as an example, we:
 3. Perform 1 (**A**<sub>1, 3</sub>) * 1 (**B**<sup>T</sup><sub>2, 3</sub>) = 1 
 4. Add them all together to get 2 + 12 + 1 = **15**
 5. Locate 16 in location (1, 1) of the resulting matrix.
+
+<br>
+
+<a id="three"></a>
 
 ### Part 3: _Modeling Operations_
 
@@ -143,7 +158,12 @@ Let's see an example in action. If we have a point, say (4, -2), and we want to 
 <sub>**Figure 13**: A column vector being transformed 2 units up and one unit to the right.</sub>
 
 Makes sense, I hope. [**Here's**](https://matrix.reshish.com/multiplication.php) a handy matrix multiplication online tool that you may use when you want to make some quick calculations when working on your games!
-### Why Do We Use Homogeneous Coordinates?
+
+<br>
+
+<a id="four"></a>
+
+### Part 4: _Why Do We Use Homogeneous Coordinates?_
 
 #### Cartesian Coordinates
 In 2D Cartesian coordinates, a point is represented as \((x, y)\). Transformations like rotation and scaling can be represented using 2x2 matrices. However, translation does not fit into a 2x2 matrix format.
@@ -175,17 +195,17 @@ To unify these transformations into a single matrix format, we use homogeneous c
 
     ```
     Translation Matrix:
-    [ 1  0  tx ]
-    [ 0  1  ty ]
-    [ 0  0  1  ]
+    [ 1   0   tx ]
+    [ 0   1   ty ]
+    [ 0   0   1  ]
     ```
 
     Applying this to a point \((x, y, 1)\):
 
     ```
-    [ 1  0  tx ]       [ x ]       [ x + tx ]
-    [ 0  1  ty ]   *   [ y ]   =   [ y + ty ]
-    [ 0  0  1  ]       [ 1 ]       [   1    ]
+    [ 1   0   tx ]       [ x ]       [ x + tx ]
+    [ 0   1   ty ]   *   [ y ]   =   [ y + ty ]
+    [ 0   0   1  ]       [ 1 ]       [   1    ]
     ```
 
     This moves the point \((x, y)\) by \((tx, ty)\).
@@ -194,34 +214,34 @@ To unify these transformations into a single matrix format, we use homogeneous c
 
     ```
     Scaling Matrix:
-    [ sx  0  0 ]
-    [  0 sy  0 ]
-    [  0  0  1 ]
+    [ sx   0   0 ]
+    [  0  sy   0 ]
+    [  0   0   1 ]
     ```
 
     Applying this to a point \((x, y, 1)\):
 
     ```
-    [ sx  0  0 ]   [ x ]   [ sx * x ]
-    [  0 sy  0 ] * [ y ] = [ sy * y ]
-    [  0  0  1 ]   [ 1 ]   [   1    ]
+    [ sx   0   0 ]   [ x ]   [ sx * x ]
+    [  0  sy   0 ] * [ y ] = [ sy * y ]
+    [  0   0   1 ]   [ 1 ]   [   1    ]
     ```
 
 3. **Rotation**: In homogeneous coordinates, rotation is represented as:
 
     ```
     Rotation Matrix:
-    [ cosθ -sinθ  0 ]
-    [ sinθ  cosθ  0 ]
-    [  0     0    1 ]
+    [ cosθ  -sinθ   0 ]
+    [ sinθ   cosθ   0 ]
+    [  0      0     1 ]
     ```
 
     Applying this to a point \((x, y, 1)\):
 
     ```
-    [ cosθ -sinθ  0 ]   [ x ]   [ x' ]
-    [ sinθ  cosθ  0 ] * [ y ] = [ y' ]
-    [  0     0    1 ]   [ 1 ]   [ 1  ]
+    [ cosθ  -sinθ   0 ]   [ x ]   [ x' ]
+    [ sinθ   cosθ   0 ] * [ y ] = [ y' ]
+    [  0      0     1 ]   [ 1 ]   [ 1  ]
     ```
 
 #### Combining Transformations
@@ -236,7 +256,11 @@ In homogeneous coordinates, all transformations (translation, scaling, rotation)
 
 Essentially, homogeneous coordinates simplify the representation and combination of various transformations. By adding an extra coordinate, we can use matrix multiplication for all transformations, making the math consistent and straightforward. This unification is particularly powerful in computer graphics, where we frequently need to apply multiple transformations to objects.
 
-### Part 4: _Matrices in OpenGL_
+<br>
+
+<a id="five"></a>
+
+### Part 5: _Matrices in OpenGL_
 
 Let's take a look at some of our code from last week and see if we can find some examples of what we've been looking at.
 
@@ -279,19 +303,21 @@ void update()
 {
     // This scale vector will make the x- and y-coordinates of the triangle
     // grow by a factor of 1% of it of its original size every frame.
-    float scale_factor = 1.01;
-    glm::vec3 scale_vector = glm::vec3(scale_factor, scale_factor, 1.0f);
+    float g_scale_factor = 1.01;
+    glm::vec3 g_scale_vector = glm::vec3(scale_factor, scale_factor, 1.0f);
     
     // We replace the previous value of the model matrix with the scaled
     // value of model matrix. This would mean that  glm::scale() returns
     // a matrix, which it does!
-    model_matrix = glm::scale(model_matrix, scale_vector);
+    g_model_matrix = glm::scale(g_model_matrix, scale_vector);
 }
 ```
 
 <sub>**Code Block 2**: Scaling the size of our model matrix by 1% every frame.</sub>
 
-![result](assets/result.gif)
+<p align=center>
+    <img src="assets/result.gif"></img>
+</p>
 
 <sub>**Figure 15**: The result of code block 2.</sub>
 

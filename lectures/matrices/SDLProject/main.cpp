@@ -1,19 +1,19 @@
 /**
  * @file main.cpp
- * @author Sebastián Romero Cruz (sebastian.romerocruz@nyu.edu)
+ * @author Sebastián Romero Cruz (src402@nyu.edu) and Wesley Zhuang (wz2445@nyu.edu)
  * @brief A simple g_shader_program that creates a window with a blue background
  * Renders in a colored triangle that will be able to infinitely scale. This is used to show 
  * the use of matrices 
- * @date 2024-05-26
- * 
- * @copyright Copyright NYU Tandon (c) 2024
+ * @date 2024-05-27
+ *
+ * @copyright NYU Tandon (c) 2024
  */
 
 #define GL_SILENCE_DEPRECATION
 #define GL_GLEXT_PROTOTYPES 1
 
 #ifdef _WINDOWS
-#include <GL/glew.h>
+    #include <GL/glew.h>
 #endif
 
 #include <SDL.h>
@@ -23,7 +23,7 @@
 #include "ShaderProgram.h" 
 
 constexpr int WINDOW_WIDTH = 640,
-          WINDOW_HEIGHT = 480;
+              WINDOW_HEIGHT = 480;
 
 constexpr float BG_RED = 0.1922f,
             BG_BLUE = 0.549f,
@@ -31,23 +31,23 @@ constexpr float BG_RED = 0.1922f,
             BG_OPACITY = 1.0f;
 
 constexpr int VIEWPORT_X = 0,
-          VIEWPORT_Y = 0,
-          VIEWPORT_WIDTH = WINDOW_WIDTH,
-          VIEWPORT_HEIGHT = WINDOW_HEIGHT;
+              VIEWPORT_Y = 0,
+              VIEWPORT_WIDTH = WINDOW_WIDTH,
+              VIEWPORT_HEIGHT = WINDOW_HEIGHT;
 
 constexpr char V_SHADER_PATH[] = "shaders/vertex.glsl",
-           F_SHADER_PATH[] = "shaders/fragment.glsl";
+               F_SHADER_PATH[] = "shaders/fragment.glsl";
 
 constexpr int TRIANGLE_RED = 1.0,
-          TRIANGLE_BLUE = 0.4,
-          TRIANGLE_GREEN = 0.4,
-          TRIANGLE_OPACITY = 1.0;
+              TRIANGLE_BLUE = 0.4,
+              TRIANGLE_GREEN = 0.4,
+              TRIANGLE_OPACITY = 1.0;
 
 constexpr float GROWTH_FACTOR = 1.01f;
 constexpr float SHRINK_FACTOR = 0.99f;
 constexpr int MAX_FRAME = 40;
 
-int g_frame_counter = 0;
+int  g_frame_counter = 0;
 bool g_is_growing = true;
 
 SDL_Window* g_display_window;
@@ -63,6 +63,7 @@ void initialise()
                                       SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                                       WINDOW_WIDTH, WINDOW_HEIGHT,
                                       SDL_WINDOW_OPENGL);
+    
     if (g_display_window == nullptr)
     {
         std::cerr << "Error: SDL window could not be created.\n";
@@ -70,6 +71,7 @@ void initialise()
         exit(1);
         
     }
+    
     SDL_GLContext context = SDL_GL_CreateContext(g_display_window);
     SDL_GL_MakeCurrent(g_display_window, context);
     
@@ -143,9 +145,6 @@ void render() {
 
 void shutdown() { SDL_Quit(); }
 
-/**
- Start here—we can see the general structure of a game loop without worrying too much about the details yet.
- */
 int main(int argc, char* argv[])
 {
     initialise();
