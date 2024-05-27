@@ -2,9 +2,9 @@
 
 <h1 align=center>You're getting old, Matrix</h1>
 
-<h3 align=center>10 Prairial, Year CCXXXI</h3>
+<h3 align=center> 28 Harpstring Moon, Imperial Year CCXXIV</h3>
 
-***Song of the day***: _[**Cupid (Twin Version)**](https://youtu.be/6uvUTu716rU) by FIFTY FIFTY (피프티피프티) (2023)._
+***Song of the day***: _[**Lucky**](https://www.youtube.com/watch?v=1w1GUN80KrI) by  Nulbarich and Sunny(feat. UMI)(2024)._
 
 ### Sections
 
@@ -18,7 +18,7 @@
     3. [**Translation**](#translation)
 4. [**Matrices in OpenGL**](#part-4-matrices-in-opengl)
 
-### Part 1: _The XYZs of Animation_
+### Part 1: _The XYZs of Movement_
 
 How do we simulate movement through space? Physics teaches to do so via methods called vectors, whereby each vector contains a X-, Y-, and Z-coordinate in [**cartesian space**](https://en.wikipedia.org/wiki/Cartesian_coordinate_system):
 
@@ -143,6 +143,98 @@ Let's see an example in action. If we have a point, say (4, -2), and we want to 
 <sub>**Figure 13**: A column vector being transformed 2 units up and one unit to the right.</sub>
 
 Makes sense, I hope. [**Here's**](https://matrix.reshish.com/multiplication.php) a handy matrix multiplication online tool that you may use when you want to make some quick calculations when working on your games!
+### Why Do We Use Homogeneous Coordinates?
+
+#### Cartesian Coordinates
+In 2D Cartesian coordinates, a point is represented as \((x, y)\). Transformations like rotation and scaling can be represented using 2x2 matrices. However, translation does not fit into a 2x2 matrix format.
+
+**Scaling**:
+
+```
+[ sx  0 ]   *   [ x ]   =   [ sx * x ]
+[  0 sy ]       [ y ]       [ sy * y ]
+```
+
+**Rotation**:
+
+```
+[ cosθ -sinθ ]   *   [ x ]   =   [ x' ]
+[ sinθ  cosθ ]       [ y ]       [ y' ]
+```
+
+**Translation**: Translation cannot be represented directly with a 2x2 matrix.
+```
+[ x ]   +   [ tx ]   =   [ x + tx ]
+[ y ]       [ ty ]       [ y + ty ]
+```
+
+#### Homogeneous Coordinates
+To unify these transformations into a single matrix format, we use homogeneous coordinates. In 2D, a point \((x, y)\) is represented as \((x, y, 1)\).
+
+1. **Translation**: In homogeneous coordinates, we can represent translation using a 3x3 matrix.
+
+    ```
+    Translation Matrix:
+    [ 1  0  tx ]
+    [ 0  1  ty ]
+    [ 0  0  1  ]
+    ```
+
+    Applying this to a point \((x, y, 1)\):
+
+    ```
+    [ 1  0  tx ]       [ x ]       [ x + tx ]
+    [ 0  1  ty ]   *   [ y ]   =   [ y + ty ]
+    [ 0  0  1  ]       [ 1 ]       [   1    ]
+    ```
+
+    This moves the point \((x, y)\) by \((tx, ty)\).
+
+2. **Scaling**: In homogeneous coordinates, scaling is represented as:
+
+    ```
+    Scaling Matrix:
+    [ sx  0  0 ]
+    [  0 sy  0 ]
+    [  0  0  1 ]
+    ```
+
+    Applying this to a point \((x, y, 1)\):
+
+    ```
+    [ sx  0  0 ]   [ x ]   [ sx * x ]
+    [  0 sy  0 ] * [ y ] = [ sy * y ]
+    [  0  0  1 ]   [ 1 ]   [   1    ]
+    ```
+
+3. **Rotation**: In homogeneous coordinates, rotation is represented as:
+
+    ```
+    Rotation Matrix:
+    [ cosθ -sinθ  0 ]
+    [ sinθ  cosθ  0 ]
+    [  0     0    1 ]
+    ```
+
+    Applying this to a point \((x, y, 1)\):
+
+    ```
+    [ cosθ -sinθ  0 ]   [ x ]   [ x' ]
+    [ sinθ  cosθ  0 ] * [ y ] = [ y' ]
+    [  0     0    1 ]   [ 1 ]   [ 1  ]
+    ```
+
+#### Combining Transformations
+
+One of the biggest advantages of using homogeneous coordinates is that we can combine multiple transformations into a single matrix. For example, if we want to scale, then rotate, and finally translate a point, we can multiply the respective matrices together and apply the resulting matrix to the point.
+
+```
+Combined Matrix = Translation * Rotation * Scaling
+```
+
+In homogeneous coordinates, all transformations (translation, scaling, rotation) are represented using 3x3 matrices, allowing us to easily combine them into a single transformation matrix.
+
+Essentially, homogeneous coordinates simplify the representation and combination of various transformations. By adding an extra coordinate, we can use matrix multiplication for all transformations, making the math consistent and straightforward. This unification is particularly powerful in computer graphics, where we frequently need to apply multiple transformations to objects.
 
 ### Part 4: _Matrices in OpenGL_
 

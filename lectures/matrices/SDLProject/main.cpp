@@ -1,7 +1,7 @@
 /**
  * @file main.cpp
  * @author Sebastián Romero Cruz (sebastian.romerocruz@nyu.edu)
- * @brief A simple program that creates a window with a blue background
+ * @brief A simple g_shader_program that creates a window with a blue background
  * Renders in a colored triangle that will be able to infinitely scale. This is used to show 
  * the use of matrices 
  * @date 2024-05-26
@@ -47,13 +47,13 @@ const float GROWTH_FACTOR = 1.01f;
 const float SHRINK_FACTOR = 0.99f;
 const int MAX_FRAME = 40;
 
-int frame_counter = 0;
-bool is_growing = true;
+int g_frame_counter = 0;
+bool g_is_growing = true;
 
 SDL_Window* g_display_window;
 bool g_game_is_running = true;
 
-ShaderProgram program;
+ShaderProgram g_shader_program;
 glm::mat4 view_matrix, model_matrix, projection_matrix;
 
 void initialise()
@@ -79,19 +79,19 @@ void initialise()
     
     glViewport(VIEWPORT_X, VIEWPORT_Y, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
     
-    program.Load(V_SHADER_PATH, F_SHADER_PATH);
+    g_shader_program.load(V_SHADER_PATH, F_SHADER_PATH);
     
     view_matrix = glm::mat4(1.0f);  // Defines the position (location and orientation) of the camera
     model_matrix = glm::mat4(1.0f);  // Defines every translation, rotations, or scaling applied to an object
     projection_matrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);  // Defines the characteristics of your camera, such as clip planes, field of view, projection method etc.
     
-    program.SetProjectionMatrix(projection_matrix);
-    program.SetViewMatrix(view_matrix);
+    g_shader_program.set_projection_matrix(projection_matrix);
+    g_shader_program.set_view_matrix(view_matrix);
     // Notice we haven't set our model matrix yet!
     
-    program.SetColor(TRIANGLE_RED, TRIANGLE_BLUE, TRIANGLE_GREEN, TRIANGLE_OPACITY);
+    g_shader_program.set_colour(TRIANGLE_RED, TRIANGLE_BLUE, TRIANGLE_GREEN, TRIANGLE_OPACITY);
     
-    glUseProgram(program.programID);
+    glUseProgram(g_shader_program.get_program_id());
     
     glClearColor(BG_RED, BG_BLUE, BG_GREEN, BG_OPACITY);
 }
@@ -124,7 +124,7 @@ void update()
 void render() {
     glClear(GL_COLOR_BUFFER_BIT);
     
-    program.SetModelMatrix(model_matrix);
+    g_shader_program.set_model_matrix(model_matrix);
     
     float vertices[] =
     {
@@ -133,10 +133,10 @@ void render() {
         -0.5f, -0.5f
     };
     
-    glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, vertices);
-    glEnableVertexAttribArray(program.positionAttribute);
+    glVertexAttribPointer(g_shader_program.get_position_attribute(), 2, GL_FLOAT, false, 0, vertices);
+    glEnableVertexAttribArray(g_shader_program.get_position_attribute());
     glDrawArrays(GL_TRIANGLES, 0, 3);
-    glDisableVertexAttribArray(program.positionAttribute);
+    glDisableVertexAttribArray(g_shader_program.get_position_attribute());
     
     SDL_GL_SwapWindow(g_display_window);
 }
