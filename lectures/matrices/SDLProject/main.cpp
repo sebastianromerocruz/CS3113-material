@@ -22,6 +22,8 @@
 #include "glm/gtc/matrix_transform.hpp"  
 #include "ShaderProgram.h" 
 
+enum AppStatus { RUNNING, TERMINATED };
+
 constexpr int WINDOW_WIDTH = 640,
               WINDOW_HEIGHT = 480;
 
@@ -43,23 +45,18 @@ constexpr int TRIANGLE_RED = 1.0,
               TRIANGLE_GREEN = 0.4,
               TRIANGLE_OPACITY = 1.0;
 
-constexpr float GROWTH_FACTOR = 1.01f;
-constexpr float SHRINK_FACTOR = 0.99f;
-constexpr int MAX_FRAME = 40;
+SDL_Window* g_display_window = nullptr;
+AppStatus g_app_status = RUNNING;
 
-int  g_frame_counter = 0;
-bool g_is_growing = true;
-
-SDL_Window* g_display_window;
-bool g_game_is_running = true;
-
-ShaderProgram g_shader_program;
-glm::mat4 view_matrix, model_matrix, projection_matrix;
+ShaderProgram g_shader_program = ShaderProgram();
+glm::mat4 view_matrix,
+          model_matrix,
+          projection_matrix;
 
 void initialise()
 {
     SDL_Init(SDL_INIT_VIDEO);
-    g_display_window = SDL_CreateWindow("Triangle!",
+    g_display_window = SDL_CreateWindow("Matrices!",
                                       SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                                       WINDOW_WIDTH, WINDOW_HEIGHT,
                                       SDL_WINDOW_OPENGL);
@@ -83,13 +80,12 @@ void initialise()
     
     g_shader_program.load(V_SHADER_PATH, F_SHADER_PATH);
     
-    view_matrix = glm::mat4(1.0f);  // Defines the position (location and orientation) of the camera
-    model_matrix = glm::mat4(1.0f);  // Defines every translation, rotations, or scaling applied to an object
-    projection_matrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);  // Defines the characteristics of your camera, such as clip planes, field of view, projection method etc.
+    view_matrix  = glm::mat4(1.0f);
+    model_matrix = glm::mat4(1.0f);
+    projection_matrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);
     
     g_shader_program.set_projection_matrix(projection_matrix);
     g_shader_program.set_view_matrix(view_matrix);
-    // Notice we haven't set our model matrix yet!
     
     g_shader_program.set_colour(TRIANGLE_RED, TRIANGLE_BLUE, TRIANGLE_GREEN, TRIANGLE_OPACITY);
     
@@ -105,20 +101,22 @@ void process_input()
     {
         if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE)
         {
-            g_game_is_running = false;
+            g_app_status = TERMINATED;
         }
     }
 }
 
 void update()
 {
+    /** NEW STUFF HERE! */
+    
     // This scale vector will make the x- and y-coordinates of the triangle
     // grow by a factor of 1% of it of its original size every frame.
     float scale_factor = 1.01;
     glm::vec3 scale_vector = glm::vec3(scale_factor, scale_factor, 1.0f);
-    
+
     // We replace the previous value of the model matrix with the scaled
-    // value of model matrix. This would mean that  glm::scale() returns
+    // value of model matrix. This would mean that glm::scale() returns
     // a matrix, which it does!
     model_matrix = glm::scale(model_matrix, scale_vector);
 }
@@ -149,7 +147,7 @@ int main(int argc, char* argv[])
 {
     initialise();
     
-    while (g_game_is_running)
+    while (g_app_status == RUNNING)
     {
         process_input();
         update();
