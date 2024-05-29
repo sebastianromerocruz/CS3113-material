@@ -8,17 +8,16 @@
 
 ### Sections
 
-1. [**A little help**](#part-1-a-little-help)
-2. [**Funny heartbeat or, how to scale a model matrix**](#part-2-funny-heartbeat-or-how-to-scale-a-model-matrix)
-3. [**Rotating a model matrix**](#part-3-rotating-a-model-matrix)
-4. [**Translating a model matrix**](#part-4-translating-a-model-matrix)
+1. [**Funny heartbeat or, how to scale a model matrix**](#part-2-funny-heartbeat-or-how-to-scale-a-model-matrix)
+2. [**Rotating a model matrix**](#part-3-rotating-a-model-matrix)
+3. [**Translating a model matrix**](#part-4-translating-a-model-matrix)
 
 ### Part 1: _A little help_
 
 Our `main.cpp` file is pretty much destined to get bloated with code _real_ fast. The lines necessary to draw a simple triangle are already what might be considered a lot, so it might bear remembering that you can define functions and classes that are not immediately relevant to your game in separate helper files. For instance, I wrote a simple function that prints the contents of a matrix nicely:
 
 ```c++
-const char MAT_SEP = '\t';
+constexpr char MAT_SEP = '\t';
 
 void print_matrix(glm::mat4 &matrix, int size)
 {
@@ -117,9 +116,9 @@ There are various ways to do this. Here's how to do this in a way that does not 
 
 /* Some code... */
 
-const float GROWTH_FACTOR = 1.01f;  // growth rate of 1.0% per frame
-const float SHRINK_FACTOR = 0.99f;  // growth rate of -1.0% per frame
-const int MAX_FRAME = 40;           // this value is, of course, up to you
+constexpr float GROWTH_FACTOR = 1.01f;  // growth rate of 1.0% per frame
+constexpr float SHRINK_FACTOR = 0.99f;  // growth rate of -1.0% per frame
+constexpr int MAX_FRAME = 40;           // this value is, of course, up to you
 
 int g_frame_counter = 0;
 bool g_is_growing = true;
@@ -169,7 +168,7 @@ Let's say that your game started with out pulsating triangle not looking up, but
 ```c++
 /* Some code... */
 
-const float INIT_TRIANGLE_ANGLE = glm::radians(45.0);
+constexpr float INIT_TRIANGLE_ANGLE = glm::radians(45.0);
 
 /* Some more code... */
 
@@ -220,7 +219,7 @@ Cool, so now that we've seen how to apply simple rotations onto our models, let'
 ```c++
 /* Some code... */
 
-const float ROT_ANGLE = glm::radians(1.5f); // Let's try a smaller angle
+constexpr float ROT_ANGLE = glm::radians(1.5f); // Let's try a smaller angle
 
 /* More code... */
 
