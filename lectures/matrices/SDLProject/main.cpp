@@ -97,7 +97,7 @@ void initialise()
 void process_input()
 {
     SDL_Event event;
-    while (SDL_PollEvent(&event))
+    while (g_app_status == RUNNING)
     {
         if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE)
         {
@@ -118,13 +118,13 @@ void update()
     // We replace the previous value of the model matrix with the scaled
     // value of model matrix. This would mean that glm::scale() returns
     // a matrix, which it does!
-    model_matrix = glm::scale(model_matrix, scale_vector);
+    g_model_matrix = glm::scale(g_model_matrix, scale_vector);
 }
 
 void render() {
     glClear(GL_COLOR_BUFFER_BIT);
     
-    g_shader_program.set_model_matrix(model_matrix);
+    g_shader_program.set_model_matrix(g_model_matrix);
     
     float vertices[] =
     {
