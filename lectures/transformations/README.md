@@ -134,7 +134,9 @@ Let's go through the steps one-by-one:
 
 The result is a very nice and fluid "heartbeat" effect for our triangle.
 
-### Part 3: _Rotating a model matrix_
+<br>
+
+### Part 2: _Rotating a model matrix_
 
 The only real difference between scaling and rotation is the function that we'll be using. As you may have guessed, we use `glm::rotate()` instead.
 
@@ -224,7 +226,9 @@ void update()
 
 <sub>**Code Block 3** and **Figure 7**: A simple spinning "animation" (i.e. 1.5-degree anti-clockwise rotation per frame).</sub>
 
-### Part 4: _Translating a model matrix_
+<br>
+
+### Part 3: _Translating a model matrix_
 
 Translating a model matrix is even more simple—we simply use the `glm::translate()` function. This function accepts our original 4 x 4 matrix as its first parameter, and a `glm::vec3` object (again representing the translation values in the x-, y-, and z-coordinates) as its second. It, too, returns another `glm::mat4` object:
 
