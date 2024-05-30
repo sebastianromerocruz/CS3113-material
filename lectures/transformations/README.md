@@ -2,7 +2,7 @@
 
 <h1 align=center>Transformations</h1>
 
-<h3 align=center>12 Prairial, Year CCXXXI</h3>
+<h3 align=center>30 Harpstring Moon, Imperial Year CCXXIV</h3>
 
 ***Song of the day***: _[**Let go**](https://www.youtube.com/watch?v=kBXAp1N5UQI) by LambC (램씨) (2024)._
 
