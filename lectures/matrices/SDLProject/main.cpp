@@ -49,9 +49,9 @@ SDL_Window* g_display_window = nullptr;
 AppStatus g_app_status = RUNNING;
 
 ShaderProgram g_shader_program = ShaderProgram();
-glm::mat4 view_matrix,
-          model_matrix,
-          projection_matrix;
+glm::mat4 g_view_matrix,
+          g_model_matrix,
+          g_projection_matrix;
 
 void initialise()
 {
@@ -80,12 +80,12 @@ void initialise()
     
     g_shader_program.load(V_SHADER_PATH, F_SHADER_PATH);
     
-    view_matrix  = glm::mat4(1.0f);
-    model_matrix = glm::mat4(1.0f);
-    projection_matrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);
+    g_view_matrix  = glm::mat4(1.0f);
+    g_model_matrix = glm::mat4(1.0f);
+    g_projection_matrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);
     
-    g_shader_program.set_projection_matrix(projection_matrix);
-    g_shader_program.set_view_matrix(view_matrix);
+    g_shader_program.set_projection_matrix(g_projection_matrix);
+    g_shader_program.set_view_matrix(g_view_matrix);
     
     g_shader_program.set_colour(TRIANGLE_RED, TRIANGLE_BLUE, TRIANGLE_GREEN, TRIANGLE_OPACITY);
     
@@ -94,10 +94,11 @@ void initialise()
     glClearColor(BG_RED, BG_BLUE, BG_GREEN, BG_OPACITY);
 }
 
+
 void process_input()
 {
     SDL_Event event;
-    while (g_app_status == RUNNING)
+    while (SDL_PollEvent(&event))
     {
         if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE)
         {
@@ -105,6 +106,7 @@ void process_input()
         }
     }
 }
+
 
 void update()
 {
@@ -120,6 +122,7 @@ void update()
     // a matrix, which it does!
     g_model_matrix = glm::scale(g_model_matrix, scale_vector);
 }
+
 
 void render() {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -141,9 +144,11 @@ void render() {
     SDL_GL_SwapWindow(g_display_window);
 }
 
+
 void shutdown() { SDL_Quit(); }
 
-int main(int argc, char* argv[])
+
+int main()
 {
     initialise();
     

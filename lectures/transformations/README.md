@@ -4,7 +4,9 @@
 
 <h3 align=center>12 Prairial, Year CCXXXI</h3>
 
-***Song of the day***: _[**Let go**](https://www.youtube.com/watch?v=kBXAp1N5UQI) by LambC(램씨) (2024)._
+***Song of the day***: _[**Let go**](https://www.youtube.com/watch?v=kBXAp1N5UQI) by LambC (램씨) (2024)._
+
+---
 
 ### Sections
 
@@ -12,36 +14,9 @@
 2. [**Rotating a model matrix**](#part-3-rotating-a-model-matrix)
 3. [**Translating a model matrix**](#part-4-translating-a-model-matrix)
 
-### Part 1: _A little help_
+---
 
-Our `main.cpp` file is pretty much destined to get bloated with code _real_ fast. The lines necessary to draw a simple triangle are already what might be considered a lot, so it might bear remembering that you can define functions and classes that are not immediately relevant to your game in separate helper files. For instance, I wrote a simple function that prints the contents of a matrix nicely:
-
-```c++
-constexpr char MAT_SEP = '\t';
-
-void print_matrix(glm::mat4 &matrix, int size)
-{
-    for (auto row = 0 ; row < size ; row++)
-    {
-        for (auto col = 0 ; col < size ; col++)
-        {
-            std::cout << matrix[row][col] << MAT_SEP;
-        }
-        
-        std::cout << "\n";
-    }
-}
-```
-
-That's a bit of a bulky function. I've created a separate file, [**helper.cpp**](SDLProject/helper.cpp) and threw it in there. In order for `main.cpp` to use it, we simply need to add a declaration somewhere _before_ using it:
-
-```c++
-void print_matrix(glm::mat4 &matrix, int size);
-```
-
-<sub>**Code Block 1**: Note that this line exists in [**main.cpp**](SDLProject/main.cpp).</sub>
-
-### Part 2: _Funny heartbeat or, how to scale a model matrix_
+### Part 1: _Funny heartbeat or, how to scale a model matrix_
 
 Suppose that we wanted to create a sort of heartbeat effect with our triangle, as such:
 
@@ -148,7 +123,7 @@ void update()
 /* More code... */
 ```
 
-<sub>**Code Block 2**: How to achieve a simple "beating" effect.</sub>
+<sub>**Code Block 1**: How to achieve a simple "beating" effect.</sub>
 
 Let's go through the steps one-by-one:
 
@@ -180,7 +155,7 @@ void initialise()
 }
 ```
 
-<sub>**Code Block 3**: Rotating our triangle's model matrix by 45-degrees. Note that OpenGL works in _radians_, so you must convert your angles from degrees to radians where necessary. For consistency, I have chosen to do so with OpenGL's built-in `glm::radians()` function.</sub>
+<sub>**Code Block 2**: Rotating our triangle's model matrix by 45-degrees. Note that OpenGL works in _radians_, so you must convert your angles from degrees to radians where necessary. For consistency, I have chosen to do so with OpenGL's built-in `glm::radians()` function.</sub>
 
 The result is an exciting, slightly rotated version of what we had before:
 
@@ -214,7 +189,7 @@ g_model_matrix = glm::rotate(g_model_matrix, TRIANGLE_INIT_ANGLE, glm::vec3(0.0f
 
 ---
 
-Cool, so now that we've seen how to apply simple rotations onto our models, let's animate a bit. I'm gonna delete my initial rotation so that my triangle can start upright again, and add the following to our code:
+Cool, so now that we've seen how to apply simple rotations onto our models, let's "animate" a bit. I'm gonna delete my initial rotation so that my triangle can start upright again, and add the following to our code:
 
 ```c++
 /* Some code... */
@@ -247,7 +222,7 @@ void update()
 
 ![z-axis-spin](assets/z-axis-spin.gif)
 
-<sub>**Code Block 4** and **Figure 7**: A simple spinning animation (i.e. 1.5-degree anti-clockwise rotation per frame).</sub>
+<sub>**Code Block 3** and **Figure 7**: A simple spinning "animation" (i.e. 1.5-degree anti-clockwise rotation per frame).</sub>
 
 ### Part 4: _Translating a model matrix_
 
@@ -264,32 +239,42 @@ Let's apply this to our `update()` function and see what we get:
 ```c++
 /* Some code here... */
 
-float TRAN_VALUE = 0.025f;
+constexpr float TRAN_VALUE = 0.025f;
+constexpr float G_GROWTH_FACTOR = 1.01f;
+constexpr float G_SHRINK_FACTOR = 0.99f;
+constexpr int   G_MAX_FRAME     = 40;
 
 /* More code here... */
 
 void update() 
 {
-    // Initialise our scale_vector and update the number of frames past
-    glm::vec3 scale_vector;
-    g_frame_counter += 1;
+    g_frame_counter++;
     
-    // Once we reach our limit, we switch directions
-    if (g_frame_counter >= MAX_FRAME)
+    // STEP 1: Declare our transformation vectors
+    glm::vec3 translation_vector;
+    glm::vec3 scale_vector;
+    glm::vec3 rotation_triggers;
+    
+    // STEP 2: Once we reach our max frame limit, we switch scale "direction"
+    if (g_frame_counter >= G_MAX_FRAME)
     {
         g_is_growing = !g_is_growing;
         g_frame_counter = 0;
     }
     
-    // Decide if the matrix will be scaled up or scaled down
-    scale_vector = glm::vec3(g_is_growing ? GROWTH_FACTOR : SHRINK_FACTOR,
-                             g_is_growing ? GROWTH_FACTOR : SHRINK_FACTOR,
-                             1.0f);
+    // STEP 3: Decide if the matrix will be scaled up or scaled down
+    translation_vector = glm::vec3(G_TRAN_VALUE, G_TRAN_VALUE, 0.0f);
+    rotation_triggers  = glm::vec3(0.0f, 0.0f, 1.0f);
+    scale_vector       = glm::vec3(
+                                   g_is_growing ? G_GROWTH_FACTOR : G_SHRINK_FACTOR,
+                                   g_is_growing ? G_GROWTH_FACTOR : G_SHRINK_FACTOR,
+                                   1.0f
+                                   );
     
-    // Our transformations
-    g_model_matrix = glm::translate(g_model_matrix, glm::vec3(TRAN_VALUE, 0.0f, 0.0f));
+    // STEP 4: Our transformations
+    g_model_matrix = glm::translate(g_model_matrix, translation_vector);
+    g_model_matrix = glm::rotate(g_model_matrix, G_ROT_ANGLE, rotation_triggers);
     g_model_matrix = glm::scale(g_model_matrix, scale_vector);
-    g_model_matrix = glm::rotate(g_model_matrix, ROT_ANGLE, glm::vec3(0.0f, 0.0f, 1.0f));
 }
 ```
 
