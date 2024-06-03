@@ -52,7 +52,6 @@ AppStatus g_app_status = RUNNING;
 
 SDL_Window* g_display_window;
 
-bool g_game_is_running = true;
 bool g_is_growing      = true;
 
 ShaderProgram g_shader_program = ShaderProgram();

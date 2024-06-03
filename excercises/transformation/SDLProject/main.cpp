@@ -40,7 +40,6 @@ SDL_Window* g_display_window;
 
 AppStatus g_app_status = RUNNING;
 
-bool g_game_is_running = true;
 bool g_is_growing = true;
 int  g_frame_counter = 0;
 

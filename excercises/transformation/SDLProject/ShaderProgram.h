@@ -1,3 +1,12 @@
+/**
+ * @file ShaderProgram.h
+ * @author Sebastián Romero Cruz (sebastian.romerocruz@nyu.edu)
+ * @brief ShaderProgram class declaration
+ * @date 2024-05-26
+
+ * @copyright NYU Tandon School of Engineering (c) 2024
+*/
+    
 #pragma once
 
 #ifdef _WINDOWS

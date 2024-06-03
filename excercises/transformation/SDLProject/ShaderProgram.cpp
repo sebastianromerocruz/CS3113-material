@@ -1,5 +1,19 @@
-#define GL_SILENCE_DEPRECATION
+/**
+ * @file ShaderProgram.cpp
+ * @author Sebastián Romero Cruz (sebastian.romerocruz@nyu.edu)
+ * @brief ShaderProgram class represents an OpenGL shader program. This class 
+ * encapsulates the functionality to manage OpenGL shader programs, including 
+ * loading vertex and fragment shaders, setting uniform variables, and managing
+ * attribute locations. It provides methods to load shaders from both string
+ * and file, set various matrices and colors, and retrieve attribute locations.
+ * ShaderProgram class manages shaders in OpenGL applications, providing a 
+ * convenient interface for shader management tasks.
+ * @date 2024-06-03
+ * 
+ * @copyright NYU Tandon School of Engineering (c) 2024
+ */
 
+#define GL_SILENCE_DEPRECATION
 #include "ShaderProgram.h"
 
 void ShaderProgram::load(const char *vertex_shader_file, const char *fragment_shader_file) {

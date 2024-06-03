@@ -31,4 +31,4 @@ The triangle's movement has to satisfy the following:
 
 If you want a hint, you could take a look at [**this**](https://crystalclearmaths.com/wp-content/uploads/2015/11/Unit-Circle.jpg).
 
-[**Solution**](https://www.youtube.com/watch?v=f2bHoTUiMpI)
+[**Solution**](https://www.youtube.com/watch?v=V3R9y5v8GUY)

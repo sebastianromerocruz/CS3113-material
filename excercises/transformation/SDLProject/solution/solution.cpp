@@ -13,30 +13,34 @@
 #include "ShaderProgram.h"
 
 
-const char V_SHADER_PATH[] = "shaders/vertex.glsl",
+enum AppStatus { RUNNING, TERMINATED };
+
+constexpr char V_SHADER_PATH[] = "shaders/vertex.glsl",
            F_SHADER_PATH[] = "shaders/fragment.glsl";
 
-const int WINDOW_WIDTH = 640,
+constexpr int WINDOW_WIDTH = 640,
           WINDOW_HEIGHT = 480;
 
-const float BG_RED = 0.1922f,
+constexpr float BG_RED = 0.1922f,
             BG_BLUE = 0.549f,
             BG_GREEN = 0.9059f,
             BG_OPACITY = 1.0f;
 
-const int VIEWPORT_X = 0,
+constexpr int VIEWPORT_X = 0,
           VIEWPORT_Y = 0,
           VIEWPORT_WIDTH = WINDOW_WIDTH,
           VIEWPORT_HEIGHT = WINDOW_HEIGHT;
 
-const int TRIANGLE_RED     = 1.0,
+constexpr int TRIANGLE_RED     = 1.0,
           TRIANGLE_BLUE    = 0.4,
           TRIANGLE_GREEN   = 0.4,
           TRIANGLE_OPACITY = 1.0;
 
 SDL_Window* g_display_window;
 
-bool g_game_is_running = true;
+AppStatus g_app_status = RUNNING;
+
+
 bool g_is_growing = true;
 int  g_frame_counter = 0;
 
@@ -47,8 +51,8 @@ glm::mat4 g_view_matrix,
 
 // ——————————— GLOBAL VARS AND CONSTS FOR TRANSFORMATIONS ——————————— //
 
-const float RADIUS = 2.0f;      // radius of your circle
-const float ROT_SPEED = 0.01f;  // rotational speed
+constexpr float RADIUS = 2.0f;      // radius of your circle
+constexpr float ROT_SPEED = 0.01f;  // rotational speed
 float       g_angle = 0.0f;     // current angle
 float       g_x_coord = RADIUS, // current x and y coordinates
             g_y_coord = 0.0f;
@@ -94,7 +98,7 @@ void process_input()
     {
         if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE)
         {
-            g_game_is_running = false;
+            g_app_status = TERMINATED;
         }
     }
 }
@@ -146,7 +150,7 @@ int main(int argc, char* argv[])
 {
     initialise();
 
-    while (g_game_is_running)
+    while (g_app_status == RUNNING)
     {
         process_input();
         update();
