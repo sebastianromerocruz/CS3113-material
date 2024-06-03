@@ -134,8 +134,8 @@ This doesn't only apply between models and the world—it also happens between m
 If we were to translate both items _with respect to the world_, the code would be similar to what we've seen before:
 
 ```c++
-character_g_model_matrix = glm::mat4(1.0f);
-character_g_model_matrix = glm::translate(character_g_model_matrix, glm::vec3(TRAN_VALUE, TRAN_VALUE, 0.0f));
+g_character_model_matrix = glm::mat4(1.0f);
+g_character_model_matrix = glm::translate(g_character_model_matrix, glm::vec3(TRAN_VALUE, TRAN_VALUE, 0.0f));
 
 item_g_model_matrix = glm::mat4(1.0f);
 item_g_model_matrix = glm::translate(item_g_model_matrix, glm::vec3(TRAN_VALUE, TRAN_VALUE, 0.0f));
@@ -161,11 +161,11 @@ What happens when our character picks up the item, though? The item ceases to fo
 Our code now has to account for both the character's transformations **and** for the item's own transformations:
 
 ```c++
-character_g_model_matrix = glm::mat4(1.0f);
-character_g_model_matrix = glm::translate(character_g_model_matrix, glm::vec3(TRAN_VALUE, TRAN_VALUE, 0.0f));
+g_character_model_matrix = glm::mat4(1.0f);
+g_character_model_matrix = glm::translate(g_character_model_matrix, glm::vec3(TRAN_VALUE, TRAN_VALUE, 0.0f));
 
 item_g_model_matrix = glm::translate(character_model, glm::vec3(TRAN_VALUE, TRAN_VALUE, 0.0f));
-item_g_model_matrix = glm::rotate(character_g_model_matrix, ANGLE, glm::vec3(0.0f, 0.0f, 1.0f));
+item_g_model_matrix = glm::rotate(g_character_model_matrix, ANGLE, glm::vec3(0.0f, 0.0f, 1.0f));
 ```
 
 <sub>**Code Block 2**: The character is probably still translated with respect to the world space, but our item now also has to be translated with respect to our character; in a sense, the character's space becomes the item's world space.</sub>
