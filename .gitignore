@@ -499,4 +499,7 @@ FodyWeavers.xsd
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
 
+#transformation solution
+
+*.CS3113-MATERIAL/excercises/transformation/solution
 # End of https://www.toptal.com/developers/gitignore/api/c++,visualstudiocode,visualstudio,xcode,macos
