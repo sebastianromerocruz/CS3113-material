@@ -15,32 +15,30 @@
 enum AppStatus { RUNNING, TERMINATED };
 
 constexpr char V_SHADER_PATH[] = "shaders/vertex.glsl",
-           F_SHADER_PATH[] = "shaders/fragment.glsl";
+               F_SHADER_PATH[] = "shaders/fragment.glsl";
 
-constexpr int WINDOW_WIDTH = 640,
-          WINDOW_HEIGHT = 480;
+constexpr int WINDOW_WIDTH  = 640,
+              WINDOW_HEIGHT = 480;
 
-constexpr float BG_RED = 0.1922f,
-            BG_BLUE = 0.549f,
-            BG_GREEN = 0.9059f,
-            BG_OPACITY = 1.0f;
+constexpr float BG_RED     = 0.1922f,
+                BG_BLUE    = 0.549f,
+                BG_GREEN   = 0.9059f,
+                BG_OPACITY = 1.0f;
 
-constexpr int VIEWPORT_X = 0,
-          VIEWPORT_Y = 0,
-          VIEWPORT_WIDTH = WINDOW_WIDTH,
-          VIEWPORT_HEIGHT = WINDOW_HEIGHT;
+constexpr int VIEWPORT_X      = 0,
+              VIEWPORT_Y      = 0,
+              VIEWPORT_WIDTH  = WINDOW_WIDTH,
+              VIEWPORT_HEIGHT = WINDOW_HEIGHT;
 
 constexpr int TRIANGLE_RED     = 1.0,
-          TRIANGLE_BLUE    = 0.4,
-          TRIANGLE_GREEN   = 0.4,
-          TRIANGLE_OPACITY = 1.0,
-          MAX_FRAME        = 40;
+              TRIANGLE_BLUE    = 0.4,
+              TRIANGLE_GREEN   = 0.4,
+              TRIANGLE_OPACITY = 1.0;
 
 SDL_Window* g_display_window;
 
 AppStatus g_app_status = RUNNING;
 
-bool g_is_growing = true;
 int  g_frame_counter = 0;
 
 ShaderProgram g_shader_program;
@@ -51,6 +49,7 @@ glm::mat4 g_view_matrix,
 // ——————————— GLOBAL VARS AND CONSTS FOR TRANSFORMATIONS ——————————— //
 
 // —————————————————————————————————————————————————————————————————— //
+
 
 void initialise()
 {
@@ -78,12 +77,19 @@ void initialise()
     g_shader_program.set_projection_matrix(g_projection_matrix);
     g_shader_program.set_view_matrix(g_view_matrix);
 
-    g_shader_program.set_colour(TRIANGLE_RED, TRIANGLE_BLUE, TRIANGLE_GREEN, TRIANGLE_OPACITY);
+    g_shader_program.set_colour(TRIANGLE_RED, 
+                                TRIANGLE_BLUE,
+                                TRIANGLE_GREEN,
+                                TRIANGLE_OPACITY);
 
     glUseProgram(g_shader_program.get_program_id());
 
-    glClearColor(BG_RED, BG_BLUE, BG_GREEN, BG_OPACITY);
+    glClearColor(BG_RED, 
+                 BG_BLUE,
+                 BG_GREEN,
+                 BG_OPACITY);
 }
+
 
 void process_input()
 {
@@ -97,12 +103,14 @@ void process_input()
     }
 }
 
+
 void update()
 {
     // ——————————— YOUR ORBIT TRANSFORMATIONS SHOULD GO HERE ——————————— //
     
     // ————————————————————————————————————————————————————————————————— //
 }
+
 
 void render() {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -116,7 +124,8 @@ void render() {
         -0.5f, -0.5f
     };
 
-    glVertexAttribPointer(g_shader_program.get_position_attribute(), 2, GL_FLOAT, false, 0, vertices);
+    glVertexAttribPointer(g_shader_program.get_position_attribute(), 
+                          2, GL_FLOAT, false, 0, vertices);
     glEnableVertexAttribArray(g_shader_program.get_position_attribute());
     glDrawArrays(GL_TRIANGLES, 0, 3);
     glDisableVertexAttribArray(g_shader_program.get_position_attribute());
@@ -124,16 +133,15 @@ void render() {
     SDL_GL_SwapWindow(g_display_window);
 }
 
+
 void shutdown() { SDL_Quit(); }
 
-/**
- Start here—we can see the general structure of a game loop without worrying too much about the details yet.
- */
-int main(int argc, char* argv[])
+
+int main()
 {
     initialise();
 
-    while (g_game_is_running)
+    while (g_app_status == RUNNING)
     {
         process_input();
         update();

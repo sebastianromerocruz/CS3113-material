@@ -6,7 +6,9 @@
 
 In this exercise, we will implement transformations on an object; in this case a simple triangle is enough. Our goal is to make our triangle move in the following orbital movement:
 
-![week3-exercise](assets/week3-exercise.gif)
+<p align=center>
+    <img src="assets/week3-exercise.gif"></img>
+</p>
 
 <sub>**Figure 1**: Your goal.</sub>
 
