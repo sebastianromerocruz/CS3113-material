@@ -250,7 +250,73 @@ void render()
 
 ---
 
-The way we standardise all of our players' play speed is by using something we call **delta time**. This calculation and value will look different, of course, depending on the machine. For example:
+The way we standardise all of our players' play speed is by using something we call **delta time**. 
+
+In game development, delta time (often abbreviated as `dt`) refers to the time elapsed between the current frame and the previous frame. Using delta time is crucial for ensuring that your game's behavior is consistent across different hardware and frame rates.
+
+#### Why Use Delta Time?
+
+1. **Consistency**: Without delta time, the game would run at different speeds on different machines. For instance, a game might run faster on a high-end computer and slower on a low-end computer.
+2. **Frame Rate Independence**: Delta time allows your game to run consistently regardless of the frame rate. This means that whether your game is running at 30 FPS (frames per second) or 60 FPS, the in-game events will occur at the same speed.
+
+#### Basic Concept
+
+The core idea is to multiply any time-dependent variable (like velocity or movement) by `delta time`. This ensures that the game logic is consistent, no matter how much time has passed between frames.
+
+Let's break it down with a simple example: moving an object in a 2D space.
+
+#### Without Delta Time
+
+If you move an object by 5 units per frame, the movement is tied directly to the frame rate. Here's an ASCII diagram illustrating this:
+
+```
+Frame Rate: 30 FPS
+
+Frame 1: Object at position (0, 0)
+Frame 2: Object at position (5, 0)
+Frame 3: Object at position (10, 0)
+...
+
+Frame Rate: 60 FPS
+
+Frame 1: Object at position (0, 0)
+Frame 2: Object at position (5, 0)
+Frame 3: Object at position (10, 0)
+Frame 4: Object at position (15, 0)
+Frame 5: Object at position (20, 0)
+...
+```
+
+In this case, the object moves faster on a higher frame rate, making the game inconsistent across different hardware.
+
+#### With Delta Time
+
+If you move an object by 5 units per second, and use delta time to scale the movement, the object's movement will be consistent:
+
+```
+Frame Rate: 30 FPS (dt = 1/30)
+
+Frame 1: Object at position (0, 0)
+Frame 2: Object at position (0.1667, 0)   // 5 * (1/30)
+Frame 3: Object at position (0.3333, 0)   // 5 * (2/30)
+...
+
+Frame Rate: 60 FPS (dt = 1/60)
+
+Frame 1: Object at position (0, 0)
+Frame 2: Object at position (0.0833, 0)   // 5 * (1/60)
+Frame 3: Object at position (0.1667, 0)   // 5 * (2/60)
+Frame 4: Object at position (0.25, 0)     // 5 * (3/60)
+...
+```
+
+In this case, the object moves at a consistent speed regardless of the frame rate.
+
+Using delta time ensures that your game logic is consistent and independent of the frame rate. It allows your game to run smoothly across different hardware, providing a better experience for all players.
+
+Delta time can be visualized as the small time intervals between frames that you use to scale your updates, making sure the game behaves uniformly regardless of how fast the frames are being processed.
+
+This calculation and value will look different, of course, depending on the machine. For example:
 
 - **60fps**: Sixty frames per second means that your computer is changing frames every 16.66ms, making the delta time _0.0166_.
 - **30fps**: Sixty frames per second means that your computer is changing frames every 33.33ms, making the delta time _0.0333_.

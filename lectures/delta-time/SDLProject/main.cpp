@@ -137,7 +137,6 @@ void update()
     
     /* Reset the Model Matrix */
     g_model_matrix = glm::mat4(1.0f);
-    
 
     /* Translate -> Rotate */
     g_model_matrix = glm::translate(g_model_matrix, glm::vec3(g_triangle_x, 0.0f, 0.0f));
