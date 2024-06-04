@@ -1,4 +1,4 @@
-<h2 align=center>Lecture 04</h2>
+<h2 align=center>Week 02: <em>Day 2</em></h2>
 
 <h1 align=center>Transformations</h1>
 

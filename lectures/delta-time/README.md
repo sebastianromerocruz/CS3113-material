@@ -1,4 +1,4 @@
-<h2 align=center>Lecture 05</h2>
+<h2 align=center>Week 03: <em>Day 1</em></h2>
 
 <h1 align=center>Delta Time</h1>
 
@@ -6,11 +6,15 @@
 
 ***Song of the day***: _[**ハネムーン (Honeymoon)**](https://www.youtube.com/watch?v=It1IucO2wfw) by LOLUET (feat. 理芽 [RIM]) (2024)._
 
+---
+
 ### Sections
 
 1. [**Matrix Operations Review**](#part-1-matrix-operations-review)
 2. [**Spaces**](#part-2-spaces)
 3. [**Timing, FPS, and Delta Time**](#part-3-timing-fps-and-delta-time)
+
+---
 
 ### Part 1: _Matrix Operations Review_ 
 
@@ -115,6 +119,8 @@ This is partially to blame for the strange behaviour when we tried to get our tr
 
 In game development terminology, we call the model's "frame of reference" the ***model space***, and the cartesian plane's the ***world space***.
 
+<br>
+
 ### Part 2: _Spaces_
 
 This doesn't only apply between models and the world—it also happens between models. Let's say that our square is the main character of our game, and straight ahead lies an item:
@@ -197,25 +203,27 @@ Take as an example something that happened to several people in the class: their
 The first is, instead of keeping track of the matrix's transformations per frame, we keep track of the arguments values being passed into them:
 
 ```c++
-float model_x;
-float model_y;
+float g_model_x;
+float g_model_y;
 
 void initialise() 
 {
-    model_x = 0.1f;
-    model_y = 0.0f;
+    g_model_x = 0.1f;
+    g_model_y = 0.0f;
 }
 
 void update()
 {
     glm::mat4 g_model_matrix = glm::mat4(1.0f);
-    g_model_matrix = glm::translate(g_model_matrix, glm::vec3(model_x, model_y, 0.0f));
+    g_model_matrix = glm::translate(g_model_matrix, glm::vec3(g_model_x, g_model_y, 0.0f));
 }
 ```
 
 <sub>**Code Block 4**: A better way to handle position changes.</sub>
 
 The second is, instead of relying on our computer's speed to update our frame, we need to use a method that will keep track of time the same way on every machine.
+
+<br>
 
 ### Part 3: _Timing, FPS, and Delta Time_
 
@@ -297,9 +305,9 @@ void update()
 
 This doesn't actually fix our problem, though, as the value of `g_triangle_x` simply increases by 0.01 as fast as the computer can refresh the frame.
 
-The way we do this is by keeping track of our **g_ticks**. Ticks are basically the amount of time that has gone by since we initialised SDL—kind of like a stopwatch.
+The way we do this is by keeping track of our **`g_ticks`**. Ticks are basically the amount of time that has gone by since we initialised SDL—kind of like a stopwatch.
 
-Start by creating a global variable to keep track of the g_ticks from the previous frame. Something like:
+Start by creating a global variable to keep track of the `g_ticks` from the previous frame. Something like:
 
 ```c++
 float g_previous_ticks = 0.0f;
