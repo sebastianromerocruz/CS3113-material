@@ -106,8 +106,7 @@ void initialise()
     // Initialise video and joystick subsystems
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK);
     
-    // Open the first controller found. Returns null on error
-    g_player_one_controller = SDL_JoystickOpen(0);
+
     
     g_display_window = SDL_CreateWindow("Hello, Textures!",
                                       SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
@@ -116,6 +115,15 @@ void initialise()
     
     SDL_GLContext context = SDL_GL_CreateContext(g_display_window);
     SDL_GL_MakeCurrent(g_display_window, context);
+
+    if (g_display_window == nullptr)
+    {
+        std::cerr << "Error: SDL window could not be created.\n";
+        SDL_Quit();
+        exit(1);
+        
+    }
+    
     
 #ifdef _WINDOWS
     glewInit();
@@ -146,60 +154,16 @@ void initialise()
 
 void process_input()
 {
-    g_player_movement = glm::vec3(0.0f);
-    
     SDL_Event event;
-    
     while (SDL_PollEvent(&event))
     {
-        switch (event.type) {
-            case SDL_WINDOWEVENT_CLOSE:
-            case SDL_QUIT:
-                g_app_status = TERMINATED;
-                break;
-                
-            case SDL_KEYDOWN:
-                switch (event.key.keysym.sym) {
-                    case SDLK_RIGHT:
-                        g_player_movement.x = 1.0f;
-                        break;
-                    case SDLK_LEFT:
-                        g_player_movement.x = -1.0f;
-                        break;
-                    case SDLK_q:
-                        g_app_status = TERMINATED;
-                        break;
-                    default:
-                        break;
-                }
-            default:
-                break;
+        if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE)
+        {
+            g_app_status = TERMINATED;
         }
     }
-    
-    const Uint8 *key_states = SDL_GetKeyboardState(NULL); // array of key states [0, 0, 1, 0, 0, ...]
-    
-    if (key_states[SDL_SCANCODE_LEFT])
-    {
-        g_player_movement.x = -1.0f;
-    } else if (key_states[SDL_SCANCODE_RIGHT])
-    {
-        g_player_movement.x = 1.0f;
-    }
-    
-    if (key_states[SDL_SCANCODE_UP])
-    {
-        g_player_movement.y = 1.0f;
-    } else if (key_states[SDL_SCANCODE_DOWN])
-    {
-        g_player_movement.y = -1.0f;
-    }
-    
-    if (glm::length(g_player_movement) > 1.0f)
-    {
-        g_player_movement = glm::normalize(g_player_movement);
-    }
 }
+
 
 void update()
 {
@@ -254,7 +218,7 @@ void render() {
 
 void shutdown()
 {
-    SDL_JoystickClose(g_player_one_controller);
+
     SDL_Quit();
 }
 
