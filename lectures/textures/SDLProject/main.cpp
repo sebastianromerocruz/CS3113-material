@@ -51,8 +51,8 @@ constexpr char PLAYER_SPRITE_FILEPATH[] = "soph.png";
 AppStatus g_app_status = RUNNING;
 
 SDL_Window* g_display_window;
-bool g_game_is_running = true;
-bool g_is_growing = true;
+
+
 
 ShaderProgram g_shader_program = ShaderProgram();
 glm::mat4 g_view_matrix,
@@ -63,7 +63,7 @@ glm::mat4 g_view_matrix,
 float g_previous_ticks = 0.0f;
 
 GLuint g_player_texture_id;
-SDL_Joystick *g_player_one_controller;
+
 
 // overall position
 glm::vec3 g_player_position = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -71,17 +71,7 @@ glm::vec3 g_player_position = glm::vec3(0.0f, 0.0f, 0.0f);
 // movement tracker
 glm::vec3 g_player_movement = glm::vec3(0.0f, 0.0f, 0.0f);
 
-float get_screen_to_ortho(float coordinate, Coordinate axis)
-{
-    switch (axis) {
-        case x_coordinate:
-            return ((coordinate / WINDOW_WIDTH) * 10.0f ) - (10.0f / 2.0f);
-        case y_coordinate:
-            return (((WINDOW_HEIGHT - coordinate) / WINDOW_HEIGHT) * 7.5f) - (7.5f / 2.0);
-        default:
-            return 0.0f;
-    }
-}
+
 
 GLuint load_texture(const char* filepath)
 {

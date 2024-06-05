@@ -57,7 +57,7 @@ void initialise()
     /* Some code here... */
 
     // Load the shaders for handling textures
-    program.Load(V_SHADER_PATH, F_SHADER_PATH);
+    g_shader_program.Load(V_SHADER_PATH, F_SHADER_PATH);
 
     // Load our player image
     g_player_texture_id = load_texture(PLAYER_SPRITE);
@@ -207,7 +207,7 @@ float vertices[] =
     -0.5f, -0.5f
 };
 
-glVertexAttribPointer(program.get_position_attribute(), 2, GL_FLOAT, false, 0, vertices);
+glVertexAttribPointer(g_shader_program.get_position_attribute(), 2, GL_FLOAT, false, 0, vertices);
 ```
 
 Well, gone are those good old days. 
@@ -254,7 +254,7 @@ Taking all of this into account, we can now update `render()` to match our new s
 void render() {
     glClear(GL_COLOR_BUFFER_BIT);
     
-    program.SetModelMatrix(model_matrix);
+    g_shader_program.set_model_matrix(g_model_matrix);
     
     // Vertices
     float vertices[] = {
@@ -262,8 +262,8 @@ void render() {
         -0.5f, -0.5f, 0.5f, 0.5f, -0.5f, 0.5f   // triangle 2
     };
     
-    glVertexAttribPointer(program.get_position_attribute(), 2, GL_FLOAT, false, 0, vertices);
-    glEnableVertexAttribArray(program.get_position_attribute());
+    glVertexAttribPointer(g_shader_program.get_position_attribute(), 2, GL_FLOAT, false, 0, vertices);
+    glEnableVertexAttribArray(g_shader_program.get_position_attribute());
 
     // Textures
     float texture_coordinates[] = {
@@ -271,18 +271,18 @@ void render() {
         0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f,     // triangle 2
     };
     
-    glVertexAttribPointer(program.get_tex_coordinate_attribute(), 2, GL_FLOAT, false, 0, texture_coordinates);
-    glEnableVertexAttribArray(program.get_tex_coordinate_attribute());
+    glVertexAttribPointer(g_shader_program.get_tex_coordinate_attribute(), 2, GL_FLOAT, false, 0, texture_coordinates);
+    glEnableVertexAttribArray(g_shader_program.get_tex_coordinate_attribute());
     
     // Bind texture
     glBindTexture(GL_TEXTURE_2D, g_player_texture_id);
     glDrawArrays(GL_TRIANGLES, 0, 6); // we are now drawing 2 triangles, so we use 6 instead of 3
     
     // We disable two attribute arrays now
-    glDisableVertexAttribArray(program.get_position_attribute());
-    glDisableVertexAttribArray(program.get_tex_coordinate_attribute());
+    glDisableVertexAttribArray(g_shader_program.get_position_attribute());
+    glDisableVertexAttribArray(g_shader_program.get_tex_coordinate_attribute());
     
-    SDL_GL_SwapWindow(display_window);
+    SDL_GL_SwapWindow(g_display_window);
 }
 ```
 
@@ -315,18 +315,18 @@ If at this point, your images do not load, and you are on...
 One of the most common errors I've seen students encounter so far comes when they try to create multiple objects on the screen. Here's a tip: the three lines that actually draw the object on the screen are the following, which exist in the `render()` part of our program:
 
 ```c++
-program.SetModelMatrix(model_matrix);
-glBindTexture(GL_TEXTURE_2D, texture_id);
+program.SetModelMatrix(g_model_matrix);
+glBindTexture(GL_TEXTURE_2D, g_texture_id);
 glDrawArrays(GL_TRIANGLES, 0, 6);
 ```
 
 Basically, every object will have its own model matrix and its own texture ID, so it might be a good idea to define a function that includes these three lines only. For example:
 
 ```c++
-void draw_object(glm::mat4 &object_model_matrix, GLuint &object_texture_id)
+void draw_object(glm::mat4 &g_object_model_matrix, GLuint &g_object_texture_id)
 {
-    program.set_model_matrix(object_model_matrix);
-    glBindTexture(GL_TEXTURE_2D, object_texture_id);
+    program.set_model_matrix(g_object_model_matrix);
+    glBindTexture(GL_TEXTURE_2D, g_object_texture_id);
     glDrawArrays(GL_TRIANGLES, 0, 6); // we are now drawing 2 triangles, so we use 6 instead of 3
 }
 ```
@@ -336,7 +336,7 @@ void draw_object(glm::mat4 &object_model_matrix, GLuint &object_texture_id)
 So you can just call a single line for every single object that you have in `render()`:
 
 ```c++
-draw_object(model_matrix, g_player_texture_id);
+draw_object(g_model_matrix, g_player_texture_id);
 ```
 
 You can find the complete `main.cpp` file [**here**](https://github.com/sebastianromerocruz/CS3113-material/blob/main/lectures/textures/SDLProject/main.cpp).
