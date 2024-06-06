@@ -4,7 +4,7 @@
 
 <h3 align=center>6 Garland Moon, Imperial Year CCXXIV</h3>
 
-***Song of the day***: _[**my crush**](https://www.youtube.com/watch?v=33tITqSwGB8) by muque(2024)._
+***Song of the day***: _[**my crush**](https://www.youtube.com/watch?v=33tITqSwGB8) by muque (2024)._
 
 ---
 
