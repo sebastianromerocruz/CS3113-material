@@ -2,7 +2,7 @@
 
 <h1 align=center>Delta Time</h1>
 
-<h3 align=center>Imperial Year CCXXIV</h3>
+<h3 align=center>6 Garland Moon, Imperial Year CCXXIV</h3>
 
 ***Song of the day***: _[**ハネムーン (Honeymoon)**](https://www.youtube.com/watch?v=It1IucO2wfw) by LOLUET (feat. 理芽 [RIM]) (2024)._
 

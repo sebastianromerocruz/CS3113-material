@@ -1,11 +1,12 @@
 #define GL_SILENCE_DEPRECATION
 #define STB_IMAGE_IMPLEMENTATION
+#define LOG(argument) std::cout << argument << '\n'
+#define GL_GLEXT_PROTOTYPES 1
 
 #ifdef _WINDOWS
 #include <GL/glew.h>
 #endif
 
-#define GL_GLEXT_PROTOTYPES 1
 #include <SDL.h>
 #include <SDL_opengl.h>
 #include "glm/mat4x4.hpp"
@@ -13,64 +14,56 @@
 #include "ShaderProgram.h"
 #include "stb_image.h"
 
-enum Coordinate
-{
-    x_coordinate,
-    y_coordinate
-};
-
 enum AppStatus { RUNNING, TERMINATED };
 
-#define LOG(argument) std::cout << argument << '\n'
+constexpr int WINDOW_WIDTH  = 640,
+              WINDOW_HEIGHT = 480;
 
-constexpr int WINDOW_WIDTH = 640,
-          WINDOW_HEIGHT = 480;
+constexpr float BG_RED     = 0.9765625f,
+                BG_GREEN   = 0.97265625f,
+                BG_BLUE    = 0.9609375f,
+                BG_OPACITY = 1.0f;
 
-constexpr float BG_RED = 0.1922f,
-            BG_BLUE = 0.549f,
-            BG_GREEN = 0.9059f,
-            BG_OPACITY = 1.0f;
-
-constexpr int VIEWPORT_X = 0,
-          VIEWPORT_Y = 0,
-          VIEWPORT_WIDTH = WINDOW_WIDTH,
-          VIEWPORT_HEIGHT = WINDOW_HEIGHT;
+constexpr int VIEWPORT_X      = 0,
+              VIEWPORT_Y      = 0,
+              VIEWPORT_WIDTH  = WINDOW_WIDTH,
+              VIEWPORT_HEIGHT = WINDOW_HEIGHT;
 
 constexpr char V_SHADER_PATH[] = "shaders/vertex_textured.glsl",
-           F_SHADER_PATH[] = "shaders/fragment_textured.glsl";
+               F_SHADER_PATH[] = "shaders/fragment_textured.glsl";
 
 constexpr float MILLISECONDS_IN_SECOND = 1000.0;
-constexpr float DEGREES_PER_SECOND = 90.0f;
 
-constexpr int NUMBER_OF_TEXTURES = 1; // to be generated, that is
-constexpr GLint LEVEL_OF_DETAIL = 0;  // base image level; Level n is the nth mipmap reduction image
-constexpr GLint TEXTURE_BORDER = 0;   // this value MUST be zero
+constexpr GLint NUMBER_OF_TEXTURES = 1, // to be generated, that is
+                LEVEL_OF_DETAIL    = 0, // mipmap reduction image level
+                TEXTURE_BORDER     = 0; // this value MUST be zero
 
-constexpr char PLAYER_SPRITE_FILEPATH[] = "soph.png";
+// source: https://yorukura-anime.com/
+constexpr char KANO_SPRITE_FILEPATH[]   = "kano.png",
+               MAHIRU_SPRITE_FILEPATH[] = "mahiru.png";
 
-AppStatus g_app_status = RUNNING;
+constexpr glm::vec3 INIT_SCALE      = glm::vec3(2.5f, 5.263f, 0.0f),
+                    INIT_POS_KANO   = glm::vec3(2.0f, 0.0f, 0.0f),
+                    INIT_POS_MAHIRU = glm::vec3(-2.0f, 0.0f, 0.0f);
+
+constexpr float ROT_INCREMENT = 1.0f;
 
 SDL_Window* g_display_window;
-
-
-
+AppStatus g_app_status = RUNNING;
 ShaderProgram g_shader_program = ShaderProgram();
+
 glm::mat4 g_view_matrix,
-          g_model_matrix,
-          g_projection_matrix,
-          g_trans_matrix;
+          g_kano_matrix,
+          g_mahiru_matrix,
+          g_projection_matrix;
 
 float g_previous_ticks = 0.0f;
 
-GLuint g_player_texture_id;
+glm::vec3 g_rotation_kano   = glm::vec3(0.0f, 0.0f, 0.0f),
+          g_rotation_mahiru = glm::vec3(0.0f, 0.0f, 0.0f);
 
-
-// overall position
-glm::vec3 g_player_position = glm::vec3(0.0f, 0.0f, 0.0f);
-
-// movement tracker
-glm::vec3 g_player_movement = glm::vec3(0.0f, 0.0f, 0.0f);
-
+GLuint g_kano_texture_id,
+       g_mahiru_texture_id;
 
 
 GLuint load_texture(const char* filepath)
@@ -101,12 +94,11 @@ GLuint load_texture(const char* filepath)
     return textureID;
 }
 
+
 void initialise()
 {
     // Initialise video and joystick subsystems
-    SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK);
-    
-
+    SDL_Init(SDL_INIT_VIDEO);
     
     g_display_window = SDL_CreateWindow("Hello, Textures!",
                                       SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
@@ -121,9 +113,7 @@ void initialise()
         std::cerr << "Error: SDL window could not be created.\n";
         SDL_Quit();
         exit(1);
-        
     }
-    
     
 #ifdef _WINDOWS
     glewInit();
@@ -133,24 +123,25 @@ void initialise()
     
     g_shader_program.load(V_SHADER_PATH, F_SHADER_PATH);
     
-    g_model_matrix = glm::mat4(1.0f);
-    g_view_matrix = glm::mat4(1.0f);  // Defines the position (location and orientation) of the camera
-    g_projection_matrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);  // Defines the characteristics of your camera, such as clip planes, field of view, projection method etc.
+    g_kano_matrix       = glm::mat4(1.0f);
+    g_mahiru_matrix     = glm::mat4(1.0f);
+    g_view_matrix       = glm::mat4(1.0f);
+    g_projection_matrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);
     
     g_shader_program.set_projection_matrix(g_projection_matrix);
     g_shader_program.set_view_matrix(g_view_matrix);
-    // Notice we haven't set our model matrix yet!
     
     glUseProgram(g_shader_program.get_program_id());
     
     glClearColor(BG_RED, BG_BLUE, BG_GREEN, BG_OPACITY);
     
-    g_player_texture_id = load_texture(PLAYER_SPRITE_FILEPATH);
+    g_kano_texture_id   = load_texture(KANO_SPRITE_FILEPATH);
+    g_mahiru_texture_id = load_texture(MAHIRU_SPRITE_FILEPATH);
     
-    // enable blending
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
+
 
 void process_input()
 {
@@ -167,47 +158,71 @@ void process_input()
 
 void update()
 {
-    float ticks = (float) SDL_GetTicks() / MILLISECONDS_IN_SECOND; // get the current number of ticks
-    float delta_time = ticks - g_previous_ticks; // the delta time is the difference from the last frame
+    /* Delta time calculations */
+    float ticks = (float) SDL_GetTicks() / MILLISECONDS_IN_SECOND;
+    float delta_time = ticks - g_previous_ticks;
     g_previous_ticks = ticks;
+    
+    /* Game logic */
+    g_rotation_kano.y += ROT_INCREMENT * delta_time;
+    g_rotation_mahiru.y += -1 * ROT_INCREMENT * delta_time;
 
-    // Add             direction       * elapsed time * units per second
-    g_player_position += g_player_movement * delta_time * 1.0f;
-
-    g_model_matrix = glm::mat4(1.0f);
-    g_model_matrix = glm::translate(g_model_matrix, g_player_position);
+    /* Model matrix reset */
+    g_kano_matrix   = glm::mat4(1.0f);
+    g_mahiru_matrix = glm::mat4(1.0f);
+    
+    /* Transformations */
+    g_kano_matrix = glm::translate(g_kano_matrix, INIT_POS_KANO);
+    g_kano_matrix = glm::rotate(g_kano_matrix,
+                                 g_rotation_kano.y,
+                                 glm::vec3(0.0f, 1.0f, 0.0f));
+    g_kano_matrix = glm::scale(g_kano_matrix, INIT_SCALE);
+    
+    g_mahiru_matrix = glm::translate(g_mahiru_matrix, INIT_POS_MAHIRU);
+    g_mahiru_matrix = glm::rotate(g_mahiru_matrix,
+                                  g_rotation_mahiru.y,
+                                  glm::vec3(0.0f, 1.0f, 0.0f));
+    g_mahiru_matrix = glm::scale(g_mahiru_matrix, INIT_SCALE);
 }
+
 
 void draw_object(glm::mat4 &object_g_model_matrix, GLuint &object_texture_id)
 {
     g_shader_program.set_model_matrix(object_g_model_matrix);
     glBindTexture(GL_TEXTURE_2D, object_texture_id);
-    glDrawArrays(GL_TRIANGLES, 0, 6); // we are now drawing 2 triangles, so we use 6 instead of 3
+    glDrawArrays(GL_TRIANGLES, 0, 6); // we are now drawing 2 triangles, so use 6, not 3
 }
 
-void render() {
+
+void render()
+{
     glClear(GL_COLOR_BUFFER_BIT);
     
     // Vertices
-    float vertices[] = {
+    float vertices[] =
+    {
         -0.5f, -0.5f, 0.5f, -0.5f, 0.5f, 0.5f,  // triangle 1
         -0.5f, -0.5f, 0.5f, 0.5f, -0.5f, 0.5f   // triangle 2
     };
 
     // Textures
-    float texture_coordinates[] = {
+    float texture_coordinates[] =
+    {
         0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,     // triangle 1
         0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f,     // triangle 2
     };
     
-    glVertexAttribPointer(g_shader_program.get_position_attribute(), 2, GL_FLOAT, false, 0, vertices);
+    glVertexAttribPointer(g_shader_program.get_position_attribute(), 2, GL_FLOAT, false,
+                          0, vertices);
     glEnableVertexAttribArray(g_shader_program.get_position_attribute());
     
-    glVertexAttribPointer(g_shader_program.get_tex_coordinate_attribute(), 2, GL_FLOAT, false, 0, texture_coordinates);
+    glVertexAttribPointer(g_shader_program.get_tex_coordinate_attribute(), 2, GL_FLOAT,
+                          false, 0, texture_coordinates);
     glEnableVertexAttribArray(g_shader_program.get_tex_coordinate_attribute());
     
     // Bind texture
-    draw_object(g_model_matrix, g_player_texture_id);
+    draw_object(g_kano_matrix, g_kano_texture_id);
+    draw_object(g_mahiru_matrix, g_mahiru_texture_id);
     
     // We disable two attribute arrays now
     glDisableVertexAttribArray(g_shader_program.get_position_attribute());
@@ -216,15 +231,10 @@ void render() {
     SDL_GL_SwapWindow(g_display_window);
 }
 
-void shutdown()
-{
 
-    SDL_Quit();
-}
+void shutdown() { SDL_Quit(); }
 
-/**
- Start here—we can see the general structure of a game loop without worrying too much about the details yet.
- */
+
 int main(int argc, char* argv[])
 {
     initialise();

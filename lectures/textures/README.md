@@ -2,9 +2,11 @@
 
 <h1 align=center>Textures</h1>
 
-<h3 align=center>Imperial Year CCXXIV</h3>
+<h3 align=center>6 Garland Moon, Imperial Year CCXXIV</h3>
 
 ***Song of the day***: _[**my crush**](https://www.youtube.com/watch?v=33tITqSwGB8) by muque(2024)._
+
+---
 
 ### Sections
 
@@ -17,6 +19,8 @@
 3. [**Texture coordinates**](#part-3-texture-coordinates)
 4. [**Blending**](#part-4-blending)
 5. [**Drawing Multiple Objects**](#part-5-drawing-multiple-objects)
+
+---
 
 ### Part 1: _Textures_
 
@@ -65,6 +69,8 @@ void initialise()
 ```
 
 This new function `load_texture()` doesn't actually exist as part of OpenGL—our job is to create it—and that's the bread and butter of this lecture.
+
+<br>
 
 ### Part 2: _Loading our textures_
 
@@ -288,6 +294,8 @@ void render() {
 
 <sub>**Code Block 4**: A `render()` function worthy of textures.</sub>
 
+<br>
+
 ### Part 4: _Blending_
 
 We're almost there, I promise.
@@ -309,6 +317,8 @@ If at this point, your images do not load, and you are on...
 - **Mac**: Go to "Build Phases" and add your image to the `Copy Files` area. Make sure `"Copy only when installing"` is unchecked!
 
 - **Windows**: Use the File Explorer to copy your images manually into your project's folder.
+
+<br>
 
 ### Part 5: _Drawing multiple objects_
 
@@ -339,4 +349,4 @@ So you can just call a single line for every single object that you have in `ren
 draw_object(g_model_matrix, g_player_texture_id);
 ```
 
-You can find the complete `main.cpp` file [**here**](https://github.com/sebastianromerocruz/CS3113-material/blob/main/lectures/textures/SDLProject/main.cpp).
+You can find the complete `main.cpp` file [**here**](SDLProject/main.cpp).
