@@ -62,7 +62,7 @@ void process_input()
     {
         if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE)
         {
-            game_is_running = false;
+            g_app_status = TERMINATED
         }
     }
 }

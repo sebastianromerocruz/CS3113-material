@@ -2,7 +2,7 @@
 
 <h1 align=center>Collision Detection</h1>
 
-<h3 align=center>25 Prairial, Year CCXXXI</h3>
+<h3 align=center>10 Garland Moon, Imperial Year CCXXIV<</h3>
 
 ***Song of the day***: _[**It's Not Living (If It's Not With You)**](https://youtu.be/_G0WKkjgNU4) by The 1975 (2019)._
 
@@ -18,16 +18,16 @@
 
 ### Part 1: _The unit circle_
 
-We mentioned at the end of yesterday's class that we need to normalise our `player_movement` vector to avoid having our spites move twice as fast when moving diagonally. We do this with the `glm::normalize()` function:
+We mentioned at the end of yesterday's class that we need to normalise our `g_player_movement` vector to avoid having our spites move twice as fast when moving diagonally. We do this with the `glm::normalize()` function:
 
 ```c++
-if (glm::length(player_movement) > 1.0f)
+if (glm::length(g_player_movement) > 1.0f)
 {
-    player_movement = glm::normalize(player_movement);
+    g_player_movement = glm::normalize(g_player_movement);
 }
 ```
 
-<sub>**Code Block 1**: The length of a vector, more commonly called its [**magnitude**](https://www.cuemath.com/magnitude-of-a-vector-formula/), is calculated by taking the square-root of the sum of its squared components. The magnitude of the `player_movement` vector is greater than 1.0 when the sprite is moving in more than one cartesian axis.</sub>
+<sub>**Code Block 1**: The length of a vector, more commonly called its [**magnitude**](https://www.cuemath.com/magnitude-of-a-vector-formula/), is calculated by taking the square-root of the sum of its squared components. The magnitude of the `g_player_movement` vector is greater than 1.0 when the sprite is moving in more than one cartesian axis.</sub>
 
 What [**normalisation**](https://www.freetext.org/Introduction_to_Linear_Algebra/Basic_Vector_Operations/Normalization/) does is turn a vector with a length greater than 1.0 to its **unit circle** equivalent. The purpose here is to scale back the vector to our desired 1.0 limit _without changing its direction_:
 
