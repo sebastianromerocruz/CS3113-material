@@ -2,7 +2,7 @@
 
 <h1 align=center>Collision Detection</h1>
 
-<h3 align=center>10 Garland Moon, Imperial Year CCXXIV<</h3>
+<h3 align=center>12 Garland Moon, Imperial Year CCXXIV<</h3>
 
 ***Song of the day***: _[**It's Not Living (If It's Not With You)**](https://youtu.be/_G0WKkjgNU4) by The 1975 (2019)._
 
