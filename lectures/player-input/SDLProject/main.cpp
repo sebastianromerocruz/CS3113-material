@@ -1,10 +1,18 @@
+/**
+ * @file main.cpp
+ * @author Sebastián Romero Cruz (sebastian.romerocruz@nyu.edu)
+ * @brief A simple g_shader_program to demonstrate player input in OpenGL.
+ * @date 2024-06-10
+ *
+ * @copyright NYU Tandon (c) 2024
+ */
 #define GL_SILENCE_DEPRECATION
 #define STB_IMAGE_IMPLEMENTATION
 #define GL_GLEXT_PROTOTYPES 1
 #define LOG(argument) std::cout << argument << '\n'
 
 #ifdef _WINDOWS
-#include <GL/glew.h>
+    #include <GL/glew.h>
 #endif
 
 #include <SDL.h>
@@ -32,14 +40,14 @@ constexpr int VIEWPORT_X      = 0,
 constexpr char V_SHADER_PATH[] = "shaders/vertex_textured.glsl",
                F_SHADER_PATH[] = "shaders/fragment_textured.glsl";
 
-constexpr float MILLISECONDS_IN_SECOND = 1000.0;
+constexpr float MILLISECONDS_IN_SECOND = 1000.0f;
 
 constexpr GLint NUMBER_OF_TEXTURES = 1,
                 LEVEL_OF_DETAIL    = 0,
                 TEXTURE_BORDER     = 0;
 
 // source: https://yorukura-anime.com/
-constexpr char KANO_SPRITE_FILEPATH[] = "assets/kano.png";
+constexpr char KANO_SPRITE_FILEPATH[] = "kano.png";
 constexpr glm::vec3 INIT_SCALE = glm::vec3(2.0f, 4.2104f, 0.0f);
 
 SDL_Window* g_display_window = nullptr;
@@ -68,6 +76,7 @@ void shutdown();
 
 GLuint load_texture(const char* filepath);
 void draw_object(glm::mat4 &object_model_matrix, GLuint &object_texture_id);
+
 
 GLuint load_texture(const char* filepath)
 {
@@ -99,6 +108,7 @@ GLuint load_texture(const char* filepath)
     return textureID;
 }
 
+
 void initialise()
 {
     SDL_Init(SDL_INIT_VIDEO);
@@ -123,8 +133,8 @@ void initialise()
     
     g_shader_program.load(V_SHADER_PATH, F_SHADER_PATH);
     
-    g_kano_texture_id = load_texture(KANO_SPRITE_FILEPATH);
-    g_kano_matrix      = glm::mat4(1.0f);
+    g_kano_texture_id   = load_texture(KANO_SPRITE_FILEPATH);
+    g_kano_matrix       = glm::mat4(1.0f);
     g_view_matrix       = glm::mat4(1.0f);
     g_projection_matrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);
     
@@ -138,76 +148,19 @@ void initialise()
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
+
 void process_input()
 {
-    // VERY IMPORTANT: If nothing is pressed, we don't want to go anywhere
-    g_kano_movement = glm::vec3(0.0f);
-
     SDL_Event event;
     while (SDL_PollEvent(&event))
     {
-        switch (event.type)
+        if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE)
         {
-            // End game
-            case SDL_QUIT:
-            case SDL_WINDOWEVENT_CLOSE:
-                g_app_status = TERMINATED;
-                break;
-                                                                             
-            case SDL_KEYDOWN:
-                switch (event.key.keysym.sym)
-                {
-                    case SDLK_LEFT:
-                        // Move the player left
-                        break;
-                                                                             
-                    case SDLK_RIGHT:
-                        // Move the player right
-                        g_kano_movement.x = 1.0f;
-                        break;
-                                                                             
-                    case SDLK_q:
-                        // Quit the game with a keystroke
-                        g_app_status = TERMINATED;
-                        break;
-                                                                             
-                    default:
-                        break;
-                }
-                                                                             
-            default:
-                break;
+            g_app_status = TERMINATED;
         }
     }
-                                                                             
-                                                                             
-    const Uint8 *key_state = SDL_GetKeyboardState(NULL);
-                                                                             
-    if (key_state[SDL_SCANCODE_LEFT])
-    {
-        g_kano_movement.x = -1.0f;
-    }
-    else if (key_state[SDL_SCANCODE_RIGHT])
-    {
-        g_kano_movement.x = 1.0f;
-    }
-                                                                             
-    if (key_state[SDL_SCANCODE_UP])
-    {
-        g_kano_movement.y = 1.0f;
-    }
-    else if (key_state[SDL_SCANCODE_DOWN])
-    {
-        g_kano_movement.y = -1.0f;
-    }
-                                                                             
-    // This makes sure that the player can't "cheat" their way into moving
-    // faster
-    if (glm::length(g_kano_movement) > 1.0f)
-    {
-        g_kano_movement = glm::normalize(g_kano_movement);
-    }
 }
+
 
 void update()
 {
