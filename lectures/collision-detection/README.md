@@ -1,10 +1,12 @@
-<h2 align=center>Lecture 08<h2>
+<h2 align=center>Week 04: <em>Day 2</em></h2>
 
 <h1 align=center>Collision Detection</h1>
 
-<h3 align=center>12 Garland Moon, Imperial Year CCXXIV<</h3>
+<h3 align=center>13 Garland Moon, Imperial Year CCXXIV<</h3>
 
-***Song of the day***: _[**It's Not Living (If It's Not With You)**](https://youtu.be/_G0WKkjgNU4) by The 1975 (2019)._
+***Song of the day***: _[**A towel blanket is peaceful (タオルケットは穏やかな)**](https://youtu.be/OUxqXA-JBYU?si=lRNiQLBPJRsqzJJs) by カネコアヤノ [Kaneko Ayano] (2023)._
+
+---
 
 ### Sections
 
@@ -15,6 +17,8 @@
     3. [**Box-to-box collisions**](#box-to-box-collisions)
     4. [**Point-to-box collisions**](#point-to-box-collisions)
 1. [**Example**](#part-3-example)
+
+---
 
 ### Part 1: _The unit circle_
 
@@ -38,6 +42,8 @@ What [**normalisation**](https://www.freetext.org/Introduction_to_Linear_Algebra
 This actually has greater implications when it comes to handling player input. A joystick's input, after all, is inherently circular, while keystrokes (e.g. `WASD`) make squares. Pressing `D` to move left gives us a movement vector of `[1, 0]` (a magnitude 1.0 vector), while pressing both `D` and `W` to move diagonally yields `[1, 1]`—a magnitude 1.414 vector. This, in effect, means that by moving diagonally, we are moving about 40% faster than if we only move in one direction.
 
 That's the real reason why code block 1 is necessary. Nothing particularly complicated, but certainly good to know, as it will affect your players' experience.
+
+<br>
 
 ### Part 2: _Collision Detection Theory_
 
@@ -135,6 +141,8 @@ One last collision type that is relatively common is point-to-box; UI buttons in
 ![box-point-collision](assets/box-point-collision.png)
 
 <sub>**Figure 9**: Visualisation for box-point collisions.</sub>
+
+<br>
 
 ### Part 3: _Example_
 
