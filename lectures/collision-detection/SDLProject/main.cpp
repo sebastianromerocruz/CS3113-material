@@ -1,5 +1,6 @@
 #define GL_SILENCE_DEPRECATION
 #define STB_IMAGE_IMPLEMENTATION
+#define LOG(argument) std::cout << argument << '\n'
 
 #ifdef _WINDOWS
 #include <GL/glew.h>
@@ -15,16 +16,17 @@
 #include "cmath"
 #include <ctime>
 
-#define LOG(argument) std::cout << argument << '\n'
 enum AppStatus { RUNNING, TERMINATED };
 
-constexpr int WINDOW_WIDTH  = 640,
-          WINDOW_HEIGHT = 480;
+constexpr float WINDOW_SIZE_MULT = 1.0f;
 
-constexpr float BG_RED     = 0.1922f,
-            BG_BLUE    = 0.549f,
-            BG_GREEN   = 0.9059f,
-            BG_OPACITY = 1.0f;
+constexpr int WINDOW_WIDTH  = 640 * WINDOW_SIZE_MULT,
+              WINDOW_HEIGHT = 480 * WINDOW_SIZE_MULT;
+
+constexpr float BG_RED     = 0.9765625f,
+                BG_GREEN   = 0.97265625f,
+                BG_BLUE    = 0.9609375f,
+                BG_OPACITY = 1.0f;
 
 constexpr int VIEWPORT_X = 0,
           VIEWPORT_Y = 0,
@@ -37,20 +39,18 @@ constexpr char V_SHADER_PATH[] = "shaders/vertex_textured.glsl",
 constexpr float MILLISECONDS_IN_SECOND = 1000.0;
 
 // source: https://yorukura-anime.com/
-constexpr char KANO_SPRITE_FILEPATH[]   = "assets/kano.png",
-               MAHIRU_SPRITE_FILEPATH[] = "assets/mahiru.png";
+constexpr char KANO_SPRITE_FILEPATH[]   = "kano.png",
+               MAHIRU_SPRITE_FILEPATH[] = "mahiru.png";
 
 constexpr float MINIMUM_COLLISION_DISTANCE = 1.0f;
 constexpr glm::vec3 INIT_SCALE      = glm::vec3(2.5f, 5.263f, 0.0f),
                     INIT_POS_KANO   = glm::vec3(2.0f, 0.0f, 0.0f),
                     INIT_POS_MAHIRU = glm::vec3(-2.0f, 0.0f, 0.0f);
 
-
-
 SDL_Window* g_display_window;
 
 AppStatus g_app_status = RUNNING;
-ShaderProgram g_shader_program;
+ShaderProgram g_shader_program = ShaderProgram();
 glm::mat4 g_view_matrix, g_kano_matrix, g_projection_matrix, g_trans_matrix, g_mahiru_matrix;
 
 float g_previous_ticks = 0.0f;
@@ -62,21 +62,19 @@ glm::vec3 g_kano_position = glm::vec3(0.0f, 0.0f, 0.0f);
 glm::vec3 g_kano_movement = glm::vec3(0.0f, 0.0f, 0.0f);
 
 glm::vec3 g_mahiru_position = glm::vec3(0.0f, 0.0f, 0.0f);
-glm::vec3 g_mahiru_movement = glm::vec3(1.0f, 1.0f, 0.0f);
-
+glm::vec3 g_mahiru_movement = glm::vec3(0.0f, 0.0f, 0.0f);
 
 float g_kano_speed = 1.0f;  // move 1 unit per second
 
-#define LOG(argument) std::cout << argument << '\n'
 void initialise();
 void process_input();
 void update();
 void render();
 void shutdown();
 
-constexpr int NUMBER_OF_TEXTURES = 1; // to be generated, that is
-constexpr GLint LEVEL_OF_DETAIL  = 0;  // base image level; Level n is the nth mipmap reduction image
-constexpr GLint TEXTURE_BORDER   = 0;   // this value MUST be zero
+constexpr GLint NUMBER_OF_TEXTURES = 1;  // to be generated, that is
+constexpr GLint LEVEL_OF_DETAIL    = 0;  // base image level; Level n is the nth mipmap reduction image
+constexpr GLint TEXTURE_BORDER     = 0;  // this value MUST be zero
 
 GLuint load_texture(const char* filepath)
 {
@@ -135,8 +133,8 @@ void initialise()
     g_mahiru_matrix = glm::translate(g_mahiru_matrix, glm::vec3(1.0f, 1.0f, 0.0f));
     g_mahiru_position += g_mahiru_movement;
     
-    g_view_matrix = glm::mat4(1.0f);  // Defines the position (location and orientation) of the camera
-    g_projection_matrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);  // Defines the characteristics of your camera, such as clip planes, field of view, projection method etc.
+    g_view_matrix = glm::mat4(1.0f);
+    g_projection_matrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);
     
     g_shader_program.set_projection_matrix(g_projection_matrix);
     g_shader_program.set_view_matrix(g_view_matrix);
@@ -224,14 +222,6 @@ void process_input()
     }
 }
 
-/**
- Uses distance formula.
- */
-bool check_collision(glm::vec3 &position_a, glm::vec3 &position_b)
-{
-    return sqrt(pow(position_b[0] - position_a[0], 2) + pow(position_b[1] - position_b[1], 2)) < MINIMUM_COLLISION_DISTANCE;
-}
-
 void update()
 {
     float ticks = (float) SDL_GetTicks() / MILLISECONDS_IN_SECOND; // get the current number of ticks
@@ -242,17 +232,25 @@ void update()
     g_kano_position += g_kano_movement * g_kano_speed * delta_time;
     
     g_kano_matrix = glm::mat4(1.0f);
+    g_kano_matrix = glm::translate(g_kano_matrix, INIT_POS_KANO);
     g_kano_matrix = glm::translate(g_kano_matrix, g_kano_position);
     
     g_mahiru_matrix = glm::mat4(1.0f);
-    
     g_mahiru_matrix = glm::translate(g_mahiru_matrix, INIT_POS_MAHIRU);
-    if (check_collision(g_kano_position, g_mahiru_position))
+    
+    g_kano_matrix = glm::scale(g_kano_matrix, INIT_SCALE);
+    g_mahiru_matrix = glm::scale(g_mahiru_matrix, INIT_SCALE);
+    
+    float x_distance = fabs(g_kano_position.x + INIT_POS_KANO.x - INIT_POS_MAHIRU.x) -
+        ((INIT_SCALE.x + INIT_SCALE.x) / 2.0f);
+
+    float y_distance = fabs(g_kano_position.y + INIT_POS_KANO.y - INIT_POS_MAHIRU.y) -
+        ((INIT_SCALE.y + INIT_SCALE.y) / 2.0f);
+    
+    if (x_distance < 0.0f && y_distance < 0.0f)
     {
         std::cout << std::time(nullptr) << ": Collision.\n";
     }
-    g_kano_matrix = glm::scale(g_kano_matrix, INIT_SCALE);
-    g_mahiru_matrix = glm::scale(g_mahiru_matrix, INIT_SCALE);
 }
 
 void draw_object(glm::mat4 &object_model_matrix, GLuint &object_texture_id)
