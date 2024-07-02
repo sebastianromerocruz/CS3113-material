@@ -76,6 +76,8 @@ public:
     void move_right() { m_movement.x = 1.0f;  face_right(); }
     void move_up() { m_movement.y = 1.0f;  face_up(); }
     void move_down() { m_movement.y = -1.0f; face_down(); }
+    
+    void const jump() { m_is_jumping = true; }
 
     // ————— GETTERS ————— //
     glm::vec3 const get_position()     const { return m_position; }
@@ -105,7 +107,6 @@ public:
     void const set_jumping_power(float new_jumping_power) { m_jumping_power = new_jumping_power;}
     void const set_width(float new_width) {m_width = new_width; }
     void const set_height(float new_height) {m_height = new_height; }
-    void const set_jump(){m_is_jumping = true; }
 
     // Setter for m_walking
     void set_walking(int walking[4][4])
