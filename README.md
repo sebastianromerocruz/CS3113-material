@@ -45,10 +45,10 @@
 6. **Week 6**: The Entity Class and Physics
     1. [**Entities**](lectures/entities/)
     2. [**Physics: Gravity**](lectures/physics_1/)
-    <!-- 2. [**Physics: Colliding with Different Kinds of Entities**](lectures/physics_2/) -->
-<!-- 7. **Week 7**: Music, sound effects, and basic enemy AI
+    3. [**Physics: Colliding with Different Kinds of Entities**](lectures/physics_2/)
+ <!--7. **Week 7**: Music, sound effects, and basic enemy AI
     1. [**Music and Sound Effects**](lectures/sound-fx/)
-    2. [**Basic Enemy AI**](lectures/enemy-ai/)
+   <!-- 2. [**Basic Enemy AI**](lectures/enemy-ai/)
 8. **Week 8**: Map and stage building
     1. [**Tilesets and Tilemaps**](lectures/platform-levels/)
     2. [**Scenes**](lectures/scenes/)
