@@ -138,54 +138,60 @@ void initialise()
     glClearColor(BG_RED, BG_BLUE, BG_GREEN, BG_OPACITY);
     
     // ––––– PLATFORMS ––––– //
-    GLuint platform_texture_id = load_texture(PLATFORM_FILEPATH);
     
     g_game_state.platforms = new Entity[PLATFORM_COUNT];
     
-    g_game_state.platforms[PLATFORM_COUNT - 1].m_texture_id = platform_texture_id;
+    g_game_state.platforms[PLATFORM_COUNT - 1].set_texture_id(load_texture(PLATFORM_FILEPATH));
     g_game_state.platforms[PLATFORM_COUNT - 1].set_position(glm::vec3(-1.5f, -2.35f, 0.0f));
     g_game_state.platforms[PLATFORM_COUNT - 1].set_width(0.4f);
     g_game_state.platforms[PLATFORM_COUNT - 1].update(0.0f, NULL, 0);
     
     for (int i = 0; i < PLATFORM_COUNT - 2; i++)
     {
-        g_game_state.platforms[i].m_texture_id = platform_texture_id;
-        g_game_state.platforms[i].set_position(glm::vec3(i - 1.0f, -3.0f, 0.0f));
+        g_game_state.platforms[i].set_texture_id(load_texture(PLATFORM_FILEPATH));
+        g_game_state.platforms[i].set_position(glm::vec3(i - 1.0f, -2.35f, 0.0f));
         g_game_state.platforms[i].set_width(0.4f);
         g_game_state.platforms[i].update(0.0f, NULL, 0);
     }
     
-    g_game_state.platforms[PLATFORM_COUNT - 2].m_texture_id = platform_texture_id;
+    g_game_state.platforms[PLATFORM_COUNT - 2].set_texture_id(load_texture(PLATFORM_FILEPATH));
     g_game_state.platforms[PLATFORM_COUNT - 2].set_position(glm::vec3(2.5f, -2.5f, 0.0f));
     g_game_state.platforms[PLATFORM_COUNT - 2].set_width(0.4f);
     g_game_state.platforms[PLATFORM_COUNT - 2].update(0.0f, NULL, 0);
     
     // ––––– PLAYER (GEORGE) ––––– //
     // Existing
-    g_game_state.player = new Entity();
-    g_game_state.player->set_position(glm::vec3(0.0f));
-    g_game_state.player->set_movement(glm::vec3(0.0f));
-    g_game_state.player->m_speed = 1.0f;
-    g_game_state.player->set_acceleration(glm::vec3(0.0f, -4.905f, 0.0f));
-    g_game_state.player->m_texture_id = load_texture(SPRITESHEET_FILEPATH);
+    // ————— PLAYER ————— //
+        GLuint player_texture_id = load_texture(SPRITESHEET_FILEPATH);
+        
+        int player_walking_animation[4][4] =
+        {
+            { 1, 5, 9, 13 },  // for George to move to the left,
+            { 3, 7, 11, 15 }, // for George to move to the right,
+            { 2, 6, 10, 14 }, // for George to move upwards,
+            { 0, 4, 8, 12 }   // for George to move downwards
+        };
+        
+        glm::vec3 acceleration = glm::vec3(0.0f,-4.905f, 0.0f);
     
-    // Walking
-    g_game_state.player->m_walking[g_game_state.player->LEFT]  = new int[4] { 1, 5, 9,  13 };
-    g_game_state.player->m_walking[g_game_state.player->RIGHT] = new int[4] { 3, 7, 11, 15 };
-    g_game_state.player->m_walking[g_game_state.player->UP]    = new int[4] { 2, 6, 10, 14 };
-    g_game_state.player->m_walking[g_game_state.player->DOWN]  = new int[4] { 0, 4, 8,  12 };
-
-    g_game_state.player->m_animation_indices = g_game_state.player->m_walking[g_game_state.player->LEFT];  // start George looking left
-    g_game_state.player->m_animation_frames = 4;
-    g_game_state.player->m_animation_index  = 0;
-    g_game_state.player->m_animation_time   = 0.0f;
-    g_game_state.player->m_animation_cols   = 4;
-    g_game_state.player->m_animation_rows   = 4;
-    g_game_state.player->set_height(0.9f);
-    g_game_state.player->set_width(0.9f);
+        g_game_state.player = new Entity(
+            player_texture_id,         // texture id
+            1.0f,                      // speed
+            acceleration,               // acceleration
+            3.0f,                      // jumping power
+            player_walking_animation,  // animation index sets
+            0.0f,                      // animation time
+            4,                         // animation frame amount
+            0,                         // current animation index
+            4,                         // animation column amount
+            4,                         // animation row amount
+            0.9f,                      // width
+            0.9f                       // height
+        );
+        
     
     // Jumping
-    g_game_state.player->m_jumping_power = 3.0f;
+    
     
     // ––––– GENERAL ––––– //
     glEnable(GL_BLEND);
@@ -215,7 +221,7 @@ void process_input()
                         
                     case SDLK_SPACE:
                         // Jump
-                        if (g_game_state.player->m_collided_bottom) g_game_state.player->m_is_jumping = true;
+                        if (g_game_state.player->get_collided_bottom() == false) g_game_state.player->set_jump();
                         break;
                         
                     default:
@@ -227,23 +233,13 @@ void process_input()
         }
     }
     
-    constexpr Uint8 *key_state = SDL_GetKeyboardState(NULL);
+    const Uint8* key_state = SDL_GetKeyboardState(NULL);
 
-    if (key_state[SDL_SCANCODE_LEFT])
-    {
-        g_game_state.player->m_movement.x = -1.0f;
-        g_game_state.player->m_animation_indices = g_game_state.player->m_walking[g_game_state.player->LEFT];
-    }
-    else if (key_state[SDL_SCANCODE_RIGHT])
-    {
-        g_game_state.player->m_movement.x = 1.0f;
-        g_game_state.player->m_animation_indices = g_game_state.player->m_walking[g_game_state.player->RIGHT];
-    }
+    if (key_state[SDL_SCANCODE_LEFT])       g_game_state.player->move_left();
+    else if (key_state[SDL_SCANCODE_RIGHT]) g_game_state.player->move_right();
     
-    if (glm::length(g_game_state.player->m_movement) > 1.0f)
-    {
-        g_game_state.player->m_movement = glm::normalize(g_game_state.player->m_movement);
-    }
+    if (glm::length(g_game_state.player->get_movement()) > 1.0f)
+            g_game_state.player->normalise_movement();
 }
 
 void update()
