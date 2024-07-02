@@ -140,23 +140,21 @@ void initialise()
     // ––––– PLATFORMS ––––– //
     
     g_game_state.platforms = new Entity[PLATFORM_COUNT];
+    GLuint platform_texture_id = load_texture(PLATFORM_FILEPATH);
+    for(int i = 0; i < PLATFORM_COUNT; i++){
+        g_game_state.platforms[i] = Entity(platform_texture_id,0.0f, 0.4f, 0.8f);
+    }
     
-    g_game_state.platforms[PLATFORM_COUNT - 1].set_texture_id(load_texture(PLATFORM_FILEPATH));
     g_game_state.platforms[PLATFORM_COUNT - 1].set_position(glm::vec3(-1.5f, -2.35f, 0.0f));
-    g_game_state.platforms[PLATFORM_COUNT - 1].set_width(0.4f);
     g_game_state.platforms[PLATFORM_COUNT - 1].update(0.0f, NULL, 0);
     
     for (int i = 0; i < PLATFORM_COUNT - 2; i++)
     {
-        g_game_state.platforms[i].set_texture_id(load_texture(PLATFORM_FILEPATH));
         g_game_state.platforms[i].set_position(glm::vec3(i - 1.0f, -2.35f, 0.0f));
-        g_game_state.platforms[i].set_width(0.4f);
         g_game_state.platforms[i].update(0.0f, NULL, 0);
     }
     
-    g_game_state.platforms[PLATFORM_COUNT - 2].set_texture_id(load_texture(PLATFORM_FILEPATH));
     g_game_state.platforms[PLATFORM_COUNT - 2].set_position(glm::vec3(2.5f, -2.5f, 0.0f));
-    g_game_state.platforms[PLATFORM_COUNT - 2].set_width(0.4f);
     g_game_state.platforms[PLATFORM_COUNT - 2].update(0.0f, NULL, 0);
     
     // ––––– PLAYER (GEORGE) ––––– //
@@ -221,7 +219,7 @@ void process_input()
                         
                     case SDLK_SPACE:
                         // Jump
-                        if (g_game_state.player->get_collided_bottom() == false) g_game_state.player->set_jump();
+                        if (g_game_state.player->get_collided_bottom()) g_game_state.player->set_jump();
                         break;
                         
                     default:
