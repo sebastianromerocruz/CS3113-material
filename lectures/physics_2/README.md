@@ -1,11 +1,14 @@
-<h2 align=center>Lecture 12</h2>
+<h2 align=center>Week 7</h2>
 
 <h1 align=center>Colliding with Different Kinds of Entities</h1>
 
 <h3 align=center>1 Blue Sea Moon, Imperial Year CCXXIV</h3>
 
 ***Song of the day***: _[**"Cosmic"**](https://www.youtube.com/watch?v=FyG21rXCxlY) by Red Velvet (2024)._
+
 ### Sections
+
+---
 
 1. [**Collision Overlap**](#part-1-collision-overlap)
 2. [**It's-a me, Jumping**](#part-2-its-a-me-jumping)
@@ -13,6 +16,8 @@
     1. [**`is_active`**](#isactive)
     2. [**Collision Flags**](#collision-flags)
     3. [**Entity Types**](#entity-types)
+
+---
 
 ### Part 1: _Collision Overlap_
 
@@ -80,6 +85,7 @@ The result is the beginnings of a platformer game:
 
 <sub>**Figure 3**: George takes a walk.</sub>
 
+<br>
 
 ### Part 2: _It's-a me, Jumping_
 
@@ -91,9 +97,12 @@ How we will determine whether the player is jumping or not is through a boolean 
 // Entity.h
 class Entity
 {
+private:
+    bool  m_is_jumping;
+    float m_jumping_power;
+
 public:
-    bool  m_is_jumping     = false;
-    float m_jumping_power = 0;
+    void const jump() { m_is_jumping = true; }
 }
 ```
 ```c++
@@ -107,7 +116,7 @@ void process_input()
                 switch (event.key.keysym.sym) {
                     case SDLK_SPACE:
                         // Jump
-                        state.player->m_is_jumping = true;
+                        state.player->jump();
                         break;
                         
                     default:
@@ -224,6 +233,8 @@ void const Entity::check_collision_x(Entity *collidable_entities, int collidable
 ![horiz-collision](assets/horiz-collision.gif)
 
 <sub>**Code Block 6 and Figure 7**: Much better.</sub>
+
+<br>
 
 ### Part 3: _`is_active`, Collision Flags, and Entity Types_
 
@@ -388,7 +399,8 @@ void process_input()
                 switch (event.key.keysym.sym) {
                     case SDLK_SPACE:
                         // Jump only if we are colliding with a platform in a specific way
-                        if (state.player->m_collided_bottom) state.player->m_is_jumping = true;
+                        if (g_game_state.player->get_collided_bottom()) 
+                            g_game_state.player->jump();
                         break;
                         
                     default:

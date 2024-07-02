@@ -160,34 +160,34 @@ void initialise()
     // ––––– PLAYER (GEORGE) ––––– //
     // Existing
     // ————— PLAYER ————— //
-        GLuint player_texture_id = load_texture(SPRITESHEET_FILEPATH);
-        
-        int player_walking_animation[4][4] =
-        {
-            { 1, 5, 9, 13 },  // for George to move to the left,
-            { 3, 7, 11, 15 }, // for George to move to the right,
-            { 2, 6, 10, 14 }, // for George to move upwards,
-            { 0, 4, 8, 12 }   // for George to move downwards
-        };
-        
-        glm::vec3 acceleration = glm::vec3(0.0f,-4.905f, 0.0f);
+    GLuint player_texture_id = load_texture(SPRITESHEET_FILEPATH);
     
-        g_game_state.player = new Entity(
-            player_texture_id,         // texture id
-            1.0f,                      // speed
-            acceleration,               // acceleration
-            3.0f,                      // jumping power
-            player_walking_animation,  // animation index sets
-            0.0f,                      // animation time
-            4,                         // animation frame amount
-            0,                         // current animation index
-            4,                         // animation column amount
-            4,                         // animation row amount
-            0.9f,                      // width
-            0.9f                       // height
-        );
-        
+    int player_walking_animation[4][4] =
+    {
+        { 1, 5, 9, 13 },  // for George to move to the left,
+        { 3, 7, 11, 15 }, // for George to move to the right,
+        { 2, 6, 10, 14 }, // for George to move upwards,
+        { 0, 4, 8, 12 }   // for George to move downwards
+    };
     
+    glm::vec3 acceleration = glm::vec3(0.0f,-4.905f, 0.0f);
+
+    g_game_state.player = new Entity(
+        player_texture_id,         // texture id
+        1.0f,                      // speed
+        acceleration,              // acceleration
+        3.0f,                      // jumping power
+        player_walking_animation,  // animation index sets
+        0.0f,                      // animation time
+        4,                         // animation frame amount
+        0,                         // current animation index
+        4,                         // animation column amount
+        4,                         // animation row amount
+        0.9f,                      // width
+        0.9f                       // height
+    );
+    
+
     // Jumping
     
     
@@ -219,7 +219,8 @@ void process_input()
                         
                     case SDLK_SPACE:
                         // Jump
-                        if (g_game_state.player->get_collided_bottom()) g_game_state.player->set_jump();
+                        if (g_game_state.player->get_collided_bottom()) 
+                            g_game_state.player->jump();
                         break;
                         
                     default:
