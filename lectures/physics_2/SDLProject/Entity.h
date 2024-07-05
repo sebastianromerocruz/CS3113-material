@@ -20,7 +20,10 @@ private:
 
     glm::mat4 m_model_matrix;
 
-    float     m_speed;
+    float     m_speed,
+              m_jumping_power;
+    
+    bool m_is_jumping;
 
     // ————— TEXTURES ————— //
     GLuint    m_texture_id;
@@ -34,8 +37,13 @@ private:
     int* m_animation_indices = nullptr;
     float m_animation_time = 0.0f;
 
-    int m_width = 1,
-        m_height = 1;
+    float m_width = 1.0f,
+          m_height = 1.0f;
+    // ————— COLLISIONS ————— //
+    bool m_collided_top    = false;
+    bool m_collided_bottom = false;
+    bool m_collided_left   = false;
+    bool m_collided_right  = false;
 
 public:
     // ————— STATIC VARIABLES ————— //
@@ -43,15 +51,17 @@ public:
 
     // ————— METHODS ————— //
     Entity();
-    Entity(GLuint texture_id, float speed, int walking[4][4], float animation_time,
+    Entity(GLuint texture_id, float speed, glm::vec3 acceleration, float jump_power, int walking[4][4], float animation_time,
         int animation_frames, int animation_index, int animation_cols,
-        int animation_rows);
-    Entity(GLuint texture_id, float speed); // Simpler constructor
+           int animation_rows, float width, float height);
+    Entity(GLuint texture_id, float speed, float width, float height); // Simpler constructor
     ~Entity();
 
     void draw_sprite_from_texture_atlas(ShaderProgram* program, GLuint texture_id, int index);
     bool const check_collision(Entity* other) const;
-
+    
+    void const check_collision_y(Entity* collidable_entities, int collidable_entity_count);
+    void const check_collision_x(Entity* collidable_entities, int collidable_entity_count);
     void update(float delta_time, Entity* collidable_entities, int collidable_entity_count);
     void render(ShaderProgram* program);
 
@@ -66,6 +76,8 @@ public:
     void move_right() { m_movement.x = 1.0f;  face_right(); }
     void move_up() { m_movement.y = 1.0f;  face_up(); }
     void move_down() { m_movement.y = -1.0f; face_down(); }
+    
+    void const jump() { m_is_jumping = true; }
 
     // ————— GETTERS ————— //
     glm::vec3 const get_position()     const { return m_position; }
@@ -75,7 +87,10 @@ public:
     glm::vec3 const get_scale()        const { return m_scale; }
     GLuint    const get_texture_id()   const { return m_texture_id; }
     float     const get_speed()        const { return m_speed; }
-
+    bool      const get_collided_top() const { return m_collided_top; }
+    bool      const get_collided_bottom() const { return m_collided_bottom; }
+    bool      const get_collided_right() const { return m_collided_right; }
+    bool      const get_collided_left() const { return m_collided_left; }
     // ————— SETTERS ————— //
     void const set_position(glm::vec3 new_position) { m_position = new_position; }
     void const set_velocity(glm::vec3 new_velocity) { m_velocity = new_velocity; }
@@ -89,6 +104,9 @@ public:
     void const set_animation_frames(int new_frames) { m_animation_frames = new_frames; }
     void const set_animation_index(int new_index) { m_animation_index = new_index; }
     void const set_animation_time(float new_time) { m_animation_time = new_time; }
+    void const set_jumping_power(float new_jumping_power) { m_jumping_power = new_jumping_power;}
+    void const set_width(float new_width) {m_width = new_width; }
+    void const set_height(float new_height) {m_height = new_height; }
 
     // Setter for m_walking
     void set_walking(int walking[4][4])
