@@ -2,9 +2,9 @@
 
 <h1 align=center>Music and Sound Effects</h1>
 
-<h3 align=center>1 Blue Sea Moon, Imperial Year CCXXIV</h3>
+<h3 align=center>9 Blue Sea Moon, Imperial Year CCXXIV</h3>
 
-***Song of the day***: _[**"Cosmic"**](https://www.youtube.com/watch?v=FyG21rXCxlY) by Red Velvet (2024)._
+***Song of the day***: _[**"Cosmic"**](https://youtu.be/DEsKgbYs9Mc?si=tJRjp8PgD0F2er3H) by Vulmon & Evangeline (2024)._
 
 ---
 

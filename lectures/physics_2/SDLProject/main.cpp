@@ -117,7 +117,7 @@ void initialise()
     {
         LOG("ERROR: Could not create OpenGL context.\n");
         shutdown();
-}
+    }
 
 #ifdef _WINDOWS
     glewInit();
@@ -189,7 +189,7 @@ void initialise()
     
 
     // Jumping
-    
+    g_game_state.player->set_jumping_power(3.0f);
     
     // ––––– GENERAL ––––– //
     glEnable(GL_BLEND);
