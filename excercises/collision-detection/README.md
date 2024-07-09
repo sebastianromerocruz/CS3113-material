@@ -23,7 +23,7 @@ We will achieve this through the following steps:
 
 #### STEP 1: _Add A Dropping Mechanism_
 
-Collisions are all set up from our [**last lecture](https://github.com/sebastianromerocruz/CS3113-material/tree/main/lectures/physics_2#collision-flags), so you don't need to worry about that. However, you'll notice that the flower is not automatically dropping when we start our game. Your first goal is to let the flower drop according to some _acceleration_ of gravity when the player presses the `Space` key.
+Collisions are all set up from our [**last lecture**](https://github.com/sebastianromerocruz/CS3113-material/tree/main/lectures/physics_2#collision-flags), so you don't need to worry about that. However, you'll notice that the flower is not automatically dropping when we start our game. Your first goal is to let the flower drop according to some _acceleration_ of gravity when the player presses the `Space` key.
 
 #### STEP 2: _"Alert" The Program Of A Collision And Shrink_
 
