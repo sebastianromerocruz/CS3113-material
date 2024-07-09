@@ -49,7 +49,7 @@ constexpr float MILLISECONDS_IN_SECOND = 1000.0;
 constexpr char SPRITESHEET_FILEPATH[] = "assets/george_0.png";
 constexpr char PLATFORM_FILEPATH[]    = "assets/platformPack_tile027.png";
 
-constexpr char BGM_FILEPATH[]          = "assets/audio/crypto.mp3",
+constexpr char BGM_FILEPATH[]          = "assets/audio/dooblydoo.mp3",
            BOUNCING_SFX_FILEPATH[] = "assets/audio/bounce.wav";
 constexpr int  LOOP_FOREVER   = -1;  // -1 means loop forever in Mix_PlayMusic; 0 means play once and loop zero times
 
@@ -71,7 +71,7 @@ constexpr int PLAY_ONCE   =  0,
 
 enum AppStatus { RUNNING, TERMINATED };
 // ––––– GLOBAL VARIABLES ––––– //
-GameState g_state;
+GameState g_game_state;
 
 SDL_Window* g_display_window;
 AppStatus g_app_status = RUNNING;
@@ -86,8 +86,16 @@ float g_accumulator = 0.0f;
 Mix_Music *g_music;
 Mix_Chunk *g_bouncing_sfx;
 
-// ––––– GENERAL FUNCTIONS ––––– //
-GLuint load_texture(constexpr char* filepath)
+// ———— GENERAL FUNCTIONS ———— //
+GLuint load_texture(const char* filepath);
+
+void initialise();
+void process_input();
+void update();
+void render();
+void shutdown();
+
+GLuint load_texture(const char* filepath)
 {
     int width, height, number_of_components;
     unsigned char* image = stbi_load(filepath, &width, &height, &number_of_components, STBI_rgb_alpha);
@@ -117,23 +125,20 @@ GLuint load_texture(constexpr char* filepath)
 
 void initialise()
 {
-    // Initialising both the video AND audio subsystems
-    // We did something similar when we talked about video game controllers
-    SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
-    g_display_window = SDL_CreateWindow("Hello, Audio!",
-                                      SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                                      WINDOW_WIDTH, WINDOW_HEIGHT,
-                                      SDL_WINDOW_OPENGL);
-    
-    SDL_GLContext context = SDL_GL_CreateContext(g_display_window);
-    SDL_GL_MakeCurrent(g_display_window, context);
+    SDL_Init(SDL_INIT_VIDEO);
+        g_display_window = SDL_CreateWindow("Hello, Entities!",
+            SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+            WINDOW_WIDTH, WINDOW_HEIGHT,
+            SDL_WINDOW_OPENGL);
 
-    if (context == nullptr)
-    {
-        LOG("ERROR: Could not create OpenGL context.\n");
-        shutdown();
-    }
+        SDL_GLContext context = SDL_GL_CreateContext(g_display_window);
+        SDL_GL_MakeCurrent(g_display_window, context);
 
+        if (context == nullptr)
+        {
+            LOG("ERROR: Could not create OpenGL context.\n");
+            shutdown();
+        }
     
 #ifdef _WINDOWS
     glewInit();
@@ -180,54 +185,56 @@ void initialise()
             );
     
     // ––––– PLATFORMS ––––– //
+    
+    g_game_state.platforms = new Entity[PLATFORM_COUNT];
     GLuint platform_texture_id = load_texture(PLATFORM_FILEPATH);
-    
-    g_state.platforms = new Entity[PLATFORM_COUNT];
-    
-    g_state.platforms[PLATFORM_COUNT - 1].m_texture_id = platform_texture_id;
-    g_state.platforms[PLATFORM_COUNT - 1].set_position(glm::vec3(-1.5f, -2.35f, 0.0f));
-    g_state.platforms[PLATFORM_COUNT - 1].set_width(0.4f);
-    g_state.platforms[PLATFORM_COUNT - 1].update(0.0f, NULL, 0);
-    
+    for(int i = 0; i < PLATFORM_COUNT; i++){
+        g_game_state.platforms[i] = Entity(platform_texture_id,0.0f, 0.4f, 0.8f);
+    }
+        
+    g_game_state.platforms[PLATFORM_COUNT - 1].set_position(glm::vec3(-1.5f, -2.35f, 0.0f));
+    g_game_state.platforms[PLATFORM_COUNT - 1].update(0.0f, NULL, 0);
+        
     for (int i = 0; i < PLATFORM_COUNT - 2; i++)
     {
-        g_state.platforms[i].m_texture_id = platform_texture_id;
-        g_state.platforms[i].set_position(glm::vec3(i - 1.0f, -3.0f, 0.0f));
-        g_state.platforms[i].set_width(0.4f);
-        g_state.platforms[i].update(0.0f, NULL, 0);
+        g_game_state.platforms[i].set_position(glm::vec3(i - 1.0f, -1.8f, 0.0f));
+        g_game_state.platforms[i].update(0.0f, NULL, 0);
     }
-    
-    g_state.platforms[PLATFORM_COUNT - 2].m_texture_id = platform_texture_id;
-    g_state.platforms[PLATFORM_COUNT - 2].set_position(glm::vec3(2.5f, -2.5f, 0.0f));
-    g_state.platforms[PLATFORM_COUNT - 2].set_width(0.4f);
-    g_state.platforms[PLATFORM_COUNT - 2].update(0.0f, NULL, 0);
+        
+    g_game_state.platforms[PLATFORM_COUNT - 2].set_position(glm::vec3(2.5f, -2.5f, 0.0f));
+    g_game_state.platforms[PLATFORM_COUNT - 2].update(0.0f, NULL, 0);
     
     // ––––– PLAYER (GEORGE) ––––– //
     // Existing
-    g_state.player = new Entity();
-    g_state.player->set_position(glm::vec3(0.0f));
-    g_state.player->set_movement(glm::vec3(0.0f));
-    g_state.player->m_speed = 1.0f;
-    g_state.player->set_acceleration(glm::vec3(0.0f, -4.905f, 0.0f));
-    g_state.player->m_texture_id = load_texture(SPRITESHEET_FILEPATH);
+    // ————— PLAYER ————— //
+    GLuint player_texture_id = load_texture(SPRITESHEET_FILEPATH);
     
-    // Walking
-    g_state.player->m_walking[g_state.player->LEFT]  = new int[4] { 1, 5, 9,  13 };
-    g_state.player->m_walking[g_state.player->RIGHT] = new int[4] { 3, 7, 11, 15 };
-    g_state.player->m_walking[g_state.player->UP]    = new int[4] { 2, 6, 10, 14 };
-    g_state.player->m_walking[g_state.player->DOWN]  = new int[4] { 0, 4, 8,  12 };
+    int player_walking_animation[4][4] =
+    {
+        { 1, 5, 9, 13 },  // for George to move to the left,
+        { 3, 7, 11, 15 }, // for George to move to the right,
+        { 2, 6, 10, 14 }, // for George to move upwards,
+        { 0, 4, 8, 12 }   // for George to move downwards
+    };
+    
+    glm::vec3 acceleration = glm::vec3(0.0f,-4.905f, 0.0f);
 
-    g_state.player->m_animation_indices = g_state.player->m_walking[g_state.player->LEFT];  // start George looking left
-    g_state.player->m_animation_frames = 4;
-    g_state.player->m_animation_index  = 0;
-    g_state.player->m_animation_time   = 0.0f;
-    g_state.player->m_animation_cols   = 4;
-    g_state.player->m_animation_rows   = 4;
-    g_state.player->set_height(0.9f);
-    g_state.player->set_width(0.9f);
-    
+    g_game_state.player = new Entity(
+        player_texture_id,         // texture id
+        1.0f,                      // speed
+        acceleration,              // acceleration
+        3.0f,                      // jumping power
+        player_walking_animation,  // animation index sets
+        0.0f,                      // animation time
+        4,                         // animation frame amount
+        0,                         // current animation index
+        4,                         // animation column amount
+        4,                         // animation row amount
+        0.9f,                      // width
+        0.9f                       // height
+    );
     // Jumping
-    g_state.player->m_jumping_power = 3.0f;
+    g_game_state.player->set_jumping_power(3.0f);
     
     // ––––– GENERAL ––––– //
     glEnable(GL_BLEND);
@@ -236,7 +243,7 @@ void initialise()
 
 void process_input()
 {
-    g_state.player->set_movement(glm::vec3(0.0f));
+    g_game_state.player->set_movement(glm::vec3(0.0f));
     
     SDL_Event event;
     while (SDL_PollEvent(&event))
@@ -257,9 +264,8 @@ void process_input()
                         
                     case SDLK_SPACE:
                         // Jump
-                        if (g_state.player->m_collided_bottom)
-                        {
-                            g_state.player->m_is_jumping = true;
+                        if (g_game_state.player->get_collided_bottom()){
+                            g_game_state.player->jump();
                             Mix_PlayChannel(
                                             NEXT_CHNL,       // using the first channel that is not currently in use...
                                             g_bouncing_sfx,  // ...play this chunk of audio...
@@ -282,23 +288,13 @@ void process_input()
         }
     }
     
-    constexpr Uint8 *key_state = SDL_GetKeyboardState(NULL);
+    const Uint8 *key_state = SDL_GetKeyboardState(NULL);
 
-    if (key_state[SDL_SCANCODE_LEFT])
-    {
-        g_state.player->m_movement.x = -1.0f;
-        g_state.player->m_animation_indices = g_state.player->m_walking[g_state.player->LEFT];
-    }
-    else if (key_state[SDL_SCANCODE_RIGHT])
-    {
-        g_state.player->m_movement.x = 1.0f;
-        g_state.player->m_animation_indices = g_state.player->m_walking[g_state.player->RIGHT];
-    }
-    
-    if (glm::length(g_state.player->m_movement) > 1.0f)
-    {
-        g_state.player->m_movement = glm::normalize(g_state.player->m_movement);
-    }
+    if (key_state[SDL_SCANCODE_LEFT])       g_game_state.player->move_left();
+    else if (key_state[SDL_SCANCODE_RIGHT]) g_game_state.player->move_right();
+      
+    if (glm::length(g_game_state.player->get_movement()) > 1.0f)
+            g_game_state.player->normalise_movement();
 }
 
 void update()
@@ -317,7 +313,7 @@ void update()
     
     while (delta_time >= FIXED_TIMESTEP)
     {
-        g_state.player->update(FIXED_TIMESTEP, g_state.platforms, PLATFORM_COUNT);
+        g_game_state.player->update(FIXED_TIMESTEP, g_game_state.platforms, PLATFORM_COUNT);
         delta_time -= FIXED_TIMESTEP;
     }
     
@@ -328,9 +324,9 @@ void render()
 {
     glClear(GL_COLOR_BUFFER_BIT);
     
-    g_state.player->render(&g_shader_program);
+    g_game_state.player->render(&g_shader_program);
     
-    for (int i = 0; i < PLATFORM_COUNT; i++) g_state.platforms[i].render(&g_shader_program);
+    for (int i = 0; i < PLATFORM_COUNT; i++) g_game_state.platforms[i].render(&g_shader_program);
     
     SDL_GL_SwapWindow(g_display_window);
 }
@@ -339,8 +335,8 @@ void shutdown()
 {
     SDL_Quit();
     
-    delete [] g_state.platforms;
-    delete g_state.player;
+    delete [] g_game_state.platforms;
+    delete g_game_state.player;
 }
 
 // ––––– GAME LOOP ––––– //
