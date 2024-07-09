@@ -19,13 +19,13 @@ Our goal is to add a gameplay mechanic to our scene whereby **the flower will sh
 
 <sub>**Figure 2**: Desired behaviour.</sub>
 
-We will achieve this through the following three steps:
+We will achieve this through the following steps:
 
 #### STEP 1: _Add A Dropping Mechanism_
 
 Collisions are all set up from our [**last lecture](https://github.com/sebastianromerocruz/CS3113-material/tree/main/lectures/physics_2#collision-flags), so you don't need to worry about that. However, you'll notice that the flower is not automatically dropping when we start our game. Your first goal is to let the flower drop according to some _acceleration_ of gravity when the player presses the `Space` key.
 
-#### STEP 2: _"Alert" The Program Of A Collision_
+#### STEP 2: _"Alert" The Program Of A Collision And Shrink_
 
 Once you do this, modify `Entity` so that, when the flower registers a collision with the teacup (i.e. a _bottom collision_), the size of the flower will continuously shrink every frame _until_ the dimensions of frame are equal to or under 0.
 
