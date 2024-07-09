@@ -1,4 +1,4 @@
-<h2 align=center>Week 08: Day 1</h2>
+<!-- <h2 align=center>Week 08: Day 1</h2>
 
 <h1 align=center>Exercise: <em>Collision Detection</em></h1>
 
@@ -29,4 +29,4 @@ Collisions are all set up from our [**last lecture**](https://github.com/sebasti
 
 Once you do this, modify `Entity` so that, when the flower registers a collision with the teacup (i.e. a _bottom collision_), the size of the flower will continuously shrink every frame _until_ the dimensions of frame are equal to or under 0.
 
-Perform this shrinking across several frames (i.e. don't shrink the flower entirely in a single frame, otherwise we won't be able to see it disappear).
+Perform this shrinking across several frames (i.e. don't shrink the flower entirely in a single frame, otherwise we won't be able to see it disappear). -->
