@@ -3,7 +3,7 @@
 #define LOG(argument) std::cout << argument << '\n'
 #define GL_GLEXT_PROTOTYPES 1
 #define FIXED_TIMESTEP 0.0166666f
-#define PLATFORM_COUNT 6
+#define PLATFORM_COUNT 5
 
 #ifdef _WINDOWS
 #include <GL/glew.h>
@@ -48,8 +48,7 @@ constexpr char V_SHADER_PATH[] = "shaders/vertex_textured.glsl",
 constexpr float MILLISECONDS_IN_SECOND = 1000.0;
 constexpr char SPRITESHEET_FILEPATH[] = "assets/george_0.png";
 constexpr char PLATFORM_FILEPATH[]    = "assets/platformPack_tile027.png";
-constexpr char FRANKLIN_FILEPATH[]    = "assets/IMG_0789.jpg";
- 
+
 constexpr char BGM_FILEPATH[]          = "assets/audio/dooblydoo.mp3",
            BOUNCING_SFX_FILEPATH[] = "assets/audio/bounce.wav";
 constexpr int  LOOP_FOREVER   = -1;  // -1 means loop forever in Mix_PlayMusic; 0 means play once and loop zero times
@@ -189,7 +188,6 @@ void initialise()
     
     g_game_state.platforms = new Entity[PLATFORM_COUNT];
     GLuint platform_texture_id = load_texture(PLATFORM_FILEPATH);
-    GLuint franklin_texture_id = load_texture(FRANKLIN_FILEPATH);
     for(int i = 0; i < PLATFORM_COUNT; i++){
         g_game_state.platforms[i] = Entity(platform_texture_id,0.0f, 0.4f, 0.8f);
     }
@@ -197,7 +195,7 @@ void initialise()
     g_game_state.platforms[PLATFORM_COUNT - 1].set_position(glm::vec3(-1.5f, -2.35f, 0.0f));
     g_game_state.platforms[PLATFORM_COUNT - 1].update(0.0f, NULL, 0);
         
-    for (int i = 0; i < PLATFORM_COUNT - 3; i++)
+    for (int i = 0; i < PLATFORM_COUNT - 2; i++)
     {
         g_game_state.platforms[i].set_position(glm::vec3(i - 1.0f, -1.8f, 0.0f));
         g_game_state.platforms[i].update(0.0f, NULL, 0);
@@ -205,10 +203,6 @@ void initialise()
         
     g_game_state.platforms[PLATFORM_COUNT - 2].set_position(glm::vec3(2.5f, -2.5f, 0.0f));
     g_game_state.platforms[PLATFORM_COUNT - 2].update(0.0f, NULL, 0);
-    g_game_state.platforms[PLATFORM_COUNT - 3].set_position(glm::vec3(3.0f, 2.0f, 0.0f));
-    g_game_state.platforms[PLATFORM_COUNT - 3].set_texture_id(franklin_texture_id);
-    g_game_state.platforms[PLATFORM_COUNT - 3].set_scale(glm::vec3(2.0f, 2.0f, 0.0f));
-    g_game_state.platforms[PLATFORM_COUNT - 3].update(0.0f, NULL, 0);
     
     // ––––– PLAYER (GEORGE) ––––– //
     // Existing
