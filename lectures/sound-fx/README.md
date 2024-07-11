@@ -1,10 +1,10 @@
-<h2 align=center>Lecture 13</h2>
+<h2 align=center>Week 08: Day 1</h2>
 
 <h1 align=center>Music and Sound Effects</h1>
 
 <h3 align=center>9 Blue Sea Moon, Imperial Year CCXXIV</h3>
 
-***Song of the day***: _[**"Cosmic"**](https://youtu.be/DEsKgbYs9Mc?si=tJRjp8PgD0F2er3H) by Vulmon & Evangeline (2024)._
+***Song of the day***: _[**Got To Be Mine**](https://youtu.be/DEsKgbYs9Mc?si=tJRjp8PgD0F2er3H) by Vulfmon & Evangeline (2024)._
 
 ---
 
@@ -13,15 +13,19 @@
 1. [**Audio: Feedback, Environment, and Mood**](#part-1-audio-feedback-environment-and-mood)
 2. [**`SDL_mixer`**](#part-2-sdl_mixer)
 3. [**Music**](#part-3-music)
-3. [**Sound Effects**](#part-3-sound-effects)
+4. [**Sound Effects**](#part-3-sound-effects)
  
+---
+
 ### Part 1: _Audio: Feedback, Environment, and Mood_
 
-One of the unsung heroes of video game develepment is sound design. What started out as simple beeps and boops in games like [**Pong**](https://youtu.be/e4VRgY3tkh0) and an endlessly repeating background music track in [**Super Mario Bros**](https://youtu.be/-avspZlbOWU?t=13) has evolved into a dynamic and essential part of the game itself. For example, in games like [**Celeste**](https://youtu.be/gXJT9wgu7Wg) the background track of almost every level will dynamically change as you progress through the map, whether it be by growing in intensity or getting calmer. This is, of course, only one example. Many video games with multiple characters will have distinct sound effects for each of them, as can be seen in [**Overwatch**](https://youtu.be/teun_wZ8_LI).
+One of the unsung heroes of video game development is sound design. What started out as simple beeps and boops in games like [**Pong**](https://youtu.be/e4VRgY3tkh0) and an endlessly repeating background music track in [**Super Mario Bros**](https://youtu.be/-avspZlbOWU?t=13) has evolved into a dynamic and essential part of the game itself. For example, in games like [**Celeste**](https://youtu.be/gXJT9wgu7Wg) the background track of almost every level will dynamically change as you progress through the map, whether it be by growing in intensity or getting calmer. This is, of course, only one example. Many video games with multiple characters will have distinct sound effects for each of them, as can be seen in [**Overwatch**](https://youtu.be/teun_wZ8_LI).
 
 But it can go even deeper than that. Many of us have fond memories of playing rhythm games like [**Dance Dance Revolution**](https://youtu.be/sv7gxqEhcBo?t=68) and [**Cytus**](https://youtu.be/RKP4R_HwyNE)–both of which rely on mechanics entirely based on sound a music. The game [**DubWars**](https://youtu.be/VJFi3gI7j6w)'s gameplay consists entirely of the player having different abilities depending on the music. Sounds design is often an entire class or sets of classes in majors like film and music composition, and for good reason. Of course, we'll only scratch the surface of it in this class, but coming up with clever mechanics based on music can make a game with a simple visual design appear much more complex and polished.
 
 There are plenty of online sources from which you can pull royalty-free [**music**](https://incompetech.filmmusic.io/search/) and [**sound**](https://freesound.org) from, by the way. Don't pay for anything unless you absolutely need/want to!
+
+<br>
 
 ### Part 2: _`SDL_mixer`_
 
@@ -68,6 +72,8 @@ void initialise()
 
 <sub>**Code Block 1**: The setup for using audio in our projects. You can find the docs for `Mix_OpenAudio` [**here**](https://wiki.libsdl.org/SDL2_mixer/Mix_OpenAudio).</sub>
 
+<br>
+
 ### Part 3: _Music_
 
 The first thing to know about `SDL_mixer` is that it acts much in the same way a real-life music and sound mixes does: it has several channels, each dedicated to one audio track. We then control the amplitude levels (i.e. how loud it is) of each of these tracks in order to get the appropriate "mix" for each of these tracks.
@@ -104,7 +110,9 @@ void initialise()
 
 <sub>**Code Block 2**: Note that [**`Mix_LoadMUS`**](https://wiki.libsdl.org/SDL2_mixer/Mix_LoadMUS) should only be used with mp3 files, although other file types are possible.</sub>
 
-### Part 3: _Sound Effects_
+<br>
+
+### Part 4: _Sound Effects_
 
 Sound effects work much in the same way as our BGM track does, except that we have multiple channels available for these. This makes sense, as your game will likely involve multiple sounds depending on the mechanics that you have set up for it. The key thing to know here is that the sound files _must be **16-bit WAV files**_ in order to be properly loaded into OpenGL, and is done by the following lines of code:
 

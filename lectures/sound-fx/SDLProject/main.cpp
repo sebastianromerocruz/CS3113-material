@@ -22,6 +22,8 @@
 #include "Entity.h"
 
 // ––––– STRUCTS AND ENUMS ––––– //
+enum AppStatus { RUNNING, TERMINATED };
+
 struct GameState
 {
     Entity* player;
@@ -69,7 +71,6 @@ constexpr int PLAY_ONCE   =  0,
           MILS_IN_SEC =  1000,
           ALL_SFX_CHN = -1;
 
-enum AppStatus { RUNNING, TERMINATED };
 // ––––– GLOBAL VARIABLES ––––– //
 GameState g_game_state;
 
