@@ -2,7 +2,7 @@
 
 <h1 align=center>Basic Enemy AI</h1>
 
-<h3 align=center>22 Messidor, Year CCXXXI</h3>
+<h3 align=center>7 Blue Sea Moon, Imperial Year CCXXIV<</h3>
 
 ***Song of the day***: _[**Happiness**](https://youtu.be/rR1lgEMMJwo) performed by The 1975 (2022)._
 
