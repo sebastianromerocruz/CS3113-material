@@ -162,7 +162,7 @@ void initialise()
     
     for (int i = 0; i < PLATFORM_COUNT; i++)
     {
-        g_game_state.platforms[i] = Entity(platform_texture_id,0.0f, 0.4f, 0.8f, PLATFORM);
+        g_game_state.platforms[i] = Entity(platform_texture_id,0.0f, 0.4f, 1.0f, PLATFORM);
         g_game_state.platforms[i].set_position(glm::vec3(i - PLATFORM_OFFSET, -3.0f, 0.0f));
         g_game_state.platforms[i].update(0.0f, NULL, NULL, 0);
     }
@@ -269,10 +269,10 @@ void process_input()
  const Uint8 *key_state = SDL_GetKeyboardState(NULL);
 
  if (key_state[SDL_SCANCODE_LEFT])       g_game_state.player->move_left();
-     else if (key_state[SDL_SCANCODE_RIGHT]) g_game_state.player->move_right();
+ else if (key_state[SDL_SCANCODE_RIGHT]) g_game_state.player->move_right();
      
-     if (glm::length(g_game_state.player->get_movement()) > 1.0f)
-             g_game_state.player->normalise_movement();
+ if (glm::length(g_game_state.player->get_movement()) > 1.0f)
+    g_game_state.player->normalise_movement();
  
  
 }
