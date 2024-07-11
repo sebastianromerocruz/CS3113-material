@@ -33,8 +33,8 @@ struct GameState
     Mix_Chunk *jump_sfx;
 };
 
-
 enum AppStatus { RUNNING, TERMINATED };
+
 // ––––– CONSTANTS ––––– //
 constexpr int WINDOW_WIDTH  = 640,
           WINDOW_HEIGHT = 480;
@@ -58,7 +58,7 @@ constexpr char SPRITESHEET_FILEPATH[] = "assets/george_0.png",
            PLATFORM_FILEPATH[]    = "assets/platformPack_tile027.png",
            ENEMY_FILEPATH[]       = "assets/soph.png";
 
-constexpr char BGM_FILEPATH[] = "assets/dooblydoo.mp3",
+constexpr char BGM_FILEPATH[] = "assets/crypto.mp3",
            SFX_FILEPATH[] = "assets/bounce.wav";
 
 constexpr int NUMBER_OF_TEXTURES = 1;
@@ -122,22 +122,22 @@ void initialise()
     // ––––– GENERAL STUFF ––––– //
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
     g_display_window = SDL_CreateWindow("Hello, AI!",
-                                      SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                                      WINDOW_WIDTH, WINDOW_HEIGHT,
-                                      SDL_WINDOW_OPENGL);
-    
+                                  SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+                                  WINDOW_WIDTH, WINDOW_HEIGHT,
+                                  SDL_WINDOW_OPENGL);
+
     SDL_GLContext context = SDL_GL_CreateContext(g_display_window);
     SDL_GL_MakeCurrent(g_display_window, context);
-    
+
     if (context == nullptr)
-        {
-            LOG("ERROR: Could not create OpenGL context.\n");
-            shutdown();
-        }
-    
-#ifdef _WINDOWS
+    {
+        LOG("ERROR: Could not create OpenGL context.\n");
+        shutdown();
+    }
+
+    #ifdef _WINDOWS
     glewInit();
-#endif
+    #endif
     // ––––– VIDEO STUFF ––––– //
     glViewport(VIEWPORT_X, VIEWPORT_Y, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
 
@@ -151,80 +151,81 @@ void initialise()
 
     glUseProgram(g_shader_program.get_program_id());
 
-       
-    
+
+
     glClearColor(BG_RED, BG_BLUE, BG_GREEN, BG_OPACITY);
-    
+
     // ––––– PLATFORM ––––– //
     GLuint platform_texture_id = load_texture(PLATFORM_FILEPATH);
-    
+
     g_game_state.platforms = new Entity[PLATFORM_COUNT];
-    
+
     for (int i = 0; i < PLATFORM_COUNT; i++)
     {
-        g_game_state.platforms[i] = Entity(platform_texture_id,0.0f, 0.4f, 1.0f, PLATFORM);
-        g_game_state.platforms[i].set_position(glm::vec3(i - PLATFORM_OFFSET, -3.0f, 0.0f));
-        g_game_state.platforms[i].update(0.0f, NULL, NULL, 0);
+    g_game_state.platforms[i] = Entity(platform_texture_id,0.0f, 0.4f, 1.0f, PLATFORM);
+    g_game_state.platforms[i].set_position(glm::vec3(i - PLATFORM_OFFSET, -3.0f, 0.0f));
+    g_game_state.platforms[i].update(0.0f, NULL, NULL, 0);
     }
-    
+
     GLuint player_texture_id = load_texture(SPRITESHEET_FILEPATH);
-    
+
     int player_walking_animation[4][4] =
     {
-        { 1, 5, 9, 13 },  // for George to move to the left,
-        { 3, 7, 11, 15 }, // for George to move to the right,
-        { 2, 6, 10, 14 }, // for George to move upwards,
-        { 0, 4, 8, 12 }   // for George to move downwards
+    { 1, 5, 9, 13 },  // for George to move to the left,
+    { 3, 7, 11, 15 }, // for George to move to the right,
+    { 2, 6, 10, 14 }, // for George to move upwards,
+    { 0, 4, 8, 12 }   // for George to move downwards
     };
-    
+
     glm::vec3 acceleration = glm::vec3(0.0f,-4.905f, 0.0f);
 
     g_game_state.player = new Entity(
-        player_texture_id,         // texture id
-        1.0f,                      // speed
-        acceleration,              // acceleration
-        3.0f,                      // jumping power
-        player_walking_animation,  // animation index sets
-        0.0f,                      // animation time
-        4,                         // animation frame amount
-        0,                         // current animation index
-        4,                         // animation column amount
-        4,                         // animation row amount
-        0.9f,                      // width
-        0.9f,                       // height
-        PLAYER
+    player_texture_id,         // texture id
+    5.0f,                      // speed
+    acceleration,              // acceleration
+    3.0f,                      // jumping power
+    player_walking_animation,  // animation index sets
+    0.0f,                      // animation time
+    4,                         // animation frame amount
+    0,                         // current animation index
+    4,                         // animation column amount
+    4,                         // animation row amount
+    0.9f,                      // width
+    0.9f,                       // height
+    PLAYER
     );
-    
+
 
     // Jumping
     g_game_state.player->set_jumping_power(3.0f);
- 
- // ––––– SOPHIE ––––– //
- GLuint enemy_texture_id = load_texture(ENEMY_FILEPATH);
- 
- g_game_state.enemies = new Entity[ENEMY_COUNT];
- 
-    for (int i = 0; i < ENEMY_COUNT; i++){
-        g_game_state.enemies[i] =  Entity(enemy_texture_id, 1.0f, 1.0f, 1.0f, ENEMY, GUARD, IDLE);
+
+    // ––––– SOPHIE ––––– //
+    GLuint enemy_texture_id = load_texture(ENEMY_FILEPATH);
+
+    g_game_state.enemies = new Entity[ENEMY_COUNT];
+
+    for (int i = 0; i < ENEMY_COUNT; i++)
+    {
+    g_game_state.enemies[i] =  Entity(enemy_texture_id, 1.0f, 1.0f, 1.0f, ENEMY, GUARD, IDLE);
     }
- 
- 
- g_game_state.enemies[0].set_position(glm::vec3(3.0f, 0.0f, 0.0f));
- g_game_state.enemies[0].set_movement(glm::vec3(0.0f));
- g_game_state.enemies[0].set_acceleration(glm::vec3(0.0f, -9.81f, 0.0f));
- 
- // ––––– AUDIO STUFF ––––– //
- Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096);
- 
- g_game_state.bgm = Mix_LoadMUS(BGM_FILEPATH);
- Mix_PlayMusic(g_game_state.bgm, -1);
- Mix_VolumeMusic(MIX_MAX_VOLUME / 4.0f);
- 
- g_game_state.jump_sfx = Mix_LoadWAV(SFX_FILEPATH);
- 
- // ––––– GENERAL STUFF ––––– //
- glEnable(GL_BLEND);
- glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+
+    g_game_state.enemies[0].set_position(glm::vec3(3.0f, 0.0f, 0.0f));
+    g_game_state.enemies[0].set_movement(glm::vec3(0.0f));
+    g_game_state.enemies[0].set_acceleration(glm::vec3(0.0f, -9.81f, 0.0f));
+
+    // ––––– AUDIO STUFF ––––– //
+    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096);
+
+    g_game_state.bgm = Mix_LoadMUS(BGM_FILEPATH);
+    Mix_PlayMusic(g_game_state.bgm, -1);
+    Mix_VolumeMusic(MIX_MAX_VOLUME / 4.0f);
+
+    g_game_state.jump_sfx = Mix_LoadWAV(SFX_FILEPATH);
+
+    // ––––– GENERAL STUFF ––––– //
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void process_input()
@@ -279,64 +280,71 @@ void process_input()
 
 void update()
 {
- float ticks = (float)SDL_GetTicks() / MILLISECONDS_IN_SECOND;
- float delta_time = ticks - g_previous_ticks;
- g_previous_ticks = ticks;
- 
- delta_time += g_accumulator;
- 
- if (delta_time < FIXED_TIMESTEP)
- {
-     g_accumulator = delta_time;
-     return;
- }
- 
- while (delta_time >= FIXED_TIMESTEP) {
-     g_game_state.player->update(FIXED_TIMESTEP, g_game_state.player, g_game_state.platforms, PLATFORM_COUNT);
-     
-     for (int i = 0; i < ENEMY_COUNT; i++) g_game_state.enemies[i].update(FIXED_TIMESTEP, g_game_state.player, g_game_state.platforms, PLATFORM_COUNT);
-     
-     delta_time -= FIXED_TIMESTEP;
- }
- 
- g_accumulator = delta_time;
+    float ticks = (float)SDL_GetTicks() / MILLISECONDS_IN_SECOND;
+    float delta_time = ticks - g_previous_ticks;
+    g_previous_ticks = ticks;
+
+    delta_time += g_accumulator;
+
+    if (delta_time < FIXED_TIMESTEP)
+    {
+        g_accumulator = delta_time;
+        return;
+    }
+
+    while (delta_time >= FIXED_TIMESTEP)
+    {
+        g_game_state.player->update(FIXED_TIMESTEP, g_game_state.player, g_game_state.platforms, PLATFORM_COUNT);
+
+        for (int i = 0; i < ENEMY_COUNT; i++)
+            g_game_state.enemies[i].update(FIXED_TIMESTEP,
+                                           g_game_state.player,
+                                           g_game_state.platforms,
+                                           PLATFORM_COUNT);
+
+        delta_time -= FIXED_TIMESTEP;
+    }
+
+    g_accumulator = delta_time;
 }
 
 void render()
 {
- glClear(GL_COLOR_BUFFER_BIT);
- 
- g_game_state.player->render(&g_shader_program);
- 
- for (int i = 0; i < PLATFORM_COUNT; i++) g_game_state.platforms[i].render(&g_shader_program);
- for (int i = 0; i < ENEMY_COUNT; i++)    g_game_state.enemies[i].render(&g_shader_program);
- 
- SDL_GL_SwapWindow(g_display_window);
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    g_game_state.player->render(&g_shader_program);
+
+    for (int i = 0; i < PLATFORM_COUNT; i++)
+        g_game_state.platforms[i].render(&g_shader_program);
+    for (int i = 0; i < ENEMY_COUNT; i++)
+        g_game_state.enemies[i].render(&g_shader_program);
+
+    SDL_GL_SwapWindow(g_display_window);
 }
 
 void shutdown()
 {
- SDL_Quit();
- 
- delete [] g_game_state.platforms;
- delete [] g_game_state.enemies;
- delete    g_game_state.player;
- Mix_FreeChunk(g_game_state.jump_sfx);
- Mix_FreeMusic(g_game_state.bgm);
+    SDL_Quit();
+
+    delete [] g_game_state.platforms;
+    delete [] g_game_state.enemies;
+    delete    g_game_state.player;
+    Mix_FreeChunk(g_game_state.jump_sfx);
+    Mix_FreeMusic(g_game_state.bgm);
 }
 
 // ––––– GAME LOOP ––––– //
 int main(int argc, char* argv[])
 {
- initialise();
- 
-while (g_app_status == RUNNING)
- {
-     process_input();
-     update();
-     render();
- }
- 
- shutdown();
- return 0;
+    initialise();
+
+    while (g_app_status == RUNNING)
+    {
+        process_input();
+        update();
+        render();
+    }
+
+    shutdown();
+    return 0;
 }
