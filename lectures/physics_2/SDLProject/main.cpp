@@ -27,6 +27,7 @@ struct GameState
     Entity* platforms;
 };
 
+enum AppStatus { RUNNING, TERMINATED };
 // ––––– CONSTANTS ––––– //
 constexpr int WINDOW_WIDTH  = 640,
           WINDOW_HEIGHT = 480;
@@ -56,7 +57,7 @@ constexpr GLint TEXTURE_BORDER   = 0;
 GameState g_game_state;
 
 SDL_Window* g_display_window;
-bool g_game_is_running = true;
+AppStatus g_app_status = TERMINATED;
 
 ShaderProgram g_shader_program;
 glm::mat4 g_view_matrix, g_projection_matrix;
@@ -191,6 +192,7 @@ void initialise()
     // Jumping
     g_game_state.player->set_jumping_power(3.0f);
     
+    
     // ––––– GENERAL ––––– //
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -207,14 +209,14 @@ void process_input()
             // End game
             case SDL_QUIT:
             case SDL_WINDOWEVENT_CLOSE:
-                g_game_is_running = false;
+                g_app_status = TERMINATED;
                 break;
                 
             case SDL_KEYDOWN:
                 switch (event.key.keysym.sym) {
                     case SDLK_q:
                         // Quit the game with a keystroke
-                        g_game_is_running = false;
+                        g_app_status = TERMINATED;
                         break;
                         
                     case SDLK_SPACE:
@@ -288,7 +290,7 @@ int main(int argc, char* argv[])
 {
     initialise();
     
-    while (g_game_is_running)
+    while (g_app_status == RUNNING)
     {
         process_input();
         update();
