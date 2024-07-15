@@ -4,7 +4,7 @@
 
 <h3 align=center>1 Blue Sea Moon, Imperial Year CCXXIV</h3>
 
-***Song of the day***: _[**2022**](https://youtu.be/c60wjTFTtP0) performed by SAI (2022)._
+***Song of the day***: _[**Ástarsæla**](https://www.youtube.com/watch?v=TbF7-Q-SvLY&feature=youtu.be) performed by  Hljómar (1968)._
 
 ---
 

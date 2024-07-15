@@ -2,7 +2,7 @@
 
 <h1 align=center>Player Input</h1>
 
-<h3 align=center>15 Blue Sea Moon, Imperial Year CCXXIV<<h3>
+<h3 align=center>10 Garland Moon, Imperial Year CCXXIV<<h3>
 
 ***Song of the day***: _[**Time Is On My Side (Mono Version)**](https://www.youtube.com/watch?v=ZHKz7FBUF1w) by The Rolling Stones (1964-1971))._
 
