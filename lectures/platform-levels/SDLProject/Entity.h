@@ -1,6 +1,7 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
+#include "Map.h"
 #include "glm/glm.hpp"
 #include "ShaderProgram.h"
 enum EntityType { PLATFORM, PLAYER, ENEMY  };
@@ -73,7 +74,12 @@ public:
     
     void const check_collision_y(Entity* collidable_entities, int collidable_entity_count);
     void const check_collision_x(Entity* collidable_entities, int collidable_entity_count);
-    void update(float delta_time, Entity *player, Entity *collidable_entities, int collidable_entity_count);
+    
+    // Overloading our methods to check for only the map
+    void const check_collision_y(Map *map);
+    void const check_collision_x(Map *map);
+    
+    void update(float delta_time, Entity *player, Entity *collidable_entities, int collidable_entity_count, Map *map);
     void render(ShaderProgram* program);
 
     void ai_activate(Entity *player);

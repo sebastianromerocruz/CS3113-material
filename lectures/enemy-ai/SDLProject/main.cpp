@@ -71,7 +71,6 @@ constexpr float PLATFORM_OFFSET = 5.0f;
 GameState g_game_state;
 
 SDL_Window* g_display_window;
-bool g_game_is_running = true;
 
 ShaderProgram g_shader_program;
 glm::mat4 g_view_matrix, g_projection_matrix;
@@ -167,6 +166,7 @@ void initialise()
     g_game_state.platforms[i].update(0.0f, NULL, NULL, 0);
     }
 
+    //GEORGE//
     GLuint player_texture_id = load_texture(SPRITESHEET_FILEPATH);
 
     int player_walking_animation[4][4] =
