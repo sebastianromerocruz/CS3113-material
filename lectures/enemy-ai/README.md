@@ -39,48 +39,50 @@ void initialise()
 {
     // ––––– PLATFORM ––––– //
     GLuint platform_texture_id = load_texture(PLATFORM_FILEPATH);
-    
-    g_state.platforms = new Entity[PLATFORM_COUNT];
-    
+
+    g_game_state.platforms = new Entity[PLATFORM_COUNT];
+
     for (int i = 0; i < PLATFORM_COUNT; i++)
     {
-        g_state.platforms[i].set_entity_type(PLATFORM);
-        g_state.platforms[i].m_texture_id = platform_texture_id;
-        g_state.platforms[i].set_position(glm::vec3(i - PLATFORM_OFFSET, -3.0f, 0.0f));
-        g_state.platforms[i].set_width(0.4f);
-        g_state.platforms[i].update(0.0f, NULL, NULL, 0);
+    g_game_state.platforms[i] = Entity(platform_texture_id,0.0f, 0.4f, 1.0f, PLATFORM);
+    g_game_state.platforms[i].set_position(glm::vec3(i - PLATFORM_OFFSET, -3.0f, 0.0f));
+    g_game_state.platforms[i].update(0.0f, NULL, NULL, 0);
     }
 
     // ––––– SOPHIE ––––– //
     GLuint enemy_texture_id = load_texture(ENEMY_FILEPATH);
-    
-    g_state.enemies = new Entity[ENEMY_COUNT];
-    g_state.enemies[0].set_entity_type(ENEMY);
-    g_state.enemies[0].m_texture_id = enemy_texture_id;
-    g_state.enemies[0].set_position(glm::vec3(3.0f, 0.0f, 0.0f));
-    g_state.enemies[0].set_movement(glm::vec3(0.0f));
-    g_state.enemies[0].set_speed(1.0f);
-    g_state.enemies[0].set_acceleration(glm::vec3(0.0f, -9.81f, 0.0f));
+
+    g_game_state.enemies = new Entity[ENEMY_COUNT];
+
+    for (int i = 0; i < ENEMY_COUNT; i++)
+    {
+    g_game_state.enemies[i] =  Entity(enemy_texture_id, 1.0f, 1.0f, 1.0f, ENEMY, GUARD, IDLE);
+    }
+
+
+    g_game_state.enemies[0].set_position(glm::vec3(3.0f, 0.0f, 0.0f));
+    g_game_state.enemies[0].set_movement(glm::vec3(0.0f));
+    g_game_state.enemies[0].set_acceleration(glm::vec3(0.0f, -9.81f, 0.0f));
 }
 
 void update()
 {
     while (delta_time >= FIXED_TIMESTEP)
     {
-        for (int i = 0; i < ENEMY_COUNT; i++) g_state.enemies[i].update(FIXED_TIMESTEP, g_state.player, g_state.platforms, PLATFORM_COUNT);
+        for (int i = 0; i < ENEMY_COUNT; i++) g_game_state.enemies[i].update(FIXED_TIMESTEP, g_game_state.player, g_game_state.platforms, PLATFORM_COUNT);
     }
 }
 
 void render()
 {
-    for (int i = 0; i < PLATFORM_COUNT; i++) g_state.platforms[i].render(&g_program);
-    for (int i = 0; i < ENEMY_COUNT; i++)    g_state.enemies[i].render(&g_program);
+    for (int i = 0; i < PLATFORM_COUNT; i++) g_game_state.platforms[i].render(&g_program);
+    for (int i = 0; i < ENEMY_COUNT; i++)    g_game_state.enemies[i].render(&g_program);
 }
 
 void shutdown()
 {
-    delete [] g_state.platforms;
-    delete [] g_state.enemies;
+    delete [] g_game_state.platforms;
+    delete [] g_game_state.enemies;
 }
 ```
 
@@ -159,14 +161,14 @@ void initialise()
     // Platforms
     for (int i = 0; i < PLATFORM_COUNT; i++)
     {
-        g_state.platforms[i].set_entity_type(PLATFORM);
+        g_game_state.platforms[i].set_entity_type(PLATFORM);
     }
 
     // Player
-    g_state.player->set_entity_type(PLAYER);
+    g_game_state.player->set_entity_type(PLAYER);
 
     // Enemy
-    g_state.enemies[0].set_entity_type(ENEMY);
+    g_game_state.enemies[0].set_entity_type(ENEMY);
 }
 ```
 
@@ -199,9 +201,9 @@ void Entity::ai_walk()
 // main.cpp
 void initialise()
 {
-    g_state.enemies[0].set_entity_type(ENEMY);
-    g_state.enemies[0].set_ai_type(GUARD);
-    g_state.enemies[0].set_ai_state(IDLE);
+    g_game_state.enemies[0].set_entity_type(ENEMY);
+    g_game_state.enemies[0].set_ai_type(GUARD);
+    g_game_state.enemies[0].set_ai_state(IDLE);
 }
 ```
 
@@ -298,17 +300,17 @@ bool const Entity::check_collision(Entity *other) const
 // main.cpp
 void initialise()
 {
-    g_state.enemies[0].set_ai_type(GUARD);
-    g_state.enemies[0].set_ai_state(IDLE);  // start at rest
+    g_game_state.enemies[0].set_ai_type(GUARD);
+    g_game_state.enemies[0].set_ai_state(IDLE);  // start at rest
 }
 
 void update()
 {
     while (delta_time >= FIXED_TIMESTEP)
     {
-        g_state.player->update(FIXED_TIMESTEP, g_state.player, g_state.platforms, PLATFORM_COUNT);
+        g_game_state.player->update(FIXED_TIMESTEP, g_game_state.player, g_game_state.platforms, PLATFORM_COUNT);
         
-        for (int i = 0; i < ENEMY_COUNT; i++) g_state.enemies[i].update(FIXED_TIMESTEP, g_state.player, g_state.platforms, PLATFORM_COUNT);
+        for (int i = 0; i < ENEMY_COUNT; i++) g_game_state.enemies[i].update(FIXED_TIMESTEP, g_game_state.player, g_game_state.platforms, PLATFORM_COUNT);
     }
 }
 ```
