@@ -166,15 +166,6 @@ void Entity::update(float delta_time, Entity* collidable_entities, int collidabl
     m_collided_bottom = false;
     m_collided_left   = false;
     m_collided_right  = false;
-    std::cout << "hello"<< std::endl;
-    for (int i = 0; i < collidable_entity_count; i++)
-    {
-        if (check_collision(&collidable_entities[i])){
-            std::cout << "hello"<< std::endl;
-            return;
-        }
-    }
-
     if (m_animation_indices != NULL)
     {
         if (glm::length(m_movement) != 0)

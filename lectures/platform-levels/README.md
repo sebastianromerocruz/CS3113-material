@@ -2,9 +2,9 @@
 
 <h2 align=center>Tilesets and Tile Maps</h2>
 
-<h3 align=center>1 Blue Sea Moon, Imperial Year CCXXIV</h3>
+<h3 align=center>15 Blue Sea Moon, Imperial Year CCXXIV</h3>
 
-***Song of the day***: _[**Ástarsæla**](https://www.youtube.com/watch?v=TbF7-Q-SvLY&feature=youtu.be) performed by  Hljómar (1968)._
+***Song of the day***: _[**Ástarsæla**](https://www.youtube.com/watch?v=TbF7-Q-SvLY&feature=youtu.be) by Hljómar (1968)._
 
 ---
 
@@ -506,7 +506,7 @@ void const Entity::check_collision_x(Map *map)
 <sub>**Code Blocks 7 and 8**: Collisions with the map and collisions with other entities are inherently different—for the better.</sub>
 
 
-### Part 4: _Having The Follow The Player_
+### Part 4: _Having The Camera Follow The Player_
 
 One last quick thing we can talk about is how we can get the camera to follow the player. How do we do that? Well, in order to perform transformations on an object, we know that we have to modify it's model matrix. This makes sense—model is the word we use for physical objects that are supposed to represent physical things.
 
