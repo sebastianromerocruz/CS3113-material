@@ -38,29 +38,30 @@ void LevelA::initialise()
 
     int player_walking_animation[4][4] =
     {
-    { 1, 5, 9, 13 },  // for George to move to the left,
-    { 3, 7, 11, 15 }, // for George to move to the right,
-    { 2, 6, 10, 14 }, // for George to move upwards,
-    { 0, 4, 8, 12 }   // for George to move downwards
+        { 1, 5, 9, 13 },  // for George to move to the left,
+        { 3, 7, 11, 15 }, // for George to move to the right,
+        { 2, 6, 10, 14 }, // for George to move upwards,
+        { 0, 4, 8, 12 }   // for George to move downwards
     };
 
-    glm::vec3 acceleration = glm::vec3(0.0f,-4.905f, 0.0f);
+    glm::vec3 acceleration = glm::vec3(0.0f, -4.81f, 0.0f);
 
     m_game_state.player = new Entity(
-    player_texture_id,         // texture id
-    5.0f,                      // speed
-    acceleration,              // acceleration
-    3.0f,                      // jumping power
-    player_walking_animation,  // animation index sets
-    0.0f,                      // animation time
-    4,                         // animation frame amount
-    0,                         // current animation index
-    4,                         // animation column amount
-    4,                         // animation row amount
-    0.9f,                      // width
-    0.9f,                       // height
-    PLAYER
+        player_texture_id,         // texture id
+        5.0f,                      // speed
+        acceleration,              // acceleration
+        5.0f,                      // jumping power
+        player_walking_animation,  // animation index sets
+        0.0f,                      // animation time
+        4,                         // animation frame amount
+        0,                         // current animation index
+        4,                         // animation column amount
+        4,                         // animation row amount
+        1.0f,                      // width
+        1.0f,                       // height
+        PLAYER
     );
+    
     m_game_state.player->set_position(glm::vec3(5.0f, 0.0f, 0.0f));
 
     // Jumping

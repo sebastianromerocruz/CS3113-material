@@ -119,7 +119,7 @@ void initialise()
 
 void process_input()
 {
-    g_current_scene->g_game_state.player->set_movement(glm::vec3(0.0f));
+    g_current_scene->get_state().player->set_movement(glm::vec3(0.0f));
     
     SDL_Event event;
     while (SDL_PollEvent(&event))
@@ -141,10 +141,10 @@ void process_input()
                         
                     case SDLK_SPACE:
                         // ————— JUMPING ————— //
-                        if (g_current_scene->g_game_state.player->get_collided_bottom())
+                        if (g_current_scene->get_state().player->get_collided_bottom())
                         {
-                            g_current_scene->g_game_state.player->jump();
-                         Mix_PlayChannel(-1,  g_current_scene->g_game_state.jump_sfx, 0);
+                            g_current_scene->get_state().player->jump();
+                            Mix_PlayChannel(-1,  g_current_scene->get_state().jump_sfx, 0);
                         }
                          break;
                         
@@ -160,11 +160,11 @@ void process_input()
     // ————— KEY HOLD ————— //
     const Uint8 *key_state = SDL_GetKeyboardState(NULL);
 
-    if (key_state[SDL_SCANCODE_LEFT])        g_current_scene->g_game_state.player->move_left();
-    else if (key_state[SDL_SCANCODE_RIGHT])  g_current_scene->g_game_state.player->move_right();
+    if (key_state[SDL_SCANCODE_LEFT])        g_current_scene->get_state().player->move_left();
+    else if (key_state[SDL_SCANCODE_RIGHT])  g_current_scene->get_state().player->move_right();
      
-    if (glm::length( g_current_scene->g_game_state.player->get_movement()) > 1.0f)
-        g_current_scene->g_game_state.player->normalise_movement();
+    if (glm::length( g_current_scene->get_state().player->get_movement()) > 1.0f)
+        g_current_scene->get_state().player->normalise_movement();
  
 }
 
@@ -196,8 +196,8 @@ void update()
     // ————— PLAYER CAMERA ————— //
     g_view_matrix = glm::mat4(1.0f);
     
-    if (g_current_scene->g_game_state.player->get_position().x > LEVEL1_LEFT_EDGE) {
-        g_view_matrix = glm::translate(g_view_matrix, glm::vec3(-g_current_scene->g_game_state.player->get_position().x, 3.75, 0));
+    if (g_current_scene->get_state().player->get_position().x > LEVEL1_LEFT_EDGE) {
+        g_view_matrix = glm::translate(g_view_matrix, glm::vec3(-g_current_scene->get_state().player->get_position().x, 3.75, 0));
     } else {
         g_view_matrix = glm::translate(g_view_matrix, glm::vec3(-5, 3.75, 0));
     }

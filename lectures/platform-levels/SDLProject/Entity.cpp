@@ -95,6 +95,8 @@ Entity::Entity(GLuint texture_id, float speed,  float width, float height, Entit
     for (int i = 0; i < SECONDS_PER_FRAME; ++i)
         for (int j = 0; j < SECONDS_PER_FRAME; ++j) m_walking[i][j] = 0;
 }
+
+
 Entity::Entity(GLuint texture_id, float speed, float width, float height, EntityType EntityType, AIType AIType, AIState AIState): m_position(0.0f), m_movement(0.0f), m_scale(1.0f, 1.0f, 0.0f), m_model_matrix(1.0f),
 m_speed(speed), m_animation_cols(0), m_animation_frames(0), m_animation_index(0),
 m_animation_rows(0), m_animation_indices(nullptr), m_animation_time(0.0f),

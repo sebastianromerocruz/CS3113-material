@@ -1,7 +1,7 @@
 #include "Map.h"
 
-Map::Map(int width, int height, unsigned int *level_data, GLuint texture_id, float tile_size, int tile_count_x, int tile_count_y) : 
-m_width(width), m_height(height), m_level_data(level_data), m_texture_id(texture_id), m_tile_size(tile_size), m_tile_count_x(tile_count_x), m_tile_count_y(tile_count_y)
+Map::Map(int width, int height, unsigned int *level_data, GLuint texture_id, float tile_size, int tile_count_x, int tile_count_y) : m_width(width), m_height(height),
+    m_level_data(level_data), m_texture_id(texture_id), m_tile_size(tile_size), m_tile_count_x(tile_count_x), m_tile_count_y(tile_count_y)
 {
     build();
 }
@@ -19,7 +19,7 @@ void Map::build()
             // If the tile number is 0 i.e. not solid, skip to the next one
             if (tile == 0) continue;
             
-            // Otherwise, calculate its UV-coordinated
+            // Otherwise, calculate its UV-coordinates
             float u_coord = (float) (tile % m_tile_count_x) / (float) m_tile_count_x;
             float v_coord = (float) (tile / m_tile_count_x) / (float) m_tile_count_y;
             
@@ -83,7 +83,7 @@ bool Map::is_solid(glm::vec3 position, float *penetration_x, float *penetration_
     // The reason why these are pointers is because we want to reassign values
     // to them in case that we are colliding. That way the object that originally
     // passed them as values will keep track of these distances
-    // inb4: we're passing by reference
+    // tldr: we're passing by reference
     *penetration_x = 0;
     *penetration_y = 0;
     

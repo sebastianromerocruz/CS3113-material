@@ -104,6 +104,7 @@ public:
     EntityType const get_entity_type()    const { return m_entity_type;   };
     AIType     const get_ai_type()        const { return m_ai_type;       };
     AIState    const get_ai_state()       const { return m_ai_state;      };
+    float const get_jumping_power() const { return m_jumping_power; }
     glm::vec3 const get_position()     const { return m_position; }
     glm::vec3 const get_velocity()     const { return m_velocity; }
     glm::vec3 const get_acceleration() const { return m_acceleration; }

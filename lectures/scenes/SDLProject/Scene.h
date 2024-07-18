@@ -35,11 +35,12 @@ struct GameState
 };
 
 class Scene {
+protected:
+    GameState m_game_state;
+    
 public:
     // ————— ATTRIBUTES ————— //
     int m_number_of_enemies = 1;
-    
-    GameState m_game_state;
     
     // ————— METHODS ————— //
     virtual void initialise() = 0;

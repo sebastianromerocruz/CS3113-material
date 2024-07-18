@@ -39,8 +39,8 @@ struct GameState
 enum AppStatus { RUNNING, TERMINATED };
 
 // ————— CONSTANTS ————— //
-constexpr int WINDOW_WIDTH  = 640,
-          WINDOW_HEIGHT = 480;
+constexpr int WINDOW_WIDTH  = 640 * 2,
+          WINDOW_HEIGHT = 480 * 2;
 
 constexpr float BG_RED     = 0.1922f,
             BG_BLUE    = 0.549f,
@@ -70,7 +70,7 @@ constexpr GLint TEXTURE_BORDER   = 0;
 
 unsigned int LEVEL_1_DATA[] =
 {
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0,
     1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1,
     2, 2, 1, 1, 0, 0, 1, 1, 1, 2, 2, 2, 2, 2,
@@ -168,35 +168,33 @@ void initialise()
 
     int player_walking_animation[4][4] =
     {
-    { 1, 5, 9, 13 },  // for George to move to the left,
-    { 3, 7, 11, 15 }, // for George to move to the right,
-    { 2, 6, 10, 14 }, // for George to move upwards,
-    { 0, 4, 8, 12 }   // for George to move downwards
+        { 1, 5, 9, 13 },  // for George to move to the left,
+        { 3, 7, 11, 15 }, // for George to move to the right,
+        { 2, 6, 10, 14 }, // for George to move upwards,
+        { 0, 4, 8, 12 }   // for George to move downwards
     };
 
     glm::vec3 acceleration = glm::vec3(0.0f,-4.905f, 0.0f);
 
     g_game_state.player = new Entity(
-    player_texture_id,         // texture id
-    5.0f,                      // speed
-    acceleration,              // acceleration
-    3.0f,                      // jumping power
-    player_walking_animation,  // animation index sets
-    0.0f,                      // animation time
-    4,                         // animation frame amount
-    0,                         // current animation index
-    4,                         // animation column amount
-    4,                         // animation row amount
-    0.9f,                      // width
-    0.9f,                       // height
-    PLAYER
+        player_texture_id,         // texture id
+        5.0f,                      // speed
+        acceleration,              // acceleration
+        3.0f,                      // jumping power
+        player_walking_animation,  // animation index sets
+        0.0f,                      // animation time
+        4,                         // animation frame amount
+        0,                         // current animation index
+        4,                         // animation column amount
+        4,                         // animation row amount
+        0.9f,                      // width
+        0.9f,                       // height
+        PLAYER
     );
 
 
     // Jumping
     g_game_state.player->set_jumping_power(5.0f);
-
-    
 
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096);
     
@@ -274,7 +272,8 @@ void update()
     
     while (delta_time >= FIXED_TIMESTEP)
     {
-        g_game_state.player->update(FIXED_TIMESTEP, g_game_state.player, NULL, 0, g_game_state.map);
+        g_game_state.player->update(FIXED_TIMESTEP, g_game_state.player, NULL, 0, 
+                                    g_game_state.map);
         delta_time -= FIXED_TIMESTEP;
     }
     

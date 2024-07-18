@@ -13,7 +13,8 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "ShaderProgram.h"
 
-class Map {
+class Map 
+{
 private:
     int m_width;
     int m_height;
@@ -36,8 +37,8 @@ private:
     
 public:
     // Constructor
-    Map(int width, int height, unsigned int *level_data, GLuint texture_id, float tile_size, int
-    tile_count_x, int tile_count_y);
+    Map(int width, int height, unsigned int *level_data, GLuint texture_id, 
+        float tile_size, int tile_count_x, int tile_count_y);
     
     // Methods
     void build();
