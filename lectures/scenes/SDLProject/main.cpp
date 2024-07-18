@@ -84,7 +84,6 @@ void initialise()
     SDL_GL_MakeCurrent(g_display_window, context);
     if (context == nullptr)
     {
-        
         shutdown();
     }
     

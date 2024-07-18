@@ -5,7 +5,7 @@ public:
     // ————— STATIC ATTRIBUTES ————— //
     int ENEMY_COUNT = 1;
     
-    // ————— CONSTRUCTOR ————— //
+    // ————— DESTRUCTOR ————— //
     ~LevelA();
     
     // ————— METHODS ————— //
