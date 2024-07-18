@@ -22,17 +22,17 @@ unsigned int LEVEL_DATA[] =
 
 LevelA::~LevelA()
 {
-    delete [] g_game_state.enemies;
-    delete    g_game_state.player;
-    delete    g_game_state.map;
-    Mix_FreeChunk(g_game_state.jump_sfx);
-    Mix_FreeMusic(g_game_state.bgm);
+    delete [] m_game_state.enemies;
+    delete    m_game_state.player;
+    delete    m_game_state.map;
+    Mix_FreeChunk(m_game_state.jump_sfx);
+    Mix_FreeMusic(m_game_state.bgm);
 }
 
 void LevelA::initialise()
 {
     GLuint map_texture_id = Utility::load_texture("assets/tileset.png");
-    g_game_state.map = new Map(LEVEL_WIDTH, LEVEL_HEIGHT, LEVEL_DATA, map_texture_id, 1.0f, 4, 1);
+    m_game_state.map = new Map(LEVEL_WIDTH, LEVEL_HEIGHT, LEVEL_DATA, map_texture_id, 1.0f, 4, 1);
     
     GLuint player_texture_id = Utility::load_texture(SPRITESHEET_FILEPATH);
 
@@ -46,7 +46,7 @@ void LevelA::initialise()
 
     glm::vec3 acceleration = glm::vec3(0.0f,-4.905f, 0.0f);
 
-    g_game_state.player = new Entity(
+    m_game_state.player = new Entity(
     player_texture_id,         // texture id
     5.0f,                      // speed
     acceleration,              // acceleration
@@ -61,54 +61,54 @@ void LevelA::initialise()
     0.9f,                       // height
     PLAYER
     );
-    g_game_state.player->set_position(glm::vec3(5.0f, 0.0f, 0.0f));
+    m_game_state.player->set_position(glm::vec3(5.0f, 0.0f, 0.0f));
 
     // Jumping
-    g_game_state.player->set_jumping_power(3.0f);
+    m_game_state.player->set_jumping_power(3.0f);
     
     /**
      Enemies' stuff */
     GLuint enemy_texture_id = Utility::load_texture(ENEMY_FILEPATH);
 
-    g_game_state.enemies = new Entity[ENEMY_COUNT];
+    m_game_state.enemies = new Entity[ENEMY_COUNT];
 
     for (int i = 0; i < ENEMY_COUNT; i++)
     {
-    g_game_state.enemies[i] =  Entity(enemy_texture_id, 1.0f, 1.0f, 1.0f, ENEMY, GUARD, IDLE);
+    m_game_state.enemies[i] =  Entity(enemy_texture_id, 1.0f, 1.0f, 1.0f, ENEMY, GUARD, IDLE);
     }
 
 
-    g_game_state.enemies[0].set_position(glm::vec3(8.0f, 0.0f, 0.0f));
-    g_game_state.enemies[0].set_movement(glm::vec3(0.0f));
-    g_game_state.enemies[0].set_acceleration(glm::vec3(0.0f, -9.81f, 0.0f));
+    m_game_state.enemies[0].set_position(glm::vec3(8.0f, 0.0f, 0.0f));
+    m_game_state.enemies[0].set_movement(glm::vec3(0.0f));
+    m_game_state.enemies[0].set_acceleration(glm::vec3(0.0f, -9.81f, 0.0f));
 
     /**
      BGM and SFX
      */
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096);
     
-    g_game_state.bgm = Mix_LoadMUS("assets/dooblydoo.mp3");
-    Mix_PlayMusic(g_game_state.bgm, -1);
+    m_game_state.bgm = Mix_LoadMUS("assets/dooblydoo.mp3");
+    Mix_PlayMusic(m_game_state.bgm, -1);
     Mix_VolumeMusic(0.0f);
     
-    g_game_state.jump_sfx = Mix_LoadWAV("assets/bounce.wav");
+    m_game_state.jump_sfx = Mix_LoadWAV("assets/bounce.wav");
 }
 
 void LevelA::update(float delta_time)
 {
-    g_game_state.player->update(delta_time, g_game_state.player, g_game_state.enemies, ENEMY_COUNT, g_game_state.map);
+    m_game_state.player->update(delta_time, m_game_state.player, m_game_state.enemies, ENEMY_COUNT, m_game_state.map);
     
     for (int i = 0; i < ENEMY_COUNT; i++)
     {
-        g_game_state.enemies[i].update(delta_time, g_game_state.player, NULL, NULL, g_game_state.map);
+        m_game_state.enemies[i].update(delta_time, m_game_state.player, NULL, NULL, m_game_state.map);
     }
 }
 
 
 void LevelA::render(ShaderProgram *g_shader_program)
 {
-    g_game_state.map->render(g_shader_program);
-    g_game_state.player->render(g_shader_program);
+    m_game_state.map->render(g_shader_program);
+    m_game_state.player->render(g_shader_program);
     for (int i = 0; i < m_number_of_enemies; i++)
-            g_game_state.enemies[i].render(g_shader_program);
+            m_game_state.enemies[i].render(g_shader_program);
 }

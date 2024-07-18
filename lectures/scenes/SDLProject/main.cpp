@@ -25,23 +25,23 @@
 #include "LevelA.h"
 
 // ————— CONSTANTS ————— //
-const int WINDOW_WIDTH  = 640,
+constexpr int WINDOW_WIDTH  = 640,
           WINDOW_HEIGHT = 480;
 
-const float BG_RED     = 0.1922f,
+constexpr float BG_RED     = 0.1922f,
             BG_BLUE    = 0.549f,
             BG_GREEN   = 0.9059f,
             BG_OPACITY = 1.0f;
 
-const int VIEWPORT_X = 0,
+constexpr int VIEWPORT_X = 0,
           VIEWPORT_Y = 0,
           VIEWPORT_WIDTH  = WINDOW_WIDTH,
           VIEWPORT_HEIGHT = WINDOW_HEIGHT;
 
-const char V_SHADER_PATH[] = "shaders/vertex_textured.glsl",
+constexpr char V_SHADER_PATH[] = "shaders/vertex_textured.glsl",
            F_SHADER_PATH[] = "shaders/fragment_textured.glsl";
 
-const float MILLISECONDS_IN_SECOND = 1000.0;
+constexpr float MILLISECONDS_IN_SECOND = 1000.0;
 
 enum AppStatus { RUNNING, TERMINATED };
 
