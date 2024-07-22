@@ -4,7 +4,7 @@
 
 <h3 align=center>23 Blue Sea Moon, Imperial Year CCXXIV</h3>
 
-***Song of the day***: _[**Canção Que Morre No Ar**](https://youtu.be/G_Dw4Pie32E) by Gal Costa (1974)_
+***Song of the day***: _[**Hadsel**](https://youtu.be/5qf9WygDTBs?si=rABa0w1y3C8_oiKC) by Beirut (2023)_
 
 ---
 
