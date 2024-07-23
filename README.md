@@ -52,10 +52,10 @@
 8. **Week 8**: Map and stage building
     1. [**Tilesets and Tilemaps**](lectures/platform-levels/)
     2. [**Scenes**](lectures/scenes/)
-<!-- 9. **Weeks 9 and 10**: Special effects
+9. **Weeks 9 and 10**: Special effects
     1. [**Effects**](lectures/fx/)
-    2. [**Shaders**](lectures/shaders/)
-11. **Week 11**: [**Playtesting and publishing your game**](lectures/playtesting/) -->
+    <!-- 2. [**Shaders**](lectures/shaders/)
+<!--11. **Week 11**: [**Playtesting and publishing your game**](lectures/playtesting/) -->
 <!-- 12. **Week 12**: NES game development and playtesting your final projects -->
 <!-- 13. **Week 13**: Presenting your final projects -->
 

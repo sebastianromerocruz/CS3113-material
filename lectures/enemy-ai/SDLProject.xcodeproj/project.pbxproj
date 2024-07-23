@@ -26,8 +26,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
-				844DC28E286650FA0099B183 /* assets in CopyFiles */,
 				DBDF1B612323DE9E007CECB1 /* shaders in CopyFiles */,
+				844DC28E286650FA0099B183 /* assets in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
