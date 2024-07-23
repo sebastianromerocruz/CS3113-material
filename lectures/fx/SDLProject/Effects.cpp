@@ -41,7 +41,7 @@ void Effects::start(EffectType effect_type, float effect_speed)
         case FADEOUT: m_alpha     = 0.0f;  break;
         case GROW:    m_size      = 0.0f;  break;
         case SHRINK:  m_size      = 10.0f; break;
-        case SHAKE:   m_time_left = 1.0f;  break;
+        // case SHAKE:   m_time_left = 1.0f;  break;
     }
 }
 
@@ -73,19 +73,19 @@ void Effects::update(float delta_time)
            break;
            
        case SHAKE:
-           m_time_left -= delta_time * m_effect_speed;
-           if (m_time_left <= 0.0f)
-           {
-               m_view_offset = glm::vec3(0.0f, 0.0f, 0.0f);
-               m_current_effect = NONE;
-           } else
-           {
-               float min = -0.1f;
-               float max =  0.0f;
-               float offset_value = ((float) rand() / RAND_MAX) * (max - min) + min;
+        //    m_time_left -= delta_time * m_effect_speed;
+        //    if (m_time_left <= 0.0f)
+        //    {
+        //        m_view_offset = glm::vec3(0.0f, 0.0f, 0.0f);
+        //        m_current_effect = NONE;
+        //    } else
+        //    {
+        //        float min = -0.1f;
+        //        float max =  0.0f;
+        //        float offset_value = ((float) rand() / RAND_MAX) * (max - min) + min;
                
-               m_view_offset = glm::vec3(offset_value, offset_value, 0.0f);
-           }
+        //        m_view_offset = glm::vec3(offset_value, offset_value, 0.0f);
+        //    }
    }
 }
 

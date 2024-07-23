@@ -17,6 +17,8 @@
     3. [**Growing and Shrinking**](#growing-and-shrinking)
     4. [**Shaking**](#shaking)
 
+---
+
 ### Part 1: _Multiple Levels_
 
 We left off last time with a level system for our games. The next step is to be able to create and switch between these levels. For this, I will prove the concept by making an almost identical version of `LevelA`, called `LevelB`, and switch between the two of them. You can find the code to the `LevelB` class [**here**](SDLProject/LevelB.h) and [**here**](SDLProject/LevelB.cpp), but really they only differ in their level data.
@@ -93,11 +95,15 @@ The result is something like the following:
 
 <sub>**Figure 1**: George falling from Level A to Level B.</sub>
 
+---
+
 ### Part 2: _Effects_
 
 We should be proud of ourselves; we have reached a point where we're going to focus on the polish of our games instead of working on the actual mechanics. The first thing we should think about is adding some special effects, such as transitions and shaking.
 
 How does this work? For transitions such as fade-ins and -outs, the trick is to create a black square that covers the entire screen. For fade-ins, we want to make this black square go from completely solid to completely invisible. We do this by manipulating the [**alpha-channel**](https://en.wikipedia.org/wiki/Alpha_compositing). We'll thus keep track of this value and change it accordingly.
+
+---
 
 #### Setup
 
@@ -143,15 +149,12 @@ public:
 ```c++
 #include "Effects.h"
 
-Effects::Effects(glm::mat4 projection_matrix, glm::mat4 view_matrix)
+Effects::Effects(glm::mat4 projection_matrix, glm::mat4 view_matrix) : m_current_effect(NONE), m_alpha(1.0f), m_effect_speed(1.0f), m_size(10.0f), m_view_offset(glm::vec3(0.0f))
 {
     // Non textured Shader
     m_shader_program.load("shaders/vertex.glsl", "shaders/fragment.glsl");
     m_shader_program.set_projection_matrix(projection_matrix);
     m_shader_program.set_view_matrix(view_matrix);
-    
-    m_current_effect = NONE;
-    m_alpha = 1.0f;
 }
 
 void Effects::draw_overlay()
@@ -211,6 +214,8 @@ void Effects::render()
 <sub>**Code Block 4**: A skeleton for our `Effects` class.</sub>
 
 As you can see, right now we don't have much beyond no effect `NONE` and `FADEIN`, though neither is really doing much. Let's change that.
+
+---
 
 #### Fade-In
 
@@ -353,6 +358,8 @@ void initialise()
 }
 ```
 
+---
+
 #### Fade-Out
 
 Fading out works basically in the exact same way, but with increasing the α-value. Keep in mind that we should not switch the effect back to `NONE` when we reach 1. Otherwise, the black screen will disappear:
@@ -418,7 +425,9 @@ The result:
 
 <sub>**Figure 3**: Fade-out transition effect.</sub>
 
-### Growing and Shrinking
+---
+
+#### Growing and Shrinking
 
 Having our overlay grow and shrink in and out of the screen works pretty much identical to the fading effects, except instead of changing `alpha`, we can change a `size` attribute:
 
@@ -499,9 +508,11 @@ Notice here that we had to modify the model matrix to reflect the size changes o
 
 <sub>**Figures 4 and 5**: Shrinking and Growing effects.</sub>
 
-### Shaking
+---
 
-Shame on you.
+#### Shaking
+
+<!-- Shame on you.
 
 A really cool effect that you can add to your game is a shaking effect to simulate the ground shaking. For this, we will have the view matrix shift rapidly for a second or two. So we need to keep track of both the time remaining and random directions that it will be shifting:
 
@@ -573,7 +584,7 @@ void update()
 }
 ```
 
-Result:
+Result: -->
 
 ![shake](assets/shake.gif)
 
