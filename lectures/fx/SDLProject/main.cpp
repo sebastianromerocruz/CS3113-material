@@ -216,7 +216,7 @@ void update()
     
     if (g_current_scene == g_levelA && g_current_scene->get_state().player->get_position().y < -10.0f) switch_to_scene(g_levelB);
     
-    g_view_matrix = glm::translate(g_view_matrix, g_effects->m_view_offset);
+    g_view_matrix = glm::translate(g_view_matrix, g_effects->get_view_offset());
 }
 
 void render()

@@ -25,13 +25,15 @@ private:
     float m_effect_speed;
     float m_size;
     float m_time_left;
-
-public:
     glm::vec3 m_view_offset;
+    
+public:
+    
     
     Effects(glm::mat4 projection_matrix, glm::mat4 view_matrix);
 
     void draw_overlay();
+    glm::vec3 get_view_offset() const { return m_view_offset;   };
     void start(EffectType effect_type, float effect_speed);
     void update(float delta_time);
     void render();

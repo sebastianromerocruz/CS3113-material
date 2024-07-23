@@ -1,18 +1,11 @@
 #include "Effects.h"
 
-Effects::Effects(glm::mat4 projection_matrix, glm::mat4 view_matrix)
+Effects::Effects(glm::mat4 projection_matrix, glm::mat4 view_matrix) :  m_current_effect(NONE), m_alpha(1.0f), m_effect_speed(1.0f), m_size(10.0f), m_view_offset(glm::vec3(0.0f))
 {
     // Non textured Shader
     m_shader_program.load("shaders/vertex.glsl", "shaders/fragment.glsl");
     m_shader_program.set_projection_matrix(projection_matrix);
     m_shader_program.set_view_matrix(view_matrix);
-    
-    m_current_effect = NONE;
-    m_alpha = 1.0f;
-    m_effect_speed = 1.0;
-    m_size = 10.0f;
-    
-    m_view_offset = glm::vec3(0.0f);
 }
 
 void Effects::draw_overlay()
