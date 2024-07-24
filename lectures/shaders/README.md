@@ -4,7 +4,7 @@
 
 <h3 align=center>25 Blue Sea Moon, Imperial Year CCXXIV</h3>
 
-***Song of the day***: _[**Where Was You At**](https://youtu.be/PSBWtq4evTw) by War (1972)._
+***Song of the day***: _[**O'share**](https://www.youtube.com/watch?v=p19i2P3-AE4) by Hedigan's (2024)._
 
 ---
 
