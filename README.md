@@ -32,7 +32,7 @@
 1. **Week 1**: The basics
     1.  [**Introduction**](lectures/introduction/)
     2.  [**Triangles**](lectures/triangle/)
-2. **Week 2**: Moving in video games
+<!-- 2. **Week 2**: Moving in video games
     1.  [**You're getting old, Matrix**](lectures/matrices/)
     2.  [**Transformations**](lectures/transformations/)
 3. **Week 3**: Applying art to our games
@@ -55,7 +55,7 @@
 9. **Weeks 9 and 10**: Special effects
     1. [**Effects**](lectures/fx/)
     2. [**Shaders**](lectures/shaders/)
-11. **Week 11**: [**Playtesting and publishing your game**](lectures/playtesting/)
+11. **Week 11**: [**Playtesting and publishing your game**](lectures/playtesting/) -->
 <!-- 12. **Week 12**: NES game development and playtesting your final projects -->
 <!-- 13. **Week 13**: Presenting your final projects -->
 
