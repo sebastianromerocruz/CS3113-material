@@ -11,7 +11,7 @@
 ### Sections
 
 1. [**Of Graphics and Hardware**](#part-1-of-graphics-and-hardware)
-2. [**Hello Triangle!**](#part-1-hello-triangle)
+2. [**Hello, Triangle!**](#part-1-hello-triangle)
 3. [**The game loop**](#part-2-the-game-loop)
 4. [**Initialising our triangle program**](#part-3-initialising-our-triangle-program)
  
@@ -85,6 +85,8 @@ LoopOverscan:
 
 So yeah, it's a good amount. The NES-era consoles were even more complicated. There, you not only had to deal with the scanlines, but also with moving sprites that acted independently to the background. I won't include the code here, but I did once give a lecture on how game development in assembly works, which you can find [**here**](https://github.com/sebastianromerocruz/game-programming-in-assembly/blob/main/LECTURE_NOTES.md). It's a lot of code for not much at all and, while it may be fun for some people, most modern game developers just want to get pixels on the screen with one or two lines of code.
 
+While this may seem far removed from today's game development, modern libraries like OpenGL take care of these low-level tasks for us, making it much easier to create high-quality graphics with minimal code.
+
 ---
 
 So where are we now, and how does OpenGL fit into all of this? As you may already know, nowadays we have dedicated graphic cards installed into our machines. For those who actually care for that kind of stuff, owning the right graphics card is what makes all the difference in their gaming experience. And that's actually where libraries like OpenGL come in. OpenGL interacts directly with your graphics card to create high fidelity graphics with much smaller overhead than, say, Unity or even Unreal. This is why gaming companies create their own in-house engines. At a certain point, tools built by somebody else stop being enough, and we want to have as fine control of our game as possible.
@@ -99,7 +101,7 @@ So how are complex 3D models built using libraries like OpenGL? The answer is si
 
 <sub>**Figure 3**: A [**model**](https://www.researchgate.net/figure/3D-mesh-triangles-with-different-resolution-3D-Modelling-for-programmers-Available-at_fig2_322096576) of a bunny at different resolutions.</sub>
 
-I think, thus, that it's only fair that we start our OpenGL journey by making a super cool triangle. We'll start by importing all the stuff that we need from OpenGL. Some of it will look familiar from last time, but we have a couple of new things thrown in there:
+I think, thus, that it's only fair that we start our OpenGL journey by making a super cool triangle. We'll start by importing all the stuff that we need from OpenGL. Some of it will look familiar from last time, but we have a couple of new things thrown in there. Let's start by importing all the libraries and tools we'll need for our OpenGL project:
 
 ```c++
 // The old stuff
@@ -123,14 +125,14 @@ I think, thus, that it's only fair that we start our OpenGL journey by making a 
 
 It looks like we need a lot in order to just draw a triangle. Certainly, if you are coming from Python and are familiar with the [**`turtle`**](https://docs.python.org/3/library/turtle.html) module, it _is_ a lot more. But it will help us appreciate how much thought goes into making games as we go along the course.
 
-Let's look at some of the constants that we will need for our triangle:
+Next, we define some key constants, such as the dimensions of our window and the colors we'll use for both the background and the triangle:
 
 ```c++
 // Our window dimensions
 constexpr int WINDOW_WIDTH  = 640,
               WINDOW_HEIGHT = 480;
 
-// Background color components
+// Background colour components
 constexpr float BG_RED     = 0.1922f,
                 BG_BLUE    = 0.549f,
                 BG_GREEN   = 0.9059f,
@@ -174,6 +176,8 @@ glm::mat4 g_projection_matrix;  // Defines the characteristics of your camera, s
 
 <sub>**Code Block 4**: The variables that we will need for our program.</sub>
 
+Think of the view matrix as the position of the camera, the model matrix as the position of your object in the world, and the projection matrix as how the camera 'sees'—whether it's through a wide-angle lens (orthographic) or a regular one (perspective).
+
 <br>
 
 ### Part 2: _The Game Loop_
@@ -211,6 +215,8 @@ int main(int argc, char* argv[])
 ```
 
 <sub>**Code Block 5**: Your average game driver code. All of our programs will more or less follow this structure.</sub>
+
+As you can see, this basic game loop handles input processing, updating the game state, rendering, and finally shutting down the game when it's over.
 
 Some of these functions are simple at this point. Since the user won't be doing anything besides ending the game (and thus, there won't be any updates to the state of our game), `process_input()`, `update()`, and `shutdown()` are basically the same as last class:
 
@@ -287,7 +293,7 @@ void initialise()
     
     g_shader_program.set_projection_matrix(g_projection_matrix);
     g_shader_program.set_view_matrix(g_view_matrix);
-    // Notice we haven't set our model matrix yet!
+    // You'll notice we haven't set our model matrix yet. We'll do this later, just before rendering.
     
     g_shader_program.set_colour(TRIANGLE_RED, TRIANGLE_BLUE, TRIANGLE_GREEN, TRIANGLE_OPACITY);
     
@@ -306,7 +312,7 @@ In order, what we have done is:
     1. Load our vertex and fragment shaders
     2. Initialise our view, projection, and model matrices, and load the first two onto our program
     3. Set our model's (triangle's) colour
-    4. Tell OpenGL to use it by passing in its ID
+    4.Tell OpenGL to activate our shader program so that the GPU will use it to draw any subsequent shapes.
 4. Setting the clear colour
 
 <br>
@@ -344,7 +350,7 @@ void render() {
 In order:
 
 1. Clear the colour to our aforementioned initialisation settings
-2. _Now_ we set our model matrix. The reason why we do this hear becomes clear if we think about what the model matrix does: it "defines every translation, rotation, and/or scaling applied to an object". This is essentially every environmental/physical change done onto an object _every frame_. For instance, if you kick a ball in-game, its change in location (translation) is applied _every frame_, not just in its initialisation.
+2. _Now_ we set our model matrix. The reason why we do this here becomes clear if we think about what the model matrix does: it "defines every translation, rotation, and/or scaling applied to an object". This is essentially every environmental/physical change done onto an object _every frame_. For instance, if you kick a ball in-game, its change in location (translation) is applied _every frame_, not just in its initialisation.
 3. Set up the triangle vertices and draw them using the following 4 commands.
 4. Swap window basically means that whatever changes were rendered from the previous frame, swap them into the current frame.
 
