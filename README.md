@@ -66,7 +66,7 @@
 21. [**3D Levels: Floors, Movement, and Collisions**](lectures/3d-levels/SDLProject/)
 22. [**Billboards**](lectures/billboards/SDLProject/) -->
 
-<sub>To be released every lecture day before class.</sub>
+<sub>Released on each lecture day before class.</sub>
 
 <br>
 
@@ -120,18 +120,21 @@ You will also need a [**Github**](https://github.com/) account!
 
 | **Item**                                                                | **Percentage** |
 |-------------------------------------------------------------------------|----------------|
-| **_Project 1_**: [**Draw a Simple 2D Scene**](assignments/project_1.md) | 10%            |
-| **_Project 2_**: [**Pong**](assignments/project_2.md)                   | 10%            |
+| **_Project 1_**: [**Draw a Simple 2D Scene**]() | 10%            |
+| **_Project 2_**: [**Pong**]()                   | 10%            |
 | **_Project 3_**: [**Lunar Lander**]()           | 15%            |
 | **_Project 4_**: [**Rise of the AI**]()         | 15%            |
 | **_Project 5_**: [**Platformer**]()             | 15%            |
 | **_Project 6_**: [**Students' Choice**]()       | 25%            |
-| **_Extra Credit_**                                                      | 05%            |
-| **_Participation_**                                                     | 05%            |
+| **_Classwork_**                                 | 10%            |
 
-Every assignment will have an "extra credit" portion. This will count for **5% to your final grade** at the end of the semester if you complete the extra credit portion of **at least 3 of the projects**. While 5% may not seem like a lot, it can mean the difference between two letter grades. This can be especially helpful later in the semester, when the projects get more long and complex.
+- Every assignment will have an "extra credit" portion. This will **add 5% to your final grade** at the end of the semester if you complete the extra credit portion of **at least 3 of the projects**. While 5% may not seem like a lot, it can mean the difference between two letter grades. This can be especially helpful later in the semester, when the projects become longer and more complex.
 
-When I say "participation" I do not mean that I will literally be keeping track of how much you speak in class. It's basically an indication of how much I get to know you throughout the semester. 
+- Classwork is based on 5-6 group assignments to be completed, as the name implies, during class. In order to get credit for these, you will need to:
+    1. Be there.
+    2. Complete the assignment with your team _before_ the end of class.
+    3. Complete the assignment using only structures learned in class.
+    4. Ensure that at least one person in your team shows the finished solution to the professor.
 
 As for your final letter grade, the following scale will be used:
 
@@ -147,7 +150,6 @@ As for your final letter grade, the following scale will be used:
     - Due by 11:59pm means your project was successfully uploaded _by that time_. This means that the version to be graded must be uploaded in both Brightspace and GitHub at that time.
     - Start uploading your project at least an hour before the deadline.
     - Projects received **1 minute late** are considered to be **a day** late.
-    - The first project is due on the Friday of week 3.
 
 - If there are any issues with uploading your project, you must email me **before the due date**.
     - While I check email regularly, do not expect a response over the weekend or close to deadlines.
@@ -156,6 +158,19 @@ As for your final letter grade, the following scale will be used:
 
 All work is to be done on your own. There are no group projects.
 **There is no additional extra credit** in this course and the grades are **not curved**.
+
+#### Project Schedule
+
+| Project             | Release Date | Due Date   |
+|---------------------|--------------|------------|
+| **Simple Scene**        | 09/20        | 09/28      |
+| **Pong**                | 09/27        | 10/12      |
+| **Lunar Lander**        | 10/11        | 10/26      |
+| **Rise of the AI**      | 10/25        | 11/09      |
+| **Platformer**          | 11/08        | 11/23      |
+| **Students' Choice**    | 11/22        | TBD        |
+
+**Note**: Because the final day of class lands on a Thursday this semester (for some inexplicable reason), the deadline for the final project will be determined later in the semester. We'll try to accommodate everyone as much as possible.
 
 <br>
 

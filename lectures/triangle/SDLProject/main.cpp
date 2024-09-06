@@ -1,6 +1,6 @@
 /**
  * @file main.cpp
- * @author your name (you@domain.com)
+ * @author Sebastián Romero Cruz (src402@nyu.edu)
  * @brief A simple program that creates a window with OpenGL context and 
  * renders a colored triangle. This program demonstrates basic usage of SDL to
  * create a window, create an OpenGL context, and render a simple colored 
@@ -23,6 +23,8 @@
 #include "glm/mat4x4.hpp"                // 4x4 Matrix
 #include "glm/gtc/matrix_transform.hpp"  // Matrix transformation methods
 #include "ShaderProgram.h"               // We'll talk about these later in the course
+
+enum AppStatus { RUNNING, TERMINATED };
 
 // Our window dimensions
 constexpr int WINDOW_WIDTH  = 640,
@@ -52,7 +54,7 @@ constexpr float TRIANGLE_RED     = 1.0,
                 TRIANGLE_GREEN   = 0.4,
                 TRIANGLE_OPACITY = 1.0;
 
-bool g_game_is_running = true;
+AppStatus g_app_status = RUNNING;
 SDL_Window* g_display_window;
 
 ShaderProgram g_shader_program;
@@ -72,7 +74,7 @@ void initialise()
     if (g_display_window == nullptr)
     {
         std::cerr << "ERROR: SDL Window could not be created.\n";
-        g_game_is_running = false;
+        g_app_status = TERMINATED;
         
         SDL_Quit();
         exit(1);
@@ -115,7 +117,7 @@ void process_input()
     {
         if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE)
         {
-            g_game_is_running = false;
+            g_app_status = TERMINATED;
         }
     }
 }
@@ -152,7 +154,7 @@ int main()
     // Initialise our program—whatever that means
     initialise();
     
-    while (g_game_is_running)
+    while (g_app_status == RUNNING)
     {
         process_input();  // If the player did anything—press a button, move the joystick—process it
         update();         // Using the game's previous state, and whatever new input we have, update the game's state

@@ -2,9 +2,9 @@
 
 <h1 align=center>Introduction</h1>
 
-<h3 align=center>5 Horsebow Moon, Imperial Year MMXXIV</h3>
+<h3 align=center>6 Horsebow Moon, Imperial Year MMXXIV</h3>
 
-***Song of the day***: _[**hello world**](https://youtu.be/Yw6u6YkTgQ4?si=NGBNmCfGvZAJBLrn) by Louie Zong._
+***Song of the day***: _[**in the pocket**](https://youtu.be/ZGvDTx2rf80?si=JmhnDP5G26c7gVN1) by Mr.Children (2024)._
 
 ---
 
