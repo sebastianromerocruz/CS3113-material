@@ -4,7 +4,7 @@
 
 <h3 align=center>13 Harpstring Moon, Imperial Year CCXXIV</h3>
 
-***Song of the day***: _[**Flavien Berger**](https://www.youtube.com/watch?v=Iyzv632Vyho) by  La Fête Noire(2018).
+***Song of the day***: _[**La Fête Noire**](https://www.youtube.com/watch?v=Iyzv632Vyho) by Flavien Berger (2018).
 
 ---
 
