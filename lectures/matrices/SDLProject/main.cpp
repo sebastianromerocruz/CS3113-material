@@ -192,7 +192,7 @@ void render() {
 void shutdown() { SDL_Quit(); }
 
 
-int main()
+int main(int argc, char* argv[])
 {
     initialise();
 

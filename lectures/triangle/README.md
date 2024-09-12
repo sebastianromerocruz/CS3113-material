@@ -1,4 +1,4 @@
-<h2 align=center>Week 01: <em>Day 2</em></h2>
+<h2 align=center>Week 01</h2>
 
 <h1 align=center>Triangles</h1>
 

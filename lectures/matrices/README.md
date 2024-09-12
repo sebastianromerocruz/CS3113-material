@@ -1,8 +1,8 @@
-<h2 align=center>Week 02: <em>Day 1</em></h2>
+<h2 align=center>Week 02</h2>
 
 <h1 align=center>You're getting old, Matrix</h1>
 
-<h3 align=center>12 Horsebow Moon, Imperial Year MMXXIV</h3>
+<h3 align=center>13 Horsebow Moon, Imperial Year MMXXIV</h3>
 
 ***Song of the day***: _[**Flavien Berger**](https://www.youtube.com/watch?v=Iyzv632Vyho) by  La Fête Noire(2018)._
 

@@ -52,6 +52,10 @@ constexpr int   G_MAX_FRAME     = 40;
 constexpr float G_ROT_ANGLE  = glm::radians(1.5f);
 constexpr float G_TRAN_VALUE = 0.025f;
 
+constexpr float BASE_SCALE = 1.0f,      // The unscaled size of your object
+                MAX_AMPLITUDE = 0.01f,  // The most our triangle will be scaled up/down
+                PULSE_SPEED = 10.0f;    // How fast you want your triangle to "beat"
+
 AppStatus g_app_status = RUNNING;
 
 SDL_Window* g_display_window;
@@ -146,6 +150,9 @@ void update()
                                    1.0f
                                    );
     
+//    float scale_factor = BASE_SCALE + MAX_AMPLITUDE * glm::cos(g_frame_counter / PULSE_SPEED);
+//    glm::vec3 scale_factors = glm::vec3(scale_factor, scale_factor, 0.0f);
+    
     // STEP 4: Our transformations
     g_model_matrix = glm::translate(g_model_matrix, translation_vector);
     g_model_matrix = glm::rotate(g_model_matrix, G_ROT_ANGLE, rotation_triggers);
@@ -177,7 +184,7 @@ void render() {
 void shutdown() { SDL_Quit(); }
 
 
-int main()
+int main(int argc, char* argv[])
 {
     initialise();
     

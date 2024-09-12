@@ -1,8 +1,8 @@
-<h2 align=center>Week 02: <em>Day 2</em></h2>
+<h2 align=center>Week 02</h2>
 
 <h1 align=center>Transformations</h1>
 
-<h3 align=center>12 Harpstring Moon, Imperial Year CCXXIV</h3>
+<h3 align=center>13 Harpstring Moon, Imperial Year CCXXIV</h3>
 
 ***Song of the day***: _[**Flavien Berger**](https://www.youtube.com/watch?v=Iyzv632Vyho) by  La Fête Noire(2018).
 
