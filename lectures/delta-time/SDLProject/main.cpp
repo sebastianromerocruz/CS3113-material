@@ -69,43 +69,43 @@ void initialise()
                                         SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                                         WINDOW_WIDTH, WINDOW_HEIGHT,
                                         SDL_WINDOW_OPENGL);
-    
+
     SDL_GLContext context = SDL_GL_CreateContext(g_display_window);
     SDL_GL_MakeCurrent(g_display_window, context);
-    
+
     if (g_display_window == nullptr)
     {
         std::cerr << "Error: SDL window could not be created.\n";
         SDL_Quit();
         exit(1);
-        
+
     }
-    
+
 #ifdef _WINDOWS
     glewInit();
 #endif
-    
+
     glViewport(VIEWPORT_X, VIEWPORT_Y, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
-    
+
     g_shader_program.load(V_SHADER_PATH, F_SHADER_PATH);
-    
+
     g_view_matrix       = glm::mat4(1.0f);
     g_model_matrix      = glm::mat4(1.0f);
     g_projection_matrix = glm::ortho(-5.0f,  5.0f,   // x
                                      -3.75f, 3.75f,  // y
                                      -1.0f,  1.0f);  // z
-    
+
     g_shader_program.set_projection_matrix(g_projection_matrix);
     g_shader_program.set_view_matrix(g_view_matrix);
-    
-    g_shader_program.set_colour(TRIANGLE_RED, 
+
+    g_shader_program.set_colour(TRIANGLE_RED,
                                 TRIANGLE_GREEN,
                                 TRIANGLE_BLUE,
                                 TRIANGLE_OPACITY);
-    
+
     glUseProgram(g_shader_program.get_program_id());
-    
-    glClearColor(BG_RED, 
+
+    glClearColor(BG_RED,
                  BG_GREEN,
                  BG_BLUE,
                  BG_OPACITY);
@@ -134,9 +134,10 @@ void update()
     /* Update Your Logic*/
     g_triangle_x += 1.0f * delta_time;
     g_triangle_rotate += DEGREES_PER_SECOND * delta_time; // 90-degrees per second
-    
+
     /* Reset the Model Matrix */
     g_model_matrix = glm::mat4(1.0f);
+
 
     /* Translate -> Rotate */
     g_model_matrix = glm::translate(g_model_matrix, glm::vec3(g_triangle_x, 0.0f, 0.0f));
@@ -145,22 +146,22 @@ void update()
 
 void render() {
     glClear(GL_COLOR_BUFFER_BIT);
-    
+
     g_shader_program.set_model_matrix(g_model_matrix);
-    
+
     float vertices[] =
     {
          0.5f, -0.5f,
          0.0f,  0.5f,
         -0.5f, -0.5f
     };
-    
-    glVertexAttribPointer(g_shader_program.get_position_attribute(), 
+
+    glVertexAttribPointer(g_shader_program.get_position_attribute(),
                           2, GL_FLOAT, false, 0, vertices);
     glEnableVertexAttribArray(g_shader_program.get_position_attribute());
     glDrawArrays(GL_TRIANGLES, 0, 3);
     glDisableVertexAttribArray(g_shader_program.get_position_attribute());
-    
+
     SDL_GL_SwapWindow(g_display_window);
 }
 
@@ -168,17 +169,17 @@ void render() {
 void shutdown() { SDL_Quit(); }
 
 
-int main(int argc, char* argv[])
+int main()
 {
     initialise();
-    
+
     while (g_app_status == RUNNING)
     {
         process_input();
         update();
         render();
     }
-    
+
     shutdown();
     return 0;
 }

@@ -1,4 +1,4 @@
-<!-- <h2 align=center>Week 03</h2>
+<h2 align=center>Week 03</h2>
 
 <h1 align=center>Exercise: <em>Transformations</em></h1>
 
@@ -33,4 +33,4 @@ The triangle's movement has to satisfy the following:
 
 If you want a hint, you could take a look at [**this**](https://crystalclearmaths.com/wp-content/uploads/2015/11/Unit-Circle.jpg).
 
-[**Solution**](https://www.youtube.com/watch?v=V3R9y5v8GUY) -->
+[**Solution**](https://www.youtube.com/watch?v=V3R9y5v8GUY)

@@ -168,7 +168,7 @@ void update()
     g_rotation_totsuko.y += -1 * ROT_INCREMENT * delta_time;
 
     /* Model matrix reset */
-    g_kimi_matrix   = glm::mat4(1.0f);
+    g_kimi_matrix    = glm::mat4(1.0f);
     g_totsuko_matrix = glm::mat4(1.0f);
 
     /* Transformations */
