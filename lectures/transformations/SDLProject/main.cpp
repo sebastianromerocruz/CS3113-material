@@ -144,18 +144,18 @@ void update()
     // STEP 3: Decide if the matrix will be scaled up or scaled down
     translation_vector = glm::vec3(G_TRAN_VALUE, G_TRAN_VALUE, 0.0f);
     rotation_triggers  = glm::vec3(0.0f, 0.0f, 1.0f);
-    scale_vector       = glm::vec3(
-                                   g_is_growing ? G_GROWTH_FACTOR : G_SHRINK_FACTOR,
-                                   g_is_growing ? G_GROWTH_FACTOR : G_SHRINK_FACTOR,
-                                   1.0f
-                                   );
+//    scale_vector       = glm::vec3(
+//                                   g_is_growing ? G_GROWTH_FACTOR : G_SHRINK_FACTOR,
+//                                   g_is_growing ? G_GROWTH_FACTOR : G_SHRINK_FACTOR,
+//                                   1.0f
+//                                   );
     
-//    float scale_factor = BASE_SCALE + MAX_AMPLITUDE * glm::cos(g_frame_counter / PULSE_SPEED);
-//    glm::vec3 scale_factors = glm::vec3(scale_factor, scale_factor, 0.0f);
+    float scale_factor = BASE_SCALE + MAX_AMPLITUDE * glm::cos(g_frame_counter / PULSE_SPEED);
+    glm::vec3 scale_factors = glm::vec3(scale_factor, scale_factor, 0.0f);
     
     // STEP 4: Our transformations
-    g_model_matrix = glm::translate(g_model_matrix, translation_vector);
-    g_model_matrix = glm::rotate(g_model_matrix, G_ROT_ANGLE, rotation_triggers);
+//    g_model_matrix = glm::translate(g_model_matrix, translation_vector);
+//    g_model_matrix = glm::rotate(g_model_matrix, G_ROT_ANGLE, rotation_triggers);
     g_model_matrix = glm::scale(g_model_matrix, scale_vector);
 }
 

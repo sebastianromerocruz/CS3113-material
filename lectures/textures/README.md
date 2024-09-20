@@ -1,26 +1,28 @@
-<h2 align=center>Lecture 06</h2>
+<h2 align=center>Week 03</h2>
 
 <h1 align=center>Textures</h1>
 
-<h3 align=center>19 Horsebow  Moon, Imperial Year MMXXIV</h3>
+<h3 align=center>20 Horsebow  Moon, Imperial Year MMXXIV</h3>
 
-***Song of the day***: _[**Why Can’t You Love Me?” Band Ver**](https://www.youtube.com/watch?v=33tITqSwGB8) by Wendy (2021)._
+***Song of the day***: _[**Why Can’t You Love Me? [Band Ver]**](https://www.youtube.com/watch?v=33tITqSwGB8) by Wendy (2021)._
 
 ---
 
 ### Sections
 
-1. [**Textures**](#part-1-textures)
-2. [**Loading our textures**](#part-2-loading-our-textures)
-    1. [**Loading the image file**](#step-1-loading-the-image-file)
-    2. [**Generating and binding a texture ID to our image**](#step-2-generating-and-binding-a-texture-id-to-our-image)
-    3. [**Setting our texture filter parameters**](#step-3-setting-our-texture-filter-parameters)
-    4. [**Releasing our file from memory and returning our texture ID**](#step-4-releasing-our-file-from-memory-and-returning-our-texture-id)
-3. [**Texture coordinates**](#part-3-texture-coordinates)
-4. [**Blending**](#part-4-blending)
-5. [**Drawing Multiple Objects**](#part-5-drawing-multiple-objects)
+1. [**Textures**](#tex)
+2. [**Loading our textures**](#load)
+    1. [**Loading the image file**](#image)
+    2. [**Generating and binding a texture ID to our image**](#bind)
+    3. [**Setting our texture filter parameters**](#filter)
+    4. [**Releasing our file from memory and returning our texture ID**](#release)
+3. [**Texture coordinates**](#coords)
+4. [**Blending**](#blending)
+5. [**Drawing Multiple Objects**](#mult)
 
 ---
+
+<a id="tex"></a>
 
 ### Part 1: _Textures_
 
@@ -72,6 +74,8 @@ This new function `load_texture()` doesn't actually exist as part of OpenGL—ou
 
 <br>
 
+<a id="load"></a>
+
 ### Part 2: _Loading our textures_
 
 By the end of this lecture, your `load_texture()` program will look as follows (each part will be explained individually):
@@ -112,6 +116,8 @@ GLuint load_texture(constexpr char* filepath)
 
 <sub>**Code Block 2**: Our completed texture loader. Return to this point after reading this entire section!</sub>
 
+<a id="image"></a>
+
 #### STEP 1: Loading the image file
 
 The first step is, I hope, pretty self explanatory. We first instantiate a couple of variables where our image-loading function, `stbi_load()`, will store the dimensions and count of our image, and pass those as arguments to `stbi_load()` in order to get an `image` variable. If this file, for whatever reason, does not load, `stbi_load()` returns `NULL`—which is quite handy for handling these types of eventualities:
@@ -130,6 +136,8 @@ if (image == NULL)
 ```
 
 Something to keep in mind is that `stbi_load()` **dynamically allocates memory for `image`**, meaning that we'll have to release that memory later on (see step 4).
+
+<a id="bind"></a>
 
 #### STEP 2: Generating and binding a texture ID to our image
 
@@ -169,6 +177,8 @@ glTexImage2D(
 
 <sub>[**Documentation for `glTextImage`**](https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glTexImage2D.xhtml)</sub>
 
+<a id="filter"></a>
+
 #### STEP 3: Setting our texture filter parameters
 
 Texture filtering is basically how graphics engines handle extrapolation (and/or interpolation) of pixels in the case that our image needs to be stretched (magnification) or compressed (minification) beyond its intended size. This almost always happens in game, as our sprite data can be, say 1024px-by-1024px in true size, but it most likely will have to be shrunk in order to actually fix the polygons it is intended for.
@@ -191,6 +201,8 @@ glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
 <sub>[**General documentation for `glTexParameter`**](https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glTexParameter.xhtml)</sub>
 
+<a id="release"></a>
+
 #### STEP 4: Releasing our file from memory and returning our texture id
 
 Do **not** forget to free up the memory you allocated for our image file raw data in step 1; nobody likes a memory leak:
@@ -200,6 +212,9 @@ stbi_image_free(image);
 
 return textureID;
 ```
+
+<br>
+<a id="coords"></a>
 
 ### Part 3: _Texture Coordinates_
 
@@ -296,6 +311,8 @@ void render() {
 
 <br>
 
+<a id="blending"></a>
+
 ### Part 4: _Blending_
 
 We're almost there, I promise.
@@ -319,6 +336,8 @@ If at this point, your images do not load, and you are on...
 - **Windows**: Use the File Explorer to copy your images manually into your project's folder.
 
 <br>
+
+<a id="mult"></a>
 
 ### Part 5: _Drawing multiple objects_
 

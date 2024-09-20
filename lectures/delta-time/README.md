@@ -1,20 +1,22 @@
-<h2 align=center>Week 03: <em>Day 1</em></h2>
+<h2 align=center>Week 03</h2>
 
 <h1 align=center>Delta Time</h1>
 
 <h3 align=center>20 Horsebow  Moon, Imperial Year MMXXIV</h3>
 
-***Song of the day***: _[**Why Can’t You Love Me?” Band Ver**](https://www.youtube.com/watch?v=33tITqSwGB8) by Wendy (2021)._
+***Song of the day***: _[**Why Can’t You Love Me? [Band Ver]**](https://www.youtube.com/watch?v=33tITqSwGB8) by Wendy (2021)._
 
 ---
 
 ### Sections
 
-1. [**Matrix Operations Review**](#part-1-matrix-operations-review)
-2. [**Spaces**](#part-2-spaces)
-3. [**Timing, FPS, and Delta Time**](#part-3-timing-fps-and-delta-time)
+1. [**Matrix Operations Review**](#mat)
+2. [**Spaces**](#spaces)
+3. [**Timing, FPS, and Delta Time**](#delta)
 
 ---
+
+<a id="mat"></a>
 
 ### Part 1: _Matrix Operations Review_ 
 
@@ -121,6 +123,8 @@ In game development terminology, we call the model's "frame of reference" the **
 
 <br>
 
+<a id="spaces"></a>
+
 ### Part 2: _Spaces_
 
 This doesn't only apply between models and the world—it also happens between models. Let's say that our square is the main character of our game, and straight ahead lies an item:
@@ -224,6 +228,8 @@ void update()
 The second is, instead of relying on our computer's speed to update our frame, we need to use a method that will keep track of time the same way on every machine.
 
 <br>
+
+<a id="delta"></a>
 
 ### Part 3: _Timing, FPS, and Delta Time_
 
