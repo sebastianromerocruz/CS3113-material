@@ -63,7 +63,7 @@ void initialise()
     /* Some code here... */
 
     // Load the shaders for handling textures
-    g_shader_program.Load(V_SHADER_PATH, F_SHADER_PATH);
+    g_shader_program.load(V_SHADER_PATH, F_SHADER_PATH);
 
     // Load our player image
     g_player_texture_id = load_texture(PLAYER_SPRITE);

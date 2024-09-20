@@ -16,8 +16,8 @@
 //
 //enum AppStatus { RUNNING, TERMINATED };
 //
-//constexpr int WINDOW_WIDTH  = 640,
-//              WINDOW_HEIGHT = 480;
+//constexpr int WINDOW_WIDTH  = 640 * 2,
+//              WINDOW_HEIGHT = 480 * 2;
 //
 //constexpr float BG_RED     = 0.9765625f,
 //                BG_GREEN   = 0.97265625f,
@@ -38,13 +38,13 @@
 //                LEVEL_OF_DETAIL    = 0, // mipmap reduction image level
 //                TEXTURE_BORDER     = 0; // this value MUST be zero
 //
-//// source: https://yorukura-anime.com/
-//constexpr char KANO_SPRITE_FILEPATH[]   = "kano.png",
-//               MAHIRU_SPRITE_FILEPATH[] = "mahiru.png";
+//// source: https://kiminoiro.jp/
+//constexpr char KIMI_SPRITE_FILEPATH[]   = "kimi.png",
+//               TOTSUKO_SPRITE_FILEPATH[] = "totsuko.png";
 //
-//constexpr glm::vec3 INIT_SCALE      = glm::vec3(2.5f, 5.263f, 0.0f),
-//                    INIT_POS_KANO   = glm::vec3(2.0f, 0.0f, 0.0f),
-//                    INIT_POS_MAHIRU = glm::vec3(-2.0f, 0.0f, 0.0f);
+//constexpr glm::vec3 INIT_SCALE      = glm::vec3(5.0f, 5.98f, 0.0f),
+//                    INIT_POS_KIMI   = glm::vec3(2.0f, 0.0f, 0.0f),
+//                    INIT_POS_TOTSUKO = glm::vec3(-2.0f, 0.0f, 0.0f);
 //
 //constexpr float ROT_INCREMENT = 1.0f;
 //
@@ -53,17 +53,17 @@
 //ShaderProgram g_shader_program = ShaderProgram();
 //
 //glm::mat4 g_view_matrix,
-//          g_kano_matrix,
-//          g_mahiru_matrix,
+//          g_kimi_matrix,
+//          g_totsuko_matrix,
 //          g_projection_matrix;
 //
 //float g_previous_ticks = 0.0f;
 //
-//glm::vec3 g_rotation_kano   = glm::vec3(0.0f, 0.0f, 0.0f),
-//          g_rotation_mahiru = glm::vec3(0.0f, 0.0f, 0.0f);
+//glm::vec3 g_rotation_kimi   = glm::vec3(0.0f, 0.0f, 0.0f),
+//          g_rotation_totsuko = glm::vec3(0.0f, 0.0f, 0.0f);
 //
-//GLuint g_kano_texture_id,
-//       g_mahiru_texture_id;
+//GLuint g_kimi_texture_id,
+//       g_totsuko_texture_id;
 //
 //
 //GLuint load_texture(const char* filepath)
@@ -123,8 +123,8 @@
 //    
 //    g_shader_program.load(V_SHADER_PATH, F_SHADER_PATH);
 //    
-//    g_kano_matrix       = glm::mat4(1.0f);
-//    g_mahiru_matrix     = glm::mat4(1.0f);
+//    g_kimi_matrix       = glm::mat4(1.0f);
+//    g_totsuko_matrix     = glm::mat4(1.0f);
 //    g_view_matrix       = glm::mat4(1.0f);
 //    g_projection_matrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);
 //    
@@ -135,8 +135,8 @@
 //    
 //    glClearColor(BG_RED, BG_BLUE, BG_GREEN, BG_OPACITY);
 //    
-//    g_kano_texture_id   = load_texture(KANO_SPRITE_FILEPATH);
-//    g_mahiru_texture_id = load_texture(MAHIRU_SPRITE_FILEPATH);
+//    g_kimi_texture_id   = load_texture(KIMI_SPRITE_FILEPATH);
+//    g_totsuko_texture_id = load_texture(TOTSUKO_SPRITE_FILEPATH);
 //    
 //    glEnable(GL_BLEND);
 //    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -164,25 +164,25 @@
 //    g_previous_ticks = ticks;
 //    
 //    /* Game logic */
-//    g_rotation_kano.y += ROT_INCREMENT * delta_time;
-//    g_rotation_mahiru.y += -1 * ROT_INCREMENT * delta_time;
+//    g_rotation_kimi.y += ROT_INCREMENT * delta_time;
+//    g_rotation_totsuko.y += -1 * ROT_INCREMENT * delta_time;
 //
 //    /* Model matrix reset */
-//    g_kano_matrix   = glm::mat4(1.0f);
-//    g_mahiru_matrix = glm::mat4(1.0f);
+//    g_kimi_matrix   = glm::mat4(1.0f);
+//    g_totsuko_matrix = glm::mat4(1.0f);
 //    
 //    /* Transformations */
-//    g_kano_matrix = glm::translate(g_kano_matrix, INIT_POS_KANO);
-//    g_kano_matrix = glm::rotate(g_kano_matrix,
-//                                 g_rotation_kano.y,
+//    g_kimi_matrix = glm::translate(g_kimi_matrix, INIT_POS_KIMI);
+//    g_kimi_matrix = glm::rotate(g_kimi_matrix,
+//                                 g_rotation_kimi.y,
 //                                 glm::vec3(0.0f, 1.0f, 0.0f));
-//    g_kano_matrix = glm::scale(g_kano_matrix, INIT_SCALE);
+//    g_kimi_matrix = glm::scale(g_kimi_matrix, INIT_SCALE);
 //    
-//    g_mahiru_matrix = glm::translate(g_mahiru_matrix, INIT_POS_MAHIRU);
-//    g_mahiru_matrix = glm::rotate(g_mahiru_matrix,
-//                                  g_rotation_mahiru.y,
+//    g_totsuko_matrix = glm::translate(g_totsuko_matrix, INIT_POS_TOTSUKO);
+//    g_totsuko_matrix = glm::rotate(g_totsuko_matrix,
+//                                  g_rotation_totsuko.y,
 //                                  glm::vec3(0.0f, 1.0f, 0.0f));
-//    g_mahiru_matrix = glm::scale(g_mahiru_matrix, INIT_SCALE);
+//    g_totsuko_matrix = glm::scale(g_totsuko_matrix, INIT_SCALE);
 //}
 //
 //
@@ -221,8 +221,8 @@
 //    glEnableVertexAttribArray(g_shader_program.get_tex_coordinate_attribute());
 //    
 //    // Bind texture
-//    draw_object(g_kano_matrix, g_kano_texture_id);
-//    draw_object(g_mahiru_matrix, g_mahiru_texture_id);
+//    draw_object(g_kimi_matrix, g_kimi_texture_id);
+//    draw_object(g_totsuko_matrix, g_totsuko_texture_id);
 //    
 //    // We disable two attribute arrays now
 //    glDisableVertexAttribArray(g_shader_program.get_position_attribute());

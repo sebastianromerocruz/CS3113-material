@@ -35,10 +35,10 @@
 2. **Week 2**: Moving in video games
     1.  [**You're getting old, Matrix**](lectures/matrices/)
     2.  [**Transformations**](lectures/transformations/)
-<!-- 3. **Week 3**: Applying art to our games
+3. **Week 3**: Applying art to our games
     1.  [**Delta Time**](lectures/delta-time/)
     2.  [**Textures**](lectures/textures/)
-4. **Week 4**: Player input and basic collision detection
+<!-- 4. **Week 4**: Player input and basic collision detection
     1.  [**Player Input**](lectures/player-input/)
     2.  [**Collision Detection**](lectures/collision-detection/)
 5. **Week 5**: [**Sprite Animation and Text**](lectures/sprites-and-text/)
@@ -120,7 +120,7 @@ You will also need a [**Github**](https://github.com/) account!
 
 | **Item**                                                                | **Percentage** |
 |-------------------------------------------------------------------------|----------------|
-| **_Project 1_**: [**Draw a Simple 2D Scene**]() | 10%            |
+| **_Project 1_**: [**Draw a Simple 2D Scene**](assignments/project_1.md) | 10%            |
 | **_Project 2_**: [**Pong**]()                   | 10%            |
 | **_Project 3_**: [**Lunar Lander**]()           | 15%            |
 | **_Project 4_**: [**Rise of the AI**]()         | 15%            |

@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		8448F1852C11F91F00A4E4DA /* starter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8448F1842C11F91F00A4E4DA /* starter.cpp */; };
 		845C739D2846DACD000D6994 /* helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 845C739C2846DACD000D6994 /* helper.cpp */; };
-		849A759E2C1152C9009D3E2E /* kano.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 849A759D2C1152BE009D3E2E /* kano.png */; };
-		849A75A02C115B62009D3E2E /* mahiru.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 849A759F2C115B59009D3E2E /* mahiru.png */; };
 		849A75A32C11619B009D3E2E /* completed.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 849A75A22C11619B009D3E2E /* completed.cpp */; };
 		DBDF1B532323DE3F007CECB1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBDF1B522323DE3F007CECB1 /* main.cpp */; };
 		DBDF1B5E2323DE8D007CECB1 /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBDF1B5D2323DE8D007CECB1 /* ShaderProgram.cpp */; };
@@ -30,8 +28,6 @@
 			dstSubfolderSpec = 6;
 			files = (
 				DBDF1B612323DE9E007CECB1 /* shaders in CopyFiles */,
-				849A75A02C115B62009D3E2E /* mahiru.png in CopyFiles */,
-				849A759E2C1152C9009D3E2E /* kano.png in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -39,9 +35,10 @@
 
 /* Begin PBXFileReference section */
 		8448F1842C11F91F00A4E4DA /* starter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = starter.cpp; sourceTree = "<group>"; };
+		845507E42C9D029500BD0FED /* totsuko.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = totsuko.png; sourceTree = "<group>"; };
+		845507E52C9D029500BD0FED /* kimi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kimi.png; sourceTree = "<group>"; };
+		845507E62C9D029500BD0FED /* rui.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rui.png; sourceTree = "<group>"; };
 		845C739C2846DACD000D6994 /* helper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = helper.cpp; sourceTree = "<group>"; };
-		849A759D2C1152BE009D3E2E /* kano.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kano.png; sourceTree = "<group>"; };
-		849A759F2C115B59009D3E2E /* mahiru.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mahiru.png; sourceTree = "<group>"; };
 		849A75A22C11619B009D3E2E /* completed.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = completed.cpp; sourceTree = "<group>"; };
 		DBDF1B4F2323DE3F007CECB1 /* SDLProject */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDLProject; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBDF1B522323DE3F007CECB1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -102,9 +99,10 @@
 		DBDF1B512323DE3F007CECB1 /* SDLProject */ = {
 			isa = PBXGroup;
 			children = (
+				845507E52C9D029500BD0FED /* kimi.png */,
+				845507E62C9D029500BD0FED /* rui.png */,
+				845507E42C9D029500BD0FED /* totsuko.png */,
 				849A75A12C11617E009D3E2E /* files */,
-				849A759F2C115B59009D3E2E /* mahiru.png */,
-				849A759D2C1152BE009D3E2E /* kano.png */,
 				DBDF1B5B2323DE8D007CECB1 /* glm */,
 				DBDF1B5D2323DE8D007CECB1 /* ShaderProgram.cpp */,
 				DBDF1B592323DE8D007CECB1 /* ShaderProgram.h */,
