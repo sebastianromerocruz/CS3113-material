@@ -1,8 +1,8 @@
-<h2 align=center>Lecture 07</h2>
+<h2 align=center>Week 04</h2>
 
 <h1 align=center>Player Input</h1>
 
-<h3 align=center>26 Horsebow  Moon, Imperial Year MMXXIV</h3>
+<h3 align=center>27 Horsebow  Moon, Imperial Year MMXXIV</h3>
 
 ***Song of the day***: _[**catalogue**](https://youtu.be/9ZK0EKMW-7g?si=waT9lP2eG25m6RzB) by julie  (2023)._
 
