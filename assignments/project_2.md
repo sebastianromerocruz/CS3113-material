@@ -24,41 +24,62 @@
 
 ***No late submissions will be accepted***.
 
+---
+
 ### Sections
 
 #### _Requirements_
 
-1. [**Paddles / Players (50%)**](#requirement-1-paddles--players-50)
-2. [**Bounces Off Walls (25%)**](#requirement-2-bounces-off-walls-25)
-3. [**Game Over (25%)**](#requirement-3-game-over-25)
+1. [**Paddles / Players (25%)**](#req-1)
+2. [**Single-Player Switch (25%)**](#req-2)
+3. [**Bounces Off Walls (25%)**](#req-3)
+4. [**Game Over (25%)**](#req-4)
 
 #### _Tips_
 
-1. [**Common Issues**](#common-issues)
-2. [**Extra Credit**](#extra-credit)
+1. [**Common Issues**](#issues)
+2. [**Extra Credit**](#extra)
 
-### Requirement 1: _Paddles / Players (50%)_
+---
+
+<a id="req-1"></a>
+
+### Requirement 1: _Paddles / Players (25%)_
 
 - There needs to be a paddle on each side that can move independently to the other.
 - The ball needs to bounce off of the paddles.
 - The paddles should not be able to go off the top or bottom of the screen.
 - Both players should be allowed to use the keyboard. For instance, player 1 could use the `W` and `S` keys, while player 2 would use the `Up` and `Down` arrows.
-- If the player presses the `t`-key, one of the paddles should switch from player-controlled to a simple up-and-down motion. In other words, we are simulating the player switching from 2-player mode to 1-player mode. Make sure that the user _can't_ use their keys to move the paddle when in 1-player mode.
 - _All_ objects in your scene must be textured.
 
-### Requirement 2: _Bounces Off Walls (25%)_
+<a id="req-2"></a>
+
+### Requirement 2: _Single-Player Switch (25%)_
+
+- If the player presses the `t`-key, one of the paddles should switch from player-controlled to a simple up-and-down motion. In other words, we are simulating the player switching from 2-player mode to 1-player mode. Make sure that the user _can't_ use their keys to move the paddle when in 1-player mode.
+
+<a id="req-3"></a>
+
+### Requirement 3: _Bounces Off Walls (25%)_
 
 - The ball needs to bounce off the top and bottom of the screen.
 
-### Requirement 3: _Game Over (25%)_
+<a id="req-4"></a>
+
+### Requirement 4: _Game Over (25%)_
 
 - The game should stop when someone wins or loses (i.e. when the ball hits a wall on the left or right).
+
+<br>
+<a id="issues"></a>
 
 ### _Common Issues_
 
 - To keep things simple, I'd recommend using [**box-to-box collision detection**](https://github.com/sebastianromerocruz/CS3113-material/tree/main/lectures/collision-detection#box-to-box-collisions) only.
 - Work object by object, mechanic by mechanic, and test often. This goes for all programming, but if you try finishing all objects in one go, you are bound to miss something that have a hard time finding it.
 
+<br>
+<a id="extra"></a>
 
 ### _Extra Credit_
 

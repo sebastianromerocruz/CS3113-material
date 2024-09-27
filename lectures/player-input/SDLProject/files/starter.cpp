@@ -150,70 +150,13 @@
 //
 //void process_input()
 //{
-//    // VERY IMPORTANT: If nothing is pressed, we don't want to go anywhere
-//    g_shield_movement = glm::vec3(0.0f);
-//
 //    SDL_Event event;
 //    while (SDL_PollEvent(&event))
 //    {
-//        switch (event.type)
+//        if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE)
 //        {
-//            // End game
-//            case SDL_QUIT:
-//            case SDL_WINDOWEVENT_CLOSE:
-//                g_app_status = TERMINATED;
-//                break;
-//            
-//            case SDL_KEYDOWN:
-//                switch (event.key.keysym.sym)
-//                {
-//                    case SDLK_LEFT:
-//                        // Move the player left
-//                        break;
-//                    
-//                    case SDLK_RIGHT:
-//                        // Move the player right
-//                        g_shield_movement.x = 1.0f;
-//                        break;
-//                    
-//                    case SDLK_q:
-//                        // Quit the game with a keystroke
-//                        g_app_status = TERMINATED;
-//                        break;
-//                    
-//                    default:
-//                        break;
-//                }
-//            default:
-//                break;
+//            g_app_status = TERMINATED;
 //        }
-//    }
-//       
-//    const Uint8 *key_state = SDL_GetKeyboardState(NULL);
-//                                                                    
-//    if (key_state[SDL_SCANCODE_LEFT])
-//    {
-//        g_shield_movement.x = -1.0f;
-//    }
-//    else if (key_state[SDL_SCANCODE_RIGHT])
-//    {
-//        g_shield_movement.x = 1.0f;
-//    }
-//    
-//    if (key_state[SDL_SCANCODE_UP])
-//    {
-//        g_shield_movement.y = 1.0f;
-//    }
-//    else if (key_state[SDL_SCANCODE_DOWN])
-//    {
-//        g_shield_movement.y = -1.0f;
-//    }
-//    
-//    // This makes sure that the player can't "cheat" their way into moving
-//    // faster
-//    if (glm::length(g_shield_movement) > 1.0f)
-//    {
-//        g_shield_movement = glm::normalize(g_shield_movement);
 //    }
 //}
 //

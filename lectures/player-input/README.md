@@ -6,16 +6,21 @@
 
 ***Song of the day***: _[**catalogue**](https://youtu.be/9ZK0EKMW-7g?si=waT9lP2eG25m6RzB) by julie  (2023)._
 
+---
 
 ### Sections
 
-1. [**Player Input**](#part-1-player-input)
-2. [**Keyboard Input**](#part-2-keyboard-input)
-    1. [**Keystrokes**](#keystrokes)
-    2. [**Keyboard State: Holding Keys Down**](#keystrokes)
-3. [**Mouse Input**](#part-3-mouse-input)
-4. [**Controller Input**](#part-4-controller-input)
-5. [**Keeping Track Of The Player's Motion**](#part-5-keeping-track-of-the-players-motion)
+1. [**Player Input**](#input)
+2. [**Keyboard Input**](#keys)
+    1. [**Keystrokes**](#strokes)
+    2. [**Keyboard State: Holding Keys Down**](#state)
+3. [**Mouse Input**](#mouse)
+4. [**Controller Input**](#controller)
+5. [**Keeping Track Of The Player's Motion**](#motion)
+
+---
+
+<a id="input"></a>
 
 ### Part 1: _Player Input_
 
@@ -49,6 +54,9 @@ We have:
 If we considered the functions in here that we have, at least once, touched on or covered, we can see see that (aside from `shutdown()`) there is one that we have conspicuously not touched yet: **`process_input()`**. You might find this funny, since the only thing that differentiates simple computer graphics from a video game is the ability for a player to make decision and convey those decision to the game.
 
 Well that changes today. We have learned enough for us to graduate from the respectable practice of creating OpenGL art and into the realm of interactive computer graphics. _Id est_: video games.
+
+<br>
+<a id="keys"></a>
 
 ### Part 2: _Keyboard Input_
 
@@ -100,6 +108,8 @@ void process_input()
 
 <sub>**Code Block 3**: The slightly-better-but-still-lackluster state of our input-processing mechanism.</sub>
 
+<a id="strokes"></a>
+
 #### Keystrokes
 
 Alright, let's get started. The first event that we'll be covering is **`SDL_KEYDOWN`**. This event is basically triggered by a key on a keyboard being pressed all the way down. It's counterpart **`SDL_KEYUP`** is, conversely, triggered when a key is released. The usefulness of the first is probably pretty obvious, but `SDL_KEYUP` is also pretty handy when, for instance, a user clicks on the wrong thing by accident, and drags the mouse pointer away from that location to safely release it.
@@ -124,6 +134,7 @@ case SDL_KEYDOWN:
 
 These two are used for "one-frame" keystrokes—great for shooting or jumping actions, but we also want options for when a player holds a key down over a period of several frames. Maybe they are running across a platform, or holding the jump button for a greater jump height. For that, we need to keep track of the keyboard's state.
 
+<a id="state"></a>
 
 #### Keyboard State
 
@@ -156,6 +167,9 @@ if (key_state[SDL_SCANCODE_RIGHT])
 <sub>**Code Block 5**: For example. Notice that the above indices use the prefix `SDL_SCANCODE_` and not `SDLK_`.</sub>
 
 We'll apply this, as well at the keystroke stuff from code block 4, in just a bit. Let's quickly cover mouse input first.
+
+<br>
+<a id="mouse"></a>
 
 ### Part 3: _Mouse Input_
 
@@ -237,6 +251,9 @@ float get_screen_to_ortho(float coordinate, Coordinate axis)
 ```
 
 <sub>**Code Block 6**: A nice function using [**enums**](https://www.learncpp.com/cpp-tutorial/unscoped-enumerations/) to translate screen to orthographic coordinates.</sub>
+
+<br>
+<a id="controller"></a>
 
 ### Part 4: _Controller Input_
 
@@ -331,6 +348,9 @@ SDL_JoystickGetButton(g_player_one_controller, button_index);
 ```
 
 <sub>**Code Block 10**: Recall that these go _outside_ the game loop.</sub>
+
+<br>
+<a id="motion"></a>
 
 ### Part 5: _Keeping Track Of The Player's Motion_
 

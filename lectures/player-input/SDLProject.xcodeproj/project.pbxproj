@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		842DC6772CA644DF0052A9C3 /* shield.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 842DC6762CA644D20052A9C3 /* shield.png */; };
+		842DC67A2CA645EF0052A9C3 /* starter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 842DC6782CA645EF0052A9C3 /* starter.cpp */; };
 		84651B172C17EB5100817E28 /* kano.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84651B162C17EAFE00817E28 /* kano.png */; };
 		84651B1A2C17ED4900817E28 /* completed.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84651B192C17ED4900817E28 /* completed.cpp */; };
 		DBDF1B532323DE3F007CECB1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBDF1B522323DE3F007CECB1 /* main.cpp */; };
@@ -27,6 +29,7 @@
 			dstSubfolderSpec = 6;
 			files = (
 				DBDF1B612323DE9E007CECB1 /* shaders in CopyFiles */,
+				842DC6772CA644DF0052A9C3 /* shield.png in CopyFiles */,
 				84651B172C17EB5100817E28 /* kano.png in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -34,6 +37,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		842DC6762CA644D20052A9C3 /* shield.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shield.png; sourceTree = "<group>"; };
+		842DC6782CA645EF0052A9C3 /* starter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = starter.cpp; sourceTree = "<group>"; };
 		84651B162C17EAFE00817E28 /* kano.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kano.png; sourceTree = "<group>"; };
 		84651B192C17ED4900817E28 /* completed.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = completed.cpp; sourceTree = "<group>"; };
 		DBDF1B4F2323DE3F007CECB1 /* SDLProject */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDLProject; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				84651B192C17ED4900817E28 /* completed.cpp */,
+				842DC6782CA645EF0052A9C3 /* starter.cpp */,
 			);
 			path = files;
 			sourceTree = "<group>";
@@ -94,6 +100,7 @@
 		DBDF1B512323DE3F007CECB1 /* SDLProject */ = {
 			isa = PBXGroup;
 			children = (
+				842DC6762CA644D20052A9C3 /* shield.png */,
 				84651B182C17ED2400817E28 /* files */,
 				84651B162C17EAFE00817E28 /* kano.png */,
 				DBDF1B5B2323DE8D007CECB1 /* glm */,
@@ -175,6 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84651B1A2C17ED4900817E28 /* completed.cpp in Sources */,
+				842DC67A2CA645EF0052A9C3 /* starter.cpp in Sources */,
 				DBDF1B532323DE3F007CECB1 /* main.cpp in Sources */,
 				DBDF1B5E2323DE8D007CECB1 /* ShaderProgram.cpp in Sources */,
 			);

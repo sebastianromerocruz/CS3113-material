@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		44F5544D2C1793920043D35A /* kano.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 44F5544B2C178CAA0043D35A /* kano.png */; };
-		44F5544E2C1793930043D35A /* mahiru.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 44F5544C2C178CAA0043D35A /* mahiru.png */; };
+		842DC6742CA63E790052A9C3 /* shield.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 842DC6722CA63BA10052A9C3 /* shield.png */; };
+		842DC6752CA63E7B0052A9C3 /* sword.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 842DC6732CA63BA10052A9C3 /* sword.png */; };
 		DBDF1B532323DE3F007CECB1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBDF1B522323DE3F007CECB1 /* main.cpp */; };
 		DBDF1B5E2323DE8D007CECB1 /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBDF1B5D2323DE8D007CECB1 /* ShaderProgram.cpp */; };
 		DBDF1B612323DE9E007CECB1 /* shaders in CopyFiles */ = {isa = PBXBuildFile; fileRef = DBDF1B5C2323DE8D007CECB1 /* shaders */; };
@@ -26,17 +26,17 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
-				44F5544E2C1793930043D35A /* mahiru.png in CopyFiles */,
+				842DC6752CA63E7B0052A9C3 /* sword.png in CopyFiles */,
+				842DC6742CA63E790052A9C3 /* shield.png in CopyFiles */,
 				DBDF1B612323DE9E007CECB1 /* shaders in CopyFiles */,
-				44F5544D2C1793920043D35A /* kano.png in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		44F5544B2C178CAA0043D35A /* kano.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kano.png; sourceTree = "<group>"; };
-		44F5544C2C178CAA0043D35A /* mahiru.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mahiru.png; sourceTree = "<group>"; };
+		842DC6722CA63BA10052A9C3 /* shield.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shield.png; sourceTree = "<group>"; };
+		842DC6732CA63BA10052A9C3 /* sword.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sword.png; sourceTree = "<group>"; };
 		DBDF1B4F2323DE3F007CECB1 /* SDLProject */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDLProject; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBDF1B522323DE3F007CECB1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		DBDF1B592323DE8D007CECB1 /* ShaderProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderProgram.h; sourceTree = "<group>"; };
@@ -87,8 +87,8 @@
 		DBDF1B512323DE3F007CECB1 /* SDLProject */ = {
 			isa = PBXGroup;
 			children = (
-				44F5544B2C178CAA0043D35A /* kano.png */,
-				44F5544C2C178CAA0043D35A /* mahiru.png */,
+				842DC6722CA63BA10052A9C3 /* shield.png */,
+				842DC6732CA63BA10052A9C3 /* sword.png */,
 				DBDF1B5B2323DE8D007CECB1 /* glm */,
 				DBDF1B5D2323DE8D007CECB1 /* ShaderProgram.cpp */,
 				DBDF1B592323DE8D007CECB1 /* ShaderProgram.h */,

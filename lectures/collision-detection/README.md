@@ -10,15 +10,16 @@
 
 ### Sections
 
-1. [**The Unit Circle**](#part-1-the-unit-circle)
-2. [**Collision detection theory**](#part-2-collision-detection-theory)
-    1. [**Circle-to-circle collisions**](#circle-to-circle-collisions)
-    2. [**Point-to-circle collisions**](#point-to-circle-collisions)
-    3. [**Box-to-box collisions**](#box-to-box-collisions)
-    4. [**Point-to-box collisions**](#point-to-box-collisions)
-1. [**Example**](#part-3-example)
+1. [**The Unit Circle**](#circle)
+2. [**Collision detection theory**](#collision)
+    1. [**Circle-to-circle collisions**](#circle-to-circle)
+    2. [**Point-to-circle collisions**](#point-to-circle)
+    3. [**Box-to-box collisions**](#box-to-box)
+    4. [**Point-to-box collisions**](#point-to-box)
 
 ---
+
+<a id="circle"></a>
 
 ### Part 1: _The unit circle_
 
@@ -44,6 +45,7 @@ This actually has greater implications when it comes to handling player input. A
 That's the real reason why code block 1 is necessary. Nothing particularly complicated, but certainly good to know, as it will affect your players' experience.
 
 <br>
+<a id="collision"></a>
 
 ### Part 2: _Collision Detection Theory_
 
@@ -54,6 +56,8 @@ Really kind of the last thing required for us to make something worth of the "vi
 <sub>**Figure 2**: Collision detection is, quite literally, the entire _raison d'être_ of Atari's [**Pong**](https://en.wikipedia.org/wiki/Pong).</sub>
 
 Nowadays, there are several ways of detecting collisions—all of them available to you—so let's take a look at them.
+
+<a id="circle-to-circle"></a>
 
 #### **Circle-to-circle collisions**
 
@@ -80,6 +84,8 @@ Really, the only thing involved in circle-to-circle detection is a simple distan
 
 In other words, _if the distance from the centres of the circles is less than the sum of their respective radii, we have a **collision**_.
 
+<a id="point-to-circle"></a>
+
 #### **Point-to-circle collisions**
 
 There's plenty of uses for point-to-circle collision detection:
@@ -93,6 +99,8 @@ Arguably easier than circle-to-circle, the math of point-to-circle is calculated
 ![distance-formula](assets/distance_formula.svg)
 
 <sub>**Figure 6**: The distance between two points in cartesian space. [**Source**](https://en.wikipedia.org/wiki/Euclidean_distance#Two_dimensions)</sub>
+
+<a id="box-to-box"></a>
 
 #### **Box-to-box collisions**
 
@@ -134,6 +142,8 @@ if (x_distance < 0 && y_distance < 0)
 
 <sub>**Code Block 2**: Box-to-box collision code. Please watch you parentheses carefully when doing this.</sub>
 
+<a id="point-to-box"></a>
+
 #### **Point-to-box collisions**
 
 One last collision type that is relatively common is point-to-box; UI buttons in many games are square—shaped, for example. This one is pretty easy: simply _get the coordinates of the **top left** and **bottom right** corners, and check the points' coordinates fall inside of them_.
@@ -142,9 +152,7 @@ One last collision type that is relatively common is point-to-box; UI buttons in
 
 <sub>**Figure 9**: Visualisation for box-point collisions.</sub>
 
-<br>
-
-### Part 3: _Example_
+<!-- ### Part 3: _Example_
 
 Let's take a look at a simple example using a modified version of our [**user input exercise**](https://github.com/sebastianromerocruz/CS3113-material/tree/main/exercises/player_input):
 
@@ -191,4 +199,4 @@ This is what I meant above when I said that you might have to fine-tune your num
 
 ![collision-ex-3](assets/collision-ex-3.png)
 
-<sub>**Figure 12**: About the point where the collision message starts appear.</sub>
+<sub>**Figure 12**: About the point where the collision message starts appear.</sub> -->

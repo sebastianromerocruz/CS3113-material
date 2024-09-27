@@ -38,33 +38,33 @@ constexpr char V_SHADER_PATH[] = "shaders/vertex_textured.glsl",
 
 constexpr float MILLISECONDS_IN_SECOND = 1000.0;
 
-// source: https://yorukura-anime.com/
-constexpr char KANO_SPRITE_FILEPATH[]   = "kano.png",
-               MAHIRU_SPRITE_FILEPATH[] = "mahiru.png";
+constexpr char SHIELD_SPRITE_FILEPATH[] = "shield.png",
+               SWORD_SPRITE_FILEPATH[]  = "sword.png";
 
 constexpr float MINIMUM_COLLISION_DISTANCE = 1.0f;
-constexpr glm::vec3 INIT_SCALE      = glm::vec3(2.5f, 5.263f, 0.0f),
-                    INIT_POS_KANO   = glm::vec3(2.0f, 0.0f, 0.0f),
-                    INIT_POS_MAHIRU = glm::vec3(-2.0f, 0.0f, 0.0f);
+constexpr glm::vec3 INIT_SCALE_SWORD = glm::vec3(1.0f, 4.1378f, 0.0f),
+                    INIT_SCALE_SHIELD = glm::vec3(2.0f, 2.3985f, 0.0f),
+                    INIT_POS_SHIELD  = glm::vec3(2.0f, 0.0f, 0.0f),
+                    INIT_POS_SWORD   = glm::vec3(-2.0f, 0.0f, 0.0f);
 
 SDL_Window* g_display_window;
 
 AppStatus g_app_status = RUNNING;
 ShaderProgram g_shader_program = ShaderProgram();
-glm::mat4 g_view_matrix, g_kano_matrix, g_projection_matrix, g_trans_matrix, g_mahiru_matrix;
+glm::mat4 g_view_matrix, g_shield_matrix, g_projection_matrix, g_sword_matrix;
 
 float g_previous_ticks = 0.0f;
 
-GLuint g_kano_texture_id;
-GLuint g_mahiro_texture_id;
+GLuint g_shield_texture_id;
+GLuint g_sword_texture_id;
 
-glm::vec3 g_kano_position = glm::vec3(0.0f, 0.0f, 0.0f);
-glm::vec3 g_kano_movement = glm::vec3(0.0f, 0.0f, 0.0f);
+glm::vec3 g_shield_position = glm::vec3(0.0f, 0.0f, 0.0f);
+glm::vec3 g_shield_movement = glm::vec3(0.0f, 0.0f, 0.0f);
 
-glm::vec3 g_mahiru_position = glm::vec3(0.0f, 0.0f, 0.0f);
-glm::vec3 g_mahiru_movement = glm::vec3(0.0f, 0.0f, 0.0f);
+glm::vec3 g_sword_position = glm::vec3(0.0f, 0.0f, 0.0f);
+glm::vec3 g_sword_movement = glm::vec3(0.0f, 0.0f, 0.0f);
 
-float g_kano_speed = 1.0f;  // move 1 unit per second
+float g_shield_speed = 1.0f;  // move 1 unit per second
 
 void initialise();
 void process_input();
@@ -128,10 +128,10 @@ void initialise()
     
     g_shader_program.load(V_SHADER_PATH, F_SHADER_PATH);
     
-    g_kano_matrix = glm::mat4(1.0f);
-    g_mahiru_matrix = glm::mat4(1.0f);
-    g_mahiru_matrix = glm::translate(g_mahiru_matrix, glm::vec3(1.0f, 1.0f, 0.0f));
-    g_mahiru_position += g_mahiru_movement;
+    g_shield_matrix = glm::mat4(1.0f);
+    g_sword_matrix = glm::mat4(1.0f);
+    g_sword_matrix = glm::translate(g_sword_matrix, glm::vec3(1.0f, 1.0f, 0.0f));
+    g_sword_position += g_sword_movement;
     
     g_view_matrix = glm::mat4(1.0f);
     g_projection_matrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);
@@ -143,8 +143,8 @@ void initialise()
     
     glClearColor(BG_RED, BG_BLUE, BG_GREEN, BG_OPACITY);
     
-    g_kano_texture_id = load_texture(KANO_SPRITE_FILEPATH);
-    g_mahiro_texture_id = load_texture(MAHIRU_SPRITE_FILEPATH);
+    g_shield_texture_id = load_texture(SHIELD_SPRITE_FILEPATH);
+    g_sword_texture_id = load_texture(SWORD_SPRITE_FILEPATH);
     
     // enable blending
     glEnable(GL_BLEND);
@@ -154,7 +154,7 @@ void initialise()
 void process_input()
 {
     // VERY IMPORTANT: If nothing is pressed, we don't want to go anywhere
-    g_kano_movement = glm::vec3(0.0f);
+    g_shield_movement = glm::vec3(0.0f);
 
     SDL_Event event;
     while (SDL_PollEvent(&event))
@@ -176,7 +176,7 @@ void process_input()
                                                                              
                     case SDLK_RIGHT:
                         // Move the player right
-                        g_kano_movement.x = 1.0f;
+                        g_shield_movement.x = 1.0f;
                         break;
                                                                              
                     case SDLK_q:
@@ -198,27 +198,27 @@ void process_input()
                                                                              
     if (key_state[SDL_SCANCODE_LEFT])
     {
-        g_kano_movement.x = -1.0f;
+        g_shield_movement.x = -1.0f;
     }
     else if (key_state[SDL_SCANCODE_RIGHT])
     {
-        g_kano_movement.x = 1.0f;
+        g_shield_movement.x = 1.0f;
     }
                                                                              
     if (key_state[SDL_SCANCODE_UP])
     {
-        g_kano_movement.y = 1.0f;
+        g_shield_movement.y = 1.0f;
     }
     else if (key_state[SDL_SCANCODE_DOWN])
     {
-        g_kano_movement.y = -1.0f;
+        g_shield_movement.y = -1.0f;
     }
                                                                              
     // This makes sure that the player can't "cheat" their way into moving
     // faster
-    if (glm::length(g_kano_movement) > 1.0f)
+    if (glm::length(g_shield_movement) > 1.0f)
     {
-        g_kano_movement = glm::normalize(g_kano_movement);
+        g_shield_movement = glm::normalize(g_shield_movement);
     }
 }
 
@@ -229,23 +229,23 @@ void update()
     g_previous_ticks = ticks;
 
     // Add direction * units per second * elapsed time
-    g_kano_position += g_kano_movement * g_kano_speed * delta_time;
+    g_shield_position += g_shield_movement * g_shield_speed * delta_time;
     
-    g_kano_matrix = glm::mat4(1.0f);
-    g_kano_matrix = glm::translate(g_kano_matrix, INIT_POS_KANO);
-    g_kano_matrix = glm::translate(g_kano_matrix, g_kano_position);
+    g_shield_matrix = glm::mat4(1.0f);
+    g_shield_matrix = glm::translate(g_shield_matrix, INIT_POS_SHIELD);
+    g_shield_matrix = glm::translate(g_shield_matrix, g_shield_position);
     
-    g_mahiru_matrix = glm::mat4(1.0f);
-    g_mahiru_matrix = glm::translate(g_mahiru_matrix, INIT_POS_MAHIRU);
+    g_sword_matrix = glm::mat4(1.0f);
+    g_sword_matrix = glm::translate(g_sword_matrix, INIT_POS_SWORD);
     
-    g_kano_matrix = glm::scale(g_kano_matrix, INIT_SCALE);
-    g_mahiru_matrix = glm::scale(g_mahiru_matrix, INIT_SCALE);
+    g_shield_matrix = glm::scale(g_shield_matrix, INIT_SCALE_SHIELD);
+    g_sword_matrix  = glm::scale(g_sword_matrix, INIT_SCALE_SWORD);
     
-    float x_distance = fabs(g_kano_position.x + INIT_POS_KANO.x - INIT_POS_MAHIRU.x) -
-        ((INIT_SCALE.x + INIT_SCALE.x) / 2.0f);
+    float x_distance = fabs(g_shield_position.x + INIT_POS_SHIELD.x - INIT_POS_SWORD.x) -
+        ((INIT_SCALE_SWORD.x + INIT_SCALE_SHIELD.x) / 2.0f);
 
-    float y_distance = fabs(g_kano_position.y + INIT_POS_KANO.y - INIT_POS_MAHIRU.y) -
-        ((INIT_SCALE.y + INIT_SCALE.y) / 2.0f);
+    float y_distance = fabs(g_shield_position.y + INIT_POS_SHIELD.y - INIT_POS_SWORD.y) -
+        ((INIT_SCALE_SWORD.y + INIT_SCALE_SHIELD.y) / 2.0f);
     
     if (x_distance < 0.0f && y_distance < 0.0f)
     {
@@ -282,8 +282,8 @@ void render() {
     glEnableVertexAttribArray(g_shader_program.get_tex_coordinate_attribute());
     
     // Bind texture
-    draw_object(g_kano_matrix, g_kano_texture_id);
-    draw_object(g_mahiru_matrix, g_mahiro_texture_id);
+    draw_object(g_shield_matrix, g_shield_texture_id);
+    draw_object(g_sword_matrix, g_sword_texture_id);
     
     // We disable two attribute arrays now
     glDisableVertexAttribArray(g_shader_program.get_position_attribute());
