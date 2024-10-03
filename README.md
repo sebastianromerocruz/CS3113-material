@@ -41,8 +41,10 @@
 4. **Week 4**: Player input and basic collision detection
     1.  [**Player Input**](lectures/player-input/)
     2.  [**Collision Detection**](lectures/collision-detection/)
-<!--5. **Week 5**: [**Sprite Animation and Text**](lectures/sprites-and-text/)
-6. **Week 6**: The Entity Class and Physics
+5. **Week 5** Sprite Animation and Text and The Entity Class: 
+    1.  [**Sprite Animation and Text**](lectures/sprites-and-text/)
+    2.  [**Entities**](lectures/entities/)
+<!--6. **Week 6**: The Entity Class and Physics
     1. [**Entities**](lectures/entities/)
     2. [**Physics: Gravity**](lectures/physics_1/)
 7. **Week 7**: [**Physics: Colliding with Different Kinds of Entities**](lectures/physics_2/)
