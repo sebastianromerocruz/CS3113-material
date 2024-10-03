@@ -1,22 +1,24 @@
-<h2 align=center>Week 05: <em>Day 1</em></h2>
+<h2 align=center>Week 05</h2>
 
 <h1 align=center>Spritesheets, Animation, and Text</h1>
 
-<h3 align=center>1 Wyvern Moon, Imperial Year MMXXIV</h3>
+<h3 align=center>3 Wyvern Moon, Imperial Year MMXXIV</h3>
 
-<p align=center><strong><em>Song of the day</strong>: <a href="https://www.youtube.com/watch?v=8s9vljW8HLA"><strong><u>Kaijitsu</u></strong></a> by Akasaki (2023).</em></p>
+<p align=center><strong><em>Song of the day</strong>: <a href="https://www.youtube.com/watch?v=8s9vljW8HLA"><strong><u>果実 (Fruit)</u></strong></a> by Akasaki (2023)</em></p>
 
 ---
 
 ### Sections
 
-1. [**A Bit of Review of Textures**](#part-1-a-bit-of-review-of-textures)
-2. [**Texture Wrap Mode**](#part-2-texture-wrap-mode)
-3. [**Texture Atlases and Sprite Sheets**](#part-3-texture-atlases-and-sprite-sheets)
-4. [**Animation**](#part-4-animation)
-5. [**Text**](#part-5-text)
+1. [**A Bit of Review of Textures**](#review)
+2. [**Texture Wrap Mode**](#wrap)
+3. [**Texture Atlases and Sprite Sheets**](#atlases)
+4. [**Animation**](#animation)
+5. [**Text**](#text)
 
 ---
+
+<a id="review"></a>
 
 ### Part 1: _A Bit of Review of Textures_
 
@@ -48,6 +50,8 @@ There are bigger implication to our ability to "slice" a texture, and we've reac
 Let's look at a couple of instances where changing the values in `tex_coords` might affect our game, and how we can handle them.
 
 <br>
+
+<a id="wrap"></a>
 
 ### Part 2: _Texture Wrap Mode_
 
@@ -85,6 +89,8 @@ glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 <sub>**Code Block 3**: Just like with filter modes, this is all that is necessary for wrapping.</sub>
 
 <br>
+
+<a id="atlases"></a>
 
 ### Part 3: _Texture Atlases and Sprite Sheets_
 
@@ -190,6 +196,8 @@ And behold:
 Notice that I added the line `program.set_model_matrix(model_matrix)` to `render()` from `draw_object()`. If you don't do this, your sprite will not render as it will not have a model matrix to follow. The worst part about this error is that OpenGL doesn't crash because of it, and the warnings that it _does_ give you are not specific at all. So don't forget!
 
 <br>
+
+<a id="animation"></a>
 
 ### Part 4: _Animation_
 
@@ -316,6 +324,8 @@ if (glm::length(g_player_movement) != 0)
 <sub>**Code Block 6**: As simple as this.</sub>
 
 <br>
+
+<a id="text"></a>
 
 ### Part 5: _Text_
 

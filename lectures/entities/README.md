@@ -1,21 +1,23 @@
-<h2 align=center>Week 05: <em>Part 2</em></h2>
+<h2 align=center>Week 05</h2>
 
 <h1 align=center>Entities</h1>
 
-<h3 align=center>1 Wyvern Moon, Imperial Year MMXXIV</h3>
+<h3 align=center>3 Wyvern Moon, Imperial Year MMXXIV</h3>
 
-<p align=center><strong><em>Song of the day</strong>: <a href="https://www.youtube.com/watch?v=8s9vljW8HLA"><strong><u>Kaijitsu</u></strong></a> by Akasaki (2023).</em></p>
+<p align=center><strong><em>Song of the day</strong>: <a href="https://www.youtube.com/watch?v=8s9vljW8HLA"><strong><u>果実 (Fruit)</u></strong></a> by Akasaki (2023)</em></p>
 
 
 ---
 
 ### Sections
 
-1. [**On Modularity and Refactoring**](#part-1-on-modularity-and-refactoring)
-2. [**The `Entity` Class**](#part-2-the-entity-class)
-3. [**More On Game States**](#part-3-more-on-game-states)
+1. [**On Modularity and Refactoring**](#mod)
+2. [**The `Entity` Class**](#entity)
+3. [**Game State**](#state)
 
 ---
+
+<a id="mod"></a>
 
 ### Part 1: _On Modularity and Refactoring_
 
@@ -59,7 +61,9 @@ Let's make a data structure that will represent and handle all things related to
 
 <br>
 
-### Part 2: _The `Entity` Class and Game States_
+<a id="entity"></a>
+
+### Part 2: _The `Entity` Class_
 
 The goal is for us not to see **any code related to creating, modifying, and animating entities**. While we can create the entities in the `main.cpp`'s `initialise()` function, each entity should have its own `render()` and `update()` methods. Let's make a simple class to cover those basic points:
 
@@ -122,7 +126,11 @@ void Entity::render(ShaderProgram *program) {
 
 <sub>**Code Blocks 2 and 3**: The basics necessary to create a textured, non-animated sprite. Preceding member attributes with an `m_` is [**common practice**](https://www.learncpp.com/cpp-tutorial/classes-and-class-members/) in C++. </sub>
 
----
+<br>
+
+<a id="state"></a>
+
+### Part 3: _Game State_
 
 We could throw an `Entity` object onto our `initialise()` function, but let's take a step back first. We're getting to a point in the complexity of our games where we'll want to keep track of various events in our game—stuff like the player pressing start to pause the game, the player changing levels, the player losing the game, etc.. These are called **states** in game design, and keeping all things related to the game in one place will make our lives much easier later on. For that reason, let's place our player object inside a `struct` in our `main.cpp` file:
 
@@ -467,20 +475,20 @@ void initialise()
     // ————— NPCs ————— //
     g_game_state.npcs = new Entity*[NUMBER_OF_NPCS];
     
-    GLuint kimura_texture_id = load_texture(KIMURA_FILEPATH);
+    GLuint kita_texture_id = load_texture(KITA_FILEPATH, LINEAR);
 
     for (int i = 0; i < NUMBER_OF_NPCS; i++)
     {
         g_game_state.npcs[i] = new Entity(
-            kimura_texture_id,  // texture id
-            1.0f                // speed
+            kita_texture_id,  // texture id
+            1.0f              // speed
         );
-        g_game_state.npcs[i]->set_scale(KIMURA_INIT_SCALE);
+        g_game_state.npcs[i]->set_scale(KITA_INIT_SCALE);
     }
 
-    g_game_state.npcs[0]->set_position(glm::vec3( 0.0f, -2.0f, 0.0f));
-    g_game_state.npcs[1]->set_position(glm::vec3(-2.0f, -2.0f, 0.0f));
-    g_game_state.npcs[2]->set_position(glm::vec3( 2.0f, -2.0f, 0.0f));
+    g_game_state.npcs[0]->set_position(glm::vec3( 0.0f, -1.0f, 0.0f));
+    g_game_state.npcs[1]->set_position(glm::vec3(-2.0f, -1.0f, 0.0f));
+    g_game_state.npcs[2]->set_position(glm::vec3( 2.0f, -1.0f, 0.0f));
 }
 
 void update()
@@ -511,114 +519,3 @@ Output:
 ![npcs](assets/npcs.png)
 
 <sub>**Figure 1**: It's dangerous to go alone.</sub>
-
-<br>
-
-### Part 3: _More On Game States_
-
-To give you more of an idea of the kinds of things that we can store in our `GameState` structs, consider the following examples:
-
-- **Example 1**: Player, enemies, items, score.
-
-```c++
-struct GameState
-{
-    Entity *player;
-    Entity *enemies[10];
-    Entity *items[5];
-    int score;
-}
-```
-
-- **Example 2**: Bullet hell.
-
-```c++
-#define MAX_BULLETS 100;
-
-struct GameState
-{
-    int next_bullet;
-    Entity *bullets[MAX_BULLETS];
-}
-
-GameState state;
-
-void initialise()
-{
-    state.next_bullet = 0;
-
-    for (int i = 0; i < MAX_BULLETS; i++)
-    {
-        state.bullets[i].active = false;
-    }
-}
-
-void fire()
-{
-    bullet[state.next_bullet].position = ...;
-    bullet[state.next_bullet].active = true;
-
-    state.next_bullet++;
-    if (state.next_bullet == MAX_BULLETS) { next_bullet = 0; }
-}
-```
-
-<sub>Note here that `active` is not an attribute that we defined earlier. This is assuming that you made some changes to `Entity` to suit your needs.<sub>
-
-- **Example 3**: Level select.
-
-```c++
-enum GameMode { MAIN_MENU, GAME_LEVEL, GAME_OVER };
-
-struct GameState
-{
-    GameMode game_mode;
-}
-
-GameState state;
-
-void initialise()
-{
-    state.game_mode = MAIN_MENU;
-}
-
-void process_input()
-{
-    switch(state.game_mode)
-    {
-        case MAIN_MENU:
-            process_input_main_menu();
-            break;
-
-        case GAME_LEVEL:
-            process_input_game_level();
-            break;
-
-        case GAME_OVER:
-            process_input_game_over();
-            break;
-    }
-}
-
-void update()
-{
-    float ticks = (float) SDL_GetTicks() / 1000.0f;
-    float delta_time = ticks - last_ticks;
-    last_ticks = ticks;
-
-    switch(state.game_mode)
-    {
-        case MAIN_MENU:
-            update_main_menu(delta_time);
-            break;
-
-        case GAME_LEVEL:
-            update_game_level(delta_time);
-            break;
-
-        case GAME_OVER:
-            update_game_over(delta_time);
-            break;
-    } 
-}
-```

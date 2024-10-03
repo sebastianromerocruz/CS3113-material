@@ -37,9 +37,9 @@ constexpr char V_SHADER_PATH[] = "shaders/vertex_textured.glsl",
 
 constexpr float MILLISECONDS_IN_SECOND = 1000.0;
 constexpr char GEORGE_FILEPATH[] = "assets/george_0.png",
-               KIMURA_FILEPATH[] = "assets/mei.png";
+               KITA_FILEPATH[] = "assets/kita.png";
 
-constexpr glm::vec3 KIMURA_INIT_SCALE = glm::vec3(1.5f, 3.1578f, 0.0f);
+constexpr glm::vec3 KITA_INIT_SCALE = glm::vec3(2.0f, 3.8621f, 0.0f);
 
 constexpr GLint NUMBER_OF_TEXTURES = 1,
                 LEVEL_OF_DETAIL    = 0,
@@ -48,7 +48,8 @@ constexpr GLint NUMBER_OF_TEXTURES = 1,
 constexpr int NUMBER_OF_NPCS = 3;
 
 // ————— STRUCTS AND ENUMS —————//
-enum AppStatus { RUNNING, TERMINATED };
+enum AppStatus  { RUNNING, TERMINATED };
+enum FilterType { NEAREST, LINEAR     };
 
 struct GameState
 {
@@ -76,7 +77,7 @@ void shutdown();
 GLuint load_texture(const char* filepath);
 
 // ———— GENERAL FUNCTIONS ———— //
-GLuint load_texture(const char* filepath)
+GLuint load_texture(const char* filepath, FilterType filterType)
 {
     int width, height, number_of_components;
     unsigned char* image = stbi_load(filepath, &width, &height, &number_of_components, STBI_rgb_alpha);
@@ -90,10 +91,13 @@ GLuint load_texture(const char* filepath)
     GLuint textureID;
     glGenTextures(NUMBER_OF_TEXTURES, &textureID);
     glBindTexture(GL_TEXTURE_2D, textureID);
-    glTexImage2D(GL_TEXTURE_2D, LEVEL_OF_DETAIL, GL_RGBA, width, height, TEXTURE_BORDER, GL_RGBA, GL_UNSIGNED_BYTE, image);
+    glTexImage2D(GL_TEXTURE_2D, LEVEL_OF_DETAIL, GL_RGBA, width, height, TEXTURE_BORDER,
+                 GL_RGBA, GL_UNSIGNED_BYTE, image);
     
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
+                    filterType == NEAREST ? GL_NEAREST : GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
+                    filterType == NEAREST ? GL_NEAREST : GL_LINEAR);
     
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -139,7 +143,7 @@ void initialise()
     glClearColor(BG_RED, BG_BLUE, BG_GREEN, BG_OPACITY);
     
     // ————— PLAYER ————— //
-    GLuint player_texture_id = load_texture(GEORGE_FILEPATH);
+    GLuint player_texture_id = load_texture(GEORGE_FILEPATH, NEAREST);
     
     int player_walking_animation[4][4] =
     {
@@ -161,24 +165,25 @@ void initialise()
     );
     
     g_game_state.player->face_down();
+    g_game_state.player->set_position(glm::vec3(0.0f, 2.0f, 0.0f));
     
     // ————— NPCs ————— //
     g_game_state.npcs = new Entity*[NUMBER_OF_NPCS];
     
-    GLuint kimura_texture_id = load_texture(KIMURA_FILEPATH);
+    GLuint kita_texture_id = load_texture(KITA_FILEPATH, LINEAR);
 
     for (int i = 0; i < NUMBER_OF_NPCS; i++)
     {
         g_game_state.npcs[i] = new Entity(
-            kimura_texture_id,  // texture id
-            1.0f                // speed
+            kita_texture_id,  // texture id
+            1.0f              // speed
         );
-        g_game_state.npcs[i]->set_scale(KIMURA_INIT_SCALE);
+        g_game_state.npcs[i]->set_scale(KITA_INIT_SCALE);
     }
 
-    g_game_state.npcs[0]->set_position(glm::vec3( 0.0f, -2.0f, 0.0f));
-    g_game_state.npcs[1]->set_position(glm::vec3(-2.0f, -2.0f, 0.0f));
-    g_game_state.npcs[2]->set_position(glm::vec3( 2.0f, -2.0f, 0.0f));
+    g_game_state.npcs[0]->set_position(glm::vec3( 0.0f, -1.0f, 0.0f));
+    g_game_state.npcs[1]->set_position(glm::vec3(-2.0f, -1.0f, 0.0f));
+    g_game_state.npcs[2]->set_position(glm::vec3( 2.0f, -1.0f, 0.0f));
     
     // ————— GENERAL ————— //
     glEnable(GL_BLEND);

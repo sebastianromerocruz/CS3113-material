@@ -103,7 +103,7 @@ GLuint load_texture(const char* filepath);
 void draw_object(glm::mat4 &object_model_matrix, GLuint &object_texture_id);
 
 
-void draw_sprite_from_texture_atlas(ShaderProgram *program, GLuint texture_id, int index,
+void draw_sprite_from_texture_atlas(ShaderProgram *shaderProgram, GLuint texture_id, int index,
                                     int rows, int cols)
 {
     // Step 1: Calculate the UV location of the indexed frame
@@ -130,18 +130,18 @@ void draw_sprite_from_texture_atlas(ShaderProgram *program, GLuint texture_id, i
     // Step 4: And render
     glBindTexture(GL_TEXTURE_2D, texture_id);
 
-    glVertexAttribPointer(program->get_position_attribute(), 2, GL_FLOAT, false, 0,
+    glVertexAttribPointer(shaderProgram->get_position_attribute(), 2, GL_FLOAT, false, 0,
                           vertices);
-    glEnableVertexAttribArray(program->get_position_attribute());
+    glEnableVertexAttribArray(shaderProgram->get_position_attribute());
 
-    glVertexAttribPointer(program->get_tex_coordinate_attribute(), 2, GL_FLOAT, false, 0,
+    glVertexAttribPointer(shaderProgram->get_tex_coordinate_attribute(), 2, GL_FLOAT, false, 0,
                           tex_coords);
-    glEnableVertexAttribArray(program->get_tex_coordinate_attribute());
+    glEnableVertexAttribArray(shaderProgram->get_tex_coordinate_attribute());
 
     glDrawArrays(GL_TRIANGLES, 0, 6);
 
-    glDisableVertexAttribArray(program->get_position_attribute());
-    glDisableVertexAttribArray(program->get_tex_coordinate_attribute());
+    glDisableVertexAttribArray(shaderProgram->get_position_attribute());
+    glDisableVertexAttribArray(shaderProgram->get_tex_coordinate_attribute());
 }
 
 
@@ -296,51 +296,37 @@ void process_input()
     {
         switch (event.type) {
             case SDL_QUIT:
-            case SDL_WINDOWEVENT_CLOSE:
-                g_app_status = TERMINATED;
-                break;
-
+            case SDL_WINDOWEVENT_CLOSE: g_app_status = TERMINATED; break;
             case SDL_KEYDOWN:
-                switch (event.key.keysym.sym) {
-                    case SDLK_LEFT:
-                        break;
-
-                    case SDLK_RIGHT:
-                        g_george_movement.x = 1.0f;
-                        break;
-
-                    case SDLK_q:
-                        g_app_status = TERMINATED;
-                        break;
-
-                    default:
-                        break;
+                switch (event.key.keysym.sym)
+                {
+                    case SDLK_q: g_app_status = TERMINATED; break;
+                    default: break;
                 }
-
-            default:
-                break;
+                
+            default: break;
         }
     }
 
     const Uint8 *key_state = SDL_GetKeyboardState(NULL);
 
-    if (key_state[SDL_SCANCODE_LEFT])
+    if (key_state[SDL_SCANCODE_A])
     {
         g_george_movement.x = -1.0f;
         g_animation_indices = g_george_walking[LEFT];
     }
-    else if (key_state[SDL_SCANCODE_RIGHT])
+    else if (key_state[SDL_SCANCODE_D])
     {
         g_george_movement.x = 1.0f;
         g_animation_indices = g_george_walking[RIGHT];
     }
 
-    if (key_state[SDL_SCANCODE_UP])
+    if (key_state[SDL_SCANCODE_W])
     {
         g_george_movement.y = 1.0f;
         g_animation_indices = g_george_walking[UP];
     }
-    else if (key_state[SDL_SCANCODE_DOWN])
+    else if (key_state[SDL_SCANCODE_S])
     {
         g_george_movement.y = -1.0f;
         g_animation_indices = g_george_walking[DOWN];
