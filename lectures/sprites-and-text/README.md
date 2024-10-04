@@ -169,6 +169,79 @@ void draw_sprite_from_texture_atlas(ShaderProgram *program, GLuint texture_id, i
 
 <sub>**Code Block 4**: Basically what we've been doing so far, but a bit more specialised.</sub>
 
+Let's break down this function, `draw_sprite_from_texture_atlas`, step by step in detail.
+
+The parameters:
+- `shaderProgram`: A pointer to a `ShaderProgram` object that contains the shader used for rendering.
+- `texture_id`: The OpenGL ID of the texture (the texture atlas).
+- `index`: The index of the sprite within the texture atlas.
+- `rows` and `cols`: The number of rows and columns in the texture atlas, used to calculate the position of each sprite.
+
+#### **Step 1: Calculate the UV location of the indexed frame**
+
+```cpp
+float u_coord = (float) (index % cols) / (float) cols;
+float v_coord = (float) (index / cols) / (float) rows;
+```
+
+- **Purpose**: This part calculates the UV (texture) coordinates for the sprite in the texture atlas. UV coordinates specify how textures are mapped onto 2D or 3D geometry.
+  
+- **How it works**:
+  - `index`: This is the sprite's position in the texture atlas, counting left-to-right, top-to-bottom.
+  - The texture atlas is arranged in a grid, and `cols` is the number of sprites per row, while `rows` is the number of sprites per column.
+  
+  **Calculating the horizontal (u) coordinate**:
+  - The `u_coord` is the starting x-coordinate in UV space for the sprite. The calculation `(index % cols)` gives the column of the sprite (because taking the modulo of the index by `cols` gives the remainder when divided by the number of columns).
+  - This column number is divided by the total number of columns to normalize it into the 0 to 1 UV space.
+
+  **Calculating the vertical (v) coordinate**:
+  - The `v_coord` is the starting y-coordinate in UV space for the sprite. `(index / cols)` gives the row number of the sprite (integer division).
+  - This is divided by the total number of rows to normalize it in UV space.
+
+#### **Step 2: Calculate its UV size**
+
+```cpp
+float width = 1.0f / (float) cols;
+float height = 1.0f / (float) rows;
+```
+
+- **Purpose**: Here, we calculate the size of a single sprite in UV space.
+  
+- **How it works**:
+  - `width`: The width of each sprite in UV space. Since UV coordinates range from 0 to 1, the width of one sprite is simply `1 / cols`.
+  - `height`: The height of each sprite in UV space is `1 / rows`.
+
+  Together, this means each sprite is uniformly distributed across the atlas, and these calculations determine how much of the UV space each sprite occupies.
+
+#### **Step 3: Match the texture coordinates to the vertices**
+
+```cpp
+float tex_coords[] =
+{
+    u_coord, v_coord + height, u_coord + width, v_coord + height, u_coord + width,
+    v_coord, u_coord, v_coord + height, u_coord + width, v_coord, u_coord, v_coord
+};
+
+float vertices[] =
+{
+    -0.5, -0.5, 0.5, -0.5,  0.5, 0.5,
+    -0.5, -0.5, 0.5,  0.5, -0.5, 0.5
+};
+```
+
+- **Purpose**: These arrays define:
+  1. `tex_coords[]`: The UV coordinates for the sprite (where to map the texture on the quad).
+  2. `vertices[]`: The vertex positions of the quad (the actual geometry on the screen).
+
+**Explanation of `tex_coords[]`:**
+  - UV coordinates are defined as `(u, v)` pairs. Each entry corresponds to a vertex on the quad, mapping that vertex to a specific part of the texture.
+  - The array maps the coordinates of the sprite from the texture atlas to each vertex of the quad.
+  - Example: `(u_coord, v_coord + height)` represents the bottom-left corner of the sprite, and `(u_coord + width, v_coord)` represents the top-right corner.
+
+**Explanation of `vertices[]`:**
+  - The vertex positions define a rectangle (quad) centered at the origin, with dimensions 1x1 in normalized device coordinates.
+  - `-0.5, -0.5` is the bottom-left corner of the quad, `0.5, 0.5` is the top-right corner.
+
 Using this function, our render function becomes much shorter and neater:
 
 ```c++

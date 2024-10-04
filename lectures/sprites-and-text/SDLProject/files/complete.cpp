@@ -56,8 +56,8 @@
 //
 //int g_george_walking[SPRITESHEET_DIMENSIONS][SPRITESHEET_DIMENSIONS] =
 //{
-//    { 3, 7, 11, 15 }, // for George to move to the right,
 //    { 1, 5, 9,  13 }, // for George to move to the left,
+//    { 3, 7, 11, 15 }, // for George to move to the right,
 //    { 2, 6, 10, 14 }, // for George to move upwards,
 //    { 0, 4, 8,  12 }  // for George to move downwards
 //};
@@ -103,45 +103,45 @@
 //void draw_object(glm::mat4 &object_model_matrix, GLuint &object_texture_id);
 //
 //
-//void draw_sprite_from_texture_atlas(ShaderProgram *program, GLuint texture_id, int index,
+//void draw_sprite_from_texture_atlas(ShaderProgram *shaderProgram, GLuint texture_id, int index,
 //                                    int rows, int cols)
 //{
 //    // Step 1: Calculate the UV location of the indexed frame
 //    float u_coord = (float) (index % cols) / (float) cols;
 //    float v_coord = (float) (index / cols) / (float) rows;
-//    
+//
 //    // Step 2: Calculate its UV size
 //    float width = 1.0f / (float) cols;
 //    float height = 1.0f / (float) rows;
-//    
+//
 //    // Step 3: Just as we have done before, match the texture coordinates to the vertices
 //    float tex_coords[] =
 //    {
 //        u_coord, v_coord + height, u_coord + width, v_coord + height, u_coord + width,
 //        v_coord, u_coord, v_coord + height, u_coord + width, v_coord, u_coord, v_coord
 //    };
-//    
+//
 //    float vertices[] =
 //    {
 //        -0.5, -0.5, 0.5, -0.5,  0.5, 0.5,
 //        -0.5, -0.5, 0.5,  0.5, -0.5, 0.5
 //    };
-//    
+//
 //    // Step 4: And render
 //    glBindTexture(GL_TEXTURE_2D, texture_id);
-//    
-//    glVertexAttribPointer(program->get_position_attribute(), 2, GL_FLOAT, false, 0,
+//
+//    glVertexAttribPointer(shaderProgram->get_position_attribute(), 2, GL_FLOAT, false, 0,
 //                          vertices);
-//    glEnableVertexAttribArray(program->get_position_attribute());
-//    
-//    glVertexAttribPointer(program->get_tex_coordinate_attribute(), 2, GL_FLOAT, false, 0,
+//    glEnableVertexAttribArray(shaderProgram->get_position_attribute());
+//
+//    glVertexAttribPointer(shaderProgram->get_tex_coordinate_attribute(), 2, GL_FLOAT, false, 0,
 //                          tex_coords);
-//    glEnableVertexAttribArray(program->get_tex_coordinate_attribute());
-//    
+//    glEnableVertexAttribArray(shaderProgram->get_tex_coordinate_attribute());
+//
 //    glDrawArrays(GL_TRIANGLES, 0, 6);
-//    
-//    glDisableVertexAttribArray(program->get_position_attribute());
-//    glDisableVertexAttribArray(program->get_tex_coordinate_attribute());
+//
+//    glDisableVertexAttribArray(shaderProgram->get_position_attribute());
+//    glDisableVertexAttribArray(shaderProgram->get_tex_coordinate_attribute());
 //}
 //
 //
@@ -164,7 +164,7 @@
 //        //    position relative to the whole sentence)
 //        int spritesheet_index = (int) text[i];  // ascii value of character
 //        float offset = (font_size + spacing) * i;
-//        
+//
 //        // 2. Using the spritesheet index, we can calculate our U- and V-coordinates
 //        float u_coordinate = (float) (spritesheet_index % FONTBANK_SIZE) / FONTBANK_SIZE;
 //        float v_coordinate = (float) (spritesheet_index / FONTBANK_SIZE) / FONTBANK_SIZE;
@@ -192,21 +192,21 @@
 //    // 4. And render all of them using the pairs
 //    glm::mat4 model_matrix = glm::mat4(1.0f);
 //    model_matrix = glm::translate(model_matrix, position);
-//    
+//
 //    shader_program->set_model_matrix(model_matrix);
 //    glUseProgram(shader_program->get_program_id());
-//    
+//
 //    glVertexAttribPointer(shader_program->get_position_attribute(), 2, GL_FLOAT, false, 0,
 //                          vertices.data());
 //    glEnableVertexAttribArray(shader_program->get_position_attribute());
-//    
+//
 //    glVertexAttribPointer(shader_program->get_tex_coordinate_attribute(), 2, GL_FLOAT,
 //                          false, 0, texture_coordinates.data());
 //    glEnableVertexAttribArray(shader_program->get_tex_coordinate_attribute());
-//    
+//
 //    glBindTexture(GL_TEXTURE_2D, font_texture_id);
 //    glDrawArrays(GL_TRIANGLES, 0, (int) (text.size() * 6));
-//    
+//
 //    glDisableVertexAttribArray(shader_program->get_position_attribute());
 //    glDisableVertexAttribArray(shader_program->get_tex_coordinate_attribute());
 //}
@@ -217,28 +217,28 @@
 //    int width, height, number_of_components;
 //    unsigned char* image = stbi_load(filepath, &width, &height, &number_of_components,
 //                                     STBI_rgb_alpha);
-//    
+//
 //    if (image == NULL)
 //    {
 //        LOG("Unable to load image. Make sure the path is correct.");
 //        assert(false);
 //    }
-//    
+//
 //    GLuint textureID;
 //    glGenTextures(NUMBER_OF_TEXTURES, &textureID);
-//    
+//
 //    glBindTexture(GL_TEXTURE_2D, textureID);
 //    glTexImage2D(GL_TEXTURE_2D, LEVEL_OF_DETAIL, GL_RGBA, width, height, TEXTURE_BORDER,
 //                 GL_RGBA, GL_UNSIGNED_BYTE, image);
-//    
+//
 //    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 //    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-//    
+//
 //    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 //    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-//    
+//
 //    stbi_image_free(image);
-//    
+//
 //    return textureID;
 //}
 //
@@ -250,7 +250,7 @@
 //                                      SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 //                                      WINDOW_WIDTH, WINDOW_HEIGHT,
 //                                      SDL_WINDOW_OPENGL);
-//    
+//
 //    SDL_GLContext context = SDL_GL_CreateContext(g_display_window);
 //    SDL_GL_MakeCurrent(g_display_window, context);
 //
@@ -259,29 +259,29 @@
 //        std::cerr << "Error: SDL window could not be created.\n";
 //        shutdown();
 //    }
-//    
+//
 //#ifdef _WINDOWS
 //    glewInit();
 //#endif
-//    
+//
 //    glViewport(VIEWPORT_X, VIEWPORT_Y, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
-//    
+//
 //    g_shader_program.load(V_SHADER_PATH, F_SHADER_PATH);
-//    
+//
 //    g_george_matrix      = glm::mat4(1.0f);
 //    g_view_matrix       = glm::mat4(1.0f);
 //    g_projection_matrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);
-//    
+//
 //    g_shader_program.set_projection_matrix(g_projection_matrix);
 //    g_shader_program.set_view_matrix(g_view_matrix);
-//    
+//
 //    glUseProgram(g_shader_program.get_program_id());
-//    
+//
 //    glClearColor(BG_RED, BG_BLUE, BG_GREEN, BG_OPACITY);
-//    
+//
 //    g_george_texture_id = load_texture(SPRITESHEET_FILEPATH);
 //    g_font_texture_id = load_texture(FONTSHEET_FILEPATH);
-//    
+//
 //    glEnable(GL_BLEND);
 //    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 //}
@@ -290,62 +290,48 @@
 //void process_input()
 //{
 //    g_george_movement = glm::vec3(0.0f);
-//    
+//
 //    SDL_Event event;
 //    while (SDL_PollEvent(&event))
 //    {
 //        switch (event.type) {
 //            case SDL_QUIT:
-//            case SDL_WINDOWEVENT_CLOSE:
-//                g_app_status = TERMINATED;
-//                break;
-//                
+//            case SDL_WINDOWEVENT_CLOSE: g_app_status = TERMINATED; break;
 //            case SDL_KEYDOWN:
-//                switch (event.key.keysym.sym) {
-//                    case SDLK_LEFT:
-//                        break;
-//                        
-//                    case SDLK_RIGHT:
-//                        g_george_movement.x = 1.0f;
-//                        break;
-//                        
-//                    case SDLK_q:
-//                        g_app_status = TERMINATED;
-//                        break;
-//                        
-//                    default:
-//                        break;
+//                switch (event.key.keysym.sym)
+//                {
+//                    case SDLK_q: g_app_status = TERMINATED; break;
+//                    default: break;
 //                }
 //                
-//            default:
-//                break;
+//            default: break;
 //        }
 //    }
-//    
+//
 //    const Uint8 *key_state = SDL_GetKeyboardState(NULL);
 //
-//    if (key_state[SDL_SCANCODE_LEFT])
+//    if (key_state[SDL_SCANCODE_A])
 //    {
 //        g_george_movement.x = -1.0f;
 //        g_animation_indices = g_george_walking[LEFT];
 //    }
-//    else if (key_state[SDL_SCANCODE_RIGHT])
+//    else if (key_state[SDL_SCANCODE_D])
 //    {
 //        g_george_movement.x = 1.0f;
 //        g_animation_indices = g_george_walking[RIGHT];
 //    }
-//    
-//    if (key_state[SDL_SCANCODE_UP])
+//
+//    if (key_state[SDL_SCANCODE_W])
 //    {
 //        g_george_movement.y = 1.0f;
 //        g_animation_indices = g_george_walking[UP];
 //    }
-//    else if (key_state[SDL_SCANCODE_DOWN])
+//    else if (key_state[SDL_SCANCODE_S])
 //    {
 //        g_george_movement.y = -1.0f;
 //        g_animation_indices = g_george_walking[DOWN];
 //    }
-//    
+//
 //    if (glm::length(g_george_movement) > 1.0f)
 //    {
 //        g_george_movement = glm::normalize(g_george_movement);
@@ -365,19 +351,19 @@
 //    {
 //        g_animation_time += delta_time;
 //        float frames_per_second = (float) 1 / SECONDS_PER_FRAME;
-//        
+//
 //        if (g_animation_time >= frames_per_second)
 //        {
 //            g_animation_time = 0.0f;
 //            g_animation_index++;
-//            
+//
 //            if (g_animation_index >= g_animation_frames) g_animation_index = 0;
 //        }
 //    }
-//    
+//
 //    /* GAME LOGIC */
 //    g_george_position += g_george_movement * g_player_speed * delta_time;
-//    
+//
 //    /* TRANSFORMATIONS */
 //    g_george_matrix = glm::mat4(1.0f);
 //    g_george_matrix = glm::translate(g_george_matrix, g_george_position);
@@ -395,15 +381,15 @@
 //void render()
 //{
 //    glClear(GL_COLOR_BUFFER_BIT);
-//  
+//
 //    g_shader_program.set_model_matrix(g_george_matrix);
 //    draw_sprite_from_texture_atlas(&g_shader_program, g_george_texture_id,
 //                                   g_animation_indices[g_animation_index],
 //                                   SPRITESHEET_DIMENSIONS, SPRITESHEET_DIMENSIONS);
-//    
+//
 //    draw_text(&g_shader_program, g_font_texture_id, "Hello, George!", 0.5f, 0.05f,
 //              glm::vec3(-3.5f, 2.0f, 0.0f));
-//    
+//
 //    SDL_GL_SwapWindow(g_display_window);
 //}
 //
@@ -414,14 +400,14 @@
 //int main(int argc, char* argv[])
 //{
 //    initialise();
-//    
+//
 //    while (g_app_status == RUNNING)
 //    {
 //        process_input();
 //        update();
 //        render();
 //    }
-//    
+//
 //    shutdown();
 //    return 0;
 //}

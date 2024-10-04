@@ -303,7 +303,7 @@ void process_input()
                     case SDLK_q: g_app_status = TERMINATED; break;
                     default: break;
                 }
-                
+
             default: break;
         }
     }

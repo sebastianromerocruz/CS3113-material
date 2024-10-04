@@ -38,27 +38,26 @@
 //                LEVEL_OF_DETAIL    = 0,
 //                TEXTURE_BORDER     = 0;
 //
-//// source: https://yorukura-anime.com/
-//constexpr char KANO_SPRITE_FILEPATH[] = "assets/kano.png";
-//constexpr glm::vec3 KANO_INIT_SCALE = glm::vec3(2.0f, 4.2104f, 0.0f);
+//constexpr char PLAYER_SPRITE_FILEPATH[] = "assets/kita.png";
+//constexpr glm::vec3 PLAYER_INIT_SCALE = glm::vec3(2.0f, 3.8621f, 0.0f);
 //
 //SDL_Window* g_display_window = nullptr;
 //AppStatus g_app_status = RUNNING;
 //
 //ShaderProgram g_shader_program = ShaderProgram();
 //
-//GLuint g_kano_texture_id;
+//GLuint g_player_texture_id;
 //
 //glm::mat4 g_view_matrix,
-//          g_kano_matrix,
+//          g_player_matrix,
 //          g_projection_matrix;
 //
 //float g_previous_ticks = 0.0f;
 //                                                               
-//glm::vec3 g_kano_position = glm::vec3(0.0f, 0.0f, 0.0f);
-//glm::vec3 g_kano_movement = glm::vec3(0.0f, 0.0f, 0.0f);
+//glm::vec3 g_player_position = glm::vec3(0.0f, 0.0f, 0.0f);
+//glm::vec3 g_player_movement = glm::vec3(0.0f, 0.0f, 0.0f);
 //                                                               
-//float g_kano_speed = 5.0f;  // move 1 unit per second
+//float g_player_speed = 5.0f;  // move 1 unit per second
 //
 //void initialise();
 //void process_input();
@@ -110,10 +109,7 @@
 //    SDL_GLContext context = SDL_GL_CreateContext(g_display_window);
 //    SDL_GL_MakeCurrent(g_display_window, context);
 //    
-//    if (g_display_window == nullptr)
-//    {
-//        shutdown();
-//    }
+//    if (g_display_window == nullptr) shutdown();
 //    
 //#ifdef _WINDOWS
 //    glewInit();
@@ -123,8 +119,8 @@
 //    
 //    g_shader_program.load(V_SHADER_PATH, F_SHADER_PATH);
 //    
-//    g_kano_texture_id = load_texture(KANO_SPRITE_FILEPATH);
-//    g_kano_matrix      = glm::mat4(1.0f);
+//    g_player_texture_id = load_texture(PLAYER_SPRITE_FILEPATH);
+//    g_player_matrix     = glm::mat4(1.0f);
 //    g_view_matrix       = glm::mat4(1.0f);
 //    g_projection_matrix = glm::ortho(-5.0f, 5.0f, -3.75f, 3.75f, -1.0f, 1.0f);
 //    
@@ -141,7 +137,7 @@
 //void process_input()
 //{
 //    // VERY IMPORTANT: If nothing is pressed, we don't want to go anywhere
-//    g_kano_movement = glm::vec3(0.0f);
+//    g_player_movement = glm::vec3(0.0f);
 //
 //    SDL_Event event;
 //    while (SDL_PollEvent(&event))
@@ -163,7 +159,7 @@
 //                                                                             
 //                    case SDLK_RIGHT:
 //                        // Move the player right
-//                        g_kano_movement.x = 1.0f;
+//                        g_player_movement.x = 1.0f;
 //                        break;
 //                                                                             
 //                    case SDLK_q:
@@ -183,30 +179,27 @@
 //                                                                             
 //    const Uint8 *key_state = SDL_GetKeyboardState(NULL);
 //                                                                             
-//    if (key_state[SDL_SCANCODE_LEFT])
+//    if (key_state[SDL_SCANCODE_A])
 //    {
-//        g_kano_movement.x = -1.0f;
+//        g_player_movement.x = -1.0f;
 //    }
-//    else if (key_state[SDL_SCANCODE_RIGHT])
+//    else if (key_state[SDL_SCANCODE_D])
 //    {
-//        g_kano_movement.x = 1.0f;
-//    }
-//                                                                             
-//    if (key_state[SDL_SCANCODE_UP])
-//    {
-//        g_kano_movement.y = 1.0f;
-//    }
-//    else if (key_state[SDL_SCANCODE_DOWN])
-//    {
-//        g_kano_movement.y = -1.0f;
+//        g_player_movement.x = 1.0f;
 //    }
 //                                                                             
-//    // This makes sure that the player can't "cheat" their way into moving
-//    // faster
-//    if (glm::length(g_kano_movement) > 1.0f)
+//    if (key_state[SDL_SCANCODE_W])
 //    {
-//        g_kano_movement = glm::normalize(g_kano_movement);
+//        g_player_movement.y = 1.0f;
 //    }
+//    else if (key_state[SDL_SCANCODE_S])
+//    {
+//        g_player_movement.y = -1.0f;
+//    }
+//                                                          
+//    
+//    if (glm::length(g_player_movement) > 1.0f)
+//        g_player_movement = glm::normalize(g_player_movement);
 //}
 //
 //void update()
@@ -217,13 +210,13 @@
 //    g_previous_ticks = ticks;
 //
 //    /* GAME LOGIC */
-//    g_kano_position += g_kano_movement * g_kano_speed * delta_time;
+//    g_player_position += g_player_movement * g_player_speed * delta_time;
 //    
 //    /* TRANSFORMATIONS */
-//    g_kano_matrix = glm::mat4(1.0f);
+//    g_player_matrix = glm::mat4(1.0f);
 //    
-//    g_kano_matrix = glm::translate(g_kano_matrix, g_kano_position);
-//    g_kano_matrix = glm::scale(g_kano_matrix, KANO_INIT_SCALE);
+//    g_player_matrix = glm::translate(g_player_matrix, g_player_position);
+//    g_player_matrix = glm::scale(g_player_matrix, PLAYER_INIT_SCALE);
 //}
 //
 //
@@ -259,7 +252,7 @@
 //    glEnableVertexAttribArray(g_shader_program.get_tex_coordinate_attribute());
 //    
 //    // Bind texture
-//    draw_object(g_kano_matrix, g_kano_texture_id);
+//    draw_object(g_player_matrix, g_player_texture_id);
 //    
 //    // We disable two attribute arrays now
 //    glDisableVertexAttribArray(g_shader_program.get_position_attribute());
