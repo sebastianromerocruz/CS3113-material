@@ -44,11 +44,10 @@
 5. **Week 5** Sprite Animation and Text and The Entity Class: 
     1.  [**Sprite Animation and Text**](lectures/sprites-and-text/)
     2.  [**Entities**](lectures/entities/)
-<!--6. **Week 6**: The Entity Class and Physics
-    1. [**Entities**](lectures/entities/)
-    2. [**Physics: Gravity**](lectures/physics_1/)
-7. **Week 7**: [**Physics: Colliding with Different Kinds of Entities**](lectures/physics_2/)
-8. **Week 8**: Music, sound effects, and basic enemy AI
+6. **Week 6**: Physics 1 and Physics 2
+    1. [**Physics: Gravity**](lectures/physics_1/)
+    2. [**Physics: Colliding with Different Kinds of Entities**](lectures/physics_2/)
+<!-- 8. **Week 8**: Music, sound effects, and basic enemy AI
     1. [**Music and Sound Effects**](lectures/sound-fx/)
     2. [**Basic Enemy AI**](lectures/enemy-ai/)
 8. **Week 8**: Map and stage building
@@ -122,8 +121,8 @@ You will also need a [**Github**](https://github.com/) account!
 
 | **Item**                                                                | **Percentage** |
 |-------------------------------------------------------------------------|----------------|
-| **_Project 1_**: [**Draw a Simple 2D Scene**](assignments/project_1.md) | 10%            |
-| **_Project 2_**: [**Pong**](assignments/project_2.md)                   | 10%            |
+| **_Project 1_**: [**Draw a Simple 2D Scene**]() | 10%            |
+| **_Project 2_**: [**Pong**]()                   | 10%            |
 | **_Project 3_**: [**Lunar Lander**]()           | 15%            |
 | **_Project 4_**: [**Rise of the AI**]()         | 15%            |
 | **_Project 5_**: [**Platformer**]()             | 15%            |
