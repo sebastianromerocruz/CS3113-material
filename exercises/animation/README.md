@@ -1,4 +1,4 @@
-<h2 align=center>Lecture 07: <em>In-Class Exercise</em></h2>
+<!-- <h2 align=center>Lecture 07: <em>In-Class Exercise</em></h2>
 
 <h1 align=center>Exercise: <em>Animation</em></h1>
 
@@ -73,4 +73,4 @@ draw_sprite_from_texture_atlas(&g_character_program, g_character_texture_id, 0, 
 // ———— PART 4 ———— //
 ```
 
-You can find the solutions [**here**](SDLProject/solution/solution.cpp), though you should of course give it a shot before you look at it!
+You can find the solutions [**here**](SDLProject/solution/solution.cpp), though you should of course give it a shot before you look at it! -->
