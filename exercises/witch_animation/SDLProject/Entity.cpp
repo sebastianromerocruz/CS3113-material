@@ -45,13 +45,6 @@ void Entity::set_animation_state(Animation new_animation)
 
     // Update the texture and animation indices based on the current animation
     m_animation_indices = m_animations[m_current_animation].data();
-
-    /**
-     Update the number of rows to match the new texture spritesheet
-
-     Since the attacking animation spritesheet is twice as long as
-     the idle animation, we scale accordingly
-     */
 }
 
 // Render the appropriate texture and animation frame

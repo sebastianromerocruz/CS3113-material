@@ -1,23 +1,25 @@
-<h2 align=center>Week 7</h2>
+<h2 align=center>Week 6</h2>
 
 <h1 align=center>Colliding with Different Kinds of Entities</h1>
 
-<h3 align=center>3 Wyvern Moon, Imperial Year MMXXIV</h3>
+<h3 align=center>11 Wyvern Moon, Imperial Year MMXXIV</h3>
 
-<p align=center><strong><em>Song of the day</strong>: <a href="https://www.youtube.com/watch?v=rZxCk39NXxU"><strong><u>Drunk </u></strong></a> by Dijon (2019).</em></p>
+<p align=center><strong><em>Song of the day</strong>: <a href="https://www.youtube.com/watch?v=rZxCk39NXxU"><strong><u>Drunk</u></strong></a> by Dijon (2019).</em></p>
 
 ### Sections
 
 ---
 
-1. [**Collision Overlap**](#part-1-collision-overlap)
-2. [**It's-a me, Jumping**](#part-2-its-a-me-jumping)
-3. [**`is_active`, Collision Flags, and Entity Types**](#part-3-isactive-collision-flags-and-entity-types)
-    1. [**`is_active`**](#isactive)
-    2. [**Collision Flags**](#collision-flags)
-    3. [**Entity Types**](#entity-types)
+1. [**Collision Overlap**](#1)
+2. [**It's-a me, Jumping**](#2)
+3. [**`is_active`, Collision Flags, and Entity Types**](#3)
+    1. [**`is_active`**](#3-1)
+    2. [**Collision Flags**](#3-2)
+    3. [**Entity Types**](#3-3)
 
 ---
+
+<a id="1"></a>
 
 ### Part 1: _Collision Overlap_
 
@@ -86,6 +88,8 @@ The result is the beginnings of a platformer game:
 <sub>**Figure 3**: George takes a walk.</sub>
 
 <br>
+
+<a id="2"></a>
 
 ### Part 2: _It's-a me, Jumping_
 
@@ -236,6 +240,8 @@ void const Entity::check_collision_x(Entity *collidable_entities, int collidable
 
 <br>
 
+<a id="3"></a>
+
 ### Part 3: _`is_active`, Collision Flags, and Entity Types_
 
 As the complexity of our games grows, you'll likely start to notice that one function, method, and/or class will not be enough for us to be able to give unique functionality to our player, our enemies, and the world which they in habit. Collision detection, for example, should exhibit different behaviour depending on whether we touch an enemy or a wall. In the case of, say, Super Mario Bros., we have several types of collisions depending on not just the object, but on the direction that we are colliding with said object:
@@ -245,6 +251,8 @@ As the complexity of our games grows, you'll likely start to notice that one fun
 <sub>**Figure 8**: Even within this frame alone, we have multiple types of collisions depending on what and in which direction Mario hits them in. `1` will release the contents of the ? block, `2` will have the ? block be a simple platform, `3` will cause Mario to take damage, `4` will cause the enemy to take damage, `5` will destroy the brick block, `6` will be a simple collision, and `7` will give Mario a power-up.</sub>
 
 The way we deal with all of these different types of situations is by adding a few flags to our entity classes. Let's start with a simple one.
+
+<a id="3-1"></a>
 
 #### `is_active`
 
@@ -301,6 +309,8 @@ void initialise()
 <sub>**Code Block 8 and Figure 9**: Our right platform may as well not exist, even though it is actually there.</sub>
 
 ---
+
+<a id="3-2"></a>
 
 #### Collision Flags
 
@@ -415,6 +425,8 @@ void process_input()
 ```
 
 <sub>**Code Block 10**: A more specific condition for jumping.</sub>
+
+<a id="3-3"></a>
 
 #### Entity Types
 

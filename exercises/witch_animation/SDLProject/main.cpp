@@ -193,10 +193,6 @@ void process_input()
 
     const Uint8 *key_state = SDL_GetKeyboardState(NULL);
 
-    /**
-     User input part
-     */
-
     if (glm::length(g_game_state.witch->get_movement()) > 1.0f)
         g_game_state.witch->normalise_movement();
 }

@@ -1,19 +1,21 @@
-<h2 align=center>Week 6: <em>Day 2</em></h2>
+<h2 align=center>Week 6</h2>
 
 <h1 align=center>Physics: <em>Fixed Timestep and Gravity</em></h1>
 
-<h3 align=center>3 Wyvern Moon, Imperial Year MMXXIV<<h3>
+<h3 align=center>11 Wyvern Moon, Imperial Year MMXXIV<<h3>
 
-<p align=center><strong><em>Song of the day</strong>: <a href="https://www.youtube.com/watch?v=rZxCk39NXxU"><strong><u>Drunk </u></strong></a> by Dijon (2019).</em></p>
+<p align=center><strong><em>Song of the day</strong>: <a href="https://www.youtube.com/watch?v=rZxCk39NXxU"><strong><u>Drunk</u></strong></a> by Dijon (2019)</em></p>
 
 ---
 
 ### Sections
 
-1. [**Fixed Time-step**](#part-1-fixed-time-step)
-2. [**Gravity**](#part-2-gravity)
+1. [**Fixed Time-step**](#1)
+2. [**Gravity**](#2)
 
 ---
+
+<a id="1"></a>
 
 ### Part 1: _Fixed Time-Step_
 
@@ -159,6 +161,8 @@ constexpr float FIXED_TIMESTEP = 1.0f / 60.0f; // ~0.0166667 seconds or 16.67 mi
 ```
 
 <br>
+
+<a id="2"></a>
 
 ### Part 2: _Gravity_
 
