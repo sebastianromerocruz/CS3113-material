@@ -121,12 +121,12 @@ You will also need a [**Github**](https://github.com/) account!
 
 | **Item**                                                                | **Percentage** |
 |-------------------------------------------------------------------------|----------------|
-| **_Project 1_**: [**Draw a Simple 2D Scene**]() | 10%            |
-| **_Project 2_**: [**Pong**]()                   | 10%            |
-| **_Project 3_**: [**Lunar Lander**]()           | 15%            |
-| **_Project 4_**: [**Rise of the AI**]()         | 15%            |
-| **_Project 5_**: [**Platformer**]()             | 15%            |
-| **_Project 6_**: [**Students' Choice**]()       | 25%            |
+| **_Project 1_**: [**Draw a Simple 2D Scene**](assignments/project_1.md) | 10%            |
+| **_Project 2_**: [**Pong**](assignments/project_2.md)                   | 10%            |
+| **_Project 3_**: [**Lunar Lander**](assignments/project_3.md)           | 15%            |
+| **_Project 4_**: **Rise of the AI**         | 15%            |
+| **_Project 5_**: **Platformer**             | 15%            |
+| **_Project 6_**: **Students' Choice**       | 25%            |
 | **_Classwork_**                                 | 10%            |
 
 - Every assignment will have an "extra credit" portion. This will **add 5% to your final grade** at the end of the semester if you complete the extra credit portion of **at least 3 of the projects**. While 5% may not seem like a lot, it can mean the difference between two letter grades. This can be especially helpful later in the semester, when the projects become longer and more complex.
