@@ -502,5 +502,5 @@ FodyWeavers.xsd
 
 #transformation solution
 
-exercises/animation/SDLProject/solution
+exercises/entity_types/SDLProject/solution
 # End of https://www.toptal.com/developers/gitignore/api/c++,visualstudiocode,visualstudio,xcode,macos
