@@ -47,10 +47,10 @@
 6. **Week 6**: Physics 1 and Physics 2
     1. [**Physics: Gravity**](lectures/physics_1/)
     2. [**Physics: Colliding with Different Kinds of Entities**](lectures/physics_2/)
-<!-- 8. **Week 8**: Music, sound effects, and basic enemy AI
+7. **Week 7**: Music, sound effects, and basic enemy AI
     1. [**Music and Sound Effects**](lectures/sound-fx/)
     2. [**Basic Enemy AI**](lectures/enemy-ai/)
-8. **Week 8**: Map and stage building
+<!--8. **Week 8**: Map and stage building
     1. [**Tilesets and Tilemaps**](lectures/platform-levels/)
     2. [**Scenes**](lectures/scenes/)
 9. **Weeks 9 and 10**: Special effects
@@ -121,12 +121,12 @@ You will also need a [**Github**](https://github.com/) account!
 
 | **Item**                                                                | **Percentage** |
 |-------------------------------------------------------------------------|----------------|
-| **_Project 1_**: [**Draw a Simple 2D Scene**](assignments/project_1.md) | 10%            |
-| **_Project 2_**: [**Pong**](assignments/project_2.md)                   | 10%            |
-| **_Project 3_**: [**Lunar Lander**](assignments/project_3.md)           | 15%            |
-| **_Project 4_**: **Rise of the AI**         | 15%            |
-| **_Project 5_**: **Platformer**             | 15%            |
-| **_Project 6_**: **Students' Choice**       | 25%            |
+| **_Project 1_**: [**Draw a Simple 2D Scene**]() | 10%            |
+| **_Project 2_**: [**Pong**]()                   | 10%            |
+| **_Project 3_**: [**Lunar Lander**]()           | 15%            |
+| **_Project 4_**: [**Rise of the AI**]()         | 15%            |
+| **_Project 5_**: [**Platformer**]()             | 15%            |
+| **_Project 6_**: [**Students' Choice**]()       | 25%            |
 | **_Classwork_**                                 | 10%            |
 
 - Every assignment will have an "extra credit" portion. This will **add 5% to your final grade** at the end of the semester if you complete the extra credit portion of **at least 3 of the projects**. While 5% may not seem like a lot, it can mean the difference between two letter grades. This can be especially helpful later in the semester, when the projects become longer and more complex.
