@@ -240,12 +240,6 @@ void process_input()
                         {
                             g_state.player->jump();
                             Mix_PlayChannel(NEXT_CHNL, g_jump_sfx, 0);
-
-                            /**
-                             Mix_FadeInChannel(channel_id, sound_chunk, loops, fade_in_time);
-
-
-                             */
                         }
                         break;
 
