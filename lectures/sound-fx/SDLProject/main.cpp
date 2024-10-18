@@ -3,7 +3,6 @@
 #define LOG(argument) std::cout << argument << '\n'
 #define GL_GLEXT_PROTOTYPES 1
 #define FIXED_TIMESTEP 0.0166666f
-#define PLATFORM_COUNT 5
 
 #ifdef _WINDOWS
 #include <GL/glew.h>
@@ -34,9 +33,9 @@ struct GameState
 constexpr int WINDOW_WIDTH  = 640,
           WINDOW_HEIGHT = 480;
 
-constexpr float BG_RED     = 0.1922f,
-            BG_BLUE    = 0.549f,
-            BG_GREEN   = 0.9059f,
+constexpr float BG_RED     = 94.0f / 255.0f,
+            BG_BLUE    = 148.0f / 255.0f,
+            BG_GREEN   = 251.0f / 255.0f,
             BG_OPACITY = 1.0f;
 
 constexpr int VIEWPORT_X = 0,
@@ -51,7 +50,7 @@ constexpr float MILLISECONDS_IN_SECOND = 1000.0;
 constexpr char SPRITESHEET_FILEPATH[] = "assets/george_0.png";
 constexpr char PLATFORM_FILEPATH[]    = "assets/platformPack_tile027.png";
 
-constexpr char BGM_FILEPATH[]          = "assets/audio/dooblydoo.mp3",
+constexpr char BGM_FILEPATH[]          = "assets/audio/Pookatori and Friends.mp3",
            BOUNCING_SFX_FILEPATH[] = "assets/audio/bounce.wav";
 constexpr int  LOOP_FOREVER   = -1;  // -1 means loop forever in Mix_PlayMusic; 0 means play once and loop zero times
 
@@ -70,6 +69,9 @@ constexpr int PLAY_ONCE   =  0,
           MUTE_VOL    =  0,
           MILS_IN_SEC =  1000,
           ALL_SFX_CHN = -1;
+
+// GAME OBJECTS
+constexpr int PLATFORM_COUNT = 5;
 
 // ––––– GLOBAL VARIABLES ––––– //
 GameState g_game_state;
@@ -100,27 +102,27 @@ GLuint load_texture(const char* filepath)
 {
     int width, height, number_of_components;
     unsigned char* image = stbi_load(filepath, &width, &height, &number_of_components, STBI_rgb_alpha);
-    
+
     if (image == NULL)
     {
         LOG("Unable to load image. Make sure the path is correct.");
         assert(false);
     }
-    
+
     GLuint textureID;
     glGenTextures(NUMBER_OF_TEXTURES, &textureID);
     glBindTexture(GL_TEXTURE_2D, textureID);
     glTexImage2D(GL_TEXTURE_2D, LEVEL_OF_DETAIL, GL_RGBA, width, height, TEXTURE_BORDER, GL_RGBA, GL_UNSIGNED_BYTE, image);
-    
+
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    
+
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    
+
     stbi_image_free(image);
-    
+
     return textureID;
 }
 
@@ -140,7 +142,7 @@ void initialise()
             LOG("ERROR: Could not create OpenGL context.\n");
             shutdown();
         }
-    
+
 #ifdef _WINDOWS
     glewInit();
 #endif
@@ -158,7 +160,7 @@ void initialise()
     glUseProgram(g_shader_program.get_program_id());
 
     glClearColor(BG_RED, BG_BLUE, BG_GREEN, BG_OPACITY);
-    
+
     // ––––– AUDIO SETUP ––––– //
     // Start Audio
     Mix_OpenAudio(
@@ -167,7 +169,7 @@ void initialise()
         AUDIO_CHAN_AMT,      // number of channels (1 is mono, 2 is stereo, etc).
         AUDIO_BUFF_SIZE      // audio buffer size in sample FRAMES (total samples divided by channel count)
         );
-    
+
     // Similar to our custom function load_texture
     g_music        = Mix_LoadMUS(BGM_FILEPATH);
     g_bouncing_sfx = Mix_LoadWAV(BOUNCING_SFX_FILEPATH);
@@ -182,34 +184,34 @@ void initialise()
     Mix_VolumeMusic(MIX_MAX_VOLUME / 2);
     Mix_VolumeChunk(
             g_bouncing_sfx,     // Set the volume of the bounce sound...
-            MIX_MAX_VOLUME / 4  // ... to 1/4th.
+            MIX_MAX_VOLUME / 2  // ... to 1/4th.
             );
-    
+
     // ––––– PLATFORMS ––––– //
-    
     g_game_state.platforms = new Entity[PLATFORM_COUNT];
+
     GLuint platform_texture_id = load_texture(PLATFORM_FILEPATH);
-    for(int i = 0; i < PLATFORM_COUNT; i++){
+
+    for(int i = 0; i < PLATFORM_COUNT; i++)
         g_game_state.platforms[i] = Entity(platform_texture_id,0.0f, 0.4f, 0.8f);
-    }
-        
+
     g_game_state.platforms[PLATFORM_COUNT - 1].set_position(glm::vec3(-1.5f, -2.35f, 0.0f));
     g_game_state.platforms[PLATFORM_COUNT - 1].update(0.0f, NULL, 0);
-        
+
     for (int i = 0; i < PLATFORM_COUNT - 2; i++)
     {
         g_game_state.platforms[i].set_position(glm::vec3(i - 1.0f, -1.8f, 0.0f));
         g_game_state.platforms[i].update(0.0f, NULL, 0);
     }
-        
+
     g_game_state.platforms[PLATFORM_COUNT - 2].set_position(glm::vec3(2.5f, -2.5f, 0.0f));
     g_game_state.platforms[PLATFORM_COUNT - 2].update(0.0f, NULL, 0);
-    
+
     // ––––– PLAYER (GEORGE) ––––– //
     // Existing
     // ————— PLAYER ————— //
     GLuint player_texture_id = load_texture(SPRITESHEET_FILEPATH);
-    
+
     int player_walking_animation[4][4] =
     {
         { 1, 5, 9, 13 },  // for George to move to the left,
@@ -217,7 +219,7 @@ void initialise()
         { 2, 6, 10, 14 }, // for George to move upwards,
         { 0, 4, 8, 12 }   // for George to move downwards
     };
-    
+
     glm::vec3 acceleration = glm::vec3(0.0f,-4.905f, 0.0f);
 
     g_game_state.player = new Entity(
@@ -236,7 +238,7 @@ void initialise()
     );
     // Jumping
     g_game_state.player->set_jumping_power(3.0f);
-    
+
     // ––––– GENERAL ––––– //
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -245,7 +247,7 @@ void initialise()
 void process_input()
 {
     g_game_state.player->set_movement(glm::vec3(0.0f));
-    
+
     SDL_Event event;
     while (SDL_PollEvent(&event))
     {
@@ -255,17 +257,18 @@ void process_input()
             case SDL_WINDOWEVENT_CLOSE:
                 g_app_status = TERMINATED;
                 break;
-                
+
             case SDL_KEYDOWN:
                 switch (event.key.keysym.sym) {
                     case SDLK_q:
                         // Quit the game with a keystroke
                         g_app_status = TERMINATED;
                         break;
-                        
+
                     case SDLK_SPACE:
                         // Jump
-                        if (g_game_state.player->get_collided_bottom()){
+                        if (g_game_state.player->get_collided_bottom())
+                        {
                             g_game_state.player->jump();
                             Mix_PlayChannel(
                                             NEXT_CHNL,       // using the first channel that is not currently in use...
@@ -274,68 +277,68 @@ void process_input()
                                             );
                         }
                         break;
-                        
+
                     case SDLK_m:
                         // Mute volume
                         Mix_HaltMusic();
                         break;
-                        
+
                     default:
                         break;
                 }
-                
+
             default:
                 break;
         }
     }
-    
+
     const Uint8 *key_state = SDL_GetKeyboardState(NULL);
 
     if (key_state[SDL_SCANCODE_LEFT])       g_game_state.player->move_left();
     else if (key_state[SDL_SCANCODE_RIGHT]) g_game_state.player->move_right();
-      
+
     if (glm::length(g_game_state.player->get_movement()) > 1.0f)
             g_game_state.player->normalise_movement();
 }
 
 void update()
 {
-    float ticks = (float)SDL_GetTicks() / MILLISECONDS_IN_SECOND;
+    float ticks = (float) SDL_GetTicks() / MILLISECONDS_IN_SECOND;
     float delta_time = ticks - g_previous_ticks;
     g_previous_ticks = ticks;
-    
+
     delta_time += g_accumulator;
-    
+
     if (delta_time < FIXED_TIMESTEP)
     {
         g_accumulator = delta_time;
         return;
     }
-    
+
     while (delta_time >= FIXED_TIMESTEP)
     {
         g_game_state.player->update(FIXED_TIMESTEP, g_game_state.platforms, PLATFORM_COUNT);
         delta_time -= FIXED_TIMESTEP;
     }
-    
+
     g_accumulator = delta_time;
 }
 
 void render()
 {
     glClear(GL_COLOR_BUFFER_BIT);
-    
+
     g_game_state.player->render(&g_shader_program);
-    
+
     for (int i = 0; i < PLATFORM_COUNT; i++) g_game_state.platforms[i].render(&g_shader_program);
-    
+
     SDL_GL_SwapWindow(g_display_window);
 }
 
 void shutdown()
 {
     SDL_Quit();
-    
+
     delete [] g_game_state.platforms;
     delete g_game_state.player;
 }
@@ -344,14 +347,14 @@ void shutdown()
 int main(int argc, char* argv[])
 {
     initialise();
-    
+
     while (g_app_status == RUNNING)
     {
         process_input();
         update();
         render();
     }
-    
+
     shutdown();
     return 0;
 }
