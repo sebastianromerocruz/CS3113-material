@@ -1,4 +1,4 @@
-<!-- <h2 align=center>Week 8</h2>
+<h2 align=center>Week 8</h2>
 
 <h1 align=center>Exercise: <em>Entity Types</em></h1>
 
@@ -29,4 +29,4 @@ int main()
 Hints:
 
 1. [**Entity types**](https://github.com/sebastianromerocruz/CS3113-material/tree/main/lectures/enemy-ai#part-2-enemy-states-ai-types-and-ai-states)
-2. [**`is_active` and collision logic**](https://github.com/sebastianromerocruz/CS3113-material/tree/main/lectures/physics_2#part-3-is_active-collision-flags-and-entity-types) -->
+2. [**`is_active` and collision logic**](https://github.com/sebastianromerocruz/CS3113-material/tree/main/lectures/physics_2#part-3-is_active-collision-flags-and-entity-types)
