@@ -50,10 +50,10 @@
 7. **Week 7**: Music, sound effects, and basic enemy AI
     1. [**Music and Sound Effects**](lectures/sound-fx/)
     2. [**Basic Enemy AI**](lectures/enemy-ai/)
-<!--8. **Week 8**: Map and stage building
+8. **Week 8**: Map and stage building
     1. [**Tilesets and Tilemaps**](lectures/platform-levels/)
     2. [**Scenes**](lectures/scenes/)
-9. **Weeks 9 and 10**: Special effects
+<!--9. **Weeks 9 and 10**: Special effects
     1. [**Effects**](lectures/fx/)
     2. [**Shaders**](lectures/shaders/)
 11. **Week 11**: [**Playtesting and publishing your game**](lectures/playtesting/) -->
