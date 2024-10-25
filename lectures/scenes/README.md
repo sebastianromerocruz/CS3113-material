@@ -1,8 +1,8 @@
-<h2 align=center>Lecture 16</h2>
+<h1 align=center>Week 08</h1>
 
 <h1 align=center>Scenes</h1>
 
-<h3 align=center> 25 Wyvern Moon, Imperial Year MMXXIV</h3>
+<h3 align=center>25 Wyvern Moon, Imperial Year MMXXIV</h3>
 
 <p align=center><strong><em>Song of the day</strong>: <a href="https://www.youtube.com/watch?v=phT2MJAn1KY&ab_channel=TOMORROWXTOGETHER-Topic"><strong><u>Thursday's Child Has Far To Go</u></strong></a> by TXT (2022).</em></p>
 
@@ -11,10 +11,14 @@
 
 ### Sections
 
-1. [**The `Utility` Class**](#part-1-the-utility-class)
-2. [**Game Modes**](#part-2-game-modes)
-3. [**Levels As Classes**](#part-3-levels-as-classes)
-4. [**Clearning Up `main.cpp` And Preparing For Multiple Levels**](#part-4-cleaning-up-maincpp-and-preparing-for-multiple-levels)
+1. [**The `Utility` Class**](#1)
+2. [**Game Modes**](#2)
+3. [**Levels As Classes**](#3)
+4. [**Clearning Up `main.cpp` And Preparing For Multiple Levels**](#4)
+
+---
+
+<a id="1"></a>
 
 ### Part 1: _The `Utility` Class_
 
@@ -163,6 +167,9 @@ One this to watch out for is that `Utility` should be the only file to have the 
 
 This pares down our `main.cpp` file a good amount but, of course, we're not stopping there. Most every game tracing back to the arcade era has more than one level to them. It's only logical that ours do as well.
 
+<br>
+<a id="2"></a>
+
 ### Part 2: _Game Modes_
 
 Let's think about how games present themselves. When you first switch a game on, you are more often than not greeted by a start screen, no?
@@ -255,6 +262,9 @@ public:
 ```
 
 <sub>**Code Blocks [3](SDLProject/Scene.h) and [4](SDLProject/Scene.cpp)**: Consider this our most general representation of levels. Notice that I made our main three methods virtual to all the child classes to define their own behaviour (hence our very-empty `Scene.cpp`). Each one of those child classes will be represent a level.</sub>
+
+<br>
+<a id="3"></a>
 
 ### Part 3: _Levels As Classes_
 
@@ -400,6 +410,9 @@ As you can see, we're forming a very cool hierarchy whereby, for example, `main.
 ---
 
 Speaking of `main.cpp`, where does all of this refactoring leave it?
+
+<br>
+<a id="4"></a>
 
 ### Part 4: _Cleaning Up `main.cpp` And Preparing For Multiple Levels_
 

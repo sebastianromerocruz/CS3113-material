@@ -199,8 +199,8 @@ void initialise()
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096);
     
     g_game_state.bgm = Mix_LoadMUS(BGM_FILEPATH);
-    Mix_PlayMusic(g_game_state.bgm, -1);
-    Mix_VolumeMusic(MIX_MAX_VOLUME / 16.0f);
+//    Mix_PlayMusic(g_game_state.bgm, -1);
+//    Mix_VolumeMusic(MIX_MAX_VOLUME / 16.0f);
     
     g_game_state.jump_sfx = Mix_LoadWAV(JUMP_SFX_FILEPATH);
     
@@ -280,6 +280,8 @@ void update()
     g_accumulator = delta_time;
     
     g_view_matrix = glm::mat4(1.0f);
+    
+    // Camera Follows the player
     g_view_matrix = glm::translate(g_view_matrix, glm::vec3(-g_game_state.player->get_position().x, 0.0f, 0.0f));
 }
 

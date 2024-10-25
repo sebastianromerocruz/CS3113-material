@@ -1,4 +1,4 @@
-<h1 align=center>Lecture 14</h1>
+<h1 align=center>Week 08</h1>
 
 <h2 align=center>Tilesets and Tile Maps</h2>
 
@@ -11,10 +11,14 @@
 
 ### Sections
 
-1. [**Optimising Our Platforms**](#part-1-optimising-our-platforms)
-2. [**The `Map` Class**](#part-2-the-map-class)
-3. [**Platforming**](#part-3-platforming)
-4. [**Having The Camera Follow The Player**](#part-4-having-the-follow-the-player)
+1. [**Optimising Our Platforms**](#1)
+2. [**The `Map` Class**](#2)
+3. [**Platforming**](#3)
+4. [**Having The Camera Follow The Player**](#4)
+
+---
+
+<a id="1"></a>
 
 ### Part 1: **Optimising Our Platforms**
 
@@ -87,6 +91,9 @@ The result, superimposed with the indices above, looks like this:
 <sub>**Figure 3**: Representing a scene using specific tiles from a tilesheet.</sub>
 
 This actually works in a very similar way to how we build and render text—it's simply evenly spaced sprite rendering with images of platforms instead of images of characters.
+
+<br>
+<a id="2"></a>
 
 ### Part 2: _The `Map` Class_
 
@@ -334,6 +341,10 @@ void shutdown()
 
 <sub>**Code Block 3, 4, and 5**: The `Map` class implemented. Keep in mind that now we have no need for the `state.platforms` array, so you can get rid of all the code that involves it. _This includes the `state.player`'s `update()` method_. We'll be looking at that momentarily.</sub>
 
+
+<br>
+<a id="3"></a>
+
 ### Part 3: _Platforming_
 
 Now, we need to update a few more things in order to make this map collidable with our player—or rather, the other way around. To do this, we need to convert our entities' positions to the grid coordinates of the tilemap and check if a tile is actually there. This requires us to overload our collision-checking methods to work for both `Entity` objects and `Map` objects.
@@ -345,7 +356,7 @@ These new `check_collision_y()` and `check_collision_x()` methods will be probin
 
 <sub>**Figures 4 and 5**: Collision detection in both cardinal coordinates.</sub>
 
-Our map, therefore needs to have a way to check whether its tiles are solid or not:
+The key method to consider here is **`is_solid()`**:
 
 ```c++
 // Map.cpp
@@ -387,6 +398,47 @@ bool Map::is_solid(glm::vec3 position, float *penetration_x, float *penetration_
 ```
 
 <sub>**Code Block 6**: This method serves a double purpose; it both a) tells us whether or not a specific tile is solid, and b) tells the calling scope by how much we've penetrated this given tile (via `penetration_x` and `penetration_y` pointers).</sub>
+
+The `is_solid` method in the `Map` class plays a critical role in determining whether a specific point in the game world corresponds to a solid tile on the map. This is essential for collision detection, which is a cornerstone of platforming mechanics in games. Let's break down the function in a technical and game programming context:
+
+#### Key Aspects of `is_solid`:
+
+1. **Position-Based Collision Detection**:
+   The method takes in a 3D vector (`glm::vec3 position`), representing the player's or entity's position in the game world. The primary goal of the function is to check whether the tile at this position is solid, thus determining if a collision should occur. While the game might be 2D, the `glm::vec3` is used because it's common to work with 3D vectors in OpenGL and game development for positioning and transformations, even in 2D games.
+
+2. **Tilemap Coordinates Conversion**:
+   The player's `position` is provided in world coordinates (floating-point values for precise location), while the tiles in the map are indexed in an integer-based grid. The function converts these world coordinates to corresponding tile coordinates (`tile_x` and `tile_y`) by dividing the position by the tile size. It also uses a floor and ceil operation to round to the nearest tile on the grid:
+   - `tile_x`: Horizontal tile index.
+   - `tile_y`: Vertical tile index (noting that Y coordinates typically increase downward in many 2D maps, which is why the `-` sign is used in the formula).
+
+3. **Boundary Checking**:
+   Before determining the solidity of the tile, the method checks if the position is outside the boundaries of the map:
+   - `m_left_bound`, `m_right_bound`, `m_top_bound`, and `m_bottom_bound` define the edges of the map, calculated based on the size and number of tiles in the map.
+   If the player's position is outside these boundaries, the function immediately returns `false`, meaning there is no solid tile in that location (as the player is outside the playable area).
+
+4. **Tile Lookup**:
+   If the position is within bounds, the method retrieves the corresponding tile index from the `m_level_data` array:
+   ```cpp
+   int tile = m_level_data[tile_y * m_width + tile_x];
+   ```
+   Here, `m_level_data` is a 1D array that represents the tilemap. The array stores integers representing different tiles (such as grass, water, stone, etc.). If the value of the tile at the calculated coordinates is `0`, it means the tile is not solid, and the method returns `false`.
+
+5. **Penetration Calculations**:
+   If the tile is solid (non-zero), the function calculates the penetration values in the X and Y directions. Penetration values help resolve collisions by determining how far the player has entered into a solid tile:
+   - `penetration_x` and `penetration_y` are passed by reference, allowing the method to modify their values.
+   - The penetration is calculated as the difference between the player's position and the center of the tile. If the player is intersecting with the tile, this penetration value helps in pushing the player back to prevent them from going through the tile.
+
+   ```cpp
+   *penetration_x = (m_tile_size / 2) - fabs(position.x - tile_center_x);
+   *penetration_y = (m_tile_size / 2) - fabs(position.y - tile_center_y);
+   ```
+
+6. **Return Value**:
+   The function returns `true` if the tile is solid, indicating that a collision has occurred and further action should be taken to resolve the collision (like moving the player back, adjusting the position, etc.). If the tile is non-solid or out of bounds, the method returns `false`.
+
+In platforming games, solid tiles are typically used to represent platforms, walls, or ground where the player can walk or collide. The `is_solid` function is a fundamental part of this because it helps define where a player can move and where they should stop due to obstacles.
+
+By using the `penetration_x` and `penetration_y`, the game can adjust the player’s position after a collision, ensuring the player doesn’t pass through platforms or walls. The game loop would typically call this function multiple times per frame to check if the player is colliding with the map tiles as they move around.
 
 To put this method into context, consider our `Entity` class's current implementations of `check_collision_y()` and `check_collision_x()`
 
@@ -506,6 +558,8 @@ void const Entity::check_collision_x(Map *map)
 
 <sub>**Code Blocks 7 and 8**: Collisions with the map and collisions with other entities are inherently different—for the better.</sub>
 
+<br>
+<a id="4"></a>
 
 ### Part 4: _Having The Camera Follow The Player_
 

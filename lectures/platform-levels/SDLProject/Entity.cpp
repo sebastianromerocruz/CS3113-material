@@ -214,6 +214,7 @@ void const Entity::check_collision_x(Entity *collidable_entities, int collidable
     }
 }
 
+
 void const Entity::check_collision_y(Map *map)
 {
     // Probes for tiles above
@@ -293,6 +294,8 @@ void const Entity::check_collision_x(Map *map)
         m_collided_right = true;
     }
 }
+
+
 void Entity::update(float delta_time, Entity *player, Entity *collidable_entities, int collidable_entity_count, Map *map)
 {
     if (!m_is_active) return;
