@@ -54,10 +54,10 @@ There are some great sources for free assets:
 
 <a id="1"></a>
 
-### Requirement 1: _3 AI With Different Behaviors (600%)_
+### Requirement 1: _3 AI With Different Behaviors (60%)_
 
 - There needs to be **3 or more enemies** with basic AI. (20% each)
-- Each AI should have a **different behavior**. For instance, one could me walking, another patrolling, another jumping or shooting. All AI must be doing _something_ other than standing around.
+- Each AI should have a **different behavior**. For instance, one could be walking, another patrolling, another jumping or shooting. All AI must be doing _something_ other than standing around.
 - It is OK to use the same image/textures for all 3 of your AI.
 - Note on the level's layout:
     - Your AI must not all be on one (flat) floor. You will lose points if all 3 of your AI are on the same floor.
@@ -83,7 +83,7 @@ There are some great sources for free assets:
 
 ### Requirement 4: _'You Win' Message (10%)_
 
-- If the player gets rid of all enemies, show text the text “You Lose”. Each letter must be rendered independently using the text function we wrote in class.
+- If the player gets rid of all enemies, show text the text “You Win. Each letter must be rendered independently using the text function we wrote in class.
 
 ---
 
