@@ -1,8 +1,8 @@
-<h2 align=center>Lecture 18</h2>
+<h2 align=center>Week 09</h2>
 
 <h1 align=center>Shaders</h1>
 
-<h3 align=center> 1 Red Wolf Moon, Imperial Year MMXXIV</h3>
+<h3 align=center>1 Red Wolf Moon, Imperial Year MMXXIV</h3>
 
 <p align=center><strong><em>Song of the day</strong>: <a href="https://www.youtube.com/watch?v=phT2MJAn1KY&ab_channel=TOMORROWXTOGETHER-Topic"><strong><u>APT</u></strong></a> by ROSÉ & Bruno Mars (2024).</em></p>
 
@@ -10,9 +10,13 @@
 
 ### Sections
 
-1. [**What exactly do shaders do?**](#part-1-what-exactly-do-shaders-do)
-2. [**Experimenting with shaders**](#part-2-experimenting-with-shaders)
+1. [**What exactly do shaders do?**](#1)
+2. [**Experimenting with shaders**](#2)
 3. [**2D Lighting**](#part-3-2d-lighting)
+
+---
+
+<a id="1"></a>
 
 ### Part 1: _What exactly do shaders do?_
 
@@ -102,6 +106,10 @@ You will notice that the extension for these files is `.glsl`. This an OpenGL sp
 - [**`uniform`**](https://www.khronos.org/opengl/wiki/Uniform_(GLSL)): These act as parameters that the user of a shader program (i.e. OpenGL) can pass to that program.
 - [**`varying`**](https://thebookofshaders.com/glossary/?search=varying): Data shared from a vertex shader to a fragment shader.
 - [**`attribute`**](https://thebookofshaders.com/glossary/?search=attribute): Read-only variables containing data shared from OpenGL environment to the vertex shader.
+
+<br>
+
+<a id="2"></a>
 
 ### Part 2: _Experimenting with shaders_
 
@@ -202,6 +210,10 @@ For example, if we change `1.0` to `0.5`:
 ![double-luminance](assets/double-luminance.png)
 
 <sub>**Figure 10**: Double luminance.</sub>
+
+<br>
+
+<a id="3"></a>
 
 ### Part 3: _2D Lighting_
 

@@ -52,7 +52,7 @@ void Effects::update(float delta_time)
    {
        case NONE: break;
            
-       // Fades
+           // Fades
        case FADEIN:
            m_alpha -= delta_time * m_effect_speed;
            if (m_alpha <= 0) m_current_effect = NONE;
@@ -73,7 +73,8 @@ void Effects::update(float delta_time)
            break;
            
        case SHAKE:
-
+           break;
+   }
 }
 
 void Effects::render()

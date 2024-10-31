@@ -77,7 +77,7 @@ void switch_to_scene(Scene *scene)
 void initialise()
 {
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
-    g_display_window = SDL_CreateWindow("Hello, Special Effects!",
+    g_display_window = SDL_CreateWindow("Hello, Shaders!",
                                       SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                                       WINDOW_WIDTH, WINDOW_HEIGHT,
                                       SDL_WINDOW_OPENGL);

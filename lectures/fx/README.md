@@ -1,8 +1,8 @@
-<h2 align=center>Lecture 17</h2>
+<h2 align=center>Week 9</h2>
 
 <h1 align=center>Effects</h1>
 
-<h3 align=center> 1 Red Wolf Moon, Imperial Year MMXXIV</h3>
+<h3 align=center>1 Red Wolf Moon, Imperial Year MMXXIV</h3>
 
 <p align=center><strong><em>Song of the day</strong>: <a href="https://www.youtube.com/watch?v=phT2MJAn1KY&ab_channel=TOMORROWXTOGETHER-Topic"><strong><u>APT</u></strong></a> by ROSÉ & Bruno Mars (2024).</em></p>
 
@@ -10,14 +10,17 @@
 
 ### Sections
 
-1. [**Multiple Levels**](#part-1-multiple-levels)
-2. [**Effects**](#part-2-effects)
-    1. [**Fade-In**](#fade-in)
-    2. [**Fade-Out**](#fade-out)
-    3. [**Growing and Shrinking**](#growing-and-shrinking)
-    4. [**Shaking**](#shaking)
+1. [**Multiple Levels**](#1)
+2. [**Effects**](#2)
+    1. [**Setup**](#2-1)
+    2. [**Fade-In**](#2-2)
+    3. [**Fade-Out**](#2-3)
+    4. [**Growing and Shrinking**](#2-4)
+    <!-- 4. [**Shaking**](#shaking) -->
 
 ---
+
+<a id="1"></a>
 
 ### Part 1: _Multiple Levels_
 
@@ -95,7 +98,9 @@ The result is something like the following:
 
 <sub>**Figure 1**: George falling from Level A to Level B.</sub>
 
----
+<br>
+
+<a id="2"></a>
 
 ### Part 2: _Effects_
 
@@ -104,6 +109,8 @@ We should be proud of ourselves; we have reached a point where we're going to fo
 How does this work? For transitions such as fade-ins and -outs, the trick is to create a black square that covers the entire screen. For fade-ins, we want to make this black square go from completely solid to completely invisible. We do this by manipulating the [**alpha-channel**](https://en.wikipedia.org/wiki/Alpha_compositing). We'll thus keep track of this value and change it accordingly.
 
 ---
+
+<a id="2-1"></a>
 
 #### Setup
 
@@ -216,6 +223,8 @@ void Effects::render()
 As you can see, right now we don't have much beyond no effect `NONE` and `FADEIN`, though neither is really doing much. Let's change that.
 
 ---
+
+<a id="2-2"></a>
 
 #### Fade-In
 
@@ -360,6 +369,8 @@ void initialise()
 
 ---
 
+<a id="2-3"></a>
+
 #### Fade-Out
 
 Fading out works basically in the exact same way, but with increasing the α-value. Keep in mind that we should not switch the effect back to `NONE` when we reach 1. Otherwise, the black screen will disappear:
@@ -426,6 +437,8 @@ The result:
 <sub>**Figure 3**: Fade-out transition effect.</sub>
 
 ---
+
+<a id="2-4"></a>
 
 #### Growing and Shrinking
 
@@ -508,10 +521,11 @@ Notice here that we had to modify the model matrix to reflect the size changes o
 
 <sub>**Figures 4 and 5**: Shrinking and Growing effects.</sub>
 
----
+<!-- ---
+
+<a id="2-4"></a>
 
 #### Shaking
-
 
 A really cool effect that you can add to your game is a shaking effect to simulate the ground shaking. For this, we will have the view matrix shift rapidly for a second or two. So we need to keep track of both the time remaining and random directions that it will be shifting:
 
@@ -585,4 +599,4 @@ void update()
 
 ![shake](assets/shake.gif)
 
-<sub>**Figure 6**: Really adds to the experience, I think.</sub>
+<sub>**Figure 6**: Really adds to the experience, I think.</sub> -->
