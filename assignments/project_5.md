@@ -5,17 +5,15 @@
  
 ### Submission instructions
 1. You _must_ use delta time, the `Entity`, `Map`, and `Scene` classes, and fixed time steps in this assignment.
-2. You should submit your homework on [**Brightspace**](https://brightspace.nyu.edu/d2l/lms/dropbox/admin/folders_manage.d2l?ou=289892).
-3. You should also push that same version to your GitHub account. Note that any commits done after the deadline will be ignored.
-4. For this assignment you should turn only the C++ files that are relevant to your project (`main.cpp`, `Entity.cpp`, `Entity.h`/`Entity.hpp`, `Map.cpp`, `Map.h`/`Map.hpp`, `Utility.cpp`, `Utility.h`/`Utility.cpp`, etc.). You _must_ also submit any image and audio files that you used in your project. Do **not** submit any other files.
-4. Do not use any OpenGL functionality that we have not learned in class.
-5. All of your `main.cpp` file should contain a header comment block as follows:
+2. You should submit the link to your repo on [**Brightspace**](https://brightspace.nyu.edu/d2l/home/399853). Note that any commits done after the deadline will be ignored.
+3. Do not use any OpenGL functionality that we have not learned in class.
+4. Your `main.cpp` file should contain a header comment block as follows:
 
 ```c++
 /**
 * Author: [Your name here]
 * Assignment: Platformer
-* Date due: 2023-08-01, 11:59pm
+* Date due: 2023-11-23, 11:59pm
 * I pledge that I have completed this assignment without
 * collaborating with anyone else, in conformance with the
 * NYU School of Engineering Policies and Procedures on
@@ -35,20 +33,26 @@ There are some great sources for free assets:
 - Lots of different kinds of [**free assets**](https://opengameart.org/).
 - Royalty free [**music**](https://incompetech.com/music/royalty-free/music.html).
 
+---
+
 ### Sections
 
 #### _Requirements_
 
-1. [**Menu Screen (10%)**](#requirement-1-menu-screen-10)
-2. [**3 Levels (40%)**](#requirement-2-3-levels-40)
-3. [**3 Lives (20%)**](#requirement-3-3-lives-20)
-4. [**AI (20%)**](#requirement-4-ai-20)
-5. [**Audio (10%)**](#requirement-5-audio-10)
+1. [**Menu Screen (10%)**](#1)
+2. [**3 Levels (40%)**](#2)
+3. [**3 Lives (20%)**](#3)
+4. [**AI (20%)**](#4)
+5. [**Audio (10%)**](#5)
 
 #### _Tips_
 
-1. [**Common Issues**](#common-issues)
-2. [**Extra Credit**](#extra-credit)
+1. [**Common Issues**](#issues)
+2. [**Extra Credit**](#extra)
+
+---
+
+<a id="1"></a>
 
 ### Requirement 1: _Menu Screen (10%)_
 
@@ -56,11 +60,17 @@ There are some great sources for free assets:
 - This can be a solid color background with text on it.
 - The menu must be a different `Scene` object. Do not just show/hide text.
 
+<br>
+<a id="2"></a>
+
 ### Requirement 2: _3 Levels (40%)_
 
 - Your game needs to have 3 levels. They do not need to be long or complicated.
 - They must scroll! (no single screen games) If you do not have 3 scrolling levels, your grade for the entire project will be 0.
 - This is a platformer game, it needs to have platforms.
+
+<br>
+<a id="3"></a>
 
 ### Requirement 3: _3 Lives (20%)_
 
@@ -68,11 +78,17 @@ There are some great sources for free assets:
 - If the player runs out of lives, show a “You Lose” text.
 - If the player gets to the end of your game, show text a "You Win” text.
 
+<br>
+<a id="4"></a>
+
 ### Requirement 4: _AI (20%)_
 
 - At least 1 type of moving AI (place a couple of these AI in your game).
 - If the player touches the AI, the player dies.
 - Each of your levels must have at least 1 AI.
+
+<br>
+<a id="5"></a>
 
 ### Requirement 5: _Audio (10%)_
 
@@ -81,9 +97,14 @@ There are some great sources for free assets:
 
 ---
 
+<a id="issues"></a>
+
 ### _Common Issues_
 
 You might find it easier to work on the movement first (without any obstacles in the way). Once the movement is working, then add your environment.
+
+<br>
+<a id="extra"></a>
 
 ### _Extra Credit_
 
