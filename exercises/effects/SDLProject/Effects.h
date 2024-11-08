@@ -26,10 +26,16 @@ private:
     float m_size;
     
 public:
+    static constexpr float MAX_OFFSET = 0.025f;
+    static constexpr int OVERLAY_SIZE = 10;
+    
     Effects(glm::mat4 projection_matrix, glm::mat4 view_matrix);
 
     void draw_overlay();
+    
+    void start(EffectType effect_type);
     void start(EffectType effect_type, float effect_speed);
+    
     void update(float delta_time);
     void render();
 };
