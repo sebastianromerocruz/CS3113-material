@@ -162,16 +162,14 @@ All work is to be done on your own. There are no group projects.
 
 #### Project Schedule
 
-| Project             | Release Date | Due Date   |
-|---------------------|--------------|------------|
+| Project                 | Release Date | Due Date   |
+|-------------------------|--------------|------------|
 | **Simple Scene**        | 09/20        | 09/28      |
 | **Pong**                | 09/27        | 10/12      |
 | **Lunar Lander**        | 10/11        | 10/26      |
 | **Rise of the AI**      | 10/25        | 11/09      |
 | **Platformer**          | 11/08        | 11/23      |
 | **Students' Choice**    | 11/22        | TBD        |
-
-**Note**: Because the final day of class lands on a Thursday this semester (for some inexplicable reason), the deadline for the final project will be determined later in the semester. We'll try to accommodate everyone as much as possible.
 
 <br>
 
