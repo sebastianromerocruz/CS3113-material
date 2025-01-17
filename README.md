@@ -32,31 +32,31 @@
 1. **Week 1**: The basics
     1.  [**Introduction**](lectures/introduction/)
     2.  [**Triangles**](lectures/triangle/)
-2. **Week 2**: Moving in video games
+<!-- 2. **Week 2**: Moving in video games
     1.  [**You're getting old, Matrix**](lectures/matrices/)
-    2.  [**Transformations**](lectures/transformations/)
-3. **Week 3**: Applying art to our games
+    2.  [**Transformations**](lectures/transformations/) -->
+<!-- 3. **Week 3**: Applying art to our games
     1.  [**Delta Time**](lectures/delta-time/)
-    2.  [**Textures**](lectures/textures/)
-4. **Week 4**: Player input and basic collision detection
+    2.  [**Textures**](lectures/textures/) -->
+<!-- 4. **Week 4**: Player input and basic collision detection
     1.  [**Player Input**](lectures/player-input/)
-    2.  [**Collision Detection**](lectures/collision-detection/)
-5. **Week 5** Sprite Animation and Text and The Entity Class: 
+    2.  [**Collision Detection**](lectures/collision-detection/) -->
+<!-- 5. **Week 5** Sprite Animation and Text and The Entity Class: 
     1.  [**Sprite Animation and Text**](lectures/sprites-and-text/)
-    2.  [**Entities**](lectures/entities/)
-6. **Week 6**: Physics 1 and Physics 2
+    2.  [**Entities**](lectures/entities/) -->
+<!-- 6. **Week 6**: Physics 1 and Physics 2
     1. [**Physics: Gravity**](lectures/physics_1/)
-    2. [**Physics: Colliding with Different Kinds of Entities**](lectures/physics_2/)
-7. **Week 7**: Music, sound effects, and basic enemy AI
+    2. [**Physics: Colliding with Different Kinds of Entities**](lectures/physics_2/) -->
+<!-- 7. **Week 7**: Music, sound effects, and basic enemy AI
     1. [**Music and Sound Effects**](lectures/sound-fx/)
-    2. [**Basic Enemy AI**](lectures/enemy-ai/)
-8. **Week 8**: Map and stage building
+    2. [**Basic Enemy AI**](lectures/enemy-ai/) -->
+<!-- 8. **Week 8**: Map and stage building
     1. [**Tilesets and Tilemaps**](lectures/platform-levels/)
-    2. [**Scenes**](lectures/scenes/)
-9. **Weeks 9**: Special effects
+    2. [**Scenes**](lectures/scenes/) -->
+<!-- 9. **Weeks 9**: Special effects
     1. [**Effects**](lectures/fx/)
-    2. [**Shaders**](lectures/shaders/)
-10. **Week 10**: [**Playtesting and publishing your game**](lectures/playtesting/)
+    2. [**Shaders**](lectures/shaders/) -->
+<!-- 10. **Week 10**: [**Playtesting and publishing your game**](lectures/playtesting/) -->
 <!-- 12. **Week 12**: NES game development and playtesting your final projects -->
 <!-- 13. **Week 13**: Presenting your final projects -->
 
@@ -83,7 +83,7 @@
 
 | **E-Mail**                                  | **Office Hours**                                                                                                     |
 |---------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
-| [**wz2445@nyu.edu**](mailto:wz2445@nyu.edu) | [**Online**](https://nyu.zoom.us/j/93461175171): Tuesdays 6:00-7:00 pm, Thursdays 6:00-7:00 pm. <br /> In Person: TBD                                                     |
+| [**wz2445@nyu.edu**](mailto:wz2445@nyu.edu) | TBD                                                     |
 
 <br>
 
@@ -124,10 +124,9 @@ You will also need a [**Github**](https://github.com/) account!
 | **_Project 1_**: [**Draw a Simple 2D Scene**](assignments/project_1.md) | 10%            |
 | **_Project 2_**: [**Pong**](assignments/project_2.md)                   | 10%            |
 | **_Project 3_**: [**Lunar Lander**](assignments/project_3.md)           | 15%            |
-| **_Project 4_**: [**Rise of the AI**](assignments/project_4.md)         | 15%            |
-| **_Project 5_**: [**Platformer**](assignments/project_5.md)             | 15%            |
-| **_Project 6_**: [**Students' Choice**]()       | 25%            |
-| **_Classwork_**                                 | 10%            |
+| **_Project 4_**: [**Platformer**](assignments/project_5.md)             | 25%            |
+| **_Project 5_**: [**Students' Choice**]()                               | 30%            |
+| **_Classwork_**                                                         | 10%            |
 
 - Every assignment will have an "extra credit" portion. This will **add 5% to your final grade** at the end of the semester if you complete the extra credit portion of **at least 3 of the projects**. While 5% may not seem like a lot, it can mean the difference between two letter grades. This can be especially helpful later in the semester, when the projects become longer and more complex.
 
