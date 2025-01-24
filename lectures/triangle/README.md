@@ -2,22 +2,25 @@
 
 <h1 align=center>Triangles</h1>
 
-<h3 align=center>6 Horsebow  Moon, Imperial Year MMXXIV</h3>
+<h3 align=center>24 Guardian Moon, Imperial Year MMXXV</h3>
 
-***Song of the day***: _[**in the pocket**](https://youtu.be/ZGvDTx2rf80?si=JmhnDP5G26c7gVN1) by Mr.Children (2024)._
+***Song of the day***: _[**光るとき (live)**](https://youtu.be/zHCtZRkFWe8?si=wTrxDSHnXN0FUIiH&t=1121) by 羊文学 (2024)._
 
 ---
 
-### Sections
+## Sections
 
-1. [**Of Graphics and Hardware**](#part-1-of-graphics-and-hardware)
-2. [**Hello, Triangle!**](#part-1-hello-triangle)
-3. [**The game loop**](#part-2-the-game-loop)
-4. [**Initialising our triangle program**](#part-3-initialising-our-triangle-program)
+1. [**Of Graphics and Hardware**](#1)
+2. [**Hello, Triangle!**](#2)
+3. [**The Game Loop**](#3)
+4. [**Initialising our triangle program**](#4)
+4. [**Rendering our triangle program**](#5)
  
 ---
 
-### Part 1: _Of Graphics and Hardware_
+<a id="1"></a>
+
+## Part 1: _Of Graphics and Hardware_
 
 How do graphics get created and rendered onto our screens?
 
@@ -93,7 +96,9 @@ So where are we now, and how does OpenGL fit into all of this? As you may alread
 
 <br>
 
-### Part 2: _Hello, Triangle!_
+<a id="2"></a>
+
+## Part 2: _Hello, Triangle!_
 
 So how are complex 3D models built using libraries like OpenGL? The answer is simple: triangles. Lots, and lots of triangles.
 
@@ -180,7 +185,9 @@ Think of the view matrix as the position of the camera, the model matrix as the 
 
 <br>
 
-### Part 2: _The Game Loop_
+<a id="3"></a>
+
+## Part 3: _The Game Loop_
 
 Even if our program won't be actually acting like much of a game, we should always start with a game loop. It looks very similar to the one we did last class, but this time we are going to parcel out our functionality into different functions:
 
@@ -245,7 +252,9 @@ void shutdown()
 
 <br>
 
-### Part 3: _Initialising Our Triangle Program_
+<a id="4"></a>
+
+## Part 4: _Initialising Our Triangle Program_
 
 Things get interesting when we get to initialising. In lecture 01, we initialised by telling OpenGL what colour we wanted our screen to be cleared to. We will be doing that again—but now, we will also be telling it about our triangle:
 
@@ -317,7 +326,9 @@ In order, what we have done is:
 
 <br>
 
-### Part 4: _Rendering our triangle program_
+<a id="5"></a>
+
+## Part 5: _Rendering our triangle program_
 
 There's a few things going on in the `render()` function:
 

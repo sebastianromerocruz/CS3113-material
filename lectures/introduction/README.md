@@ -2,41 +2,31 @@
 
 <h1 align=center>Introduction</h1>
 
-<h3 align=center>6 Horsebow Moon, Imperial Year MMXXIV</h3>
+<h3 align=center>24 Guardian Moon, Imperial Year MMXXV</h3>
 
-***Song of the day***: _[**in the pocket**](https://youtu.be/ZGvDTx2rf80?si=JmhnDP5G26c7gVN1) by Mr.Children (2024)._
-
----
-
-Hey, my name is Sebastián, and my last names are Romero Cruz. I teach about programming for a living and, incredibly, sometimes even enjoy programming itself.
-
-Outside of programming, things I enjoy include:
-
-- **Slice-of-life anime**: my favourite is [***Liz and the Blue Bird***](https://youtu.be/QR33NrbOUgE).
-- **Reading**: my current favourite is [***The Fawn by Magda Szabó***](https://www.themodernnovel.org/europe/europe/hungary/szabo/fawn/).
-- **Playing music**: I play a [**Rickenbacker 4001C64**](http://www.rickenbacker.com/model.asp?model=4001C64) and a cute [**Squier FSR Classic Vibe Bass VI**](https://www.guitar.co.uk/media/catalog/product/cache/1/image/1800x900/9df78eab33525d08d6e5fb8d27136e95/s/q/squier_squier_fsr_classic_vibe_bass_vi_laurel_fingerboard_parchment_pickguard_matching_headstock_shell_pink_front.jpeg).
-
-Let's talk about the course see [**syllabus**](https://github.com/sebastianromerocruz/CS3113-material/blob/main/README.md)
+***Song of the day***: _[**光るとき (live)**](https://youtu.be/zHCtZRkFWe8?si=wTrxDSHnXN0FUIiH&t=1121) by 羊文学 (2024)._
 
 ---
 
-### Sections
+## Sections
 
-1. [**Opening a sample project**](#part-2-opening-a-sample-project)
-2. [**Understanding the basics**](#part-3-understanding-the-basics)
-    1. [**Housekeeping**](#housekeeping)
-    2. [**Constants and (global) variables**](#constants-and-global-variables)
-    3. [**Starting our driver program**](#starting-our-driver-program)
-    4. [**Setting up our context**](#setting-up-our-context)
-    5. [**The game loop**](#the-game-loop)
-3. [**Working with Github**](#part-1-working-with-github)
-    1. [**Create a new repository through Github**](#step-1-create-a-new-repository-through-github)
-    2. [**Cloning your repo**](#step-2-cloning-your-repo)
-    3. [**Making and saving changes into your repo**](#step-3-making-and-saving-changes-into-your-repo)
+1. [**Opening a sample project**](#1)
+2. [**Understanding the basics**](#2)
+    1. [**Housekeeping**](#2-1)
+    2. [**Constants and (global) variables**](#2-2)
+    3. [**Starting our driver program**](#2-3)
+    4. [**Setting up our context**](#2-4)
+    5. [**The game loop**](#2-5)
+3. [**Working with Github**](#3)
+    1. [**Create a new repository through Github**](#3-1)
+    2. [**Cloning your repo**](#3-2)
+    3. [**Making and saving changes into your repo**](#3-3)
 
 ---
 
-### Part 1: _Opening a sample project_
+<a id="1"></a>
+
+## Part 1: _Opening a sample project_
 
 Unfortunately, setting up OpenGL takes some setting up. A former TA of the course and friend of mine, Thu Vu, created set-up video guides for each operating system, so please follow [**these instructions**]() if you are a Windows user or [**these instructions**]() if you are a Mac user–in either case, you will need to download the appropriate library from [**this folder**](https://github.com/sebastianromerocruz/CS3113-material/tree/main/libraries). 
 
@@ -125,9 +115,13 @@ That's nice, isn't it? It may not seem like much, but getting pixels onto the sc
 
 <br>
 
-### Part 3: _Understanding the basics_
+<a id="2"></a>
 
-#### Housekeeping
+## Part 2: _Understanding the basics_
+
+<a id="2-1"></a>
+
+### Housekeeping
 
 The first few lines are fairly standard for OpenGL programs; we are basically just importing the necessary libraries for everything to run smoothly:
 
@@ -144,7 +138,9 @@ The first few lines are fairly standard for OpenGL programs; we are basically ju
 #endif
 ```
 
-#### Constants and (global) variables
+<a id="2-2"></a>
+
+### Constants and (global) variables
 
 Next up are some constants that, while not strictly necessary, may make your programs easier to read and follow. For example, I define the dimensions of my display window, as well as the RGB values of my background, ahead of time. That way, if I have to change them on the fly, I can do so in one place only and not have to fish around for other instances of them. In short programs like these, it may not seem like a very big deal, but once you start making actual games, you're going to want to know what each value means, and to have an easy way to change them:
 
@@ -175,9 +171,9 @@ bool g_game_is_running = true;
 
 `g_display_window` is simply where our game will be displayed, and `g_game_is_running` will keep track of whether our game is on or off. Naturally, it starts out as being on (or `true`), but if the player performs an action like closing the window, we will need a mechanism to flip this switch to `false`. We will talk about this in the sections that follow.
 
----
+<a id="2-3"></a>
 
-#### Starting our driver program
+### Starting our driver program
 
 Just like in every other C++ program, we will need a `main`, or driver, function. Our game loop will reside in here:
 
@@ -209,9 +205,9 @@ if (g_display_window == nullptr)
 
 <sub>**Note**: For those of you who are curious, the parameters of [**`SDL_CreateWindow`**](https://wiki.libsdl.org/SDL_CreateWindow) are, in order: its title (`title`), its x-position (`x`), its y-position `y`, its width and height (`w` and `h`, respectively), and its flag (`flag`). Don't worry too much about what this flag means—all that matters is that it is `SDL_WINDOW_OPENGL` because we are working in an OpenGL context.</sub>
 
----
+<a id="2-4"></a>
 
-#### Setting up our context
+### Setting up our context
 
 Speaking of working in an OpenGL context, that's another thing we always have to create and set up:
 
@@ -222,9 +218,9 @@ SDL_GL_MakeCurrent(g_display_window, context);                   // ...and make 
 
 An OpenGL context is many things, but you can think of it as an object that stores all of the "states" associated with this instance of OpenGL. Think of a context as an object that holds all of OpenGL; when a context is destroyed, OpenGL is also destroyed.
 
----
+<a id="2-5"></a>
 
-#### The game loop
+### The game loop
 
 And now, the moment of truth.
 
@@ -271,7 +267,9 @@ You can find my complete `cpp` file [**here**](SDLProject/main.cpp).
 
 <br>
 
-### Part 2: _Working with GitHub_
+<a id="3"></a>
+
+## Part 3: _Working with GitHub_
 
 The way we're going to be managing our work in this class via [**GitHub**](https://github.com/). Follow [**these instructions**](https://github.com/git-guides/install-git#install-git) to install Git onto your computer.
 
@@ -288,7 +286,9 @@ youself set up for the rest of the summer:
 
 <sub>**Note**: If you already know how to handle yourself in GitHub, you can skip this section entirely.</sub>
 
-#### Step 1: _Create a new repository through GitHub_
+<a id="3-1"></a>
+
+### Step 1: _Create a new repository through GitHub_
 
 After you've installed gotten yourself a GitHub account and installed Git, your first step is to create a new public repository in your account:
 
@@ -298,7 +298,9 @@ After you've installed gotten yourself a GitHub account and installed Git, your 
 
 <sub>**Figures 2-4**: Creating a new public GitHub repository (or _repo_).</sub>
 
-#### Step 2: _Cloning your repo_
+<a id="3-2"></a>
+
+### Step 2: _Cloning your repo_
 
 ![git_04](assets/git_04.png)
 ![git_05](assets/git_05.png)
@@ -308,7 +310,9 @@ After you've installed gotten yourself a GitHub account and installed Git, your 
 
 <sub>**Figures 5-8**: Getting the repo locally onto your computer.</sub>
 
-#### Step 3: _Making and saving changes into your repo_
+<a id="3-3"></a>
+
+### Step 3: _Making and saving changes into your repo_
 
 Let's make a simple change to your repo—create a `txt` file called `something.txt` inside your repo—and save
 (i.e. push) them up to GitHub.
