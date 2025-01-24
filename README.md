@@ -163,12 +163,11 @@ All work is to be done on your own. There are no group projects.
 
 | Project                 | Release Date | Due Date   |
 |-------------------------|--------------|------------|
-| **Simple Scene**        | 09/20        | 09/28      |
-| **Pong**                | 09/27        | 10/12      |
-| **Lunar Lander**        | 10/11        | 10/26      |
-| **Rise of the AI**      | 10/25        | 11/09      |
-| **Platformer**          | 11/08        | 11/23      |
-| **Students' Choice**    | 11/22        | TBD        |
+| **Simple Scene**        | 02/07        | 02/15      |
+| **Pong**                | 02/27        | 03/01      |
+| **Lunar Lander**        | 02/28        | 03/15      |
+| **Platformer**          | 03/14        | 04/05      |
+| **Students' Choice**    | 04/04        | 04/25 & 05/02        |
 
 <br>
 

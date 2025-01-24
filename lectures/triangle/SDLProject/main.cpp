@@ -65,6 +65,7 @@ glm::mat4 g_view_matrix,        // Defines the position (location and orientatio
 
 void initialise()
 {
+    // HARD INITIALISE ———————————————————————————————————————————————————————————————————
     SDL_Init(SDL_INIT_VIDEO);
     g_display_window = SDL_CreateWindow("Hello, Triangle!",
                                       SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
@@ -87,6 +88,9 @@ void initialise()
     glewInit();
 #endif
     
+    // ———————————————————————————————————————————————————————————————————————————————————
+    
+    // SOFT INITIALISE ———————————————————————————————————————————————————————————————————
     // Initialise our camera
     glViewport(VIEWPORT_X, VIEWPORT_Y, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
     
